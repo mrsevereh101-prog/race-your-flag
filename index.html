@@ -1538,6 +1538,21 @@ html #menu .ico3d-btn::before,html #menu .ico3d-btn::after{display:none!importan
 .gem-pack .gp-art{height:64px;display:flex;align-items:center;justify-content:center}.gem-pack .gp-art .ico{width:46px;height:46px;margin:0 -12px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
 .gem-pack .gp-n{font-size:20px}.gem-pack .gp-name{font-size:12px;opacity:.9}.gem-pack button{width:100%}
 .gp-tag{position:absolute;top:-10px;right:-6px;background:#e0654a;border-radius:999px;padding:2px 8px;font-size:11px;transform:rotate(6deg)}
+.gh-hd{flex:1;min-width:0}.gh-wal{font-size:15px;white-space:nowrap}
+.gh-bar{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px;margin:8px 0}
+.gh-tab{display:grid;justify-items:center;gap:1px;padding:5px 0;min-width:0;border-radius:12px;border:2px solid rgba(217,162,39,.6);background:linear-gradient(180deg,#3a4aa0,#1c2462)}
+.gh-tab .gh-ic{font-size:20px;line-height:1}.gh-tab small{font-size:8.5px;white-space:nowrap;overflow:hidden;max-width:100%}.gh-tab[aria-pressed="true"]{border-color:#f2c14a;background:linear-gradient(180deg,#f2c14a,#c8921c)}
+.gh-sec{display:grid;gap:10px}
+.gh-chat{display:grid;gap:8px}.gh-msgs{height:min(46vh,420px);overflow-y:auto;display:grid;align-content:start;gap:6px;padding:8px;border-radius:14px;background:rgba(10,16,50,.75);border:2px solid rgba(217,162,39,.5)}
+.gh-m{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:8px;align-items:start}.gh-m img{width:26px;height:18px;border-radius:3px;margin-top:2px}
+.gh-m b{display:block;font-size:12px;color:#ffd77a!important;-webkit-text-fill-color:#ffd77a!important}.gh-m span{font-size:14px;word-break:break-word}.gh-m small{font-size:10px;opacity:.7}
+.gh-m.mine b{color:#7fd8ff!important;-webkit-text-fill-color:#7fd8ff!important}.gh-m.ann{background:rgba(242,193,74,.18);border-radius:8px;padding:4px}
+.gh-send{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}.gh-send input{font-size:16px;padding:10px;border-radius:12px}
+.gh-don{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.gh-line{padding:6px 10px;border-radius:10px;background:rgba(10,16,50,.35);font-size:13px}
+.gh-news{padding:10px 12px;border-radius:14px;background:rgba(10,16,50,.45);border-left:4px solid #f2c14a}.gh-news p{margin:4px 0}.gh-news small{opacity:.75}
+.gh-shop{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}.gh-item{display:grid;justify-items:center;gap:4px;padding:12px 8px;border-radius:16px;background:radial-gradient(circle at 50% 30%,#3a62c8,#18225a);border:2px solid #f2c14a;text-align:center}
+.gh-iic{font-size:40px;line-height:1.1}.gh-item small{font-size:11px;min-height:2.6em}.gh-item button{width:100%}
+.gh-stars{color:#f2c14a!important;-webkit-text-fill-color:#f2c14a!important;font-size:18px;letter-spacing:1px}
 .f3d-pg{font-size:10.5px;color:var(--gold,#f5c542);min-height:1em;line-height:1}
 </style>
 
@@ -3641,7 +3656,7 @@ function startSurvival(){
   GP=null;startRaceFromGo({id:'sv'+Date.now(),seed:Math.floor(Math.random()*1e9),trk:selTrack,mode:'solo',laps:1,lo:false,sv:true,roster},false);
 }
 function showSurvivalResults(){
-  state='results';const sv=RACE.sv;
+  state='results';const sv=RACE.sv;if(!RACE.rewarded&&player)addRunMeters(prog(player));
   if((sv.wave|0)>(STATS.svBest|0)){STATS.svBest=sv.wave|0;saveJSON('flagdash-stats',STATS);RACE.roomNew=roomCheckWins();}
   $('results').querySelector('.table-wrap').hidden=true;$('teamResult').hidden=true;$('gpBox').hidden=true;
   $('resEyebrow').textContent=`Survival · ${TH.name}`;resArt();
@@ -5426,6 +5441,8 @@ const ROOM_ITEMS=[
   {id:'m_podium',name:'Podium Medal',ic:'🏅',cat:'medal',slot:'wall',src:'win',pw:8,win:S=>[S.top3|0,10],how:'Finish in the top 3 ten times'},
   {id:'m_online',name:'Online Champion',ic:'🎖️',cat:'medal',slot:'wall',src:'win',pw:15,win:S=>[S.onlineWins|0,1],how:'Win an online race'},
   {id:'m_hits',name:'Hit Master',ic:'💥',cat:'medal',slot:'wall',src:'win',pw:10,win:S=>[S.hits|0,100],how:'Land 100 hits on rivals'},
+  {id:'g_statue',name:'Hero Statue',ic:'🗽',cat:'monument',slot:'pedestal',src:'guild',pw:20,how:'Guild store: 60 hero badges'},
+  {id:'g_crest',name:'Guild Crest',ic:'🛡️',cat:'medal',slot:'wall',src:'guild',pw:12,how:'Guild store: 30 diamonds'},
   {id:'m_war',name:'War Banner',ic:'⚔️',cat:'medal',slot:'wall',src:'win',pw:15,win:S=>[S.warWins|0,1],how:'Win a guild war'},
   {id:'cup_war',name:'War Crown',ic:'👑',cat:'trophy',slot:'shelf',src:'win',pw:35,win:S=>[S.warWins|0,5],how:'Win 5 guild wars'},
   {id:'m_survivor',name:'Survivor',ic:'🧟',cat:'medal',slot:'wall',src:'win',pw:10,win:S=>[S.svBest|0,10],how:'Reach wave 10 in Survival'},
@@ -5562,6 +5579,7 @@ function renderCollection(){
     else if(it.src==='win'){const [v,n]=it.win(STATS);sub.textContent=`${it.how} · ${Math.min(v,n)}/${n}`;const bar=document.createElement('i');bar.className='rc-bar';bar.innerHTML=`<i style="width:${Math.min(100,v/n*100)}%"></i>`;mid.append(nm,sub,bar);}
     else if(it.src==='buy'){sub.textContent=SLOT_NAME[it.slot];const b=document.createElement('button');b.className='buy';const ok=canAfford(it.cost,it.cur);b.innerHTML=priceHTML(it.cost,it.cur);b.disabled=!ok;b.title=ok?'Buy':'Not enough';
       b.onclick=()=>{if(!spend(it.cost,it.cur))return;sfx.purchase();const g=grantItem(it.id,'buy');renderCollection();renderRoomHud();if(g&&g.lv&&g.lv.to>g.lv.from){sfx.levelUp();}if(g&&g.lv&&g.lv.to>g.lv.from)feed(`Rank up! You are now ${rankName(g.lv.to)}`,'good');};side.appendChild(b);mid.append(nm,sub);}
+    else if(it.src==='guild'){sub.textContent=it.how;mid.append(nm,sub);}
     else{sub.textContent='Only a friend can send this ('+priceHTML(it.cost,it.cur).replace(/<[^>]+>/g,'')+(it.cur==='gem'?' diamonds':' coins')+')';mid.append(nm,sub);}
     // what the item adds: Strength and the bonuses it gives, plus XP the first time you get it
     const bf=document.createElement('div');bf.className='col-buffs';
@@ -5741,6 +5759,7 @@ function evaluateRace(place){
   if(isTeamMode(RACE.mode)){const tp=teamPoints(resultRows().map(x=>x.r));st.teamWin=tp[player.team]===Math.max(...tp)&&tp.filter(v=>v===Math.max(...tp)).length===1;st.guildBattleWin=!!(RACE.gb&&st.teamWin);}
   const notes=[];
   // lifetime
+  if(!RACE.zd&&player)setTimeout(()=>addRunMeters(prog(player)),0);
   STATS.races++;if(place===1)STATS.wins++;if(place<=3)STATS.top3++;STATS.coins+=st.coins|0;STATS.gems+=st.gems|0;STATS.hits+=st.hits|0;STATS.powers+=st.powers|0;STATS.items+=st.items|0;STATS.clears+=st.clears|0;if(st.online)STATS.online++;if(st.teamWin)STATS.teamWins++;
   if(place===1){if(st.online)STATS.onlineWins=(STATS.onlineWins|0)+1;STATS.winsBy=STATS.winsBy||{};const cc=player&&player.flag?player.flag.code:selCountry;STATS.winsBy[cc]=(STATS.winsBy[cc]|0)+1;{const k=st.online?'vsBy':'soloBy',was=flag3d(cc).on;STATS[k]=STATS[k]||{};STATS[k][cc]=(STATS[k][cc]|0)+1;if(!was&&flag3d(cc).on)notes.push(`✨ 3D flag unlocked: ${flagCanvas(cc).name}!`);}if(RACE.fc)STATS.fcWins=(STATS.fcWins|0)+1;}
   saveJSON('flagdash-stats',STATS);
@@ -5777,11 +5796,11 @@ function renderTasks(box,tab){
     const row=document.createElement('div');row.className='hub-row'+(claimed?' done':'');
     row.innerHTML=`<div class="hub-main"><b></b><div class="bar"><i style="width:${Math.min(100,(st.prog[t.id]|0)/t.n*100)}%"></i></div><small>${Math.min(st.prog[t.id]|0,t.n)} / ${t.n}</small></div><div class="hub-side"><span class="rewards">${rewardHTML(t.rw)}</span><button class="buy"></button></div>`;
     row.querySelector('b').textContent=t.txt;const b=row.querySelector('button');
-    if(claimed){b.textContent='Claimed';b.disabled=true;}else if(done){b.textContent='Claim';b.onclick=()=>{st.claimed.push(t.id);saveJSON('flagdash-daily',st);giveReward(t.rw);sfx.claim();renderHub();};}else{b.textContent='In progress';b.disabled=true;}
+    if(claimed){b.textContent='Claimed';b.disabled=true;}else if(done){b.textContent='Claim';b.onclick=()=>{st.claimed.push(t.id);saveJSON('flagdash-daily',st);giveReward(t.rw);addBadges(2,'daily task');sfx.claim();renderHub();};}else{b.textContent='In progress';b.disabled=true;}
     box.appendChild(row);});
   const all=list.every(t=>st.claimed.includes(t.id));const row=document.createElement('div');row.className='hub-row bonus';
   row.innerHTML=`<div class="hub-main"><b>Daily bonus: claim all three tasks</b></div><div class="hub-side"><span class="rewards">${rewardHTML(DAILY_BONUS)}</span><button class="buy"></button></div>`;
-  const b=row.querySelector('button');if(st.bonus){b.textContent='Claimed';b.disabled=true;}else if(all){b.textContent='Claim';b.onclick=()=>{st.bonus=true;saveJSON('flagdash-daily',st);giveReward(DAILY_BONUS);sfx.fanfare();renderHub();};}else{b.textContent='Locked';b.disabled=true;}
+  const b=row.querySelector('button');if(st.bonus){b.textContent='Claimed';b.disabled=true;}else if(all){b.textContent='Claim';b.onclick=()=>{st.bonus=true;saveJSON('flagdash-daily',st);giveReward(DAILY_BONUS);addBadges(5,'daily bonus');sfx.fanfare();renderHub();};}else{b.textContent='Locked';b.disabled=true;}
   box.appendChild(row);
   const tm=document.createElement('p');tm.className='muted';const now=new Date(),mid=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1);const hrs=Math.ceil((mid-now)/3600000);tm.textContent=`New tasks in about ${hrs} hour${hrs>1?'s':''}.`;box.appendChild(tm);
 }
@@ -5923,7 +5942,7 @@ function buildGuildBoard(key){
   if(GUILD){const w=MYPTS.w&&MYPTS.w.k===key?MYPTS.w:{p:0,r:0};add(GUILD.id,GUILD.name,GUILD.tag,GUILD.col,(w.p|0)+(w.gb|0),w.r|0,false);}
   Object.values(SEEN).forEach(c=>{if(!c.gid||!c.w||c.w[0]!==key)return;add(c.gid,c.gn||c.gt,c.gt,c.gc||'#aab4d8',(c.w[1]|0)+(c.w[3]|0),c.w[2]|0,false);});
   const rng=mulberry32(hashStr('cpug'+key)),f=periodFrac('w',key);
-  CPU_GUILDS.forEach(([n,t],i)=>add('cpug'+i,n,t,GUILD_COLORS[i%GUILD_COLORS.length],Math.round(2500*(0.2+0.8*rng())*f),Math.round(50*(0.2+0.8*rng())*f),true));
+  CPU_GUILDS.forEach(([n,t],i)=>add('gstarter'+i,n,t,GUILD_COLORS[i%GUILD_COLORS.length],Math.round(2500*(0.2+0.8*rng())*f),Math.round(50*(0.2+0.8*rng())*f),true));
   return [...map.values()].sort((a,b)=>b.pts-a.pts);
 }
 
@@ -6088,7 +6107,10 @@ function warPick(wk,board){if(!GUILD)return null;LBHIST.war=LBHIST.war||{};
   const rv=pool.slice().sort((a,b)=>Math.abs(h(a.id)-me)-Math.abs(h(b.id)-me))[0];
   LBHIST.war[wk]={gid:GUILD.id,rival:{id:rv.id,name:rv.name,tag:rv.tag,col:rv.col,cpu:!!rv.cpu}};saveJSON('flagdash-lbhist',LBHIST);return Object.assign({},rv,{pts:rv.cpu?warCpuPts(wk,rv.id):rv.pts});}
 function warCpuPts(wk,id){const f=periodFrac('w',wk);return Math.round((250+hashStr(wk+id)%300)*Math.min(1,f));}
-function warScore(wk,board){const sv=warSv(wk);if(sv&&sv.row)return +sv.row.us|0;const me=board.find(g=>g.id===GUILD.id);return me?me.pts|0:0;}
+function warScore(wk,board){const sv=warSv(wk);if(sv&&sv.row)return +sv.row.us|0;
+  // only real members count in a war (CPU guildmates don't)
+  if(wk===weekKey())return guildMembers().reduce((a,m)=>a+(m.w.p|0),0)+(MYPTS.w&&MYPTS.w.k===wk?MYPTS.w.gb|0:0);
+  const me=board.find(g=>g.id===GUILD.id);return me&&!String(me.id).startsWith('gstarter')?me.pts|0:0;}
 function warVs(us,them,rv,live){const d=document.createElement('div');d.className='war-vs';const tot=Math.max(1,us+them),pc=Math.round(us/tot*100);
   d.innerHTML=`<div class="war-side"><span class="g-badge"></span><b></b><strong>${us}</strong></div><div class="war-x">⚔️</div><div class="war-side them"><strong>${them}</strong><b></b><span class="g-badge"></span></div><div class="war-bar"><i style="width:${pc}%"></i></div>`;
   const bs=d.querySelectorAll('.g-badge'),ns=d.querySelectorAll('.war-side b');bs[0].textContent=GUILD.tag;bs[0].style.background=GUILD.col;ns[0].textContent=GUILD.name;
@@ -6118,6 +6140,129 @@ function renderWar(box){if(!GUILD)return;const sec=document.createElement('div')
   if(STATS.warWins){const rec=document.createElement('p');rec.className='muted small';rec.textContent=`Wars won: ${STATS.warWins}`;sec.appendChild(rec);}
   if(LBHIST.war[wk])LBHIST.war[wk].seen=true;
 }
+/* ---------- Guild Hall: your guild's home. Guild chat first, then activities, records, gifts,
+   donations, announcements, the guild store and the members. Starter guilds (and every guild)
+   are filled out with CPU members, so a guild never feels empty. ---------- */
+const GH=loadJSON('flagdash-gh',{});const saveGH=()=>saveJSON('flagdash-gh',GH);
+const ghOf=gid=>GH[gid]||(GH[gid]={bank:0,my:0,gift:'',cpuGift:'',news:[],chat:[],buys:{}});
+const STARTER_GUILDS=CPU_GUILDS.map(([n,t],i)=>({id:'gstarter'+i,name:n,tag:t,col:GUILD_COLORS[i%GUILD_COLORS.length]}));
+const GH_FIRST=['Kofi','Ama','Lucas','Mia','Yuki','Ravi','Amara','Diego','Lena','Omar','Zara','Jean','Nia','Ikaika','Sofia','Malik','Hana','Theo','Ayo','Lola','Kenji','Ines','Tariq','Ana','Mateo','Chloe','Dami','Noah','Rosa','Emeka','Leila','Jamal','Bea','Sami','Esi','Marco','Aisha','Pierre','Kai','Wanjiru'];
+const GH_TAIL=['','','','_GG','99','x','Pro','Dash','_HT','7','Run','Flash','Bolt','01','Star'];
+// the guild's CPU members: same names every time for the same guild
+function ghCpu(gid){const rng=mulberry32(hashStr('ghm'+gid)),n=gid.startsWith('gstarter')?18+Math.floor(rng()*10):10+Math.floor(rng()*8),out=[];const used=new Set();
+  for(let i=0;i<n;i++){let nm;do{nm=GH_FIRST[Math.floor(rng()*GH_FIRST.length)]+GH_TAIL[Math.floor(rng()*GH_TAIL.length)];}while(used.has(nm));used.add(nm);
+    out.push({id:'c'+i,nm,cc:COUNTRIES[Math.floor(rng()*COUNTRIES.length)][0],ch:CHAR_IDS[Math.floor(rng()*CHAR_IDS.length)],base:rng(),role:i===0?'Leader':i<3?'Elder':'Member',cpu:true});}
+  return out;}
+const ghLeaderIsMe=()=>GUILD&&GUILD.owner===PID;
+function ghMembers(){const wk=weekKey(),f=periodFrac('w',wk),cpu=ghCpu(GUILD.id).map(m=>Object.assign(m,{pts:Math.round(m.base*m.base*520*f)}));
+  if(ghLeaderIsMe())cpu[0].role='Elder';
+  const real=guildMembers().map(m=>({nm:m.nm,cc:m.cc,me:m.me,pts:m.w.p|0,role:m.me&&ghLeaderIsMe()?'Leader':'Member'}));
+  return real.concat(cpu).sort((a,b)=>b.pts-a.pts);}
+// guild level from the guild bank (everyone's donations, in coins; a diamond counts as 50 coins)
+const ghLevel=bank=>{let L=1,need=1000,left=bank;while(left>=need&&L<50){left-=need;L++;need=Math.round(need*1.35);}return {L,left,need};};
+function ghBank(gid){const g=ghOf(gid);const days=Math.floor((Date.now()-(GUILD.joined||Date.now()))/864e5)+1,rng=mulberry32(hashStr('ghb'+gid));return g.bank+g.my+Math.round((2000+rng()*6000)+days*(300+rng()*500));}
+// CPU chatter: a few lines an hour, worked out from the clock so everyone in the guild sees the same ones
+const GH_LINES=['gg everyone!','who is up for a guild battle?','just hit wave 9 in Zombie Defense 🧟','we need more races for the weekly goal 💪','⚔️ we got this war','donated 200 coins to the bank','anyone got the Lead Swap? 🔄','that Samurai slash is crazy','morning team ☀️','night all 🌙','new skin 🔥','push for the top 10!','3 wins in a row 🏁','the Archer wind saved me lol','Grand Prix later?','sniper drop in Zombie Defense = best gun','welcome to the new members 👋','almost unlocked my 3D flag 🚩','who wants to race Online?','claim your guild gift today 🎁','that last lap was close','dwarf earthquake op','let us win this week 🏆','how do you get hero badges? running miles!','GG on that war last week','I love this guild ❤️'];
+function ghCpuChat(gid){const cpu=ghCpu(gid),now=Date.now(),slot=7*60000,out=[];
+  for(let k=0;k<30;k++){const s=Math.floor(now/slot)-k,rng=mulberry32(hashStr('ghc'+gid+s));if(rng()<0.45)continue;const m=cpu[Math.floor(rng()*cpu.length)];
+    out.push({id:'cpu'+s,nm:m.nm,cc:m.cc,t:GH_LINES[Math.floor(rng()*GH_LINES.length)],ts:s*slot+Math.floor(rng()*slot*0.9),role:m.role});}
+  return out.filter(m=>m.ts<=now);}
+// hero badges: 1 for every 1,000 m you run, 2 for each daily task, 5 for the daily bonus
+function addBadges(n,why){if(!n)return;wallet.badges=(wallet.badges|0)+n;saveWallet();if(why)feed(`🎖️ +${n} hero badge${n>1?'s':''}: ${why}`,'good');}
+function addRunMeters(m){if(!(m>0))return;STATS.meters=(STATS.meters|0)+Math.round(m);const got=Math.floor(STATS.meters/1000)-(STATS.badgeKm|0);if(got>0){STATS.badgeKm=(STATS.badgeKm|0)+got;addBadges(got,`${(STATS.badgeKm).toLocaleString()} km run`);}saveJSON('flagdash-stats',STATS);}
+// guild store: diamonds, coins, real money and hero badges
+const GH_STORE=[
+  {id:'gchest',name:'Guild Chest',ic:'🎁',cur:'badge',cost:20,desc:'200 to 600 coins and 2 to 6 diamonds.',give(){const c=200+Math.floor(Math.random()*5)*100,g=2+Math.floor(Math.random()*5);giveReward({c,g});return `${c} coins and ${g} diamonds`;}},
+  {id:'gperks',name:'Perk Crate',ic:'⚡',cur:'badge',cost:12,desc:'3 random coin perks.',give(){const ids=BUFFS.filter(b=>b.tier==='coin').map(b=>b.id),got=[];for(let i=0;i<3;i++){const id=pick(ids);wallet.buffs[id]=(wallet.buffs[id]|0)+1;got.push(BUFFS.find(b=>b.id===id).name);}saveWallet();return got.join(', ');}},
+  {id:'gstatue',name:'Hero Statue',ic:'🗽',cur:'badge',cost:60,room:'g_statue',desc:'A gold statue of your hero for your room.'},
+  {id:'gsupply',name:'Supply Box',ic:'📦',cur:'coin',cost:600,desc:'2 random coin perks and 3 hero badges.',give(){const ids=BUFFS.filter(b=>b.tier==='coin').map(b=>b.id);for(let i=0;i<2;i++){const id=pick(ids);wallet.buffs[id]=(wallet.buffs[id]|0)+1;}saveWallet();addBadges(3);return '2 perks and 3 hero badges';}},
+  {id:'gcrest',name:'Guild Crest',ic:'🛡️',cur:'gem',cost:30,room:'g_crest',desc:'Your guild\'s crest for your room wall.'},
+  {id:'gbadges',name:'Badge Bundle',ic:'🎖️',cur:'gem',cost:15,desc:'25 hero badges.',give(){addBadges(25);return '25 hero badges';}},
+  {id:'gtreasure',name:'Guild Treasure',ic:'💰',cur:'usd',usd:'$4.99',desc:'300 diamonds and 60 hero badges.'}];
+const curIc={badge:'🎖️',coin:'🪙',gem:'💎'};
+const GH_TABS=[['chat','💬','Chat'],['act','⚔️','Activity'],['rec','🏆','Records'],['gift','🎁','Gifts'],['don','💰','Donate'],['news','📢','News'],['shop','🏪','Store'],['mem','👥','Team']];
+let ghChatT=null;
+function ghHeader(box){const head=document.createElement('div');head.className='g-head';head.style.borderColor=GUILD.col;
+  const lv=ghLevel(ghBank(GUILD.id)),gb=buildGuildBoard(weekKey()),rank=gb.findIndex(g=>g.id===GUILD.id)+1,mem=ghMembers().length;
+  head.innerHTML=`<div class="g-badge"></div><div class="gh-hd"><div class="g-name"></div><div class="muted"></div></div><div class="gh-wal"><span>🎖️ <b class="ghB"></b></span></div>`;
+  head.querySelector('.g-badge').textContent=GUILD.tag;head.querySelector('.g-badge').style.background=GUILD.col;head.querySelector('.g-name').textContent=GUILD.name;
+  head.querySelector('.muted').textContent=`Level ${lv.L} · ${mem} members${rank?` · #${rank} this week`:''}`;head.querySelector('.ghB').textContent=(wallet.badges|0).toLocaleString();box.appendChild(head);
+  const bar=document.createElement('div');bar.className='gh-bar';const cur=GH_TABS.some(t=>t[0]===hubTab)?hubTab:'chat';
+  GH_TABS.forEach(([id,ic,lab])=>{const b=document.createElement('button');b.className='gh-tab';b.setAttribute('aria-pressed',id===cur);b.innerHTML=`<span class="gh-ic">${ic}</span><small>${lab}</small>`;b.onclick=()=>{hubTab=id;renderHub();};bar.appendChild(b);});
+  box.appendChild(bar);return cur;}
+function ghChat(box){const wrap=document.createElement('div');wrap.className='gh-chat';const list=document.createElement('div');list.className='gh-msgs';wrap.appendChild(list);
+  const form=document.createElement('form');form.className='gh-send';form.innerHTML='<input type="text" maxlength="120" placeholder="Message your guild" aria-label="Message your guild" autocomplete="off"><button class="primary" type="submit">Send</button>';wrap.appendChild(form);box.appendChild(wrap);
+  const g=ghOf(GUILD.id);let sig='';
+  const draw=()=>{const real=(gChan()&&CH.hist[gChan()]||[]).filter(m=>!BLOCKED[m.from]).map(m=>({nm:m.mine?'You':m.nm,cc:m.cc,t:filterText(m.t),ts:m.ts,mine:!!m.mine}));
+    const all=real.concat(ghCpuChat(GUILD.id),g.chat.map(m=>Object.assign({},m,{t:filterText(m.t)}))).sort((a,b)=>a.ts-b.ts).slice(-60);
+    const s=all.length+'|'+(all.length?all[all.length-1].ts:0);if(s===sig)return;sig=s;list.innerHTML='';
+    all.forEach(m=>{const r=document.createElement('div');r.className='gh-m'+(m.mine?' mine':'')+(m.ann?' ann':'');const im=document.createElement('img');im.alt='';im.src=flagCanvas(COUNTRY_CODES.has(m.cc)?m.cc:'USA').url;
+      const b=document.createElement('div');const h=document.createElement('b');h.textContent=(m.ann?'📢 ':'')+m.nm+(m.role&&m.role!=='Member'?` · ${m.role}`:'');const t=document.createElement('span');t.textContent=m.t;const d=new Date(m.ts);const tm=document.createElement('small');tm.textContent=`${d.getHours()}:${pad2(d.getMinutes())}`;
+      b.append(h,t);r.append(im,b,tm);list.appendChild(r);});list.scrollTop=list.scrollHeight;};
+  draw();clearInterval(ghChatT);ghChatT=setInterval(()=>{if(hubOpen!=='guild'||!list.isConnected){clearInterval(ghChatT);return;}draw();},2000);
+  form.onsubmit=e=>{e.preventDefault();const i=form.querySelector('input'),v=cleanText(i.value);if(!v)return;
+    let sent=false;try{if(signedIn()&&chatOn()&&gChan()){if(!chatNet.room&&NET.ns)initChat();sent=sendPublic(gChan(),v);}}catch(_){}
+    if(!sent){g.chat.push({nm:'You',cc:selCountry,t:v,ts:Date.now(),mine:true});g.chat=g.chat.slice(-40);saveGH();}
+    i.value='';draw();
+    // a guildmate answers now and then
+    if(Math.random()<0.6){const cpu=ghCpu(GUILD.id),m=pick(cpu),R=['👍','let\'s go!','gg','haha true','same here','on my way 🏁','💪💪','nice!','who wants to race?'];setTimeout(()=>{g.chat.push({nm:m.nm,cc:m.cc,t:pick(R),ts:Date.now(),role:m.role});g.chat=g.chat.slice(-40);saveGH();if(list.isConnected)draw();},1500+Math.random()*3000);}};}
+function ghActivities(box){renderWar(box);
+  const wk=weekKey(),races=guildRaces()+ghCpu(GUILD.id).reduce((a,m)=>a+Math.round(m.base*6*periodFrac('w',wk)),0),claimed=LBHIST.gclaim[wk];const goal=document.createElement('div');goal.className='hub-row'+(claimed?' done':'');
+  goal.innerHTML=`<div class="hub-main"><b>Weekly guild goal: ${GUILD_GOAL} races together</b><div class="bar"><i style="width:${Math.min(100,races/GUILD_GOAL*100)}%"></i></div><small>${Math.min(races,GUILD_GOAL)} / ${GUILD_GOAL} races this week</small></div><div class="hub-side"><span class="rewards">${rewardHTML(GUILD_GOAL_RW)}</span><button class="buy"></button></div>`;
+  const b=goal.querySelector('button');if(claimed){b.textContent='Claimed';b.disabled=true;}else if(races>=GUILD_GOAL){b.textContent='Claim';b.onclick=()=>{LBHIST.gclaim[wk]=true;saveJSON('flagdash-lbhist',LBHIST);giveReward(GUILD_GOAL_RW);sfx.fanfare();renderHub();};}else{b.textContent='In progress';b.disabled=true;}
+  box.appendChild(goal);
+  const p=document.createElement('p');p.className='muted';p.textContent='Guild battles: in an online room, the host picks 3 v 3 or 2 v 2 v 2 and ticks "Guild battle". Teams are then made by guild, and each win adds 10 guild points.';box.appendChild(p);}
+function ghRecords(box){const lv=ghLevel(ghBank(GUILD.id)),mem=ghMembers().length,wars=STATS.warWins|0,goals=Object.keys(LBHIST.gclaim||{}).length,km=Math.floor((STATS.meters|0)/1000);
+  const L=[['🏰','Guild level',lv.L,[2,5,10,20]],['👥','Members',mem,[10,20,30,40]],['⚔️','Guild wars won',wars,[1,5,10,25]],['✅','Weekly goals reached',goals,[1,4,12,26]],['🏃','Your kilometres run',km,[10,50,200,1000]],['🎖️','Your hero badges',wallet.badges|0,[10,50,200,500]]];
+  const h=document.createElement('p');h.className='muted';h.textContent=`Guild bank: ${ghBank(GUILD.id).toLocaleString()} coins · level ${lv.L+1} in ${(lv.need-lv.left).toLocaleString()} more`;box.appendChild(h);
+  L.forEach(([ic,name,v,steps])=>{const nx=steps.find(s=>v<s),stars=steps.filter(s=>v>=s).length;const r=document.createElement('div');r.className='hub-row'+(nx?'':' done');
+    r.innerHTML=`<div class="hub-main"><b>${ic} </b><div class="bar"><i style="width:${nx?Math.min(100,v/nx*100):100}%"></i></div><small></small></div><div class="hub-side"><span class="gh-stars">${'★'.repeat(stars)}${'☆'.repeat(steps.length-stars)}</span></div>`;
+    r.querySelector('b').append(name+': '+v.toLocaleString());r.querySelector('small').textContent=nx?`Next star at ${nx.toLocaleString()}`:'All stars earned';box.appendChild(r);});}
+function ghGifts(box){const g=ghOf(GUILD.id),day=new Date().toDateString();
+  const r=document.createElement('div');r.className='hub-row'+(g.gift===day?' done':'');r.innerHTML=`<div class="hub-main"><b>🎁 Daily guild gift</b><small>A free gift from the guild bank, once a day.</small></div><div class="hub-side"><button class="buy"></button></div>`;
+  const b=r.querySelector('button');if(g.gift===day){b.textContent='Come back tomorrow';b.disabled=true;}else{b.textContent='Open';b.onclick=()=>{g.gift=day;saveGH();const x=Math.random();let msg;if(x<0.5){const c=50+Math.floor(Math.random()*11)*10;giveReward({c});msg=c+' coins';}else if(x<0.8){const n=1+Math.floor(Math.random()*2);giveReward({g:n});msg=n+' diamond'+(n>1?'s':'');}else{addBadges(2);msg='2 hero badges';}sfx.claim();feed('🎁 Guild gift: '+msg,'good');renderHub();};}
+  box.appendChild(r);
+  // a guildmate sends you something some days
+  const rng=mulberry32(hashStr('ghg'+GUILD.id+day));if(rng()<0.5){const m=pick(ghCpu(GUILD.id)),amt=50+Math.floor(rng()*6)*25;const r2=document.createElement('div');r2.className='hub-row'+(g.cpuGift===day?' done':'');
+    r2.innerHTML=`<div class="hub-main"><b></b><small>A gift from a guildmate.</small></div><div class="hub-side"><span class="rewards">${rewardHTML({c:amt})}</span><button class="buy"></button></div>`;r2.querySelector('b').textContent=`🎁 ${m.nm} sent you ${amt} coins`;
+    const b2=r2.querySelector('button');if(g.cpuGift===day){b2.textContent='Claimed';b2.disabled=true;}else{b2.textContent='Claim';b2.onclick=()=>{g.cpuGift=day;saveGH();giveReward({c:amt});sfx.claim();renderHub();};}box.appendChild(r2);}
+  const p=document.createElement('p');p.className='muted';p.textContent='Send room gifts to friends from your room: open My room, then the gift box.';box.appendChild(p);}
+function ghDonate(box){const g=ghOf(GUILD.id),lv=ghLevel(ghBank(GUILD.id));
+  const t=document.createElement('div');t.className='hub-row';t.innerHTML=`<div class="hub-main"><b>Guild level ${lv.L}</b><div class="bar"><i style="width:${lv.left/lv.need*100}%"></i></div><small>${lv.left.toLocaleString()} / ${lv.need.toLocaleString()} to level ${lv.L+1} · you gave ${g.my.toLocaleString()}</small></div>`;box.appendChild(t);
+  const opts=[['100 coins',{c:100},100],['500 coins',{c:500},500],['5 diamonds',{g:5},250],['20 diamonds',{g:20},1000]];
+  const row=document.createElement('div');row.className='gh-don';opts.forEach(([lab,cost,val])=>{const b=document.createElement('button');b.className='buy';b.textContent='Give '+lab;
+    const can=cost.c?wallet.coins>=cost.c:wallet.gems>=cost.g;b.disabled=!can;b.onclick=()=>{if(cost.c)wallet.coins-=cost.c;else wallet.gems-=cost.g;saveWallet();g.my+=val;saveGH();sfx.purchase();feed(`💰 Thanks! +${val.toLocaleString()} to the guild bank`,'good');renderHub();};row.appendChild(b);});box.appendChild(row);
+  const h=document.createElement('h3');h.textContent='Recent donations';box.appendChild(h);
+  const cpu=ghCpu(GUILD.id),day=Math.floor(Date.now()/864e5);for(let k=0;k<6;k++){const rng=mulberry32(hashStr('ghd'+GUILD.id+(day*10+k)));const m=cpu[Math.floor(rng()*cpu.length)],v=[100,200,500,250,1000][Math.floor(rng()*5)];
+    const r=document.createElement('div');r.className='gh-line';r.textContent=`${m.nm} gave ${v>=250&&rng()<0.4?Math.round(v/50)+' diamonds':v+' coins'}`;box.appendChild(r);}
+  if(g.my){const r=document.createElement('div');r.className='gh-line me';r.textContent=`You gave ${g.my.toLocaleString()} in total`;box.appendChild(r);}}
+function ghNews(box){const g=ghOf(GUILD.id),cpu=ghCpu(GUILD.id),lead=ghLeaderIsMe()?null:cpu[0];
+  if(ghLeaderIsMe()){const f=document.createElement('form');f.className='gh-send';f.innerHTML='<input type="text" maxlength="160" placeholder="Post an announcement to your guild" autocomplete="off"><button class="primary" type="submit">Post</button>';
+    f.onsubmit=e=>{e.preventDefault();const v=cleanText(f.querySelector('input').value);if(!v)return;g.news.unshift({t:v,ts:Date.now(),nm:'You'});g.news=g.news.slice(0,20);
+      g.chat.push({nm:'You',cc:selCountry,t:v,ts:Date.now(),mine:true,ann:1});saveGH();try{if(signedIn()&&chatOn()&&gChan())sendPublic(gChan(),'📢 '+v);}catch(_){}renderHub();};box.appendChild(f);}
+  const wk=weekKey(),rv=LBHIST.war&&LBHIST.war[wk]&&LBHIST.war[wk].rival;
+  const auto=[[`This week we fight [${rv?rv.tag:'???'}] ${rv?rv.name:'a rival guild'} in the Guild War. Every race counts! ⚔️`,0],[`Weekly goal: ${GUILD_GOAL} races together. Claim your reward in Activities.`,1],['Remember your daily guild gift 🎁 and the guild store 🏪.',2]];
+  const all=g.news.map(n=>({t:n.t,nm:n.nm,ts:n.ts})).concat(lead?auto.map(([t,i])=>({t,nm:lead.nm+' · Leader',ts:Date.now()-((i+1)*3+((hashStr(wk+i)%5)))*3600000})):[]).sort((a,b)=>b.ts-a.ts);
+  if(!all.length){const p=document.createElement('p');p.className='muted';p.textContent='No announcements yet. Post one above to tell your guild what\'s next.';box.appendChild(p);}
+  all.forEach(n=>{const r=document.createElement('div');r.className='gh-news';const h=document.createElement('b');h.textContent='📢 '+n.nm;const t=document.createElement('p');t.textContent=n.t;const d=document.createElement('small');d.textContent=new Date(n.ts).toLocaleString([], {weekday:'short',hour:'numeric',minute:'2-digit'});r.append(h,t,d);box.appendChild(r);});}
+function ghStore(box){const p=document.createElement('p');p.className='muted';p.textContent='Earn 🎖️ hero badges by running (1 per km) and finishing daily tasks (2 each, 5 for the bonus).';box.appendChild(p);
+  const g=ghOf(GUILD.id),grid=document.createElement('div');grid.className='gh-shop';
+  GH_STORE.forEach(it=>{const c=document.createElement('div');c.className='gh-item';const own=it.room&&ownsItem(it.room);
+    c.innerHTML=`<div class="gh-iic">${it.ic}</div><b></b><small></small><button class="buy"></button>`;c.querySelector('b').textContent=it.name;c.querySelector('small').textContent=it.desc;const b=c.querySelector('button');
+    if(it.cur==='usd'){b.textContent=it.usd+' · soon';b.disabled=!DEVMODE;if(DEVMODE)b.onclick=()=>{giveReward({g:300});addBadges(60);sfx.purchase();renderHub();};}
+    else if(own){b.textContent='Owned';b.disabled=true;}
+    else{const have=it.cur==='badge'?wallet.badges|0:it.cur==='coin'?wallet.coins:wallet.gems;b.textContent=`${curIc[it.cur]} ${it.cost.toLocaleString()}`;b.disabled=have<it.cost;
+      b.onclick=()=>{if(it.cur==='badge')wallet.badges-=it.cost;else if(it.cur==='coin')wallet.coins-=it.cost;else wallet.gems-=it.cost;saveWallet();
+        let msg;if(it.room){grantItem(it.room);msg=it.name+' is in your room';}else msg=it.give();sfx.purchase();feed(`🏪 ${it.name}: ${msg}`,'good');renderHub();};}
+    grid.appendChild(c);});box.appendChild(grid);}
+function ghMembersTab(box){
+  const inv=document.createElement('div');inv.className='hub-form';inv.innerHTML=`<h3>Invite friends</h3><p class="muted">Send this code. They paste it under Guild, Join with an invite code.</p><div class="g-code"><code></code><button class="ghost">Copy</button></div>`;
+  const code=guildCode(GUILD);inv.querySelector('code').textContent=code;inv.querySelector('button').onclick=e=>{try{navigator.clipboard.writeText(code).then(()=>{e.target.textContent='Copied';});}catch(_){}};box.appendChild(inv);
+  const mh=document.createElement('h3');mh.textContent='Members this week';box.appendChild(mh);
+  ghMembers().forEach((m,i)=>{const row=boardRow(i,{nm:m.nm,cc:m.cc,me:m.me,pts:m.pts,cpu:m.cpu});const tg=row.querySelector('.lb-tag');if(tg)tg.textContent=(m.role!=='Member'?m.role+' · ':'')+(m.cpu?'CPU':'');box.appendChild(row);});
+  const lv=document.createElement('button');lv.className='ghost';lv.textContent='Leave guild';lv.onclick=()=>{if(lv.dataset.sure){setGuild(null);}else{lv.dataset.sure='1';lv.textContent='Tap again to leave';}};box.appendChild(lv);}
+function renderGuildHome(box){const cur=ghHeader(box);const sec=document.createElement('div');sec.className='gh-sec';box.appendChild(sec);
+  ({chat:ghChat,act:ghActivities,rec:ghRecords,gift:ghGifts,don:ghDonate,news:ghNews,shop:ghStore,mem:ghMembersTab})[cur](sec);}
 function renderGuild(box){
   if(!GUILD){
     const intro=document.createElement('p');intro.className='muted';intro.textContent='Team up with friends. Your guild tag shows next to your name, guild points add up on the guild leaderboard, and a weekly goal pays every member.';box.appendChild(intro);
@@ -6130,26 +6275,14 @@ function renderGuild(box){
       setGuild({id:'g'+Math.random().toString(36).slice(2,12),name:n,tag:t,col,owner:PID});sfx.pick();};
     const j=document.createElement('div');j.className='hub-form';j.innerHTML=`<h3>Join with an invite code</h3><label>Code<input type="text" id="gCode" autocomplete="off" placeholder="FDG-..."></label><button class="ghost" id="gJoin">Join guild</button><p class="muted" id="gJMsg"></p>`;box.appendChild(j);
     j.querySelector('#gJoin').onclick=()=>{const g=parseGuildCode(j.querySelector('#gCode').value);if(!g){j.querySelector('#gJMsg').textContent='That code did not work. Ask your guild leader for the code again.';return;}setGuild(g);sfx.pick();};
+    {const h=document.createElement('h3');h.textContent='Starter guilds';box.appendChild(h);
+      STARTER_GUILDS.forEach(g=>{const row=document.createElement('div');row.className='hub-row';row.innerHTML=`<div class="hub-main"><b></b><small></small></div><div class="hub-side"><button class="buy">Join</button></div>`;
+        row.querySelector('b').textContent=`[${g.tag}] ${g.name}`;row.querySelector('small').textContent=`${ghCpu(g.id).length} members · open to everyone`;row.querySelector('button').onclick=()=>{setGuild(g);sfx.pick();hubTab='chat';};box.appendChild(row);});}
     const kg=knownGuilds();if(kg.length){const h=document.createElement('h3');h.textContent='Guilds of players you met online';box.appendChild(h);
       kg.forEach(g=>{const row=document.createElement('div');row.className='hub-row';row.innerHTML=`<div class="hub-main"><b></b><small></small></div><div class="hub-side"><button class="buy">Join</button></div>`;
         row.querySelector('b').textContent=`[${g.tag}] ${g.name}`;row.querySelector('small').textContent=`${g.n} member${g.n>1?'s':''} seen`;row.querySelector('button').onclick=()=>{setGuild({id:g.id,name:g.name,tag:g.tag,col:GUILD_COLORS.includes(g.col)?g.col:GUILD_COLORS[0]});};box.appendChild(row);});}
     return;}
-  const wk=weekKey();const head=document.createElement('div');head.className='g-head';head.style.borderColor=GUILD.col;
-  head.innerHTML=`<div class="g-badge"></div><div><div class="g-name"></div><div class="muted"></div></div>`;
-  head.querySelector('.g-badge').textContent=GUILD.tag;head.querySelector('.g-badge').style.background=GUILD.col;head.querySelector('.g-name').textContent=GUILD.name;
-  const gb=buildGuildBoard(wk),rank=gb.findIndex(g=>g.id===GUILD.id)+1;head.querySelector('.muted').textContent=`#${rank} of ${gb.length} guilds this week`;box.appendChild(head);
-  renderWar(box);
-  // weekly goal
-  const races=guildRaces(),claimed=LBHIST.gclaim[wk];const goal=document.createElement('div');goal.className='hub-row'+(claimed?' done':'');
-  goal.innerHTML=`<div class="hub-main"><b>Weekly guild goal: ${GUILD_GOAL} races together</b><div class="bar"><i style="width:${Math.min(100,races/GUILD_GOAL*100)}%"></i></div><small>${Math.min(races,GUILD_GOAL)} / ${GUILD_GOAL} races by members you've seen this week</small></div><div class="hub-side"><span class="rewards">${rewardHTML(GUILD_GOAL_RW)}</span><button class="buy"></button></div>`;
-  const b=goal.querySelector('button');if(claimed){b.textContent='Claimed';b.disabled=true;}else if(races>=GUILD_GOAL){b.textContent='Claim';b.onclick=()=>{LBHIST.gclaim[wk]=true;saveJSON('flagdash-lbhist',LBHIST);giveReward(GUILD_GOAL_RW);sfx.fanfare();renderHub();};}else{b.textContent='In progress';b.disabled=true;}
-  box.appendChild(goal);
-  const inv=document.createElement('div');inv.className='hub-form';inv.innerHTML=`<h3>Invite friends</h3><p class="muted">Send this code. They paste it under Guild, Join with an invite code.</p><div class="g-code"><code></code><button class="ghost">Copy</button></div>`;
-  const code=guildCode(GUILD);inv.querySelector('code').textContent=code;inv.querySelector('button').onclick=e=>{try{navigator.clipboard.writeText(code).then(()=>{e.target.textContent='Copied';});}catch(_){}};box.appendChild(inv);
-  const mh=document.createElement('h3');mh.textContent='Members';box.appendChild(mh);
-  guildMembers().sort((a,b)=>(b.w.p|0)-(a.w.p|0)).forEach((m,i)=>box.appendChild(boardRow(i,{nm:m.nm,cc:m.cc,me:m.me,pts:m.w.p|0})));
-  const gbt=document.createElement('p');gbt.className='muted';gbt.textContent='Guild battles: in an online room, the host picks 3 v 3 or 2 v 2 v 2 and ticks "Guild battle". Teams are then made by guild.';box.appendChild(gbt);
-  const lv=document.createElement('button');lv.className='ghost';lv.textContent='Leave guild';lv.onclick=()=>{if(lv.dataset.sure){setGuild(null);}else{lv.dataset.sure='1';lv.textContent='Tap again to leave';}};box.appendChild(lv);
+  renderGuildHome(box);
 }
 
 /* ---------- hub panel (Task Board, Leaderboards, Guild) ---------- */

@@ -72,6 +72,12 @@ Supabase project: hzzqnwzsasuwjafmsgqh
   - [ ] Indian warrior
   - [ ] Queen of All Beasts: a Black woman hero who commands animals
 
+## Guild Hall (Oct 11)
+- [x] Opens straight to your guild: guild chat first, icon bar for Activity (war, weekly goal), Records, Gifts, Donate, News (announcements), Store, Team
+- [x] Hero badges 🎖️: 1 per km run, 2 per daily task, 5 for the daily bonus; spent in the guild store (also coins, diamonds, cash)
+- [x] Guilds filled with CPU members (random names, chat lines, donations, gifts); 6 starter guilds anyone can join
+- [ ] Server side: guild bank, announcements and donations shared between real members (now kept on each device)
+
 ## Flag capes (done Oct 10)
 - [x] Heroes wear their flag as a cape instead of the flag on their shoulder
 - [x] Home screen: the runner stands turned so the cape shows
