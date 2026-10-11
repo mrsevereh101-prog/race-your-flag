@@ -1512,6 +1512,17 @@ html.zd-mode #svHud{left:auto!important;right:max(12px,env(safe-area-inset-right
 .zd-hero.down{opacity:.45;filter:grayscale(1)}.zd-hero.down::after{content:'DOWN';position:absolute;inset:0;display:grid;place-items:center;font-size:13px;color:#ff6a6a}
 html.zd-mode #touch .tgroup{position:fixed!important;right:max(12px,env(safe-area-inset-right,0px))!important;left:auto!important;top:var(--zd-top,90px)!important;bottom:auto!important;transform:none!important}
 html.zd-mode #touch .tgroup button{width:48px!important;height:48px!important}
+.war-card{display:grid;gap:10px;padding:14px;border-radius:16px;border:2px solid #f2c14a;background:linear-gradient(160deg,rgba(120,30,30,.55),rgba(20,24,70,.7));margin:10px 0}
+.war-card h3{margin:0}
+.war-vs{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
+.war-side{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;align-items:center;column-gap:8px}
+.war-side .g-badge{grid-row:1/3;min-width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:13px;padding:0 4px}
+.war-side b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.war-side strong{font-size:24px;line-height:1}
+.war-side.them{grid-template-columns:minmax(0,1fr) auto;text-align:right}.war-side.them .g-badge{grid-column:2;grid-row:1/3}.war-side.them strong,.war-side.them b{grid-column:1}
+.war-x{font-size:26px}
+.war-bar{grid-column:1/-1;height:12px;border-radius:6px;overflow:hidden}.war-bar i{display:block;height:100%;border-right:3px solid #fff}
+.war-state{margin:0;font-size:15px}.war-state.win{color:#7dffa0}.war-state.lose{color:#ff8a8a}
+.war-last.win{border-color:#f2c14a!important}
 .f3d-pg{font-size:10.5px;color:var(--gold,#f5c542);min-height:1em;line-height:1}
 </style>
 
@@ -5384,6 +5395,8 @@ const ROOM_ITEMS=[
   {id:'m_podium',name:'Podium Medal',ic:'🏅',cat:'medal',slot:'wall',src:'win',pw:8,win:S=>[S.top3|0,10],how:'Finish in the top 3 ten times'},
   {id:'m_online',name:'Online Champion',ic:'🎖️',cat:'medal',slot:'wall',src:'win',pw:15,win:S=>[S.onlineWins|0,1],how:'Win an online race'},
   {id:'m_hits',name:'Hit Master',ic:'💥',cat:'medal',slot:'wall',src:'win',pw:10,win:S=>[S.hits|0,100],how:'Land 100 hits on rivals'},
+  {id:'m_war',name:'War Banner',ic:'⚔️',cat:'medal',slot:'wall',src:'win',pw:15,win:S=>[S.warWins|0,1],how:'Win a guild war'},
+  {id:'cup_war',name:'War Crown',ic:'👑',cat:'trophy',slot:'shelf',src:'win',pw:35,win:S=>[S.warWins|0,5],how:'Win 5 guild wars'},
   {id:'m_survivor',name:'Survivor',ic:'🧟',cat:'medal',slot:'wall',src:'win',pw:10,win:S=>[S.svBest|0,10],how:'Reach wave 10 in Survival'},
   {id:'m_marathon',name:'Marathon',ic:'👟',cat:'medal',slot:'wall',src:'win',pw:10,win:S=>[S.races|0,50],how:'Finish 50 races'},
   // monuments: big pedestals. A few countries have one signature monument; the rest are shared.
@@ -6004,7 +6017,7 @@ async function renderBoards(box,tab){
     const h=document.createElement('p');h.className='muted';h.textContent=`Guild points this week (${periodLeft('w')}). Every member's race points count, plus 10 for each guild battle win.`;box.appendChild(h);
     rows.slice(0,20).forEach((g,i)=>{const row=document.createElement('div');row.className='lb-row g'+(GUILD&&g.id===GUILD.id?' me':'');
       const pos=document.createElement('b');pos.className='lb-pos';pos.textContent=i+1;const sw=document.createElement('i');sw.className='g-swatch';sw.style.background=g.col;
-      const nm=document.createElement('span');nm.className='lb-nm';nm.textContent=`[${g.tag}] ${g.name}`;const tg=document.createElement('small');tg.className='lb-tag';tg.textContent=g.cpu?'CPU':g.world?`${g.members} member${g.members===1?'':'s'}`:`${g.members} seen`;
+      const nm=document.createElement('span');nm.className='lb-nm';const wr=GUILD&&LBHIST.war&&LBHIST.war[key]&&LBHIST.war[key].gid===GUILD.id&&LBHIST.war[key].rival.id===g.id;nm.textContent=(wr?'⚔️ ':'')+`[${g.tag}] ${g.name}`;const tg=document.createElement('small');tg.className='lb-tag';tg.textContent=wr?'Your rival':g.cpu?'CPU':g.world?`${g.members} member${g.members===1?'':'s'}`:`${g.members} seen`;
       const pt=document.createElement('b');pt.className='lb-pts';pt.textContent=g.pts;row.append(pos,sw,nm,tg,pt);box.appendChild(row);});
     return;}
   const pd=PERIODS.find(x=>x.id===tab)||PERIODS[1];const rows=await BACKEND.board(pd.id,pd.key());
@@ -6024,6 +6037,46 @@ async function renderBoards(box,tab){
     const t=document.createElement('span');t.className='me-rk';t.textContent='Your rank: '+(r.rank||meI+1);const n=document.createElement('span');n.className='me-nm';n.textContent=r.nm;
     const pt=document.createElement('b');pt.textContent=fmtPts(r.pts);me.append(t,a,fl,n,pt);box.appendChild(me);}
   const n=document.createElement('p');n.className='muted small lb-foot';n.textContent='Tap your picture to change it. Points: 1st 25, 2nd 18, 3rd 15, 4th 12, then 10, 8, 6, 4. +5 for online races and +5 for a team win. '+(GLB.on?`Worldwide rankings: ${rows.total||rows.length} player${(rows.total||rows.length)===1?'':'s'} on this board.`:'Rankings show players you have met online and CPU rivals.');box.appendChild(n);
+}
+/* ---------- guild wars: each week your guild is matched against one rival guild ----------
+   War score = the guild's points on the weekly guild board (every member's race points, plus 10
+   for each guild battle win). Most points when the week ends wins the war. */
+const WAR_RW={win:{c:800,g:6},draw:{c:350,g:2},loss:{c:200,g:0}};
+const prevWeekKey=()=>weekKey(Date.now()-7*864e5);
+function warPick(wk,board){if(!GUILD)return null;LBHIST.war=LBHIST.war||{};const w=LBHIST.war[wk];
+  if(w&&w.gid===GUILD.id&&w.rival){const live=board.find(g=>g.id===w.rival.id);return Object.assign({},w.rival,{pts:w.rival.cpu?warCpuPts(wk,w.rival.id):live?live.pts:0});}
+  const others=board.filter(g=>g.id!==GUILD.id);if(!others.length)return null;
+  const real=others.filter(g=>!g.cpu),pool=real.length?real:others,h=id=>hashStr(wk+'|'+id),me=h(GUILD.id);
+  const rv=pool.slice().sort((a,b)=>Math.abs(h(a.id)-me)-Math.abs(h(b.id)-me))[0];
+  LBHIST.war[wk]={gid:GUILD.id,rival:{id:rv.id,name:rv.name,tag:rv.tag,col:rv.col,cpu:!!rv.cpu}};saveJSON('flagdash-lbhist',LBHIST);return Object.assign({},rv,{pts:rv.cpu?warCpuPts(wk,rv.id):rv.pts});}
+function warCpuPts(wk,id){const f=periodFrac('w',wk);return Math.round((250+hashStr(wk+id)%300)*Math.min(1,f));}
+function warScore(wk,board){const me=board.find(g=>g.id===GUILD.id);return me?me.pts|0:0;}
+function warVs(us,them,rv,live){const d=document.createElement('div');d.className='war-vs';const tot=Math.max(1,us+them),pc=Math.round(us/tot*100);
+  d.innerHTML=`<div class="war-side"><span class="g-badge"></span><b></b><strong>${us}</strong></div><div class="war-x">⚔️</div><div class="war-side them"><strong>${them}</strong><b></b><span class="g-badge"></span></div><div class="war-bar"><i style="width:${pc}%"></i></div>`;
+  const bs=d.querySelectorAll('.g-badge'),ns=d.querySelectorAll('.war-side b');bs[0].textContent=GUILD.tag;bs[0].style.background=GUILD.col;ns[0].textContent=GUILD.name;
+  bs[1].textContent=rv.tag;bs[1].style.background=rv.col;ns[1].textContent=rv.name;d.querySelector('.war-bar i').style.background=GUILD.col;d.querySelector('.war-bar').style.background=rv.col;return d;}
+function renderWar(box){if(!GUILD)return;const sec=document.createElement('div');sec.className='war-card';box.appendChild(sec);
+  const wk=weekKey(),board=buildGuildBoard(wk),rv=warPick(wk,board);
+  const h=document.createElement('h3');h.textContent=`⚔️ Guild War · ${periodLeft('w')}`;sec.appendChild(h);
+  if(!rv){const p=document.createElement('p');p.className='muted';p.textContent='No rival guild found yet. Check back after a race.';sec.appendChild(p);}
+  else{const us=warScore(wk,board),them=rv.pts|0;sec.appendChild(warVs(us,them,rv,true));
+    const st=document.createElement('p');st.className='war-state '+(us>them?'win':us<them?'lose':'tie');st.textContent=us>them?`Winning by ${us-them}! Keep racing.`:us<them?`Behind by ${them-us}. Every race counts.`:'All tied up. The next race decides it.';sec.appendChild(st);
+    const how=document.createElement('p');how.className='muted small';how.innerHTML=`Every race a member runs adds their race points. Guild battle wins add 10 more. Win the war: ${rewardHTML(WAR_RW.win)} and a trophy for your room.`;sec.appendChild(how);
+    const go=document.createElement('button');go.className='primary d3-gold';go.textContent='⚔️ Race for the war';go.onclick=()=>{closeHub();const t=$('tabOnline');if(t)t.click();setTimeout(()=>{const b=$('mmBtn');if(b)b.click();},250);};sec.appendChild(go);}
+  // last week's war: result and reward
+  const pk=prevWeekKey(),slot=document.createElement('div');sec.appendChild(slot);
+  (async()=>{LBHIST.war=LBHIST.war||{};let w=LBHIST.war[pk];if(w&&w.gid!==GUILD.id)return;if(w&&w.claimed){return;}
+    const pb=await BACKEND.guildBoard(pk);if(!w||w.us==null){const r=warPick(pk,pb);if(!r)return;w=LBHIST.war[pk];const us=warScore(pk,pb);if(!us&&!(w&&w.seen))return;w.us=us;w.them=r.pts|0;w.res=us>w.them?'win':us<w.them?'loss':'draw';saveJSON('flagdash-lbhist',LBHIST);}
+    const row=document.createElement('div');row.className='hub-row war-last '+w.res;const rw=WAR_RW[w.res];
+    row.innerHTML=`<div class="hub-main"><b></b><small></small></div><div class="hub-side"><span class="rewards">${rewardHTML(rw)}</span><button class="buy">Claim</button></div>`;
+    row.querySelector('b').textContent=w.res==='win'?`Last week: you beat [${w.rival.tag}] ${w.rival.name}!`:w.res==='loss'?`Last week: [${w.rival.tag}] ${w.rival.name} won`:`Last week: a draw with [${w.rival.tag}] ${w.rival.name}`;
+    row.querySelector('small').textContent=`${w.us} to ${w.them}`;
+    row.querySelector('button').onclick=()=>{w.claimed=true;saveJSON('flagdash-lbhist',LBHIST);giveReward(rw);
+      if(w.res==='win'){STATS.warWins=(STATS.warWins|0)+1;saveJSON('flagdash-stats',STATS);try{roomCheckWins();}catch(e){}sfx.fanfare();}else sfx.claim();renderHub();};
+    slot.appendChild(row);})();
+  // record
+  if(STATS.warWins){const rec=document.createElement('p');rec.className='muted small';rec.textContent=`Wars won: ${STATS.warWins}`;sec.appendChild(rec);}
+  if(LBHIST.war[wk])LBHIST.war[wk].seen=true;
 }
 function renderGuild(box){
   if(!GUILD){
@@ -6045,6 +6098,7 @@ function renderGuild(box){
   head.innerHTML=`<div class="g-badge"></div><div><div class="g-name"></div><div class="muted"></div></div>`;
   head.querySelector('.g-badge').textContent=GUILD.tag;head.querySelector('.g-badge').style.background=GUILD.col;head.querySelector('.g-name').textContent=GUILD.name;
   const gb=buildGuildBoard(wk),rank=gb.findIndex(g=>g.id===GUILD.id)+1;head.querySelector('.muted').textContent=`#${rank} of ${gb.length} guilds this week`;box.appendChild(head);
+  renderWar(box);
   // weekly goal
   const races=guildRaces(),claimed=LBHIST.gclaim[wk];const goal=document.createElement('div');goal.className='hub-row'+(claimed?' done':'');
   goal.innerHTML=`<div class="hub-main"><b>Weekly guild goal: ${GUILD_GOAL} races together</b><div class="bar"><i style="width:${Math.min(100,races/GUILD_GOAL*100)}%"></i></div><small>${Math.min(races,GUILD_GOAL)} / ${GUILD_GOAL} races by members you've seen this week</small></div><div class="hub-side"><span class="rewards">${rewardHTML(GUILD_GOAL_RW)}</span><button class="buy"></button></div>`;
