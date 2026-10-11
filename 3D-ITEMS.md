@@ -573,7 +573,9 @@ Background: one flat, solid pure green (#00FF00) filling the whole image, like a
 No words, letters or numbers.
 ```
 
-## Home screen leftovers (green screen) · to make
+## Home screen leftovers (green screen) · made
+
+Picture: `art/sheets/home-leftovers.jpg`. `arrow_l` is `arrow_r` mirrored.
 
 | Spot | Item | Replaces | File |
 |---|---|---|---|
