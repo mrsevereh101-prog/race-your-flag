@@ -4935,6 +4935,7 @@ const TIERS=[{id:'free',name:'Free'},{id:'coin',name:'Coins'},{id:'gem',name:'Di
 // Rarity: Mythical ($), Legendary ($ / 💎 / 🍀 earned), Epic (💎), Rare (coins), Common (free)
 const RARITY=[{id:'myth',name:'Mythical',ic:'🔴'},{id:'leg',name:'Legendary',ic:'🟡'},{id:'epic',name:'Epic',ic:'🟣'},{id:'rare',name:'Rare',ic:'🔵'},{id:'com',name:'Common',ic:'⚪'}];
 const usdVal=it=>parseFloat(String(it.usd||'').replace(/[^0-9.]/g,''))||0;
+// mythical items are always real-money items (tier 'usd'); every other rarity uses coins or diamonds
 function rarityOf(it){if(!it)return 'com';if(it.rar)return it.rar;
   if(it.tier==='usd')return usdVal(it)>=3.99?'myth':'leg';
   if(it.tier==='gem')return (it.cost|0)>=8?'leg':'epic';
@@ -5020,7 +5021,7 @@ const BUFFS=[
   {id:'double',name:'Double Coins',tier:'gem',cost:3,desc:'Every coin you pick up counts twice.'},
   {id:'nullify',name:'Null Field',tier:'gem',cost:4,desc:'Mystery-box items can\'t touch you: bananas, rockets, freeze bombs, land mines and fire trails do nothing to you all race.'},
   {id:'comeback',name:'Comeback Boost',tier:'coin',cost:220,desc:'Races with 2 or more laps: finish the first lap in 4th, 5th or 6th and get a 3-second speed boost.'},
-  {id:'swap',name:'Lead Swap',tier:'gem',cost:25,rar:'myth',desc:'Mythical. Races with 2 or more laps: start with a 🔄 item. Use it during the first lap to swap places with the runner in 1st.'},
+  {id:'swap',name:'Lead Swap',tier:'usd',usd:'$0.99',rar:'myth',desc:'Mythical. Races with 2 or more laps: start with a 🔄 item. Use it during the first lap to swap places with the runner in 1st.'},
 ];
 // perks that only work in races with more than one lap (kept for the next race otherwise)
 const LAP_PERKS=['comeback','swap'];
