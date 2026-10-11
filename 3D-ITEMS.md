@@ -560,7 +560,9 @@ Background: one flat, solid pure green (#00FF00) filling the whole image, like a
 No words, letters or numbers.
 ```
 
-## Back arrow (green screen) · to make
+## Back arrow (green screen) · made
+
+Made pointing right; the cut is mirrored to point left (`art/sheets/back-arrow.jpg`).
 
 One icon, its own picture. Save the cut-out as `img/icons/back.webp`; the game switches from ◀ to it automatically.
 
