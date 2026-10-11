@@ -572,3 +572,19 @@ Style: smooth 3D render like a premium mobile game item icon, with soft shading 
 Background: one flat, solid pure green (#00FF00) filling the whole image, like a green screen. No shadows, floor, gradient, glow, sparkles or particles. Nothing green on the arrow.
 No words, letters or numbers.
 ```
+
+## Home screen leftovers (green screen) · to make
+
+| Spot | Item | Replaces | File |
+|---|---|---|---|
+| Left | Edit pencil | ✏️ | `edit` |
+| Middle | Info badge | blue "i" | `info` |
+| Right | Runner arrow (right; mirrored for left) | ◀ ▶ | `arrow_r` |
+
+```
+Wide 16:9 image of three separate 3D game icons in one row, evenly spaced. Each one sits in the middle of its own third, all the same size, not touching, with nothing cut off at the edges.
+Left to right: a chunky cartoon pencil angled up to the right, yellow body with a gold metal band, pink eraser and a sharpened wooden tip; a round glossy royal-blue button with a thick gold rim and a bold white lowercase letter "i" in the middle; a chunky rounded arrow pointing to the RIGHT, polished gold with a thick royal-blue enamel inner face, bevelled edges.
+Style: smooth 3D render like a premium mobile game item icon, with soft shading and no outlines, not a drawing. Chunky rounded shapes, a bold clean silhouette, glossy materials, soft studio light from the top left, rich colours, seen from the front, tilted very slightly.
+Background: one flat, solid pure green (#00FF00) filling the whole image, like a green screen. No shadows, floor, gradient, glow, sparkles or particles. Nothing green on the objects.
+No words, letters or numbers, except the single letter "i" on the blue button.
+```
