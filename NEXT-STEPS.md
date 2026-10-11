@@ -60,7 +60,7 @@ Supabase project: hzzqnwzsasuwjafmsgqh
   switching it off brings back your real save.
 
 ## To do (added Oct 10)
-- [x] **Guild wars** (Oct 11): each week your guild is matched with a rival guild; most guild points by week's end wins coins, diamonds and room trophies. Next: seasons of several weeks, a war leaderboard, server-side matchups so both guilds see the same pairing.
+- [x] **Guild wars** (Oct 11): each week your guild is matched with a rival guild; most guild points by week's end wins coins, diamonds and room trophies. Server matchups live (`supabase/guildwars.sql`, run Oct 11). Next: seasons of several weeks and a war leaderboard.
 - [ ] **Guild perks**: bonuses a guild unlocks together (for example more coins or faster power recharge for every member), bought with guild points.
 - [ ] **Gifts to each other**: players can already send room items to friends (they arrive in the inbox). Next: send other things too, like perks, coins or skins.
 - [ ] **Guild custom flags**: each guild designs its own flag (colors, emblem), shown in guild races and on members.
