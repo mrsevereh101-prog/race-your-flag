@@ -1553,12 +1553,39 @@ html #menu .ico3d-btn::before,html #menu .ico3d-btn::after{display:none!importan
 .gh-shop{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}.gh-item{display:grid;justify-items:center;gap:4px;padding:12px 8px;border-radius:16px;background:radial-gradient(circle at 50% 30%,#3a62c8,#18225a);border:2px solid #f2c14a;text-align:center}
 .gh-iic{font-size:40px;line-height:1.1}.gh-item small{font-size:11px;min-height:2.6em}.gh-item button{width:100%}
 .gh-stars{color:#f2c14a!important;-webkit-text-fill-color:#f2c14a!important;font-size:18px;letter-spacing:1px}
+#home2{display:none}
+html.home2-on #home2{display:block;position:fixed;inset:0;z-index:5;background:#efe7d8 url(img/home/wall.webp) center/cover;overflow:hidden}
+html.home2-on #home2::before{content:'';position:absolute;inset:-20px;background:inherit;filter:blur(14px) brightness(1.02);}
+html.home2-on.mode-page #home2,#menu[hidden] #home2{display:none!important}
+html.home2-on:not(.mode-page) #menu .menu-inner{visibility:hidden}
+html.home2-on:not(.mode-page) #menu #d3Sheet{visibility:hidden}
+.h2-box{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100vw,calc(100dvh * 768 / 1376));aspect-ratio:768/1376;background:url(img/home/wall.webp) center/100% 100% no-repeat;box-shadow:0 0 40px rgba(0,0,0,.25);container-type:inline-size}
+.h2-box>*{position:absolute}
+html body .h2-hot{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0;border-radius:50%;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.h2-hot:active{background:rgba(255,255,255,.25)!important}
+.h2-prof{display:grid;place-items:center;overflow:hidden}.h2-prof .h2-av{width:88%;height:88%;border-radius:50%;object-fit:cover}
+.h2-name{font-size:2.9cqw;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#4a3410!important;-webkit-text-fill-color:#4a3410!important;text-shadow:none!important}
+html body .h2-bar{padding:0!important;border:0!important;border-radius:999px;background:#d9cdb4!important;overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,.35)!important}
+.h2-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:999px}.h2-xp i{background:linear-gradient(180deg,#f6d36a,#c8921c)}.h2-str i{background:linear-gradient(180deg,#7fc4ff,#2f7fd6)}
+.h2-bar span{position:relative;font-size:2.6cqw;line-height:1;display:block;text-align:center}
+html body .h2-pill{border-radius:999px;display:flex;align-items:center;gap:4%}.h2-pic{width:24%;aspect-ratio:1;display:grid;place-items:center;font-size:3.2cqw}.h2-pic .ico{width:100%;height:100%}
+.h2-pill b{flex:1;text-align:right;padding-right:10%;font-size:3.4cqw;color:#4a3410!important;-webkit-text-fill-color:#4a3410!important;text-shadow:none!important}
+html body .h2-ban{border-radius:0 30px 30px 0}.h2-btx{position:absolute;left:66%;top:50%;transform:translate(-50%,-50%);font-size:3.4cqw;color:#7a5520!important;-webkit-text-fill-color:#7a5520!important;text-shadow:none!important}
+.h2-evtx{position:absolute;left:4%;top:50%;transform:translateY(-50%);width:52%;font:900 3.6cqw/1.05 var(--display,system-ui);letter-spacing:.02em;color:#f6d36a!important;-webkit-text-fill-color:#f6d36a!important;text-align:center}
+html body .h2-tab{border-radius:24px}
+.h2-run{pointer-events:auto}.h2-run canvas,html body .h2-run #preview{width:100%!important;height:100%!important;display:block;background:none!important;border-radius:0!important}
+.h2-frame{display:grid;place-items:center;pointer-events:none}.h2-frame img{width:100%;height:auto;max-height:70%;object-fit:contain;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.h2-frame b{position:absolute;right:-6%;bottom:-4%;font-size:2.4cqw;background:#c8921c;border-radius:999px;padding:0 1.2cqw;line-height:1.5}
+.h2-menu{position:absolute;right:max(10px,calc(50% - min(50vw,calc(100dvh * 768 / 1376 / 2)) + 10px));bottom:calc(50% - min(100vw * 1376 / 768,100dvh) / 2 + min(100vw,calc(100dvh * 768 / 1376)) * 0.19);z-index:3;display:grid;gap:6px;padding:10px;border-radius:18px;background:#fbf6ea;border:3px solid #d9a227;box-shadow:0 8px 24px rgba(0,0,0,.35);min-width:200px}
+.h2-menu[hidden]{display:none}.h2-menu button{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;background:#f3e8cf;border:1.5px solid #d9b26a;font-size:15px;text-align:left}
+.h2-menu button .ico{width:30px;height:30px}
 .f3d-pg{font-size:10.5px;color:var(--gold,#f5c542);min-height:1em;line-height:1}
 </style>
 
 <div id="stage"></div>
 
 <div id="menu" class="overlay">
+  <div id="home2" aria-label="Home"><div class="h2-box" id="h2Box"></div></div>
   <div class="menu-inner desk3">
     <div class="left-col">
       <div class="d3-top">
@@ -3074,7 +3101,7 @@ const pvCanvas=$('preview');
 const pv={r:new THREE.WebGLRenderer({canvas:pvCanvas,antialias:true,alpha:true}),scene:new THREE.Scene(),cam:new THREE.PerspectiveCamera(30,1,0.1,50),runner:null,rotY:0.35,drag:null,autoT:3,w:0,h:0};
 pv.r.setPixelRatio(Math.min(window.devicePixelRatio||1,2));pv.r.setClearColor(0x000000,0);
 pv.scene.add(new THREE.HemisphereLight(0xeef1ff,0x3a2a40,1.0));{const l=new THREE.DirectionalLight(0xffffff,0.8);l.position.set(-3,4,-5);pv.scene.add(l);}
-{const disc=new THREE.Mesh(new THREE.CircleGeometry(1.15,48),new THREE.MeshBasicMaterial({color:0x2a3378}));disc.rotation.x=-Math.PI/2;pv.scene.add(disc);const rim=new THREE.Mesh(new THREE.RingGeometry(1.15,1.22,48),new THREE.MeshBasicMaterial({color:0xf2b631}));rim.rotation.x=-Math.PI/2;rim.position.y=0.002;pv.scene.add(rim);}
+{const disc=pv.disc=new THREE.Mesh(new THREE.CircleGeometry(1.15,48),new THREE.MeshBasicMaterial({color:0x2a3378}));disc.rotation.x=-Math.PI/2;pv.scene.add(disc);const rim=pv.rim=new THREE.Mesh(new THREE.RingGeometry(1.15,1.22,48),new THREE.MeshBasicMaterial({color:0xf2b631}));rim.rotation.x=-Math.PI/2;rim.position.y=0.002;pv.scene.add(rim);}
 pv.cam.position.set(0,1.3,-4.5);pv.cam.lookAt(0,1.02,0);
 /* ---------- studio look for the home-screen hero (test: add ?studio=1 to the address) ----------
    Real materials (metal, lacquer, cloth, skin), a reflection map, film-style tone mapping,
@@ -7428,7 +7455,7 @@ function frame(now){requestAnimationFrame(frame);tick(now);}
 function tick(now){
   const dt=ONB.hold&&(state==='countdown'||state==='race')?0:clamp((now-last)/1000,0,0.05);last=now;
   if(state==='plaza'||(state==='menu'&&plaza.active)){plaza.update(dt,now);if(state==='menu')renderPreview(dt,now);updateParticles(dt);renderer.render(scene,camera);return;}
-  if(state==='menu'&&locker.active){locker.update(dt);updateParticles(dt);renderer.render(scene,camera);renderPreview(dt,now);return;}
+  if(state==='menu'&&locker.active){if(!document.documentElement.classList.contains('home2-on')||document.documentElement.classList.contains('mode-page')||$('menu').hidden){locker.update(dt);updateParticles(dt);renderer.render(scene,camera);}renderPreview(dt,now);return;}
   if(state==='menu'||state==='lobby'){
     menuT+=dt;const d=(menuT*9)%(TRACK-100);
     W(Math.sin(menuT*0.25)*3.5,d-9,Hf(d-9)+4.2+Math.sin(menuT*0.4)*0.6,camera.position);
@@ -7884,6 +7911,63 @@ const BACK3D={ok:false};{const t=new Image();t.onload=()=>{BACK3D.ok=true;docume
     if(o.classList.contains('overlay')&&!o.hidden&&!KEEP.has(o.id)){if(o.id==='settings'){closeSettings();return;}const b=[...o.querySelectorAll('.back-btn')].find(x=>x.offsetParent);if(b)b.click();}});
   // the flag / runner picker: tap above it to put it away
   document.addEventListener('click',e=>{if(!pickOpen||state!=='menu'||e.target!==downOn)return;const t=e.target;if(!(t instanceof Element)||t.closest('#picker,.overlay:not(#menu),button,input,a,.tile-modal'))return;if(t===pvCanvas||t.closest('#playPanel,.preview-wrap'))closePicker();});
+})();
+
+/* ---------- Home: the Wall of Fame (img/home/wall.webp). The picture has the cards, buttons and
+   banners painted on; live buttons and real numbers sit on top of them, measured in the
+   picture's own pixels (768 x 1376) so they line up on every phone. The 3D runner stands on the pedestal. ---------- */
+(()=>{const box=$('h2Box');if(!box)return;document.documentElement.classList.add('home2-on');
+  const P=(x,y,w,h)=>`left:${x/7.68}%;top:${y/13.76}%;width:${w/7.68}%;height:${h/13.76}%`;
+  const el=(tag,cls,x,y,w,h,parent)=>{const e=document.createElement(tag);e.className=cls;if(x!=null)e.style.cssText=P(x,y,w,h);(parent||box).appendChild(e);return e;};
+  const hot=(cls,x,y,w,h,label,fn)=>{const b=el('button','h2-hot '+cls,x,y,w,h);b.type='button';b.setAttribute('aria-label',label);b.title=label;b.onclick=e=>{e.stopPropagation();try{sfx.tap();}catch(_){}fn(e);};return b;};
+  const tabOpen=()=>document.documentElement.classList.contains('mode-page');
+  const closePage=()=>{const c=document.querySelector('#d3Sheet .d3-tabbar [aria-selected="true"]');if(c)c.click();};
+  const page=id=>{const t=$(id);if(!t)return;if(t.getAttribute('aria-selected')==='true')return;t.click();};
+  // wall of fame: the flags you have won with hang in the frames, most wins first
+  const FR=[[140,347],[243,347],[346,347],[448,347],[550,347],[243,477],[346,477],[448,477],[140,607],[243,607],[346,607],[448,607],[550,607]];
+  const frames=FR.map(([x,y])=>{const f=el('div','h2-frame',x+10,y+12,58,74);return f;});
+  // runner on the pedestal
+  const run=el('div','h2-run',193,470,380,470);run.appendChild(pvCanvas);if(pv.disc)pv.disc.visible=false;if(pv.rim)pv.rim.visible=false;
+  // profile card
+  const prof=hot('h2-prof',60,112,118,118,'Profile',()=>openAcct());
+  const nm=el('div','h2-name',198,104,150,30);
+  const xp=el('button','h2-bar h2-xp',195,140,146,21);xp.innerHTML='<i></i><span></span>';xp.onclick=()=>openLevels();xp.setAttribute('aria-label','Racer rank');
+  const st=el('button','h2-bar h2-str',195,181,146,21);st.innerHTML='<i></i><span></span>';st.onclick=()=>openRoom();st.setAttribute('aria-label','Room strength');
+  // wallet card: coins, diamonds, hero badges, settings
+  const pill=(y,ic,label,fn)=>{const b=hot('h2-pill',558,y,154,39,label,fn);b.innerHTML=`<span class="h2-pic">${ic}</span><b></b>`;return b.querySelector('b');};
+  const vC=pill(118,'<img class="ico" src="img/icons/coin.webp" alt="">','Coins: open the store',()=>{storeTab='items';openStore();});
+  const vG=pill(170,'<img class="ico" src="img/icons/gem.webp" alt="">','Diamonds: buy more',()=>{storeTab='gems';openStore();});
+  const vB=pill(224,'🎖️','Hero badges: guild store',()=>openHub('guild','shop'));
+  hot('h2-round',645,288,64,64,'Settings',()=>openSettings());
+  // right column
+  [[488,'Pick your runner',()=>openPicker('char')],[625,'Pick your flag',()=>openPicker('flag')],[762,'Guild Hall',()=>openHub('guild')],[900,'Store',()=>openStore()],[1038,'Leaderboards',()=>openHub('boards')]]
+    .forEach(([y,l,fn])=>hot('h2-round',622,y-57,114,114,l,fn));
+  // banners: daily tasks, and the special event of the day
+  const daily=hot('h2-ban',0,935,182,96,'Daily tasks',()=>openHub('tasks','daily'));daily.innerHTML='<span class="h2-btx">Daily</span>';
+  const EV=[['ZOMBIE DEFENSE',()=>{const b=$('zdBtn');if(b)b.click();}],['GUILD WAR',()=>openHub('guild','act')],['GRAND PRIX',()=>{const b=$('gpBtn');if(b)b.click();}]];
+  const ev=EV[Math.floor(Date.now()/864e5)%EV.length];
+  const evb=hot('h2-ban h2-ev',0,1062,345,108,'Special event: '+ev[0],ev[1]);evb.innerHTML=`<span class="h2-evtx">${ev[0]}</span>`;
+  // bottom bar
+  hot('h2-tab',22,1232,148,110,'Home',()=>{if(tabOpen())closePage();});
+  hot('h2-tab',170,1232,142,110,'Quick Race',()=>page('tabQuick'));
+  hot('h2-tab',312,1232,144,110,'Online',()=>page('tabOnline'));
+  hot('h2-tab',456,1232,144,110,'Challenges',()=>page('tabSolo'));
+  hot('h2-tab',600,1232,146,110,'Menu',()=>{const m=$('h2Menu');m.hidden=!m.hidden;});
+  const menu=document.createElement('div');menu.id='h2Menu';menu.hidden=true;menu.className='h2-menu';
+  [['menu_room','My room',()=>$('plazaBtn').click()],['menu_inbox','Friends & inbox',()=>$('deskInbox').click()],['menu_boards','Leaderboards',()=>openHub('boards')],['emotes','Emote',()=>{const r=pv.runner;if(r)r.emote={id:pick(EMOTES),t:1.8};}],['menu_settings','Settings',()=>openSettings()],['info','How to play',()=>{$('howto').hidden=false;}]]
+    .forEach(([ic,l,fn])=>{const b=document.createElement('button');b.type='button';b.innerHTML=`<img class="ico" src="img/icons/${ic}.webp" alt=""><span></span>`;b.querySelector('span').textContent=l;b.onclick=()=>{menu.hidden=true;fn();};menu.appendChild(b);});
+  $('home2').appendChild(menu);document.addEventListener('pointerdown',e=>{if(!menu.hidden&&!e.target.closest('#h2Menu,.h2-tab'))menu.hidden=true;},true);
+  // keep the numbers fresh
+  let avK='';const short=n=>n>=1e6?(n/1e6).toFixed(n>=1e7?1:2).replace(/\.?0+$/,'')+'M':n>=1e5?Math.round(n/1e3)+'K':n.toLocaleString();
+  const sync=()=>{if($('menu').hidden)return;const l=levelOf(loadJSON('flagdash-xp',{xp:0}).xp);
+    nm.textContent=myName||'Runner';xp.querySelector('i').style.width=(l.max?100:l.into/l.need*100)+'%';xp.querySelector('span').textContent='Lv '+l.L;
+    const sv=roomStrength();st.querySelector('i').style.width=Math.min(100,sv/5)+'%';st.querySelector('span').textContent='💪 '+sv;
+    vC.textContent=short(wallet.coins|0);vG.textContent=short(wallet.gems|0);vB.textContent=short(wallet.badges|0);
+    const k=myAvatar()+'|'+selCountry+'|'+(store.get('flagdash-pic')||'');if(k!==avK&&typeof THREE!=='undefined'){avK=k;prof.innerHTML='';prof.appendChild(rowAvatar({me:true,cc:selCountry},'h2-av'));}
+    const won=Object.entries(STATS.winsBy||{}).filter(([cc,n])=>n>0&&COUNTRY_CODES.has(cc)).sort((a,b)=>b[1]-a[1]);
+    frames.forEach((f,i)=>{const w=won[i],key=w?w[0]+'|'+myFlagUrl(w[0]):'';if(f.dataset.k===key)return;f.dataset.k=key;f.innerHTML='';if(!w){f.title='';return;}
+      const im=document.createElement('img');im.alt='';im.src=myFlagUrl(w[0]);f.title=`${flagCanvas(w[0]).name}: ${w[1]} win${w[1]>1?'s':''}`;const n=document.createElement('b');n.textContent=w[1];f.append(im,n);});};
+  sync();setInterval(sync,1000);
 })();
 /* ---------- Race Desk emote icon ---------- */
 (()=>{const box=document.querySelector('.d3-emotes'),bt=$('emoteToggle');if(!box||!bt)return;
