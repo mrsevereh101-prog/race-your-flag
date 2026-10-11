@@ -6043,14 +6043,21 @@ async function renderBoards(box,tab){
    for each guild battle win). Most points when the week ends wins the war. */
 const WAR_RW={win:{c:800,g:6},draw:{c:350,g:2},loss:{c:200,g:0}};
 const prevWeekKey=()=>weekKey(Date.now()-7*864e5);
-function warPick(wk,board){if(!GUILD)return null;LBHIST.war=LBHIST.war||{};const w=LBHIST.war[wk];
+// the server's matchup (supabase/guildwars.sql) wins over the local pick, so both guilds see the same war
+const warSv=wk=>GUILD&&GLB.war&&GLB.war[wk+'|'+GUILD.id];
+async function warServer(wk){if(!GLB.enabled||!GUILD||!signedIn())return null;GLB.war=GLB.war||{};const k=wk+'|'+GUILD.id,c=GLB.war[k];if(c&&Date.now()-c.at<30000)return c.row;
+  try{const rows=await sbCall('rpc/fd_war',{p_key:wk,p_gid:GUILD.id});GLB.war[k]={at:Date.now(),row:Array.isArray(rows)&&rows[0]&&rows[0].rival?rows[0]:null};}catch(e){GLB.war[k]={at:Date.now(),row:null};}return GLB.war[k].row;}
+function warPick(wk,board){if(!GUILD)return null;LBHIST.war=LBHIST.war||{};
+  const sv=warSv(wk);if(sv&&sv.row){const r=sv.row,rv={id:r.rival,name:cleanName(r.name||'').slice(0,20)||cleanTag(r.tag||'')||'Rival guild',tag:cleanTag(r.tag||'')||'??',col:GUILD_COLORS.includes(r.col)?r.col:'#aab4d8',cpu:false};
+    const cur=LBHIST.war[wk]&&LBHIST.war[wk].gid===GUILD.id?LBHIST.war[wk]:{};LBHIST.war[wk]=Object.assign(cur,{gid:GUILD.id,rival:rv});saveJSON('flagdash-lbhist',LBHIST);return Object.assign({},rv,{pts:+r.them|0});}
+  const w=LBHIST.war[wk];
   if(w&&w.gid===GUILD.id&&w.rival){const live=board.find(g=>g.id===w.rival.id);return Object.assign({},w.rival,{pts:w.rival.cpu?warCpuPts(wk,w.rival.id):live?live.pts:0});}
   const others=board.filter(g=>g.id!==GUILD.id);if(!others.length)return null;
   const real=others.filter(g=>!g.cpu),pool=real.length?real:others,h=id=>hashStr(wk+'|'+id),me=h(GUILD.id);
   const rv=pool.slice().sort((a,b)=>Math.abs(h(a.id)-me)-Math.abs(h(b.id)-me))[0];
   LBHIST.war[wk]={gid:GUILD.id,rival:{id:rv.id,name:rv.name,tag:rv.tag,col:rv.col,cpu:!!rv.cpu}};saveJSON('flagdash-lbhist',LBHIST);return Object.assign({},rv,{pts:rv.cpu?warCpuPts(wk,rv.id):rv.pts});}
 function warCpuPts(wk,id){const f=periodFrac('w',wk);return Math.round((250+hashStr(wk+id)%300)*Math.min(1,f));}
-function warScore(wk,board){const me=board.find(g=>g.id===GUILD.id);return me?me.pts|0:0;}
+function warScore(wk,board){const sv=warSv(wk);if(sv&&sv.row)return +sv.row.us|0;const me=board.find(g=>g.id===GUILD.id);return me?me.pts|0:0;}
 function warVs(us,them,rv,live){const d=document.createElement('div');d.className='war-vs';const tot=Math.max(1,us+them),pc=Math.round(us/tot*100);
   d.innerHTML=`<div class="war-side"><span class="g-badge"></span><b></b><strong>${us}</strong></div><div class="war-x">⚔️</div><div class="war-side them"><strong>${them}</strong><b></b><span class="g-badge"></span></div><div class="war-bar"><i style="width:${pc}%"></i></div>`;
   const bs=d.querySelectorAll('.g-badge'),ns=d.querySelectorAll('.war-side b');bs[0].textContent=GUILD.tag;bs[0].style.background=GUILD.col;ns[0].textContent=GUILD.name;
@@ -6063,9 +6070,11 @@ function renderWar(box){if(!GUILD)return;const sec=document.createElement('div')
     const st=document.createElement('p');st.className='war-state '+(us>them?'win':us<them?'lose':'tie');st.textContent=us>them?`Winning by ${us-them}! Keep racing.`:us<them?`Behind by ${them-us}. Every race counts.`:'All tied up. The next race decides it.';sec.appendChild(st);
     const how=document.createElement('p');how.className='muted small';how.innerHTML=`Every race a member runs adds their race points. Guild battle wins add 10 more. Win the war: ${rewardHTML(WAR_RW.win)} and a trophy for your room.`;sec.appendChild(how);
     const go=document.createElement('button');go.className='primary d3-gold';go.textContent='⚔️ Race for the war';go.onclick=()=>{closeHub();const t=$('tabOnline');if(t)t.click();setTimeout(()=>{const b=$('mmBtn');if(b)b.click();},250);};sec.appendChild(go);}
+  const shown=rv?rv.id+'|'+warScore(wk,board)+'|'+rv.pts:'';
+  warServer(wk).then(()=>{const r2=warPick(wk,buildGuildBoard(wk)),now=r2?r2.id+'|'+warScore(wk,buildGuildBoard(wk))+'|'+r2.pts:'';if(now!==shown&&hubOpen==='guild')renderHub();});
   // last week's war: result and reward
   const pk=prevWeekKey(),slot=document.createElement('div');sec.appendChild(slot);
-  (async()=>{LBHIST.war=LBHIST.war||{};let w=LBHIST.war[pk];if(w&&w.gid!==GUILD.id)return;if(w&&w.claimed){return;}
+  (async()=>{await warServer(pk);LBHIST.war=LBHIST.war||{};let w=LBHIST.war[pk];if(w&&w.gid!==GUILD.id)return;if(w&&w.claimed){return;}
     const pb=await BACKEND.guildBoard(pk);if(!w||w.us==null){const r=warPick(pk,pb);if(!r)return;w=LBHIST.war[pk];const us=warScore(pk,pb);if(!us&&!(w&&w.seen))return;w.us=us;w.them=r.pts|0;w.res=us>w.them?'win':us<w.them?'loss':'draw';saveJSON('flagdash-lbhist',LBHIST);}
     const row=document.createElement('div');row.className='hub-row war-last '+w.res;const rw=WAR_RW[w.res];
     row.innerHTML=`<div class="hub-main"><b></b><small></small></div><div class="hub-side"><span class="rewards">${rewardHTML(rw)}</span><button class="buy">Claim</button></div>`;
