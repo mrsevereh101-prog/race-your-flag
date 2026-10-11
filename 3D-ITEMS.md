@@ -559,3 +559,14 @@ Style: smooth 3D render like a premium mobile game item icon, with soft shading 
 Background: one flat, solid pure green (#00FF00) filling the whole image, like a green screen. No shadows, floor, gradient, glow, sparkles or particles. Nothing green on the objects.
 No words, letters or numbers.
 ```
+
+## Back arrow (green screen) · to make
+
+One icon, its own picture. Save the cut-out as `img/icons/back.webp`; the game switches from ◀ to it automatically.
+
+```
+Square 1:1 image of one 3D game icon in the middle, filling about two thirds of the picture, with nothing cut off at the edges: a chunky rounded arrow pointing to the LEFT, made of polished gold with a thick royal-blue enamel inner face, like a premium mobile game "back" button icon. Bevelled edges and a soft highlight across the top.
+Style: smooth 3D render like a premium mobile game item icon, with soft shading and no outlines, not a drawing. Chunky rounded shapes, a bold clean silhouette, glossy materials, soft studio light from the top left, rich colours, seen straight from the front, tilted very slightly.
+Background: one flat, solid pure green (#00FF00) filling the whole image, like a green screen. No shadows, floor, gradient, glow, sparkles or particles. Nothing green on the arrow.
+No words, letters or numbers.
+```

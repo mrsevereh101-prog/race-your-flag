@@ -1524,6 +1524,11 @@ html.zd-mode #touch .tgroup button{width:48px!important;height:48px!important}
 .war-bar{grid-column:1/-1;height:12px;border-radius:6px;overflow:hidden}.war-bar i{display:block;height:100%;border-right:3px solid #fff}
 .war-state{margin:0;font-size:15px}.war-state.win{color:#7dffa0}.war-state.lose{color:#ff8a8a}
 .war-last.win{border-color:#f2c14a!important}
+.back-btn{order:-1;flex:none;width:46px!important;height:46px!important;min-width:0!important;padding:0!important;border-radius:50%!important;display:inline-grid!important;place-items:center;font-size:20px!important;line-height:1}
+.back-btn .back-ic{display:block;transform:translateX(-1px)}.back-btn .back-ic img{width:34px;height:34px;object-fit:contain;display:block;transform:none}
+.store-head:has(.back-btn),.chat-top:has(.back-btn){justify-content:flex-start}.store-head:has(.back-btn)>h2,.chat-top:has(.back-btn)>h2{margin-right:auto}
+.store-head,.chat-top{display:flex;align-items:center;gap:10px}.store-head>.back-btn,.chat-top>.back-btn{margin-right:2px}
+.tp-x.back-btn{left:10px!important;right:auto!important;width:40px!important;height:40px!important}
 .f3d-pg{font-size:10.5px;color:var(--gold,#f5c542);min-height:1em;line-height:1}
 </style>
 
@@ -7704,6 +7709,24 @@ if(isFirstVisit())setTimeout(onboardSetup,700);
   window.addEventListener('resize',()=>requestAnimationFrame(fitHome));setInterval(fitHome,700);requestAnimationFrame(fitHome);
 })();
 
+
+/* ---------- back arrows: every Close button becomes a ◀ back arrow at the start of its header,
+   and tapping outside a pop-up card goes back ---------- */
+const BACK3D={ok:false};{const t=new Image();t.onload=()=>{BACK3D.ok=true;document.querySelectorAll('.back-btn .back-ic').forEach(i=>{i.textContent='';const im=document.createElement('img');im.src=t.src;im.alt='';i.appendChild(im);});};t.src='img/icons/back.webp';}
+(()=>{const isClose=t=>t==='Close'||t==='✕'||t==='×';
+  const fix=b=>{if(!b||b.tagName!=='BUTTON'||!b.isConnected)return;const t=b.textContent.trim();if(b.dataset.back&&!isClose(t))return;if(!isClose(t))return;
+    b.dataset.back='1';b.textContent='';const i=document.createElement('span');i.className='back-ic';if(BACK3D.ok){const im=document.createElement('img');im.src='img/icons/back.webp';im.alt='';i.appendChild(im);}else i.textContent='◀';b.appendChild(i);b.classList.add('back-btn');b.setAttribute('aria-label','Back');b.title='Back';};
+  document.querySelectorAll('button').forEach(fix);
+  new MutationObserver(ms=>{for(const m of ms){if(m.type==='childList'){if(m.target.tagName==='BUTTON')fix(m.target);m.addedNodes.forEach(n=>{if(n.nodeType!==1)return;if(n.tagName==='BUTTON')fix(n);else n.querySelectorAll&&n.querySelectorAll('button').forEach(fix);});}
+    else if(m.type==='characterData'){const b=m.target.parentElement&&m.target.parentElement.closest('button');if(b)fix(b);}}}).observe(document.body,{childList:true,subtree:true,characterData:true});
+  // tap the dark area around a pop-up: same as its back arrow
+  const KEEP=new Set(['menu','results','celebrate','pause','podium','gate','lobby']);let downOn=null;
+  document.addEventListener('pointerdown',e=>{downOn=e.target;},true);
+  document.addEventListener('click',e=>{const o=e.target;if(!(o instanceof Element)||o!==downOn)return;
+    if(o.classList.contains('overlay')&&!o.hidden&&!KEEP.has(o.id)){if(o.id==='settings'){closeSettings();return;}const b=[...o.querySelectorAll('.back-btn')].find(x=>x.offsetParent);if(b)b.click();}});
+  // the flag / runner picker: tap above it to put it away
+  document.addEventListener('click',e=>{if(!pickOpen||state!=='menu'||e.target!==downOn)return;const t=e.target;if(!(t instanceof Element)||t.closest('#picker,.overlay:not(#menu),button,input,a,.tile-modal'))return;if(t===pvCanvas||t.closest('#playPanel,.preview-wrap'))closePicker();});
+})();
 /* ---------- Race Desk emote icon ---------- */
 (()=>{const box=document.querySelector('.d3-emotes'),bt=$('emoteToggle');if(!box||!bt)return;
   const set=o=>{box.classList.toggle('open',o);bt.setAttribute('aria-expanded',o);};
