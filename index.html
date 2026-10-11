@@ -481,7 +481,7 @@ html.cream .cel-gift{background:rgba(255,255,255,.55)!important;border-color:#d6
 #rcTabs .tab-ico{width:26px!important;height:26px!important;margin:0!important}
 .ico-btn{padding:4px 10px!important}.ico-btn .ico{width:30px;height:30px}
 @media (max-width:460px){#store .store-head{flex-wrap:nowrap;gap:6px}#store .st-title{font-size:22px}#store .st-piles{gap:4px}#store .st-pile{font-size:14px;gap:1px}#store .st-pile svg{width:26px;height:19px}#store .store-head .info-btn{width:26px;height:26px;font-size:15px!important}#storeClose{flex:none;padding:6px 10px}}
-#storeTabs button,#roomTabs button{display:grid;place-items:center;gap:2px;min-width:0;padding:5px 2px}#storeTabs,#roomTabs{min-width:0}#storeTabs{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));width:100%}
+#storeTabs button,#roomTabs button{display:grid;place-items:center;gap:2px;min-width:0;padding:5px 2px}#storeTabs,#roomTabs{min-width:0}#storeTabs{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));width:100%}
 #storeTabs .tab-ico,#roomTabs .tab-ico{width:30px;height:30px;margin:0 auto}
 .info-home{position:absolute;left:10px;top:60px;z-index:3;width:36px;height:36px}
 </style>
@@ -1533,6 +1533,11 @@ html #menu .ico3d-btn,html #menu .ico3d-btn:hover,html #menu .d3-stage .ico3d-bt
 .ico3d-btn .ico3d{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 3px 4px rgba(0,0,0,.4));pointer-events:none}
 .ico3d-btn:active .ico3d{transform:scale(.9)}
 html #menu .ico3d-btn::before,html #menu .ico3d-btn::after{display:none!important}
+.gem-shop{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.gem-pack{position:relative;display:grid;justify-items:center;gap:6px;padding:16px 10px 12px;border-radius:18px;border:3px solid #6ec3ff;background:radial-gradient(circle at 50% 30%,#3a62c8,#18225a);box-shadow:0 4px 10px rgba(0,0,0,.3)}
+.gem-pack .gp-art{height:64px;display:flex;align-items:center;justify-content:center}.gem-pack .gp-art .ico{width:46px;height:46px;margin:0 -12px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+.gem-pack .gp-n{font-size:20px}.gem-pack .gp-name{font-size:12px;opacity:.9}.gem-pack button{width:100%}
+.gp-tag{position:absolute;top:-10px;right:-6px;background:#e0654a;border-radius:999px;padding:2px 8px;font-size:11px;transform:rotate(6deg)}
 .f3d-pg{font-size:10.5px;color:var(--gold,#f5c542);min-height:1em;line-height:1}
 </style>
 
@@ -1890,7 +1895,7 @@ html #menu .ico3d-btn::before,html #menu .ico3d-btn::after{display:none!importan
 <div id="store" class="overlay" hidden>
   <div class="store-card">
     <div class="store-head st-treasure"><h2 class="st-title">Store</h2><div class="st-piles"><span class="st-pile"><svg viewBox="0 0 44 30" aria-hidden="true"><defs><linearGradient id="cgG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1a8"/><stop offset=".5" stop-color="#f2b631"/><stop offset="1" stop-color="#a8740f"/></linearGradient></defs><g fill="url(#cgG)" stroke="#8a5d0c" stroke-width=".8"><ellipse cx="12" cy="25" rx="9" ry="3.5"/><ellipse cx="12" cy="21" rx="9" ry="3.5"/><ellipse cx="30" cy="25" rx="9" ry="3.5"/><ellipse cx="30" cy="21" rx="9" ry="3.5"/><ellipse cx="30" cy="17" rx="9" ry="3.5"/><ellipse cx="21" cy="13" rx="9" ry="3.5"/><ellipse cx="21" cy="9" rx="9" ry="3.5"/></g></svg><b id="stCoins">0</b></span><span class="st-pile"><svg viewBox="0 0 44 30" aria-hidden="true"><defs><linearGradient id="dgG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6fbff"/><stop offset=".5" stop-color="#5fc8ff"/><stop offset="1" stop-color="#1c6fb8"/></linearGradient></defs><g fill="url(#dgG)" stroke="#155a96" stroke-width=".8"><path d="M4 20l5-6h8l5 6-9 9z"/><path d="M22 20l5-6h8l5 6-9 9z"/><path d="M13 12l5-6h8l5 6-9 9z"/></g></svg><b id="stGems">0</b></span></div><button class="ghost" id="storeClose">Close</button></div>
-    <div class="seg" id="storeTabs" role="group" aria-label="Store section"><button data-tab="owned" title="Owned" aria-label="Owned"><img class="ico tab-ico" src="img/chest-closed-glow.webp" alt=""><span class="tab-tx">Owned</span></button><button data-tab="items" title="Items" aria-label="Items"><img class="ico tab-ico" src="img/icons/box.webp" alt=""><span class="tab-tx">Items</span></button><button data-tab="skins" title="Skins" aria-label="Skins"><img class="ico tab-ico" src="img/icons/skin_classic.webp" alt=""><span class="tab-tx">Skins</span></button><button data-tab="attire" title="Attire" aria-label="Attire"><img class="ico tab-ico" src="img/icons/att_crown.webp" alt=""><span class="tab-tx">Attire</span></button><button data-tab="buffs" title="Perks" aria-label="Perks"><img class="ico tab-ico" src="img/icons/perk_charge.webp" alt=""><span class="tab-tx">Perks</span></button></div>
+    <div class="seg" id="storeTabs" role="group" aria-label="Store section"><button data-tab="owned" title="Owned" aria-label="Owned"><img class="ico tab-ico" src="img/chest-closed-glow.webp" alt=""><span class="tab-tx">Owned</span></button><button data-tab="items" title="Items" aria-label="Items"><img class="ico tab-ico" src="img/icons/box.webp" alt=""><span class="tab-tx">Items</span></button><button data-tab="skins" title="Skins" aria-label="Skins"><img class="ico tab-ico" src="img/icons/skin_classic.webp" alt=""><span class="tab-tx">Skins</span></button><button data-tab="attire" title="Attire" aria-label="Attire"><img class="ico tab-ico" src="img/icons/att_crown.webp" alt=""><span class="tab-tx">Attire</span></button><button data-tab="buffs" title="Perks" aria-label="Perks"><img class="ico tab-ico" src="img/icons/perk_charge.webp" alt=""><span class="tab-tx">Perks</span></button><button data-tab="gems" title="Diamonds" aria-label="Diamonds"><img class="ico tab-ico" src="img/icons/gem.webp" alt=""><span class="tab-tx">Diamonds</span></button></div>
     <button type="button" class="pr-open" id="storePower"><span class="pr-ic">📊</span><b>Power report</b><span class="pr-mini" id="storePowerPct"></span></button>
     <p class="store-note" id="storeNote" hidden></p>
     <p class="store-mods" id="storeMods" hidden></p>
@@ -4935,10 +4940,11 @@ const TIERS=[{id:'free',name:'Free'},{id:'coin',name:'Coins'},{id:'gem',name:'Di
 // Rarity: Mythical ($), Legendary ($ / 💎 / 🍀 earned), Epic (💎), Rare (coins), Common (free)
 const RARITY=[{id:'myth',name:'Mythical',ic:'🔴'},{id:'leg',name:'Legendary',ic:'🟡'},{id:'epic',name:'Epic',ic:'🟣'},{id:'rare',name:'Rare',ic:'🔵'},{id:'com',name:'Common',ic:'⚪'}];
 const usdVal=it=>parseFloat(String(it.usd||'').replace(/[^0-9.]/g,''))||0;
+const LEG_GEMS=20;   // legendary: 20 diamonds or more
 // mythical items are always real-money items (tier 'usd'); every other rarity uses coins or diamonds
 function rarityOf(it){if(!it)return 'com';if(it.rar)return it.rar;
   if(it.tier==='usd')return usdVal(it)>=3.99?'myth':'leg';
-  if(it.tier==='gem')return (it.cost|0)>=8?'leg':'epic';
+  if(it.tier==='gem')return (it.cost|0)>=LEG_GEMS?'leg':'epic';
   if(it.lvl)return it.lvl>=17?'leg':'epic';   // rank rewards: earned skins
   return it.tier==='coin'?'rare':'com';}
 const rarName=it=>RARITY.find(r=>r.id===rarityOf(it)).name;
@@ -4954,8 +4960,8 @@ const SKINS_SHOP=[
   {id:'frost',name:'Frost',tier:'coin',cost:300,desc:'Icy blue with a cold glow.',buff:{agi:0.05},tint:0x9fdcff,amt:0.55,emissive:0x0a2a44,sw:'linear-gradient(135deg,#e6f7ff,#5fb7e8)'},
   {id:'jungle',name:'Jungle',tier:'coin',cost:400,desc:'Leaf green, head to toe.',buff:{spd:0.02},tint:0x2f8a3a,amt:0.55,sw:'linear-gradient(135deg,#8fe07a,#1f5a26)'},
   {id:'shadow',name:'Shadow',tier:'coin',cost:600,desc:'Near black with a purple aura.',buff:{stun:0.1},tint:0x241a3a,amt:0.7,emissive:0x2a0a4a,sw:'linear-gradient(135deg,#5a3a8a,#0e0a18)'},
-  {id:'gold',name:'Royal Gold',tier:'gem',cost:8,desc:'Solid gold, with a sparkling trail.',buff:{coin:0.15},tint:0xf2c14a,amt:0.65,emissive:0x3a2a00,trail:[1,0.85,0.3],sw:'linear-gradient(135deg,#fff1b0,#d89a1a)'},
-  {id:'neon',name:'Neon',tier:'gem',cost:12,desc:'Glowing cyan with a light trail.',buff:{spd:0.03},tint:0x22e0ff,amt:0.5,emissive:0x0a4a5a,trail:[0.3,1,1],sw:'linear-gradient(135deg,#6ffcff,#ff4fa3)'},
+  {id:'gold',name:'Royal Gold',tier:'gem',cost:25,desc:'Solid gold, with a sparkling trail.',buff:{coin:0.15},tint:0xf2c14a,amt:0.65,emissive:0x3a2a00,trail:[1,0.85,0.3],sw:'linear-gradient(135deg,#fff1b0,#d89a1a)'},
+  {id:'neon',name:'Neon',tier:'gem',cost:35,desc:'Glowing cyan with a light trail.',buff:{spd:0.03},tint:0x22e0ff,amt:0.5,emissive:0x0a4a5a,trail:[0.3,1,1],sw:'linear-gradient(135deg,#6ffcff,#ff4fa3)'},
   {id:'inferno',name:'Inferno',tier:'usd',usd:'$3.99',desc:'Molten armour and a trail of fire.',buff:{spd:0.03,chg:0.08},tint:0xff5a1a,amt:0.6,emissive:0x5a1400,trail:[1,0.45,0.1],sw:'linear-gradient(135deg,#ffd24a,#ff4a1a 55%,#5a0a00)'},
   {id:'oni',lvl:2,hero:'samurai',name:'Oni Shogun',tier:'free',desc:'Black lacquer armour, blood-red cords and gold horns. Embers follow every step.',pal:[0x0c0a0c,0xa8141c,0xf0c24a],amt:0.82,emissive:0x3a0604,trail:[1,0.35,0.1],aura:[1,0.3,0.15],sw:'linear-gradient(135deg,#f0c24a,#a8141c 45%,#0c0a0c)'},
   {id:'sakura',lvl:8,hero:'samurai',name:'Sakura Ronin',tier:'free',desc:'Pearl-white armour with cherry-blossom pink. Petals drift behind you.',pal:[0x6a5a66,0xf4f0f4,0xff8cc0],amt:0.8,emissive:0x2a0a1a,trail:[1,0.6,0.8],aura:[1,0.7,0.85],sw:'linear-gradient(135deg,#ffffff,#ffb3d6 55%,#ff5ca8)'},
@@ -4989,7 +4995,7 @@ const ATTIRE=[
   {id:'crown',slot:'head',name:'Crown',tier:'gem',cost:5,icon:'👑',desc:'A small gold crown.',buff:{coin:0.15}},
   {id:'halo',slot:'head',name:'Halo',tier:'usd',usd:'$1.99',icon:'😇',desc:'A glowing halo over your head.',buff:{stun:0.15}},
   {id:'cape',slot:'back',name:'Hero Cape',tier:'coin',cost:350,icon:'🦸',desc:'A flowing red cape.',buff:{spd:0.02}},
-  {id:'wings',slot:'back',name:'Wings',tier:'gem',cost:8,icon:'🪽',desc:'Feathered white wings.',buff:{agi:0.1}},
+  {id:'wings',slot:'back',name:'Wings',tier:'gem',cost:25,icon:'🪽',desc:'Feathered white wings.',buff:{agi:0.1}},
   {id:'jetpack',slot:'back',name:'Jetpack',tier:'usd',usd:'$2.99',icon:'🚀',desc:'A twin-tank jetpack.',buff:{spd:0.04}},
   {id:'clover',slot:'charm',name:'Lucky Clover',tier:'free',icon:'🍀',desc:'Carried in a pocket.',buff:{coin:0.05}},
   {id:'battery',slot:'charm',name:'Power Cell',tier:'coin',cost:300,icon:'🔋',desc:'Hums with stored energy.',buff:{chg:0.1}},
@@ -5072,7 +5078,20 @@ function markFreeSeen(){store.set('flagdash-freeseen',JSON.stringify(freeIds()))
 const STORE_NOTE={owned:'',items:'Pick one attack and one defence before each race. Each can be used once per race: R for attack, F for defence. Items you buy are yours to keep.',
   skins:'⚔️ Hero skins are free, two for each hero: equipping one switches you to that hero. Other skins work on every runner and are yours to keep; some give a bonus while you wear them.',
   attire:`Attire lasts ${ATTIRE_DAYS} days from purchase. Wear one piece per slot for its full bonus. Pieces you own but aren't wearing still give 10% of their bonus.`,
-  buffs:'Each buff lasts one race.'};
+  buffs:'Each buff lasts one race.',
+  gems:'Diamonds buy legendary and epic items. Mythical items are bought with real money.'};
+const GEM_PACKS=[{id:'g30',n:30,usd:'$0.99',name:'Handful'},{id:'g80',n:80,usd:'$1.99',name:'Pouch'},{id:'g220',n:220,usd:'$4.99',name:'Sack',tag:'+10% bonus'},
+  {id:'g500',n:500,usd:'$9.99',name:'Chest',tag:'Popular'},{id:'g1200',n:1200,usd:'$19.99',name:'Vault',tag:'Best value'}];
+function renderGemShop(grid){const box=document.createElement('div');box.className='gem-shop';
+  GEM_PACKS.forEach((p,i)=>{const c=document.createElement('div');c.className='gem-pack';
+    c.innerHTML=`${p.tag?'<span class="gp-tag"></span>':''}<div class="gp-art"></div><b class="gp-n"></b><small class="gp-name"></small><button class="buy"></button>`;
+    const art=c.querySelector('.gp-art');for(let k=0;k<Math.min(5,i+1);k++){const im=icoEl('gem');art.appendChild(im);}
+    if(p.tag)c.querySelector('.gp-tag').textContent=p.tag;c.querySelector('.gp-n').textContent=p.n.toLocaleString()+' 💎';c.querySelector('.gp-name').textContent=p.name;
+    const b=c.querySelector('button');b.textContent=p.usd;
+    if(DEVMODE){b.title='Developer mode: free';b.onclick=()=>{wallet.gems+=p.n;saveWallet();sfx.purchase();renderStore();};}
+    else{b.disabled=true;b.textContent=p.usd+' · soon';b.title='Real-money checkout is not connected yet';}
+    box.appendChild(c);});
+  grid.appendChild(box);}
 function priceTag(it){if(lvLocked(it))return `<span class="price lvl">🔒 ${rankName(it.lvl)}</span>`;if(it.tier==='free')return it.lvl?'<span class="price">Unlocked</span>':'<span class="price">Free</span>';if(it.tier==='usd')return `<span class="price usd">${it.usd}</span>`;return priceHTML(it.cost,curOf(it));}
 // Buy button for any store item; usd items stay locked because no payment provider is connected.
 function buyButton(btn,it,label,onBuy){
@@ -5130,6 +5149,7 @@ function renderStore(){
   const m=myMods(),mb=$('storeMods');mb.textContent=Object.keys(m).some(k=>m[k]>0)?'Your bonuses now: '+buffLine(Object.fromEntries(Object.entries(m).filter(([,v])=>v>0))):'You have no bonuses right now.';
   const grid=$('storeGrid');grid.innerHTML='';
   if(storeTab==='owned'){renderOwned(grid);return;}
+  if(storeTab==='gems'){renderGemShop(grid);return;}
   const list=storeTab==='items'?LOADOUT:storeTab==='skins'?SKINS_SHOP:storeTab==='attire'?ATTIRE:BUFFS.concat([LUCK]);
   RARITY.forEach(t=>{let its=list.filter(i=>rarityOf(i)===t.id);if(storeTab==='skins')its=its.slice().sort((a,b)=>(b.hero===selChar)-(a.hero===selChar)||(!!b.hero)-(!!a.hero));if(!its.length)return;
     const h=document.createElement('h3');h.className='tier-head rh-'+t.id;h.textContent=t.name;{const ra=icoOf('rar',t.id);if(ra)h.prepend(icoEl(ra,'rar-ico'));}grid.appendChild(h);
@@ -7477,7 +7497,7 @@ const LAYOUT=(()=>{
   $('quickBtn').onclick=()=>{initAudio();if(actx&&actx.state==='suspended')actx.resume();startOffline(true);};
   $('deskSet').onclick=()=>openSettings();$('chalBtn').onclick=()=>openHub('tasks','challenges');$('deskAcct').onclick=()=>openAcct();$('acctClose').onclick=()=>closeAcct();$('setAcct').onclick=()=>{closeSettings();openAcct();};
   $('acct').addEventListener('click',e=>{if(e.target===$('acct'))closeAcct();});$('deskStore').onclick=()=>openStore();
-  $('deskWallet').onclick=()=>openStore();$('deskWallet').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openStore();}};$('d3Store').onclick=()=>openStore();$('d3Friends').onclick=()=>openSocial('friends');
+  $('deskWallet').onclick=e=>{if(e.target.closest&&e.target.closest('.d3-gem'))storeTab='gems';openStore();};$('deskWallet').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openStore();}};$('d3Store').onclick=()=>openStore();$('d3Friends').onclick=()=>openSocial('friends');
   const cycle=dir=>{const i=CHAR_IDS.indexOf(selChar);selChar=CHAR_IDS[(i+dir+CHAR_IDS.length)%CHAR_IDS.length];store.set('flagdash-char',selChar);refreshMenu('flex');syncLobbyPresence();};
   $('pvLeft').onclick=()=>cycle(-1);$('pvRight').onclick=()=>cycle(1);
   const short=t=>{const n=+String(t).replace(/[^0-9]/g,'');return n>=1e6?(n/1e6).toFixed(n>=1e7?1:2).replace(/\.?0+$/,'')+'M':n>=1e5?Math.round(n/1e3)+'K':t;};
