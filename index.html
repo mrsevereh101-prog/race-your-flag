@@ -1603,6 +1603,9 @@ html body .h2-tab{border-radius:24px}
 .h2-menu{position:absolute;right:max(10px,calc(50% - min(50vw,calc(100dvh * 768 / 1376 / 2)) + 10px));bottom:calc(50% - min(100vw * 1376 / 768,100dvh) / 2 + min(100vw,calc(100dvh * 768 / 1376)) * 0.19);z-index:3;display:grid;gap:6px;padding:10px;border-radius:18px;background:#fbf6ea;border:3px solid #d9a227;box-shadow:0 8px 24px rgba(0,0,0,.35);min-width:200px}
 .h2-menu[hidden]{display:none}.h2-menu button{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;background:#f3e8cf;border:1.5px solid #d9b26a;font-size:15px;text-align:left}
 .h2-menu button .ico{width:30px;height:30px}
+.f3d{display:inline-flex;align-items:flex-end;flex-wrap:wrap;gap:0 .02em;line-height:1;vertical-align:middle}
+.f3d img{height:1.15em;width:auto;display:block;filter:drop-shadow(0 .06em .05em rgba(0,0,0,.35));pointer-events:none}
+.f3d .f3d-sp{display:block;width:.35em}.f3d .f3d-tx{align-self:center}
 .f3d-pg{font-size:10.5px;color:var(--gold,#f5c542);min-height:1em;line-height:1}
 </style>
 
@@ -7993,6 +7996,19 @@ const BACK3D={ok:false};{const t=new Image();t.onload=()=>{BACK3D.ok=true;docume
       const im=document.createElement('img');im.alt='';im.src=myFlagUrl(w[0]);f.title=`${flagCanvas(w[0]).name}: ${w[1]} win${w[1]>1?'s':''}`;const n=document.createElement('b');n.textContent=w[1];f.append(im,n);});};
   sync();setInterval(sync,1000);
 })();
+
+/* ---------- 3D lettering (img/font/<colour>/<char>.webp) for big titles; anything without a
+   picture (lower-case is drawn as capitals; symbols, emoji) stays as normal text ---------- */
+const F3D_CH=new Set('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+%/'.split('')),F3D_NAME={'%':'pct','/':'slash','+':'plus'};
+function font3d(el,col){if(!el||el.children.length)return;const t=el.textContent;if(!t.trim())return;
+  const frag=document.createDocumentFragment(),w=document.createElement('span');w.className='f3d';w.setAttribute('aria-hidden','true');let plain='';
+  const flush=()=>{if(plain){const s=document.createElement('span');s.className='f3d-tx';s.textContent=plain;w.appendChild(s);plain='';}};
+  for(const c of t){const u=c.toUpperCase();if(F3D_CH.has(u)){flush();const im=document.createElement('img');im.alt='';im.src=`img/font/${col||'gold'}/${F3D_NAME[u]||u}.webp`;w.appendChild(im);}
+    else if(c===' '){flush();const g=document.createElement('i');g.className='f3d-sp';w.appendChild(g);}else plain+=c;}
+  flush();el.textContent='';el.setAttribute('aria-label',t);el.dataset.f3d=t;el.appendChild(w);}
+(()=>{const SEL='#hubTitle,#store .st-title,.set-card h2,#pickTitle,#lvTitle,#acctTitle,#howtoTitle,#socTitle,#placeNum';
+  const run=()=>document.querySelectorAll(SEL).forEach(el=>font3d(el,'gold'));run();
+  new MutationObserver(ms=>{if(ms.some(m=>m.target.nodeType!==1||!m.target.closest||!m.target.closest('.f3d')))run();}).observe(document.body,{childList:true,subtree:true,characterData:true});})();
 /* ---------- Race Desk emote icon ---------- */
 (()=>{const box=document.querySelector('.d3-emotes'),bt=$('emoteToggle');if(!box||!bt)return;
   const set=o=>{box.classList.toggle('open',o);bt.setAttribute('aria-expanded',o);};
