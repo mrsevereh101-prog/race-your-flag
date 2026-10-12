@@ -1571,6 +1571,7 @@ html body .h2-bar{padding:0!important;border:0!important;border-radius:999px;bac
 html body .h2-pill{border-radius:999px;display:flex;align-items:center;gap:4%}.h2-pic{width:24%;aspect-ratio:1;display:grid;place-items:center;font-size:3.2cqw}.h2-pic .ico{width:100%;height:100%}
 .h2-pill b{flex:1;text-align:right;padding-right:10%;font-size:3.4cqw;color:#4a3410!important;-webkit-text-fill-color:#4a3410!important;text-shadow:none!important}
 html body .h2-ban{border-radius:0 30px 30px 0}.h2-btx{position:absolute;left:66%;top:50%;transform:translate(-50%,-50%);font-size:3.4cqw;color:#7a5520!important;-webkit-text-fill-color:#7a5520!important;text-shadow:none!important}
+.h2-evb{pointer-events:none;object-fit:contain;filter:drop-shadow(0 3px 4px rgba(0,0,0,.4))}
 .h2-evtx{position:absolute;left:4%;top:50%;transform:translateY(-50%);width:52%;font:900 3.6cqw/1.05 var(--display,system-ui);letter-spacing:.02em;color:#f6d36a!important;-webkit-text-fill-color:#f6d36a!important;text-align:center}
 html body .h2-tab{border-radius:24px}
 .h2-run{pointer-events:auto}.h2-run canvas,html body .h2-run #preview{width:100%!important;height:100%!important;display:block;background:none!important;border-radius:0!important}
@@ -7944,9 +7945,9 @@ const BACK3D={ok:false};{const t=new Image();t.onload=()=>{BACK3D.ok=true;docume
     .forEach(([y,l,fn])=>hot('h2-round',622,y-57,114,114,l,fn));
   // banners: daily tasks, and the special event of the day
   const daily=hot('h2-ban',0,935,182,96,'Daily tasks',()=>openHub('tasks','daily'));daily.innerHTML='<span class="h2-btx">Daily</span>';
-  const EV=[['ZOMBIE DEFENSE',()=>{const b=$('zdBtn');if(b)b.click();}],['GUILD WAR',()=>openHub('guild','act')],['GRAND PRIX',()=>{const b=$('gpBtn');if(b)b.click();}]];
+  const EV=[['ZOMBIE DEFENSE',()=>{const b=$('zdBtn');if(b)b.click();},'ev_zombie'],['GUILD WAR',()=>openHub('guild','act'),'ev_guild'],['GRAND PRIX',()=>{const b=$('gpBtn');if(b)b.click();},'ev_gp']];
   const ev=EV[Math.floor(Date.now()/864e5)%EV.length];
-  const evb=hot('h2-ban h2-ev',0,1062,345,108,'Special event: '+ev[0],ev[1]);evb.innerHTML=`<span class="h2-evtx">${ev[0]}</span>`;
+  const evb=hot('h2-ban h2-ev',0,1062,345,108,'Special event: '+ev[0],ev[1]);evb.innerHTML=`<span class="h2-evtx">${ev[0]}</span>`;{const bi=el('img','h2-evb',196,1066,98,98);bi.src='img/ui/'+ev[2]+'.webp';bi.alt='';}
   // bottom bar
   hot('h2-tab',22,1232,148,110,'Home',()=>{if(tabOpen())closePage();});
   hot('h2-tab',170,1232,142,110,'Quick Race',()=>page('tabQuick'));

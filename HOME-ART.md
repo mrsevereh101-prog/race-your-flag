@@ -1,5 +1,14 @@
 # Race Your Flag: Wall of Fame art (ivory marble and gold)
 
+## Made (Oct 12) · cut-outs in `img/ui/`, originals in `art/sheets/ui/`
+- UI pieces: `btn_round`, `banner_arrow`, `card_square`, `portrait_laurel`, `bar_frame`, `pill`
+- `pedestal`, `card_popup` (pop-up frame)
+- Buttons: `btn_gold`, `btn_cream`, `btn_brown`, `dot_gold`, `dot_cream`, `dot_blue`
+- Event badges: `ev_zombie`, `ev_guild`, `ev_gp` (on the home ribbon)
+- `loading.webp` (loading screen), `marble-bg.webp` (plain page background)
+- Still to make: themed mode-page backgrounds (#1, optional) and My room (#2)
+
+
 The home screen is `img/home/wall.webp`. These prompts make the rest of the game match it.
 Make each picture, send it to Claude, and it gets cut out and wired in.
 Rules for every prompt: no words, letters or numbers (the game adds real text), and green-screen pieces use pure green #00FF00.
