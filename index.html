@@ -4944,10 +4944,12 @@ async function initAuth(){
   document.addEventListener('visibilitychange',()=>{if(document.hidden)syncPush();});
 }
 // Developer accounts are listed in Supabase (supabase/devs.sql). Only they see the Developer switch in Settings.
-async function checkDev(){AUTH.dev=undefined;renderGate();let dev=false;if(AUTH.user){try{const sb=await getSb();const {data,error}=await sb.rpc('fd_is_dev');dev=!error&&data===true;}catch(e){}}AUTH.dev=dev;renderDevBox();renderGate();}
+async function checkDev(){AUTH.dev=undefined;renderGate();let dev=false,tester=false;if(AUTH.user){try{const sb=await getSb();const {data,error}=await sb.rpc('fd_is_dev');dev=!error&&data===true;
+    // testers (supabase/testers.sql) get into the private game but not Developer mode
+    if(!dev){const t=await sb.rpc('fd_is_tester');tester=!t.error&&t.data===true;}}catch(e){}}AUTH.tester=tester;AUTH.dev=dev;renderDevBox();renderGate();}
 // Private for now: only accounts on the developer list (supabase/devs.sql) get past this screen.
 const GATED=!window.claude;
-function renderGate(){const g=$('gate');if(!g)return;if(!GATED||AUTH.dev===true){g.hidden=true;return;}g.hidden=false;
+function renderGate(){const g=$('gate');if(!g)return;if(!GATED||AUTH.dev===true||AUTH.tester===true){g.hidden=true;return;}g.hidden=false;
   const wait=!AUTH.ready||(AUTH.user&&AUTH.dev===undefined),msg=$('gateMsg');
   msg.textContent=wait?'…':!AUTH.user?'Coming soon':'Coming soon · this account has no access';
   $('gateSign').hidden=wait||!!AUTH.user;$('gateOut').hidden=wait||!AUTH.user;}
