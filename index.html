@@ -1606,14 +1606,16 @@ html body .h2-tab{border-radius:24px}
 .f3d{display:inline-flex;align-items:flex-end;flex-wrap:wrap;gap:0 .02em;line-height:1;vertical-align:middle}
 .f3d img{height:1.15em;width:auto;display:block;filter:drop-shadow(0 .06em .05em rgba(0,0,0,.35));pointer-events:none}
 .f3d .f3d-sp{display:block;width:.35em}.f3d .f3d-tx{align-self:center}
-/* trial: strong gold lettering on the leaderboard page only */
-html body #hub.lb-gold,html body #hub.lb-gold *:not(svg,svg *,input,textarea,select,option){color:#e89c00!important;-webkit-text-fill-color:#e89c00!important;font-weight:900!important;
-  text-shadow:0 1.5px 0 #a86400,0 3px 3px rgba(90,50,0,.28)!important}
-html body #hub.lb-gold .hub-card{border-image:none!important;background:radial-gradient(ellipse at 50% 0%,#5a3a14 0%,#3a2408 55%,#24160a 100%)!important;border:3px solid #c8921c!important;border-radius:22px!important;box-shadow:0 0 0 2px #6b4a10,0 14px 40px rgba(0,0,0,.5)!important}
-html body #hub.lb-gold :is(.lb-row,.lb-pod,.lb-list,.lb-mebar,.lb-season,.hub-row,.seg){background:linear-gradient(180deg,rgba(128,86,34,.9),rgba(98,64,22,.9))!important;border-color:#b8862a!important;box-shadow:inset 0 1px 0 rgba(255,210,120,.18)!important}
-html body #hub.lb-gold :is(button.ghost,.seg button,.chip-btn):not([aria-pressed="true"]):not(.back-btn){border-image:url(img/ui/btn_brown.webp) 48 108 fill / 22% 22px / 0 stretch!important}
-html body #hub.lb-gold :is(.seg button[aria-pressed="true"],.seg button[aria-pressed="true"] *,button.buy,button.buy *,button.primary,button.primary *){color:#4a2a04!important;-webkit-text-fill-color:#4a2a04!important;text-shadow:0 1px 0 rgba(255,240,190,.6)!important}
-html body #hub.lb-gold .lb-row.me *:not(img){color:#c87800!important;-webkit-text-fill-color:#c87800!important}
+/* trial: gold surfaces with dark engraved lettering, leaderboard page only */
+html body #hub.lb-gold,html body #hub.lb-gold *:not(svg,svg *,input,textarea,select,option){color:#3a2204!important;-webkit-text-fill-color:#3a2204!important;font-weight:900!important;
+  text-shadow:0 1px 0 rgba(255,244,200,.75),0 -1px 0 rgba(90,55,5,.35)!important}
+html body #hub.lb-gold .hub-card{border-image:none!important;background:linear-gradient(180deg,#f4cf62 0%,#e3ac36 45%,#c98f1e 100%)!important;border:3px solid #9a6a12!important;border-radius:22px!important;box-shadow:inset 0 2px 0 rgba(255,245,200,.7),inset 0 -3px 0 rgba(110,70,8,.4),0 0 0 2px #f6dc8a,0 14px 40px rgba(0,0,0,.45)!important}
+html body #hub.lb-gold :is(.lb-row,.lb-pod,.lb-list,.lb-mebar,.lb-season,.hub-row,.seg){background:linear-gradient(180deg,#f8dc84,#ebbb4c)!important;border-color:#a8781c!important;box-shadow:inset 0 1px 0 rgba(255,250,220,.8),inset 0 -2px 0 rgba(140,90,10,.3)!important}
+html body #hub.lb-gold :is(button.ghost,.seg button,.chip-btn):not([aria-pressed="true"]):not(.back-btn){border-image:url(img/ui/btn_gold.webp) 48 108 fill / 22% 22px / 0 stretch!important}
+html body #hub.lb-gold .seg button[aria-pressed="true"]{border-image:url(img/ui/btn_brown.webp) 48 108 fill / 22% 22px / 0 stretch!important}
+html body #hub.lb-gold .seg button[aria-pressed="true"],html body #hub.lb-gold .seg button[aria-pressed="true"] *{color:#ffd760!important;-webkit-text-fill-color:#ffd760!important;text-shadow:0 1px 0 rgba(0,0,0,.4)!important}
+html body #hub.lb-gold .f3d img{filter:brightness(.34) saturate(1.4) drop-shadow(0 1.5px 0 rgba(255,244,200,.7))!important}
+html body #hub.lb-gold .lb-row.me{background:linear-gradient(180deg,#fff0b8,#f6d070)!important;border-color:#7a5208!important}
 .f3d-pg{font-size:10.5px;color:var(--gold,#f5c542);min-height:1em;line-height:1}
 </style>
 
