@@ -136,3 +136,5 @@ Don't change the game until all hero models are made. Then add everything in one
   - Older: Hayato Kurogane (Samurai, 35–40), Malkia Nyota (Queen of Beasts, 30s), Sir Aldric (Knight, 30s),
     Sigurd Stormbeard (Viking, 40s), Old Thorgar (Dwarf, 60s)
   - Volt-X (Robot, no age)
+  - Extra hero: Wind Dancer model is the green/braid girl (name: Aria Windsong or similar). Ha-Neul (prompt #1)
+    becomes a NEW 12th hero; her type, perk and special ability still to decide.
