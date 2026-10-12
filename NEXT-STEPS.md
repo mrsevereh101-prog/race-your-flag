@@ -65,12 +65,9 @@ Supabase project: hzzqnwzsasuwjafmsgqh
 - [ ] **Gifts to each other**: players can already send room items to friends (they arrive in the inbox). Next: send other things too, like perks, coins or skins.
 - [ ] **Guild custom flags**: each guild designs its own flag (colors, emblem), shown in guild races and on members.
 - [x] **Flag capes**: every hero wears their country's flag as a cape (done Oct 10). Next: guild flag capes.
-- [ ] **New heroes** (each needs a look, a power, a perk, speech lines and a voice):
-  - [ ] Knight
-  - [ ] Viking
-  - [ ] Shaolin monk
-  - [ ] Indian warrior
-  - [ ] Queen of All Beasts: a Black woman hero who commands animals
+- [x] **New heroes** (Oct 12): Queen of Beasts (Stampede), Knight (Holy Light), Shaolin (Fire Fist), Viking (Blizzard), Robot (Laser Grid), Rapper (Bass Drop), each with a look, power, perk, speech lines and a Zombie Defense ultimate.
+  - [ ] Recorded voices (they use the phone voice for now), hero skins, 3D power icons and portrait art for the six
+  - [ ] Indian warrior (still on the list)
 
 ## Guild Hall (Oct 11)
 - [x] Opens straight to your guild: guild chat first, icon bar for Activity (war, weekly goal), Records, Gifts, Donate, News (announcements), Store, Team
