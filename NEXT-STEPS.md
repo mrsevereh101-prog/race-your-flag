@@ -120,6 +120,8 @@ Suggested order: free items first, then money, then reach.
 ## Hero 3D models (pinned Oct 12; do these together once every hero file is in)
 Don't change the game until all hero models are made. Then add everything in one update.
 - Kapwa Lamò (Warrior) is live with `models/warrior.glb` and the in-game skeleton.
+- Ready, not in the game yet: `models/winddancer.glb` (faces +z, feet at 0, 0.98 tall).
+  Joints: sh [0.13,0.69], elb [0.20,0.56], hand [0.27,0.42], hip [0.07,0.42], knee [0.08,0.22], legs split 0.30, head 0.79.
 - Tripo checklist per hero: A-pose, feet visible, no base, one character facing front, ~20k triangles.
 - Weapons (pinned, undecided): either built into the model (short weapons held away from the body)
   or no weapons at all, with weapons only flashing in during the special ability.
