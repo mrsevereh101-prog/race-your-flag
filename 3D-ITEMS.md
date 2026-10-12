@@ -590,3 +590,27 @@ Style: smooth 3D render like a premium mobile game item icon, with soft shading 
 Background: one flat, solid pure green (#00FF00) filling the whole image, like a green screen. No shadows, floor, gradient, glow, sparkles or particles. Nothing green on the objects.
 No words, letters or numbers, except the single letter "i" on the blue button.
 ```
+
+## Guild Hall tab icons (green screen) · to make
+
+| Spot | Item | Replaces | File |
+|---|---|---|---|
+| Top left | Chat | 💬 | `gh_chat` |
+| Top middle | Activity | ⚔️ | `gh_act` |
+| Top right | Records | 🏆 | `gh_rec` |
+| Middle left | Gifts | 🎁 | `gh_gift` |
+| Middle middle | Donate | 💰 | `gh_don` |
+| Middle right | News | 📢 | `gh_news` |
+| Bottom left | Store | 🏪 | `gh_shop` |
+| Bottom middle | Team | 👥 | `gh_team` |
+| Bottom right | Hero badge | 🎖️ | `badge` |
+
+```
+Square 1:1 image of nine separate 3D game icons in a neat grid of three rows and three columns, evenly spaced, all the same size, not touching, nothing cut off at the edges.
+Top row, left to right: two overlapping round speech bubbles, one cream and one royal blue, with gold rims; two crossed silver swords with gold hilts over a small royal-blue shield; a gold trophy cup on a small dark wooden base.
+Middle row, left to right: a gift box wrapped in royal-blue paper with a big gold ribbon bow; a cream cloth money sack tied with gold rope, with a gold coin spilling from the top; a gold megaphone with a royal-blue handle and small sound waves.
+Bottom row, left to right: a small market stall with a royal-blue and cream striped awning and gold coins on the counter; two cute round cartoon heads side by side, one wearing a gold helmet and one a royal-blue cap, shoulders only, no faces details beyond simple eyes; a gold star medal hanging from a short red, white and blue ribbon.
+Style: smooth 3D render like a premium mobile game item icon, soft shading and no outlines, not a drawing. Chunky rounded shapes, bold clean silhouettes, glossy gold, cream enamel and royal blue, soft studio light from the top left, three-quarter view from slightly above.
+Background: one flat, solid pure green (#00FF00) filling the whole image, like a green screen. No shadows, floor, gradient, glow, sparkles or particles. Nothing green on the objects.
+No words, letters or numbers.
+```
