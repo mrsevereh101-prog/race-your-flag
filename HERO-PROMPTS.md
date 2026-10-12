@@ -73,3 +73,9 @@ One single 3D stylized mobile-game hero, seen straight from the front, standing 
 A friendly running robot, human-sized and slim, glossy white and electric-blue armour plates, dark grey joints, a rounded helmet-like head with a glowing cyan visor face showing simple happy eyes, small antenna, a glowing blue power core in the chest, and sturdy robot feet. Smooth sci-fi design, clean and toy-like.
 Polished stylized 3D like a premium mobile game hero, slightly chunky heroic proportions, soft studio light. Plain light-grey background, no shadows, no text, no other views, no cape, no weapon, nothing held in the hands.
 ```
+## 11. Zuri Ashe · Smoke (young, new hero)
+```
+One single 3D stylized mobile-game hero, seen straight from the front, standing in a relaxed A-pose with arms slightly away from the body, legs slightly apart, empty open hands, full body visible head to toe, centred, nothing cut off. Only ONE character in the picture, shown once.
+A confident Black teenage girl, about 17 to 18 years old, rich dark brown skin, big voluminous natural curly hair (a full round afro of tight curls) held back with a thin silver headband, bright brown eyes, a cool sly smile. A cropped charcoal-grey hooded jacket with the hood down and soft smoky-purple panels, a fitted dark grey top underneath, a silver belt with small round canisters, dark grey joggers with lavender side stripes, chunky black-and-lavender sneakers, fingerless dark gloves, and small silver hoop earrings.
+Polished stylized 3D like a premium mobile game hero, slightly chunky heroic proportions, soft studio light. Plain light-grey background, no shadows, no text, no other views, no cape, no weapon, nothing held in the hands, no smoke or effects around her.
+```

@@ -138,3 +138,4 @@ Don't change the game until all hero models are made. Then add everything in one
   - Volt-X (Robot, no age)
   - Extra hero: Wind Dancer model is the green/braid girl (name: Aria Windsong or similar). Ha-Neul (prompt #1)
     becomes a NEW 12th hero; her type, perk and special ability still to decide.
+  - 13th hero: Zuri Ashe (young Black girl, natural curly hair, power: smoke). Prompt #11.
