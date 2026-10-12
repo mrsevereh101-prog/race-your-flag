@@ -463,7 +463,7 @@ html.cream.adv .lv-shield{background:url(img/icons/lv_shield.webp) center/contai
 #acct{z-index:9100!important}
 /* all text black and bold (light themes; the race countdown and banners keep their own look) */
 html.cream body{font-synthesis:none}
-html body,html body *:not(svg,svg *,#countdown,#countdown *,#ultBanner,#ultBanner *,input,textarea,select,option){color:#fff!important;-webkit-text-fill-color:#fff!important;font-weight:800!important;text-shadow:-1px 0 0 #000,1px 0 0 #000,0 -1px 0 #000,0 1px 0 #000,0 2px 3px rgba(0,0,0,.45)!important}
+html body,html body *:not(svg,svg *,#countdown,#countdown *,#ultBanner,#ultBanner *,input,textarea,select,option){color:#9fdcff!important;-webkit-text-fill-color:#9fdcff!important;font-weight:800!important;text-shadow:-1px 0 0 #000,1px 0 0 #000,0 -1px 0 #000,0 1px 0 #000,0 2px 3px rgba(0,0,0,.45)!important}
 html body :is(input,textarea,select){color:#111!important;-webkit-text-fill-color:#111!important;font-weight:700!important;text-shadow:none!important}
 html.cream #celebrate .cel-card{background:var(--cream)!important;border:1.5px solid #c99a3a!important;box-shadow:0 10px 30px rgba(0,0,0,.35)!important}
 html.cream .cel-gift{background:rgba(255,255,255,.55)!important;border-color:#d6b46a!important}
@@ -7964,7 +7964,7 @@ const BACK3D={ok:false};{const t=new Image();t.onload=()=>{BACK3D.ok=true;docume
   const vB=pill(224,'🎖️','Hero badges: guild store',()=>openHub('guild','shop'));
   hot('h2-round',645,288,64,64,'Settings',()=>openSettings());
   // right column
-  [[488,'Pick your runner',()=>openPicker('char')],[625,'Pick your flag',()=>openPicker('flag')],[762,'Guild Hall',()=>openHub('guild')],[900,'Store',()=>openStore()],[1038,'Leaderboards',()=>openHub('boards')]]
+  [[488,'Pick your runner',()=>openPicker('runner')],[625,'Pick your flag',()=>openPicker('flag')],[762,'Guild Hall',()=>openHub('guild')],[900,'Store',()=>openStore()],[1038,'Leaderboards',()=>openHub('boards')]]
     .forEach(([y,l,fn])=>hot('h2-round',622,y-57,114,114,l,fn));
   // banners: daily tasks, and the special event of the day
   const daily=hot('h2-ban',0,935,182,96,'Daily tasks',()=>openHub('tasks','daily'));daily.innerHTML='<span class="h2-btx">Daily</span>';
