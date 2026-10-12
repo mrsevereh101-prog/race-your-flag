@@ -591,7 +591,9 @@ Background: one flat, solid pure green (#00FF00) filling the whole image, like a
 No words, letters or numbers, except the single letter "i" on the blue button.
 ```
 
-## Guild Hall tab icons (green screen) · to make
+## Guild Hall tab icons (green screen) · made
+
+Picture: `art/sheets/guild-tabs.jpg`.
 
 | Spot | Item | Replaces | File |
 |---|---|---|---|
