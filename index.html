@@ -1938,6 +1938,7 @@ html body :is(#hub,#store).lb-gold .lb-row.me{background:linear-gradient(180deg,
       <div class="set-tiles" role="group" aria-label="Settings sections"><button type="button" class="set-tile" data-g="look" aria-expanded="false" aria-controls="setG_look" aria-label="Theme" title="Theme"><span class="st-ic">🎨</span><span class="tab-tx">Theme</span></button><button type="button" class="set-tile" data-g="sound" aria-expanded="false" aria-controls="setG_sound" aria-label="Sound" title="Sound"><span class="st-ic">🎵</span><span class="tab-tx">Sound</span></button><button type="button" class="set-tile" data-g="chat" aria-expanded="false" aria-controls="setG_chat" aria-label="Chat" title="Chat"><span class="st-ic">💬</span><span class="tab-tx">Chat</span></button><button type="button" class="set-tile" data-g="account" aria-expanded="false" aria-controls="setG_account" aria-label="Account" title="Account"><span class="st-ic">👤</span><span class="tab-tx">Account</span></button><button type="button" class="set-tile" data-g="layout" aria-expanded="false" aria-controls="setG_layout" aria-label="Screen layout" title="Screen layout"><span class="st-ic">📐</span><span class="tab-tx">Screen layout</span></button><button type="button" class="set-tile" data-g="dev" aria-expanded="false" aria-controls="setG_dev" aria-label="Developer" title="Developer" hidden><span class="st-ic">🛠️</span><span class="tab-tx">Developer</span></button></div>
       <div class="set-grp" id="setG_look" data-g="look" hidden>
       <div class="set-row"><span>Theme</span><button class="set-tog" id="set_theme"></button><span></span></div>
+      <div class="set-row set-row2" title="Wear your flag as a cape instead of above your head"><span>Flag cape</span><button class="set-tog" id="set_cape" aria-label="Flag cape: wear your flag as a cape"></button></div>
       </div>
       <div class="set-grp" id="setG_sound" data-g="sound" hidden>
       <div class="set-row"><span>Music</span><button class="set-tog" id="set_music"></button><input type="range" min="0" max="100" id="set_musicVol" aria-label="Music volume"></div>
@@ -2258,42 +2259,49 @@ function kitFrom(cv){
    RUNNERS, ITEMS, TRACKS
    ========================================================= */
 const CHARS=[
- {id:'samurai',perk:{name:'Bushido',desc:'Gets back up 30% faster after any hit or fall.'},name:'Samurai',power:'Slash',desc:'A sword wave sweeps the whole track and knocks every rival down.',speed:1.01,agility:1.0,charge:20,stun:1.5,kind:'knock',rgb:[1,0.35,0.3],
+ {id:'samurai',hn:'Hayato Kurogane',perk:{name:'Bushido',desc:'Gets back up 30% faster after any hit or fall.'},name:'Samurai',power:'Slash',desc:'A sword wave sweeps the whole track and knocks every rival down.',speed:1.01,agility:1.0,charge:20,stun:1.5,kind:'knock',rgb:[1,0.35,0.3],
   look:{skin:0xc9956b,b:1.12,ls:1.0,sc:1.0},
   svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#9e1f1a"/><path d="M7 27C13 22 20 14 27 6" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M6 20c6 1 12-2 16-8" stroke="#ffb3a8" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M8 28l4-4" stroke="#f2b631" stroke-width="3" stroke-linecap="round"/></svg>'},
- {id:'warrior',perk:{name:'Unstoppable',desc:'Smashes straight through walls instead of crashing into them.'},name:'Warrior',power:'Lightning',desc:'Calls lightning down on every rival on the track. Charges fastest.',speed:1.01,agility:0.93,charge:18,stun:1.6,kind:'knock',rgb:[0.6,0.85,1],
+ {id:'warrior',hn:'Kapwa Lamò',perk:{name:'Unstoppable',desc:'Smashes straight through walls instead of crashing into them.'},name:'Warrior',power:'Lightning',desc:'Calls lightning down on every rival on the track. Charges fastest.',speed:1.01,agility:0.93,charge:18,stun:1.6,kind:'knock',rgb:[0.6,0.85,1],
   look:{skin:0x5a3a24,b:1.16,ls:1.04,sc:1.04},
   svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#2c2f6b"/><path d="M19 4L9 19h7l-2 11 11-16h-7z" fill="#ffd24a"/></svg>'},
- {id:'archer',perk:{name:'Full Quiver',desc:'Starts every race already holding an item.'},name:'Archer',power:'Wind',desc:'A gale blows every rival backwards and spins them around.',speed:1.02,agility:1.1,charge:20,stun:1.3,kind:'slip',rgb:[0.8,1,0.95],
+ {id:'archer',hn:'Aria Windsong',perk:{name:'Full Quiver',desc:'Starts every race already holding an item.'},name:'Wind Dancer',power:'Wind',desc:'A gale blows every rival backwards and spins them around.',speed:1.02,agility:1.1,charge:20,stun:1.3,kind:'slip',rgb:[0.8,1,0.95],
   look:{skin:0xe8b996,b:0.92,ls:1.04,sc:0.97},
   svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#24533f"/><path d="M5 12h16a4 4 0 10-4-4M5 18h22a4 4 0 11-4 4M5 24h11" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>'},
- {id:'elf',perk:{name:'Light Feet',desc:'Never slips: bananas, oil and ice cannot trip an elf.'},name:'Elf',power:'Trees',desc:'Trees burst from the ground and trap every rival in place.',speed:1.03,agility:1.12,charge:22,stun:1.8,kind:'rooted',rgb:[0.55,1,0.45],
+ {id:'elf',hn:'Liora Swiftleaf',perk:{name:'Light Feet',desc:'Never slips: bananas, oil and ice cannot trip an elf.'},name:'Elf',power:'Trees',desc:'Trees burst from the ground and trap every rival in place.',speed:1.03,agility:1.12,charge:22,stun:1.8,kind:'rooted',rgb:[0.55,1,0.45],
   look:{skin:0xf1d3bf,b:0.9,ls:1.1,sc:1.02},
   svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#2f6b2a"/><path d="M17 4l-9 12h5l-6 8h20l-6-8h5z" fill="#9be07a"/><rect x="15" y="24" width="4" height="6" fill="#8a5a32"/></svg>'},
- {id:'dwarf',perk:{name:'Low Rider',desc:'Short enough to run under barricades without sliding, but still has to jump the hurdles.'},name:'Dwarf',power:'Earthquake',desc:'Shakes the whole course. Every rival falls over.',speed:0.965,agility:0.86,charge:18,stun:1.4,kind:'knock',rgb:[1,0.7,0.35],
+ {id:'dwarf',hn:'Old Thorgar',perk:{name:'Low Rider',desc:'Short enough to run under barricades without sliding, but still has to jump the hurdles.'},name:'Dwarf',power:'Earthquake',desc:'Shakes the whole course. Every rival falls over.',speed:0.965,agility:0.86,charge:18,stun:1.4,kind:'knock',rgb:[1,0.7,0.35],
   look:{skin:0xd99a7a,b:1.45,ls:0.72,sc:0.88},
   svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#6b4323"/><path d="M4 22h26" stroke="#e8c79a" stroke-width="3" stroke-linecap="round"/><path d="M16 8l-3 6 4 3-3 5 5 4" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 27h4M22 27h6" stroke="#e8c79a" stroke-width="2" stroke-linecap="round"/></svg>'},
- {id:'queen',perk:{name:'Wild Instinct',desc:'Her beasts warn her: 25% of attacks miss her completely.'},name:'Queen of Beasts',power:'Stampede',desc:'She calls the wild: lions, rhinos and elephants charge down the track and trample every rival.',speed:1.02,agility:1.06,charge:20,stun:1.5,kind:'knock',rgb:[1,0.75,0.3],
+ {id:'queen',hn:'Malkia Nyota',perk:{name:'Wild Instinct',desc:'Her beasts warn her: 25% of attacks miss her completely.'},name:'Queen of Beasts',power:'Stampede',desc:'She calls the wild: lions, rhinos and elephants charge down the track and trample every rival.',speed:1.02,agility:1.06,charge:20,stun:1.5,kind:'knock',rgb:[1,0.75,0.3],
   look:{skin:0x5a3826,b:1.0,ls:1.06,sc:1.0},
   svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#7a4a12"/><circle cx="17" cy="18" r="8" fill="#f2b631"/><path d="M9 12l3 3M25 12l-3 3M11 8l2 5M23 8l-2 5M17 6v6" stroke="#f2b631" stroke-width="2.4" stroke-linecap="round"/><circle cx="14" cy="17" r="1.4" fill="#3a2008"/><circle cx="20" cy="17" r="1.4" fill="#3a2008"/></svg>'},
- {id:'knight',perk:{name:'Holy Shield',desc:'Starts every race with a shield that blocks the first hit.'},name:'Knight',power:'Holy Light',desc:'Pillars of blinding light strike every rival on the track.',speed:1.0,agility:0.95,charge:21,stun:1.6,kind:'knock',rgb:[1,0.95,0.6],
+ {id:'knight',hn:'Sir Aldric',perk:{name:'Holy Shield',desc:'Starts every race with a shield that blocks the first hit.'},name:'Knight',power:'Holy Light',desc:'Pillars of blinding light strike every rival on the track.',speed:1.0,agility:0.95,charge:21,stun:1.6,kind:'knock',rgb:[1,0.95,0.6],
   look:{skin:0xe2b48e,b:1.14,ls:1.02,sc:1.03},
   svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#2b3a6b"/><path d="M17 4l2.5 9.5L29 17l-9.5 2.5L17 29l-2.5-9.5L5 17l9.5-3.5z" fill="#fff2a8"/></svg>'},
- {id:'shaolin',perk:{name:'Iron Body',desc:'Hurdles, walls and barriers stun him only half as long.'},name:'Shaolin',power:'Fire Fist',desc:'A wave of fire rolls down the track and knocks every rival flat.',speed:1.03,agility:1.08,charge:20,stun:1.4,kind:'knock',rgb:[1,0.5,0.15],
+ {id:'shaolin',hn:'Xiao Long',perk:{name:'Iron Body',desc:'Hurdles, walls and barriers stun him only half as long.'},name:'Shaolin',power:'Fire Fist',desc:'A wave of fire rolls down the track and knocks every rival flat.',speed:1.03,agility:1.08,charge:20,stun:1.4,kind:'knock',rgb:[1,0.5,0.15],
   look:{skin:0xd9a47a,b:1.02,ls:1.04,sc:1.0},
   svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#8a2a0a"/><path d="M17 4c4 6 9 8 7 16a7 7 0 01-14 0c0-4 3-6 3-10 2 2 3 4 3 6 2-3 2-7 1-12z" fill="#ffb03a"/></svg>'},
- {id:'viking',perk:{name:'Frost Blood',desc:'Ice and oil can\'t make him slip, and freezes wear off twice as fast.'},name:'Viking',power:'Blizzard',desc:'A blizzard sweeps the track and freezes every rival in a block of ice.',speed:0.99,agility:0.92,charge:20,stun:1.7,kind:'rooted',rgb:[0.7,0.9,1],
+ {id:'viking',hn:'Sigurd Stormbeard',perk:{name:'Frost Blood',desc:'Ice and oil can\'t make him slip, and freezes wear off twice as fast.'},name:'Viking',power:'Blizzard',desc:'A blizzard sweeps the track and freezes every rival in a block of ice.',speed:0.99,agility:0.92,charge:20,stun:1.7,kind:'rooted',rgb:[0.7,0.9,1],
   look:{skin:0xf0c4a2,b:1.24,ls:1.0,sc:1.05},
   svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#2a4a6b"/><path d="M17 5v24M7 11l20 12M27 11L7 23" stroke="#dff4ff" stroke-width="2.6" stroke-linecap="round"/></svg>'},
- {id:'robot',perk:{name:'Magnet Core',desc:'Pulls in coins from the lanes next to him.'},name:'Robot',power:'Laser Grid',desc:'Red lasers lock onto every rival on the track and zap them.',speed:1.0,agility:1.0,charge:19,stun:1.4,kind:'knock',rgb:[1,0.25,0.25],
+ {id:'robot',hn:'Volt-X',perk:{name:'Magnet Core',desc:'Pulls in coins from the lanes next to him.'},name:'Robot',power:'Laser Grid',desc:'Red lasers lock onto every rival on the track and zap them.',speed:1.0,agility:1.0,charge:19,stun:1.4,kind:'knock',rgb:[1,0.25,0.25],
   look:{skin:0x9fb0c4,b:1.12,ls:1.0,sc:1.02},
   svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#3a4250"/><rect x="9" y="10" width="16" height="13" rx="3" fill="#c9d4e2"/><circle cx="14" cy="16" r="2" fill="#ff3a3a"/><circle cx="20" cy="16" r="2" fill="#ff3a3a"/><path d="M17 10V6" stroke="#c9d4e2" stroke-width="2"/><circle cx="17" cy="5" r="1.6" fill="#ff3a3a"/></svg>'},
- {id:'rapper',perk:{name:'Hype',desc:'Every rival he hits gives him a 1.5-second speed burst.'},name:'Rapper',power:'Bass Drop',desc:'The bass drops so hard the whole track shakes and every rival spins off their feet.',speed:1.02,agility:1.04,charge:19,stun:1.3,kind:'slip',rgb:[0.75,0.45,1],
+ {id:'rapper',hn:'Kid Echo',perk:{name:'Hype',desc:'Every rival he hits gives him a 1.5-second speed burst.'},name:'Rapper',power:'Bass Drop',desc:'The bass drops so hard the whole track shakes and every rival spins off their feet.',speed:1.02,agility:1.04,charge:19,stun:1.3,kind:'slip',rgb:[0.75,0.45,1],
   look:{skin:0x6e4430,b:1.04,ls:1.04,sc:1.0},
   svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#4a1f7a"/><rect x="14" y="6" width="6" height="12" rx="3" fill="#e8e8f0"/><path d="M11 15a6 6 0 0012 0M17 21v6M13 27h8" stroke="#e8e8f0" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M6 12q-2 5 0 10M28 12q2 5 0 10" stroke="#c49aff" stroke-width="2" fill="none"/></svg>'},
+ {id:'kicker',hn:'Ha-Neul',as:'archer',perk:{name:'Counter Kick',desc:'When a rival hits her, she kicks back: 30% of the time they get stunned too.'},name:'Taekwondo',power:'Hurricane Kick',desc:'She spins into a hurricane kick that sends every rival on the track flying.',speed:1.03,agility:1.1,charge:20,stun:1.4,kind:'knock',rgb:[1,0.45,0.55],
+  look:{skin:0xf0cdb0,b:0.92,ls:1.06,sc:0.98},
+  svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#a8324a"/><path d="M8 24c3-9 10-14 19-15" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M6 16c5-1 9 1 12 4M10 28c4-2 9-2 13 0" stroke="#ffc2cf" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="25" cy="9" r="3" fill="#fff"/></svg>'},
+ {id:'gas',hn:'Zuri Vapor',as:'rapper',perk:{name:'Vapor Form',desc:'Hits on her wear off 40% faster.'},name:'Gas',power:'Gas Cloud',desc:'A purple gas cloud rolls over every rival on the track and leaves them dizzy.',speed:1.02,agility:1.06,charge:20,stun:1.6,kind:'slip',rgb:[0.7,0.4,1],
+  look:{skin:0x5a3826,b:0.95,ls:1.05,sc:0.98},
+  svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#4b2a6e"/><circle cx="12" cy="19" r="6" fill="#c9a2ff"/><circle cx="20" cy="15" r="7" fill="#b07cff"/><circle cx="23" cy="22" r="5" fill="#d9c2ff"/><circle cx="16" cy="23" r="4" fill="#9a62f0"/></svg>'},
 ];
 const CHAR_IDS=CHARS.map(c=>c.id);
 const charById=id=>CHARS.find(c=>c.id===id)||CHARS[0];
+const heroName=ch=>ch.hn?`${ch.hn} · ${ch.name}`:ch.name;
 const ITEMS={banana:{name:'Banana Peel',icon:'🍌'},rocket:{name:'Rocket',icon:'🚀'},freeze:{name:'Freeze Bomb',icon:'❄️'},turbo:{name:'Turbo Shoes',icon:'💨'},shield:{name:'Shield',icon:'🛡️'},mine:{name:'Land Mine',icon:'💣'},ghost:{name:'Ghost',icon:'👻'},fire:{name:'Fire Trail',icon:'🔥'},swap:{name:'Lead Swap',icon:'🔄'}};
 /* ---------- 3D icons: pictures in img/icons/<name>.webp take the place of the emoji ---------- */
 const ICO=new Set('att_amulet att_band att_battery att_cape att_clover att_crown att_halo att_jetpack att_shades att_wings box chat coin collection cup_bronze cup_diamond cup_gold cup_silver d_banner d_clock d_map d_neon d_poster decorate emotes f_arcade f_chair f_couch f_guitar f_plant f_radio f_tv f_weights fc_crown g_bouquet g_box g_friend g_heart g_teddy gem gp_points gp_trophy guild item_banana item_fire item_freeze item_ghost item_mine item_rocket item_shield item_turbo lo_aegis lo_bubble lo_dart lo_escape lo_meteor lo_net lo_ram lo_shock lo_titan lo_vortex luck luck_golden luck_jackpot lv_shield m_hits m_marathon m_online m_podium m_survivor menu_boards menu_inbox menu_room menu_settings menu_store mon_BRA mon_EGY mon_FRA mon_GBR mon_HTI mon_IND mon_ITA mon_JPN mon_MEX mon_USA mon_fountain mon_giant mon_hall perk_charge perk_comeback perk_double perk_magnet perk_nullify perk_shield perk_start power_lightning power_quake power_slash power_trees power_wind rank_champs rank_city rank_continent rank_country rank_county rank_global rank_region rank_sea rank_state rank_street rank_track rar_com rar_epic rar_leg rar_myth rar_rare skin_ancientoak skin_celestial skin_classic skin_continentchamp skin_crimson skin_dunewalker skin_forgeking skin_frost skin_frostgiant skin_gold skin_inferno skin_jungle skin_krakenlord skin_moonblade skin_mountainking skin_neon skin_oni skin_phoenix skin_rookie skin_sakura skin_shadow skin_shadowranger skin_sirenqueen skin_skyemperor skin_stormlord skin_stormtide skin_tidecaller skin_titan skin_warlord skin_worldtree stopwatch strength swap tab_challenges tab_online tab_quick task trk_amazon trk_antarctica trk_canyon trk_city trk_coast trk_giza trk_glacier trk_grandcanyon trk_greatwall trk_outback trk_paris trk_sahara trk_stadium trk_streets xp'.split(' '));
@@ -2934,7 +2942,7 @@ function gradMapTex(tex,sk){const img=tex&&tex.image;if(!img||!img.getContext||!
     x.putImageData(d,0,0);const t2=new THREE.CanvasTexture(c);t2.wrapS=tex.wrapS;t2.wrapT=tex.wrapT;t2.repeat.copy(tex.repeat);t2.offset.copy(tex.offset);t2.anisotropy=tex.anisotropy;t2.__shared=true;GRADC.set(key,t2);return t2;}
   catch(e){GRADC.set(key,null);return null;}}
 function buildModel(flag,charId,opt){
-  opt=opt||{};const ch=charById(charId),lk=ch.look,b=lk.b,ls=lk.ls,id=ch.id;
+  opt=opt||{};const ch=charById(charId),lk=ch.look,b=lk.b,ls=lk.ls,hid=ch.id,id=ch.as||ch.id;
   const [kA]=flag.kit;const body=[];const DS=THREE.DoubleSide;
   const M=(c,x)=>{const m=new THREE.MeshLambertMaterial(Object.assign({color:c},x||{}));body.push(m);return m;};
   const TX=(k,x)=>M(0xffffff,Object.assign({map:OUTFIT_TEX[k]()},x||{}));
@@ -3030,9 +3038,10 @@ function buildModel(flag,charId,opt){
     add(Cyl(0.25*b,0.34*b,0.5,true),TX('kilt',{side:DS}),0,-0.26,0,pelvis);
     add(Tor(tr*1.08,0.04),M(0x4a2e18),0,0.0,0,torso,Math.PI/2).scale.set(1.3,1,1);
     [armL,armR].forEach(a=>{add(Cyl(0.076,0.076,0.14),M(0xb08a3a),0,-0.13,0,a.elb);add(Tor(0.068,0.02),M(0x3fa2c0),0,-0.23,0,a.elb,Math.PI/2);});
-    const sh=shieldDisk('hide',0.4,M(0x5b3b25));sh.position.set(-0.1,-0.16,0);sh.rotation.z=Math.PI/2;armL.elb.add(sh);
-    const sp=new THREE.Group();sp.rotation.set(0.35,0,0);armR.hand.add(sp);
-    add(Cyl(0.022,0.022,1.7),wood(),0,0.1,0,sp);add(new THREE.ConeGeometry(0.045,0.24,8),steel(),0,-0.87,0,sp,Math.PI,0,0);add(new THREE.BoxGeometry(0.02,0.24,0.2),steel(),0,0.7,-0.1,sp);
+    // machete: dark wooden grip, long steel blade pointing down
+    const mc=new THREE.Group();mc.rotation.set(0.3,0,0);armR.hand.add(mc);
+    add(Cyl(0.026,0.026,0.17),M(0x3a2414),0,0.02,0,mc);add(new THREE.BoxGeometry(0.05,0.03,0.07),steel(),0,-0.07,0,mc);
+    add(new THREE.BoxGeometry(0.014,0.5,0.085),steel(),0,-0.33,-0.012,mc);add(new THREE.BoxGeometry(0.014,0.12,0.11),steel(),0,-0.6,-0.024,mc,0.25,0,0);
   }else if(id==='archer'){
     longHair(P.hair,0.34);
     braid(headP,[0.2,0.04,0.04],[0.21,-0.46,-0.16],8,P.hair,null,0.062);
@@ -3162,23 +3171,34 @@ function buildModel(flag,charId,opt){
   let tag=null;
   if(opt.tag){const t=canvasTex(320,80,(c,w,h)=>{c.fillStyle='rgba(14,18,48,.88)';c.fillRect(0,0,w,h);if(opt.team!=null)R(c,0,0,8,h,TEAMS[opt.team].col);c.drawImage(flag.canvas,16,12,84,56);c.fillStyle='#fff';c.font='600 38px "Chakra Petch", sans-serif';c.textBaseline='middle';c.fillText(opt.tag.slice(0,17),112,42);});
     tag=new THREE.Sprite(new THREE.SpriteMaterial({map:t,depthWrite:false,transparent:true}));tag.scale.set(1.5,0.375,1);tag.position.y=3.05;root.add(tag);}
+  const g0h=headP.children.length,g0t=torso.children.length;let capeGear=false;
   (opt.gear||[]).forEach(gid=>{
     const L=(c,x)=>new THREE.MeshLambertMaterial(Object.assign({color:c},x||{}));
     if(gid==='band')add(Tor(0.255,0.04),L(0xe0322a),0,0.3,0,headP,Math.PI/2);
     else if(gid==='shades'){const k=L(0x111118,{emissive:0x0a0a14});[-0.08,0.08].forEach(x=>add(new THREE.BoxGeometry(0.12,0.07,0.03),k,x,0.27,-0.225,headP));add(new THREE.BoxGeometry(0.06,0.02,0.02),k,0,0.28,-0.23,headP);}
     else if(gid==='crown'){const g=L(0xf2c14a,{emissive:0x3a2a00});add(Cyl(0.15,0.15,0.1,true),new THREE.MeshLambertMaterial({color:0xf2c14a,emissive:0x3a2a00,side:DS}),0,0.52,0,headP);for(let i=0;i<5;i++){const a=i*TAU/5;add(new THREE.ConeGeometry(0.03,0.09,5),g,Math.cos(a)*0.15,0.6,Math.sin(a)*0.15,headP);}}
     else if(gid==='halo')add(Tor(0.2,0.025),new THREE.MeshBasicMaterial({color:0xfff2a0}),0,0.66,0,headP,Math.PI/2);
-    else if(gid==='cape'){const g=L(0xf2c14a,{emissive:0x3a2a00});[-1,1].forEach(sd=>add(new THREE.BoxGeometry(0.035,capeL,0.03),g,sd*capeW/2,-capeL/2,0,cape));add(new THREE.BoxGeometry(capeW+0.035,0.035,0.03),g,0,-capeL,0,cape);}
+    else if(gid==='cape'){capeGear=true;const g=L(0xf2c14a,{emissive:0x3a2a00});[-1,1].forEach(sd=>add(new THREE.BoxGeometry(0.035,capeL,0.03),g,sd*capeW/2,-capeL/2,0,cape));add(new THREE.BoxGeometry(capeW+0.035,0.035,0.03),g,0,-capeL,0,cape);}
     else if(gid==='wings'){const w=L(0xf4f4fa);[-1,1].forEach(s=>{const m=add(Sph(0.3),w,s*0.26,0.5,tr+0.12,torso,0,0,s*-0.6);m.scale.set(1.5,0.5,0.12);});}
     else if(gid==='jetpack'){const gr=L(0x8a90a0),rd=L(0xd8342a);[-0.09,0.09].forEach(x=>{add(Cyl(0.075,0.075,0.42),gr,x,0.36,tr+0.14,torso);add(new THREE.ConeGeometry(0.075,0.12,10),rd,x,0.1,tr+0.14,torso,Math.PI);});}
   });
+  const gearHead=headP.children.slice(g0h),gearTorso=torso.children.slice(g0t).filter(o=>o!==cape&&o!==flagPivot);
+  // the flag rides above the head like a name tag; the cape is optional (Settings, or the Hero Cape gear)
+  cape.visible=capeGear||capeOn();let headFlag=null;
+  if(!cape.visible&&!opt.tag&&!opt.noFlag){
+    const u=flag.url&&/^img\//.test(flag.url)?flag.url:null;
+    const map=u?(TEXC['hf'+u]||(TEXC['hf'+u]=Object.assign(new THREE.TextureLoader().load(u),{__shared:true}))):flag.tex;
+    headFlag=new THREE.Sprite(new THREE.SpriteMaterial({map,transparent:true,depthWrite:false}));headFlag.scale.set(u?0.8:0.66,u?0.6:0.44,1);headFlag.position.y=(opt.lookY||2.55);root.add(headFlag);}
   if(opt.skin&&opt.skin.pal){const P=opt.skin.pal.map(c=>new THREE.Color(c)),a=opt.skin.amt||0.8,ex=new Set([skin,sash,flagMesh.material,capeMat]);
     body.forEach(mt=>{if(ex.has(mt)||!mt.color)return;const c=mt.color,L=0.2126*c.r+0.7152*c.g+0.0722*c.b;
       if(mt.map){const gm=gradMapTex(mt.map,opt.skin);if(gm){mt.map=gm;c.setRGB(1,1,1);}else c.lerp(P[1],a);}else{const tgt=L<0.2?P[0]:L>0.6?P[2]:P[1];c.lerp(tgt,a);}
       if(opt.skin.emissive)mt.userData.be=new THREE.Color(opt.skin.emissive).multiplyScalar(L>0.6?1.6:1);});}
   if(opt.skin&&opt.skin.tint!=null){const tc=new THREE.Color(opt.skin.tint),ex=new Set([skin,sash,flagMesh.material,capeMat]);body.forEach(mt=>{if(ex.has(mt))return;mt.color.lerp(tc,opt.skin.amt);if(opt.skin.emissive)mt.userData.be=new THREE.Color(opt.skin.emissive);});}
-  const out={root,pelvis,torso,headP,eyes,mouth,stars,armL,armR,legL,legR,flagPivot,flagMesh,shadow,shield,ring,tag,body,hipH,look:lk,sc:lk.sc,cape};
-  if(HERO3D[id]&&HERO3D[id].geo)attachHero3D(out,id);
+  const out={root,pelvis,torso,headP,eyes,mouth,stars,armL,armR,legL,legR,flagPivot,flagMesh,shadow,shield,ring,tag,body,hipH,look:lk,sc:lk.sc,cape,headFlag,gearHead,gearTorso};
+  {root.updateMatrixWorld(true);const v=new THREE.Vector3();headP.getWorldPosition(v);root.worldToLocal(v);out.headY=v.y;}
+  out.skin=opt.skin||null;
+  if(headFlag)headFlag.position.y=out.headY+0.95;
+  if(HERO3D[hid]){if(HERO3D[hid].geo)attachHero3D(out,hid);else loadHero3D(hid);}
   return out;
 }
 
@@ -3186,34 +3206,59 @@ function buildModel(flag,charId,opt){
    so we give it one here: bones at its joints, each vertex weighted to the nearest body part. The game's
    usual pose code still moves the simple runner's joints; every frame those rotations are copied onto
    these bones, and the simple runner is hidden. Weapons, cape and stun stars move onto the new bones. ---------- */
-const HERO3D={warrior:{url:'models/warrior.glb',S:2.25,
-  // joint positions in the model's own units (it is 0.98 tall, facing +z)
-  J:{pelvis:[0,0.42],torso:[0,0.47],head:[0,0.78],sh:[0.14,0.70],elb:[0.222,0.555],hand:[0.30,0.41],hip:[0.065,0.40],knee:[0.075,0.21]}}};
-function loadHero3D(id){const H=HERO3D[id];if(!H||H.busy||H.geo||typeof THREE.GLTFLoader!=='function')return;H.busy=true;
-  new THREE.GLTFLoader().load(H.url,g=>{let mesh=null;g.scene.traverse(o=>{if(o.isMesh&&!mesh)mesh=o;});if(!mesh){H.busy=false;return;}
+// joint spots in each model's own units (models are ~0.98 tall, feet at 0, facing +z):
+// pelvis/head heights, then shoulder, elbow, hand, hip, knee (x,y), torso half-width, arm thickness, where the legs part
+const HJ=(pel,head,sh,elb,hand,hip,knee,tw,aw,split)=>({pelvis:[0,pel],torso:[0,pel+0.05],head:[0,head],sh,elb,hand,hip,knee,tw,aw,split});
+const HERO3D={
+ warrior:{url:'models/warrior.glb',J:HJ(0.42,0.78,[0.14,0.70],[0.222,0.555],[0.30,0.41],[0.065,0.40],[0.075,0.21],0.09,0.07,0.26)},
+ archer:{url:'models/winddancer.glb',J:HJ(0.48,0.795,[0.118,0.71],[0.201,0.581],[0.263,0.461],[0.072,0.46],[0.077,0.244],0.083,0.06,0.35)},
+ dwarf:{url:'models/dwarf.glb',J:HJ(0.4,0.8,[0.25,0.7],[0.358,0.48],[0.442,0.277],[0.065,0.38],[0.07,0.201],0.205,0.117,0.26)},
+ elf:{url:'models/elf.glb',J:HJ(0.48,0.8,[0.139,0.662],[0.22,0.553],[0.28,0.452],[0.064,0.46],[0.069,0.244],0.09,0.052,0.412)},
+ gas:{url:'models/gas.glb',J:HJ(0.48,0.75,[0.103,0.617],[0.188,0.517],[0.252,0.424],[0.064,0.46],[0.069,0.244],0.072,0.047,0.385)},
+ knight:{url:'models/knight.glb',J:HJ(0.425,0.828,[0.202,0.645],[0.283,0.513],[0.343,0.392],[0.083,0.405],[0.088,0.215],0.113,0.08,0.295)},
+ kicker:{url:'models/korean.glb',J:HJ(0.48,0.757,[0.101,0.675],[0.187,0.554],[0.251,0.443],[0.066,0.46],[0.071,0.244],0.06,0.061,0.385)},
+ queen:{url:'models/queen.glb',J:HJ(0.4,0.81,[0.136,0.607],[0.221,0.518],[0.285,0.436],[0.065,0.38],[0.07,0.201],0.09,0.058,0.26)},
+ rapper:{url:'models/rapper.glb',J:HJ(0.463,0.825,[0.171,0.597],[0.253,0.499],[0.314,0.408],[0.075,0.443],[0.08,0.235],0.12,0.06,0.333)},
+ robot:{url:'models/robot.glb',J:HJ(0.48,0.738,[0.17,0.66],[0.267,0.515],[0.341,0.381],[0.079,0.46],[0.084,0.244],0.098,0.085,0.35)},
+ samurai:{url:'models/samurai.glb',J:HJ(0.4,0.807,[0.156,0.685],[0.261,0.556],[0.343,0.436],[0.089,0.38],[0.094,0.201],0.11,0.077,0.253)},
+ shaolin:{url:'models/shaolin.glb',J:HJ(0.48,0.83,[0.157,0.682],[0.239,0.547],[0.3,0.422],[0.074,0.46],[0.079,0.244],0.09,0.063,0.378)},
+ viking:{url:'models/viking.glb',J:HJ(0.43,0.8,[0.24,0.74],[0.303,0.527],[0.346,0.331],[0.099,0.41],[0.104,0.217],0.165,0.094,0.3)},
+};
+const H3_ON=new Set();
+function loadHero3D(id){const H=HERO3D[id];if(!H||H.busy||H.geo||H.fail||typeof THREE.GLTFLoader!=='function')return;H.busy=true;
+  new THREE.GLTFLoader().load(H.url,g=>{let mesh=null;g.scene.traverse(o=>{if(o.isMesh&&!mesh)mesh=o;});if(!mesh){H.busy=false;H.fail=true;return;}
     const geo=mesh.geometry,pos=geo.attributes.position,n=pos.count,J=H.J,si=new Uint16Array(n*4),sw=new Float32Array(n*4);
     const sm=(a,b,t)=>{const x=clamp((t-a)/(b-a),0,1);return x*x*(3-2*x);};
-    const dx=J.hand[0]-J.sh[0],dy=J.hand[1]-J.sh[1],dd=dx*dx+dy*dy;
-    for(let i=0;i<n;i++){const x=pos.getX(i),y=pos.getY(i),ax=Math.abs(x),L=x>0,w=new Float32Array(13);
+    const dx=J.hand[0]-J.sh[0],dy=J.hand[1]-J.sh[1],dd=dx*dx+dy*dy,ri=Math.max(0.045,J.aw*0.7);
+    let top=0,back=0;
+    for(let i=0;i<n;i++){const x=pos.getX(i),y=pos.getY(i),z=pos.getZ(i),ax=Math.abs(x),L=x>0,w=new Float32Array(13);
+      top=Math.max(top,y);if(y>J.sh[1]-0.12&&y<J.sh[1]&&ax<J.tw)back=Math.min(back,z);
       // arms: close to the shoulder-to-hand line and outside the chest
       const t=clamp(((ax-J.sh[0])*dx+(y-J.sh[1])*dy)/dd,0,1),px=J.sh[0]+t*dx,py=J.sh[1]+t*dy,dist=Math.hypot(ax-px,y-py);
-      const arm=(1-sm(0.05,0.085,dist))*sm(0.105,0.15,ax)*(y>0.36?1:0),low=sm(0.38,0.56,t);
+      const arm=(1-sm(ri,ri+0.035,dist))*sm(J.tw+0.015,J.tw+0.055,ax)*(y>J.hand[1]-0.1?1:0),low=sm(0.38,0.56,t);
       w[L?3:5]+=arm*(1-low);w[L?4:6]+=arm*low;
-      const rest=1-arm,head=sm(0.765,0.805,y),leg=1-sm(0.27,0.40,y),trunk=Math.max(0,1-head-leg);
-      w[2]+=rest*head;const up=sm(0.42,0.52,y);w[1]+=rest*trunk*up;w[0]+=rest*trunk*(1-up);
-      const side=sm(-0.035,0.035,x),kn=1-sm(0.16,0.26,y);
+      const rest=1-arm,head=sm(J.head[1]-0.015,J.head[1]+0.025,y),leg=1-sm(J.split+0.01,J.hip[1],y),trunk=Math.max(0,1-head-leg);
+      w[2]+=rest*head;const up=sm(J.pelvis[1],J.pelvis[1]+0.1,y);w[1]+=rest*trunk*up;w[0]+=rest*trunk*(1-up);
+      const side=sm(-0.035,0.035,x),kn=1-sm(J.knee[1]-0.05,J.knee[1]+0.05,y);
       w[7]+=rest*leg*side*(1-kn);w[8]+=rest*leg*side*kn;w[9]+=rest*leg*(1-side)*(1-kn);w[10]+=rest*leg*(1-side)*kn;
-      const top=[...w.keys()].sort((a,b)=>w[b]-w[a]).slice(0,4),tot=top.reduce((a,k)=>a+w[k],0)||1;
-      top.forEach((k,j)=>{si[i*4+j]=k;sw[i*4+j]=w[k]/tot;});}
+      const tp=[...w.keys()].sort((a,b)=>w[b]-w[a]).slice(0,4),tot=tp.reduce((a,k)=>a+w[k],0)||1;
+      tp.forEach((k,j)=>{si[i*4+j]=k;sw[i*4+j]=w[k]/tot;});}
     geo.setAttribute('skinIndex',new THREE.Uint16BufferAttribute(si,4));geo.setAttribute('skinWeight',new THREE.Float32BufferAttribute(sw,4));
     geo.userData.shared=true;const mat=mesh.material;mat.skinning=true;mat.userData.shared=true;['map','normalMap','metalnessMap','roughnessMap'].forEach(k=>{if(mat[k])mat[k].__shared=true;});
     if(mat.metalness!=null)mat.metalness=Math.min(mat.metalness,0.15);
     // the game draws in plain colour, so read the picture as-is instead of darkening it
     if(mat.map)mat.map.encoding=THREE.LinearEncoding;mat.needsUpdate=true;
-    H.geo=geo;H.mat=mat;H.busy=false;
+    H.geo=geo;H.mat=mat;H.top=top;H.back=back;H.busy=false;H.mats={};
     // swap the new model in wherever this hero is already on screen
-    try{if(state==='menu'&&selChar===id)rebuildPreview();}catch(e){}},undefined,()=>{H.busy=false;});}
-function attachHero3D(m,id){const H=HERO3D[id],J=H.J,S=H.S;
+    try{if(state==='menu'&&selChar===id)rebuildPreview();}catch(e){}
+    try{(runners||[]).forEach(r=>{if(r.m&&!r.m.glb&&r.char&&r.char.id===id)attachHero3D(r.m,id);});}catch(e){}},undefined,()=>{H.busy=false;H.fail=true;});}
+// a skin recolours the model by tinting its picture (one shared material per hero and skin)
+function hero3dMat(H,sk){if(!sk||(sk.tint==null&&!sk.pal))return H.mat;const k=sk.id||String(sk.tint);if(H.mats[k])return H.mats[k];
+  const m=H.mat.clone();m.userData.shared=true;const tc=new THREE.Color(sk.tint!=null?sk.tint:sk.pal[1]);m.color.setRGB(1,1,1).lerp(tc,Math.min(0.75,(sk.amt||0.6)*0.85));
+  if(sk.emissive){m.emissive=new THREE.Color(sk.emissive);m.emissiveIntensity=0.35;}return H.mats[k]=m;}
+function attachHero3D(m,id){const H=HERO3D[id],J=H.J;if(m.glb||!H.geo)return;
+  // size: line the model's neck up with the simple runner's head
+  const S=(m.headY||1.75)/J.head[1];
   const B=(x,y,parent)=>{const b=new THREE.Bone();b.position.set(x,y,0);if(parent)parent.add(b);return b;};
   // bone positions are relative to their parent
   const pel=B(0,J.pelvis[1]),tor=B(0,J.torso[1]-J.pelvis[1],pel),hd=B(0,J.head[1]-J.torso[1],tor);
@@ -3223,14 +3268,21 @@ function attachHero3D(m,id){const H=HERO3D[id],J=H.J,S=H.S;
   const [hpL,knL]=leg(1),[hpR,knR]=leg(-1);
   const bones=[pel,tor,hd,shL,elL,shR,elR,hpL,knL,hpR,knR,hnL,hnR];
   const holder=new THREE.Group();holder.rotation.y=Math.PI;holder.scale.setScalar(S);holder.add(pel);
-  const mesh=new THREE.SkinnedMesh(H.geo,H.mat);mesh.frustumCulled=false;holder.add(mesh);holder.updateMatrixWorld(true);mesh.bind(new THREE.Skeleton(bones));
+  const mesh=new THREE.SkinnedMesh(H.geo,hero3dMat(H,m.skin));mesh.frustumCulled=false;holder.add(mesh);holder.updateMatrixWorld(true);mesh.bind(new THREE.Skeleton(bones));
   m.root.add(holder);
   // keep cape, weapons and stun stars, moved onto the new skeleton (undoing its turn and size)
-  const wrap=(bone,obj,pos)=>{if(!obj)return;const w=new THREE.Group();w.rotation.y=Math.PI;w.scale.setScalar(1/S);if(pos)w.position.set(pos[0],pos[1],pos[2]);bone.add(w);w.add(obj);};
-  [...m.armR.hand.children].forEach(o=>wrap(hnR,o));
-  [...m.armL.elb.children].filter(o=>o.isGroup&&o!==m.armL.hand).forEach(o=>wrap(elL,o));
-  if(m.cape)wrap(tor,m.cape,[0,0.17,0]),m.cape.position.set(0,0.12,0.14);
+  const wrap=(bone,obj,pos)=>{if(!obj)return;const w=new THREE.Group();w.rotation.y=Math.PI;w.scale.setScalar(1/S);if(pos)w.position.set(pos[0],pos[1],pos[2]);bone.add(w);w.add(obj);return w;};
+  // new heroes borrow a stand-in body, so they don't take its hand props
+  if(!charById(id).as){
+    [...m.armR.hand.children].forEach(o=>wrap(hnR,o));
+    [...m.armL.elb.children].filter(o=>o.isGroup&&o!==m.armL.hand).forEach(o=>wrap(elL,o));}
+  if(m.cape){wrap(tor,m.cape,[0,J.sh[1]-J.torso[1]+0.01,0]);m.cape.position.set(0,0,-H.back*S+0.04);m.cape.scale.setScalar(clamp(J.sh[0]/0.14,0.85,1.6));}
   wrap(hd,m.stars,[0,0.12,0]);m.stars.position.set(0,0.4,0);
+  // hats, shades, wings and jetpacks: sized to the new head and moved onto the new bones
+  const hs=clamp((H.top-J.head[1])*S/0.62,0.7,1.6);
+  if(m.gearHead&&m.gearHead.length){const w=wrap(hd,new THREE.Group(),[0,0,0]);w.children[0].scale.setScalar(hs);m.gearHead.forEach(o=>w.children[0].add(o));}
+  if(m.gearTorso&&m.gearTorso.length){const w=wrap(tor,new THREE.Group(),[0,0,0]);w.children[0].position.z=-H.back*S-0.2;m.gearTorso.forEach(o=>w.children[0].add(o));}
+  if(m.headFlag)m.headFlag.position.y=H.top*S+0.42;
   m.pelvis.visible=false;
   m.glb={pel,tor,hd,shL,elL,shR,elR,hpL,knL,hpR,knR,S,J,hipH:m.hipH};}
 // copy the simple runner's pose onto the model's bones (mirrored, since the model faces the other way)
@@ -3240,7 +3292,6 @@ function syncHero3D(m){const g=m.glb;if(!g)return;const P=m.pelvis.rotation,TR=m
   const A=(sh,el,a,rest)=>{sh.rotation.set(-a.sh.rotation.x,a.sh.rotation.y,-a.sh.rotation.z-rest);el.rotation.set(-a.elb.rotation.x,a.elb.rotation.y,-a.elb.rotation.z);};
   A(g.shL,g.elL,m.armL,0.5);A(g.shR,g.elR,m.armR,-0.5);
   g.hpL.rotation.x=-m.legL.hip.rotation.x;g.knL.rotation.x=-m.legL.knee.rotation.x;g.hpR.rotation.x=-m.legR.hip.rotation.x;g.knR.rotation.x=-m.legR.knee.rotation.x;}
-loadHero3D('warrior');
 function disposeModel(m){disposeTree(m.root);}
 
 function J(o,k,t,f){o[k]+=(t-o[k])*f;}
@@ -3798,6 +3849,8 @@ function zdUlt(r){const z=RACE.zd;if(!z||z.over||r.down||r.charge<1||state!=='ra
   else if(id==='shaolin'){samp('fire',1);live.forEach(e=>{zdDamage(e,13,r);const q=zdP(e.x,e.d,0.8);burst(q.x,q.y,q.z,16,[1,0.5,0.1],{add:true,max:6,up:4,grav:2,size:0.4});});}
   else if(id==='viking'){samp('freeze',1);flashScreen('rgba(210,240,255,.6)');live.forEach(e=>{e.frz=6;zdDamage(e,5,r);});}
   else if(id==='robot'){samp('shockwave',1);live.sort((a,b)=>b.hp-a.hp).slice(0,12).forEach((e,i)=>setTimeout(()=>{if(!z.en.includes(e))return;laserFx(r,{x:e.x,d:e.d,y:0,m:null});zdDamage(e,14,r);},i*50));}
+  else if(id==='kicker'){samp('power_slash',1);windFx(r);live.forEach(e=>{e.push=e.type==='boss'?5:12;zdDamage(e,7,r);});}
+  else if(id==='gas'){samp('power_wind',1);for(let i=0;i<6;i++)ringFx(rand(-3,3),ZD_LINE+6+i*6,0x9a62f0,6,0.8);live.forEach(e=>{e.frz=Math.max(e.frz,2.5);zdDamage(e,5,r);});}
   else if(id==='rapper'){samp('shockwave',1);bassFx(r);live.forEach(e=>{e.push=e.type==='boss'?4:10;e.frz=Math.max(e.frz,1.5);zdDamage(e,6,r);});}
   else if(id==='elf'){samp('power_trees',1);live.forEach(e=>{e.frz=5;zdDamage(e,4,r);const q=zdP(e.x,e.d,0.5);burst(q.x,q.y,q.z,10,[0.4,0.9,0.3],{max:3,up:5,grav:6,size:0.4});});}
   else{samp('power_quake',1);if(!reduceMotion)shake=1.1;live.forEach(e=>{e.frz=Math.max(e.frz,2);zdDamage(e,7,r);});for(let i=0;i<6;i++)ringFx(rand(-3,3),ZD_LINE+6+i*6,0xffb060,6,0.6);}
@@ -4157,7 +4210,8 @@ const music={vol:0.5,chans:new Map(),cur:null,timers:[],paused:false,unlocked:fa
 const SET=(()=>{let s=null;try{s=JSON.parse(store.get('flagdash-settings')||'null');}catch(e){}s=s&&typeof s==='object'?s:{};
   const num=(v,d)=>typeof v==='number'&&v>=0&&v<=1?v:d;
   return {music:s.music!==undefined?!!s.music:store.get('flagdash-music')!=='0',sfx:s.sfx!==undefined?!!s.sfx:store.get('flagdash-muted')!=='1',voice:s.voice!==false,
-    chat:s.chat!==false,filter:s.filter!==false,dmFriends:!!s.dmFriends,musicVol:num(s.musicVol,0.5),sfxVol:num(s.sfxVol,0.8),voiceVol:num(s.voiceVol,0.9)};})();
+    chat:s.chat!==false,cape:!!s.cape,filter:s.filter!==false,dmFriends:!!s.dmFriends,musicVol:num(s.musicVol,0.5),sfxVol:num(s.sfxVol,0.8),voiceVol:num(s.voiceVol,0.9)};})();
+function capeOn(){try{return !!SET.cape;}catch(e){return false;}}
 function saveSettings(){store.set('flagdash-settings',JSON.stringify(SET));}
 let sfxBus=null;
 function sfxOut(){if(!sfxBus){sfxBus=actx.createGain();sfxBus.connect(actx.destination);}sfxBus.gain.value=SET.sfxVol;return sfxBus;}
@@ -4171,7 +4225,7 @@ function applySettings(){
 function renderSettings(){
   const box=$('setBody');if(!box)return;
   [['music','Music'],['sfx','Sound effects'],['voice','Voices']].forEach(([k])=>{const t=$('set_'+k),v=$('set_'+k+'Vol');if(t){t.setAttribute('aria-pressed',SET[k]);t.textContent=SET[k]?'On':'Off';}if(v){v.value=Math.round(SET[k+'Vol']*100);v.disabled=!SET[k];}});
-  ['chat','filter','dmFriends'].forEach(k=>{const t=$('set_'+k);if(t){t.setAttribute('aria-pressed',!!SET[k]);t.textContent=SET[k]?'On':'Off';}});
+  ['chat','filter','dmFriends','cape'].forEach(k=>{const t=$('set_'+k);if(t){t.setAttribute('aria-pressed',!!SET[k]);t.textContent=SET[k]?'On':'Off';}});
   renderDevBox();
   const vn=$('setVoiceNote');if(vn)vn.textContent=voice.supported()?'Runners speak their taunts with this device’s built-in voice. Recorded voices replace it line by line.':'This browser has no built-in voice. Taunts still show as speech bubbles.';
 }
@@ -4222,7 +4276,7 @@ function openSettings(){const o=$('settings');o.hidden=false;renderSettings();
 function closeSettings(){$('settings').hidden=true;if(settingsPaused){settingsPaused=false;togglePause();}}
 
 /* ---------- spoken taunts: device text-to-speech until recordings exist ---------- */
-const VOICE_STYLE={samurai:{pitch:0.75,rate:1.0},warrior:{pitch:0.6,rate:0.95},archer:{pitch:1.15,rate:1.1},elf:{pitch:1.45,rate:1.05},dwarf:{pitch:0.55,rate:1.15},queen:{pitch:1.1,rate:0.95},knight:{pitch:0.8,rate:0.95},shaolin:{pitch:0.9,rate:1.0},viking:{pitch:0.5,rate:0.95},robot:{pitch:0.3,rate:0.9},rapper:{pitch:0.85,rate:1.2}};
+const VOICE_STYLE={samurai:{pitch:0.75,rate:1.0},warrior:{pitch:0.6,rate:0.95},archer:{pitch:1.15,rate:1.1},elf:{pitch:1.45,rate:1.05},dwarf:{pitch:0.55,rate:1.15},queen:{pitch:1.1,rate:0.95},knight:{pitch:0.8,rate:0.95},shaolin:{pitch:0.9,rate:1.0},viking:{pitch:0.5,rate:0.95},robot:{pitch:0.3,rate:0.9},rapper:{pitch:0.85,rate:1.2},kicker:{pitch:1.3,rate:1.1},gas:{pitch:1.2,rate:1.05}};
 const voice={list:[],ready:false,cur:null,curPri:0,
   supported(){return typeof window.speechSynthesis!=='undefined'&&typeof window.SpeechSynthesisUtterance!=='undefined';},
   load(){if(!this.supported())return;const upd=()=>{this.list=speechSynthesis.getVoices()||[];this.ready=this.list.length>0;};upd();try{speechSynthesis.addEventListener('voiceschanged',upd);}catch(e){speechSynthesis.onvoiceschanged=upd;}},
@@ -4258,7 +4312,7 @@ const feedSeen=new Map();let feedLast=0;
 // Who hit whom, as icons: attacker's flag, the weapon, the victim's flag (+ any loot)
 const flagURL=r=>{const f=r&&r.flag;if(!f)return '';return f.url||(f.url=f.canvas.toDataURL('image/png'));};
 const HIT_IC=[[/rocket/i,'🚀'],[/banana/i,'🍌'],[/mine/i,'💣'],[/fire/i,'🔥'],[/froze|freeze/i,'❄️'],[/lightning|zapp/i,'⚡'],[/slash|sword/i,'⚔️'],[/quake/i,'🌋'],[/wind|gale/i,'🌪️'],[/tree/i,'🌳'],[/dart/i,'🎯'],[/net\b/i,'🕸️'],[/meteor/i,'☄️'],[/shockwave/i,'💥'],[/vortex/i,'🌀'],[/passed through/i,'👻']];
-function hitIcon(why,src){for(const [re,ic] of HIT_IC)if(re.test(why||''))return ic;const p=src&&src.char&&src.char.id;return {samurai:'⚔️',warrior:'⚡',archer:'🌪️',elf:'🌳',dwarf:'🌋',queen:'🦁',knight:'✨',shaolin:'🔥',viking:'❄️',robot:'🤖',rapper:'🎤'}[p]||'💥';}
+function hitIcon(why,src){for(const [re,ic] of HIT_IC)if(re.test(why||''))return ic;const p=src&&src.char&&src.char.id;return {samurai:'⚔️',warrior:'⚡',archer:'🌪️',elf:'🌳',dwarf:'🌋',queen:'🦁',knight:'✨',shaolin:'🔥',viking:'❄️',robot:'🤖',rapper:'🎤',kicker:'🦶',gas:'💨'}[p]||'💥';}
 function hitFeed(a,b,ic){
   if(!a||!b||!RACE)return null;const mine=a===player,me=b===player;const f=$('feed');const e=document.createElement('div');e.className='msg hitchip'+(mine?' good':me?' bad':'');
   const im=r=>{const i=document.createElement('img');i.src=flagURL(r);i.alt=r.nm||'';return i;};
@@ -4332,6 +4386,8 @@ function handleAct(src,a){
       else if(p==='shaolin'){fireWaveFx(src);victims.forEach(o=>{const q=wpos(o,0.8);burst(q.x,q.y,q.z,26,[1,0.5,0.1],{add:true,max:6,up:5,grav:2,size:0.4});});samp('fire',1)||sfx.power();samp('power_slash',0.6);}
       else if(p==='viking'){blizzardFx(src);victims.forEach(o=>iceFx(o,ch.stun));samp('freeze',1)||sfx.power();samp('power_wind',0.7);}
       else if(p==='robot'){victims.forEach(o=>laserFx(src,o));samp('shockwave',1)||sfx.power();}
+      else if(p==='kicker'){ringFx(src.x,src.d,0xff6a8a,28,0.6);windFx(src);victims.forEach(o=>{swirlFx(o);const q=wpos(o,1);burst(q.x,q.y,q.z,18,[1,0.5,0.6],{add:true,max:5,up:4,grav:3});});samp('power_slash',1)||sfx.slash();samp('power_wind',0.6);}
+      else if(p==='gas'){ringFx(src.x,src.d,0x9a62f0,26,0.9);victims.forEach(o=>gasFx(o));samp('power_wind',1)||sfx.wind();}
       else if(p==='rapper'){bassFx(src);victims.forEach(o=>swirlFx(o));samp('shockwave',1)||sfx.power();tone(55,0.9,'sine',0.12,-20);tone(42,1.1,'sine',0.1,-12,0.15);}
       else{if(!reduceMotion)shake=Math.max(shake,0.9);ringFx(src.x,src.d,0xc98a4a,25,0.8);runners.forEach(o=>{const q=wpos(o,0.1);burst(q.x,q.y,q.z,20,TH.dust,{max:5,up:4,grav:9,size:0.4});});sfx.quake();}
       for(const o of victims){if(!o.owned)continue;if(hit(o,ch.stun,src,ch.kind,`${src.nm}'s ${ch.power} stunned you`,true)&&p==='archer')o.d=Math.max(0,o.d-4);}
@@ -4367,8 +4423,11 @@ function hit(o,dur,src,kind,why,quiet){
   dur*=1-((o.mods&&o.mods.stun)||0);
   if(o.char&&o.char.id==='samurai')dur*=0.7;  // perk: Bushido
   if(o.char&&o.char.id==='shaolin'&&!src)dur*=0.5;  // perk: Iron Body (obstacles)
+  if(o.char&&o.char.id==='gas'&&src&&src!==o)dur*=0.6;  // perk: Vapor Form
   if(src&&src!==o&&src.char&&src.char.id==='rapper'&&src.owned){src.boost=Math.max(src.boost,1.5);src.boostMul=Math.max(src.boostMul||1,1.35);if(src.kind==='local')feed('🎤 Hype! Speed burst','good');}  // perk: Hype
   o.stun=Math.max(o.stun,dur);o.grace=dur+1.2;o.stunKind=kind||'trip';o.speed*=0.35;o.slide=0;if(kind==='knock')o.vy=Math.max(o.vy,5.5);
+  // perk: Counter Kick. She kicks back at whoever hit her
+  if(o.char&&o.char.id==='kicker'&&src&&src!==o&&src.owned&&!src.finished&&!(src.stun>0)&&Math.random()<0.3){ringFx(src.x,src.d,0xff6a8a,2.5,0.4);hit(src,0.9,o,'knock',`${o.nm}'s Counter Kick got you`,true);if(o.kind==='local')feed('🦶 Counter Kick!','good');}
   const p=wpos(o,2.1);burst(p.x,p.y,p.z,10,[1,0.9,0.3],{add:true,max:3,up:3,grav:4,size:0.22});
   if(o.kind==='local'){raceStat('hurt');if(!reduceMotion)shake=0.45;sfx.hit();if(!src||src===o)feed(why||'You got hit','bad');}
   if(src&&src!==o)hitFeed(src,o,hitIcon(why,src));
@@ -4479,6 +4538,8 @@ const CHAR_SAY={
   viking:{hit:['For Valhalla!','Skål!'],hurt:['Ha! That tickled!','You call that a hit?'],power:['Winter is here!','Freeze, little ones!']},
   robot:{hit:['Target eliminated.','Calculating victory.'],hurt:['Damage detected.','Error. Error. Rebooting.'],power:['Lasers armed.','Initiating laser grid.']},
   rapper:{hit:['Drop the beat!','You just got remixed!'],hurt:['Yo, not cool!','That ain\'t on beat!'],power:['Feel the bass!','Turn it up!']},
+  kicker:{hit:['Hi-yah!','Too slow!'],hurt:['Hey! Watch it!','You will regret that!'],power:['Hurricane kick!','Feel the storm of my feet!']},
+  gas:{hit:['Breathe that in!','Lost in the fog!'],hurt:['Rude!','You can\'t catch vapor!'],power:['Gas cloud, coming through!','Hope you can hold your breath!']},
 };
 // Haitian Creole lines for runners wearing the Haiti flag. Each has a voice id:
 // drop a recording at voice/<id>.mp3 and add the id to VOICE_FILES to play it with the bubble.
@@ -4573,7 +4634,8 @@ Object.assign(sfx,{
   boostPad:()=>samp('boost_pad')||tone(420,0.3,'sawtooth',0.04,900),
   jumpPad:()=>{if(samp('jump_pad'))return;tone(200,0.25,'square',0.05,600);tone(500,0.3,'triangle',0.04,700,0.08);},
 });
-function showUlt(src){showBanner(src.char.power+'!',`${src.nm} · ${src.char.name}`,src.char.rgb);}
+function gasFx(o){const q=wpos(o,0.9);for(let i=0;i<3;i++)burst(q.x,q.y,q.z,14,i%2?[0.62,0.38,0.95]:[0.8,0.65,1],{max:3,up:1.6,grav:-0.6,size:0.75});swirlFx(o);}
+function showUlt(src){showBanner(src.char.power+'!',`${src.nm} · ${src.char.hn||src.char.name}`,src.char.rgb);}
 function showBanner(big,small,rgb){const el=$('ultBanner');el.innerHTML='';const b=document.createElement('b');b.textContent=big;const s=document.createElement('span');s.textContent=small;el.append(b,s);
   const [r,g,bl]=rgb;el.style.setProperty('--uc',`rgb(${r*255|0},${g*255|0},${bl*255|0})`);el.classList.remove('show');void el.offsetWidth;el.classList.add('show');}
 function flashScreen(col){const f=$('flash');f.style.transition='none';f.style.background=col;f.style.opacity=reduceMotion?'0.25':'0.75';void f.offsetWidth;f.style.transition='opacity .45s';f.style.opacity='0';}
@@ -5925,7 +5987,7 @@ function renderHeroDock(){const row=$('hdRow'),card=$('hdCard');if(!row)return;
     if(b.dataset.k!==k&&typeof THREE!=='undefined'){b.dataset.k=k;b.innerHTML='';b.appendChild(heroTileImg(id));}});
   const ch=charById(selChar);if(!ch)return;
   const bar=(lab,v,r)=>{const n=hdBar(v,r);return `<div class="hd-stat"><span>${lab}</span><i>${Array.from({length:10},(_,i)=>`<b class="${i<n?'on':''}"></b>`).join('')}</i></div>`;};
-  card.innerHTML=`<div class="hd-h"><b>${ch.name}</b><span>·</span><b class="hd-pw">${ch.power}</b></div><p class="hd-desc"></p><p class="hd-perk"><span>⭐</span><span><b>${ch.perk.name}:</b> <span class="hd-pd"></span></span></p><div class="hd-stats">${bar('Speed',ch.speed,HD_RANGE.speed)}${bar('Agility',ch.agility,HD_RANGE.agility)}${bar('Recharge',ch.charge,HD_RANGE.charge)}</div>`;
+  card.innerHTML=`<div class="hd-h"><b>${heroName(ch)}</b><span>·</span><b class="hd-pw">${ch.power}</b></div><p class="hd-desc"></p><p class="hd-perk"><span>⭐</span><span><b>${ch.perk.name}:</b> <span class="hd-pd"></span></span></p><div class="hd-stats">${bar('Speed',ch.speed,HD_RANGE.speed)}${bar('Agility',ch.agility,HD_RANGE.agility)}${bar('Recharge',ch.charge,HD_RANGE.charge)}</div>`;
   card.querySelector('.hd-desc').textContent=ch.desc;card.querySelector('.hd-pd').textContent=ch.perk.desc;}
 // Gifts: pick a gift for a friend; you pay, they get it in their inbox.
 function openGift(friend){$('gfTitle').textContent=`Send a gift to ${friend.nm}`;$('gfNote').textContent='';TSEL.gift=null;
@@ -6263,15 +6325,19 @@ const AV={cache:new Map(),r:null,q:[],busy:false};
 function avatarImg(av,cc,cls){const im=document.createElement('img');im.className='av '+(cls||'');im.alt='';const key=(av||'')+'|'+cc;
   const c=AV.cache.get(key);if(c)im.src=c;else{im.classList.add('loading');AV.q.push({key,av,cc,im});pumpAvatars();}return im;}
 function pumpAvatars(){if(AV.busy)return;AV.busy=true;requestAnimationFrame(()=>{AV.busy=false;const t0=performance.now();
-  while(AV.q.length&&performance.now()-t0<40){const j=AV.q.shift();let url=AV.cache.get(j.key);if(!url){try{url=renderPortrait(j.av,j.cc);}catch(e){url='';}AV.cache.set(j.key,url);}
+  const wait=[];
+  while(AV.q.length&&performance.now()-t0<40){const j=AV.q.shift();let url=AV.cache.get(j.key);
+    // wait for the hero's 3D model so the picture shows the real hero
+    if(!url){const H=HERO3D[String(j.av||'').split('.')[0]];if(H&&!H.geo&&!H.fail){loadHero3D(String(j.av).split('.')[0]);wait.push(j);continue;}}
+    if(!url){try{url=renderPortrait(j.av,j.cc);}catch(e){url='';}AV.cache.set(j.key,url);}
     if(url){j.im.src=url;}j.im.classList.remove('loading');}
-  if(AV.q.length)pumpAvatars();});}
+  if(wait.length){AV.q.push(...wait);setTimeout(pumpAvatars,300);}else if(AV.q.length)pumpAvatars();});}
 function renderPortrait(av,cc){
   if(!AV.r){const cv=document.createElement('canvas');cv.width=cv.height=160;AV.r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true,preserveDrawingBuffer:true});AV.r.setClearColor(0,0);
     AV.scene=new THREE.Scene();AV.scene.add(new THREE.HemisphereLight(0xffffff,0x40304a,1.05));const l=new THREE.DirectionalLight(0xfff2dc,0.8);l.position.set(-1.5,2.5,-3);AV.scene.add(l);
     const rim=new THREE.DirectionalLight(0x9fc4ff,0.6);rim.position.set(2,2,3);AV.scene.add(rim);AV.cam=new THREE.PerspectiveCamera(28,1,0.05,20);}
   const [hero,sk]=(validAv(av)||cpuAvatar(cc)).split('.');const m=buildModel(flagCanvas(COUNTRY_CODES.has(cc)?cc:'USA'),hero,{lane:7,skin:skinById(sk),hq:true});
-  if(m.flagPivot)m.flagPivot.visible=false;if(m.shadow)m.shadow.visible=false;if(m.tag)m.tag.visible=false;
+  if(m.flagPivot)m.flagPivot.visible=false;if(m.shadow)m.shadow.visible=false;if(m.tag)m.tag.visible=false;if(m.headFlag)m.headFlag.visible=false;
   m.root.rotation.y=0.32;AV.scene.add(m.root);m.root.updateMatrixWorld(true);const hp=new THREE.Vector3();m.headP.getWorldPosition(hp);
   const hy=hp.y+0.2*m.sc;AV.cam.position.set(0.12*m.sc,hy+0.05*m.sc,-1.75*m.sc);AV.cam.lookAt(0,hy-0.12*m.sc,0);
   AV.r.render(AV.scene,AV.cam);const url=AV.r.domElement.toDataURL('image/png');AV.scene.remove(m.root);disposeModel(m);return url;}
@@ -7000,10 +7066,10 @@ function infoTap(b,e){const onI=e&&e.target&&e.target.closest&&e.target.closest(
   if(onI||b.getAttribute('aria-pressed')==='true'){b.classList.toggle('open');return true;}return false;}
 const statPct=(v,lo,hi)=>Math.round(clamp((v-lo)/(hi-lo),0.08,1)*100);
 function renderCharTiles(){charGrid.innerHTML='';
-  const tiles=CHARS.map(ch=>({key:ch.id,el:mkTile({img:heroTileImg(ch.id),label:ch.name,cls:ch.id===selChar?'on own':'own'}),
+  const tiles=CHARS.map(ch=>({key:ch.id,el:mkTile({img:heroTileImg(ch.id),label:ch.hn||ch.name,cls:ch.id===selChar?'on own':'own'}),
     pick:()=>{if(selChar!==ch.id){selChar=ch.id;store.set('flagdash-char',ch.id);refreshMenu('flex');syncLobbyPresence();}},
     info:()=>{const st=document.createElement('div');st.className='stats';st.innerHTML=`<div class="stat">Speed<i><b style="width:${statPct(ch.speed,0.96,1.04)}%"></b></i></div><div class="stat">Agility<i><b style="width:${statPct(ch.agility,0.8,1.18)}%"></b></i></div><div class="stat">Recharge<i><b style="width:${statPct(26-ch.charge,3,9)}%"></b></i></div>`;
-      return tileInfo(`${ch.name} · ${ch.power}`,[ch.desc,`⭐ ${ch.perk.name}: ${ch.perk.desc}`,st]);}}));
+      return tileInfo(`${heroName(ch)} · ${ch.power}`,[ch.desc,`⭐ ${ch.perk.name}: ${ch.perk.desc}`,st]);}}));
   charGrid.appendChild(tileGrid('runner',tiles,renderCharTiles));}
 function elevProfile(th){const h=heightFn(th),pts=[];let lo=1e9,hi=-1e9;for(let i=0;i<=60;i++){const v=h(i/60*TRACK);pts.push(v);lo=Math.min(lo,v);hi=Math.max(hi,v);}return {pts,lo,hi};}
 const PROF=THEMES.map(elevProfile);const gLo=Math.min(...PROF.map(p=>p.lo)),gHi=Math.max(...PROF.map(p=>p.hi));
@@ -7022,8 +7088,8 @@ function refreshMenu(emote){
     $('teamSub').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tmode===selMode));}
   $('lapSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.laps===selLaps));$('lapHint').textContent=selLaps===1?'One lap of 1,500 m.':`${selLaps} laps of ${LAP_LEN[selLaps]} m (${(selLaps*LAP_LEN[selLaps]).toLocaleString()} m total).`;renderWallet();renderLoadout();
   const f=flagCanvas(selCountry),ch=charById(selChar);
-  $('sumFlag').src=myFlagUrl(selCountry);$('sumCountry').textContent=f.name;$('sumChar').textContent=`${ch.name} · ${ch.power}`;
-  $('pkFlag').textContent=f.name;$('pkRunner').textContent=ch.name;$('pkTrack').textContent=themeById(selTrack).name;setIco($('pkTrackIc'),icoOf('trk',selTrack),'🛣️');
+  $('sumFlag').src=myFlagUrl(selCountry);$('sumCountry').textContent=f.name;$('sumChar').textContent=`${heroName(ch)} · ${ch.power}`;
+  $('pkFlag').textContent=f.name;$('pkRunner').textContent=ch.hn||ch.name;$('pkTrack').textContent=themeById(selTrack).name;setIco($('pkTrackIc'),icoOf('trk',selTrack),'🛣️');
   const inRoom=!!NET.game;$('lobbyReturn').hidden=!inRoom;$('playChoices').hidden=inRoom;document.querySelectorAll('.cpu-go').forEach(e=>e.hidden=inRoom);$('returnCode').textContent=NET.code||'';
   if(emote!==undefined)rebuildPreview(emote);
 }
@@ -7145,6 +7211,7 @@ $('lapSeg').addEventListener('click',e=>{const b=e.target.closest('button');if(!
 $('lobbyLaps').addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!NET.isHost)return;NET.cfg.laps=+b.dataset.laps;syncLobbyPresence();renderLobby();});
 $('setBtn').onclick=openSettings;$('menuSetBtn').onclick=openSettings;$('setClose').onclick=closeSettings;$('setQuit').onclick=()=>{settingsPaused=false;$('settings').hidden=true;if(state==='paused')state=prevState;music.setPaused(false);$('pause').hidden=true;toMenu();};
 ['chat','filter','dmFriends'].forEach(k=>{$('set_'+k).onclick=()=>{SET[k]=!SET[k];applySettings();if(hubChatOpen())renderChat();};});
+$('set_cape').onclick=()=>{SET.cape=!SET.cape;applySettings();try{if(state==='menu')rebuildPreview();}catch(e){}};
 ['music','sfx','voice'].forEach(k=>{$('set_'+k).onclick=()=>{SET[k]=!SET[k];applySettings();};$('set_'+k+'Vol').oninput=e=>{SET[k+'Vol']=(+e.target.value)/100;applySettings();};});
 $('setTest').onclick=()=>{initAudio();voice.unlock();const r={id:'test',char:charById(selChar)};voice.say(pick(SAY.hit),r,'en',null,3);};
 $('pauseBtn').onclick=()=>openSettings();$('resumeBtn').onclick=()=>togglePause();$('quitBtn').onclick=()=>toMenu();

@@ -117,25 +117,15 @@ Suggested order: free items first, then money, then reach.
 11. [ ] **Payment method + purchasing**: real money. Needs a Stripe account (yours), a small server step on Supabase to confirm payments, and a refund/terms page. App stores later take their own cut and use their own billing.
 12. [ ] **Website**: a home page for the game (trailer, screenshots, Play button, privacy, contact). Can live on GitHub Pages for free; a custom domain (about $12/year) is optional.
 
-## Hero 3D models (pinned Oct 12; do these together once every hero file is in)
-Don't change the game until all hero models are made. Then add everything in one update.
-- Kapwa Lamò (Warrior) is live with `models/warrior.glb` and the in-game skeleton.
-- Ready, not in the game yet: `models/winddancer.glb` (faces +z, feet at 0, 0.98 tall).
-  Joints: sh [0.13,0.69], elb [0.20,0.56], hand [0.27,0.42], hip [0.07,0.42], knee [0.08,0.22], legs split 0.30, head 0.79.
-- Tripo checklist per hero: A-pose, feet visible, no base, one character facing front, ~20k triangles.
-- Weapons (pinned, undecided): either built into the model (short weapons held away from the body)
-  or no weapons at all, with weapons only flashing in during the special ability.
-  Kapwa Lamò: machete instead of spear, no shield.
-- Flag above each racer's head like a name tag by default; "Show Cape" switch in Settings.
-- Load each hero's model only when it is on screen; keep each file under 1 MB.
-- Skins: only the base model per hero. Color skins (Rookie, Crimson, Frost, Jungle, Shadow, Gold, Neon, Inferno)
-  recolor the 3D model in code. Hero-exclusive premium skins: recolor for now, own Tripo model later (optional).
-- Ages and names (show as "Name · Type"):
-  - Young (17–18): Kapwa Lamò (Warrior), Ha-Neul (Wind Dancer, war fan), Liora Swiftleaf (Elf),
-    Xiao Long (Shaolin), Kid Echo (Rapper)
-  - Older: Hayato Kurogane (Samurai, 35–40), Malkia Nyota (Queen of Beasts, 30s), Sir Aldric (Knight, 30s),
-    Sigurd Stormbeard (Viking, 40s), Old Thorgar (Dwarf, 60s)
-  - Volt-X (Robot, no age)
-  - Extra hero: Wind Dancer model is the green/braid girl (name: Aria Windsong or similar). Ha-Neul (prompt #1)
-    becomes a NEW 12th hero; her type, perk and special ability still to decide.
-  - 13th hero: Zuri Vapor (young Black girl, natural curly hair, power: glowing gas clouds, not smoking). Prompt #11.
+## Hero 3D models (live Oct 12)
+All 13 heroes use real 3D models (`models/*.glb`, Tripo, ~22k triangles, 1024 webp textures).
+- The game builds a skeleton for each one from the joint table `HERO3D` in index.html. Joints were measured from
+  each model's front outline (scratchpad tool `sil.py`); Dwarf, Viking, Elf, Gas needed hand fixes (beard/hair).
+- A model downloads only when that hero is first shown; until then the old simple runner stands in.
+- Flag floats above the player's head; Settings > Theme > "Flag cape" brings the cape back (Hero Cape gear too).
+- Skins tint the model. Hats, shades, wings and jetpacks follow the new bones.
+- Names show as "Name · Type". New heroes: Ha-Neul (Taekwondo, Counter Kick, Hurricane Kick) and
+  Zuri Vapor (Gas, Vapor Form, Gas Cloud). Archer renamed Wind Dancer (Aria Windsong).
+- Kapwa Lamò: machete, no shield.
+- Still open: weapons in races (keep or hide), hero-only premium skins as their own models (optional),
+  Wind Dancer war fan + Tailwind perk, power icons for the two new heroes.
