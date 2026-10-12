@@ -1620,6 +1620,12 @@ html body :is(#hub,#store).lb-gold .lb-row{background:none!important;border:3px 
 html body :is(#hub,#store).lb-gold .lb-list{background:none!important;border:0!important;box-shadow:none!important}
 html body :is(#hub,#store).lb-gold .war-card{background:linear-gradient(180deg,#f8dc84,#e2a838)!important;border-color:#9a6a12!important}
 html body :is(#hub,#store).lb-gold .lb-row.me{background:linear-gradient(180deg,#fff0b8,#f6d070)!important;border-color:#7a5208!important}
+#newHint{position:fixed;z-index:60;transform:translate(-50%,-100%);display:grid;justify-items:center;gap:2px;pointer-events:none;animation:nhBob .8s ease-in-out infinite alternate}
+#newHint img{width:58px;height:auto;transform:rotate(90deg);filter:drop-shadow(0 3px 4px rgba(0,0,0,.45))}
+#newHint b{order:-1;font-size:14px;padding:3px 10px;border-radius:999px;background:#3a2204;color:#ffd760!important;-webkit-text-fill-color:#ffd760!important;text-shadow:none!important;white-space:nowrap}
+#newHint[hidden]{display:none}
+@keyframes nhBob{to{transform:translate(-50%,calc(-100% - 12px))}}
+@media (prefers-reduced-motion:reduce){#newHint{animation:none}}
 .f3d-pg{font-size:10.5px;color:var(--gold,#f5c542);min-height:1em;line-height:1}
 </style>
 
@@ -8161,6 +8167,15 @@ function font3d(el,col){if(!el||el.children.length)return;const t=el.textContent
 (()=>{const SEL='#hubTitle,#store .st-title,.set-card h2,#pickTitle,#lvTitle,#acctTitle,#howtoTitle,#socTitle,#placeNum';
   const run=()=>document.querySelectorAll(SEL).forEach(el=>font3d(el,'gold'));run();
   new MutationObserver(ms=>{if(ms.some(m=>m.target.nodeType!==1||!m.target.closest||!m.target.closest('.f3d')))run();}).observe(document.body,{childList:true,subtree:true,characterData:true});})();
+
+/* ---------- newcomer hint: a bouncing arrow to Quick Race, then to GO!, until the first race is run ---------- */
+(()=>{const ar=document.createElement('div');ar.id='newHint';ar.hidden=true;ar.innerHTML='<img src="img/icons/arrow_r.webp" alt=""><b>Tap to race!</b>';document.body.appendChild(ar);
+  const place=()=>{const fresh=(STATS.races|0)===0&&!$('menu').hidden&&state==='menu'&&!document.querySelector('.overlay:not([hidden]):not(#menu)')&&!pickOpen;
+    let t=null;if(fresh){const pg=document.documentElement.classList.contains('mode-page');
+      if(!pg)t=document.querySelector('.h2-hot[aria-label="Quick Race"]');else if(!$('paneQuick').hidden)t=$('quickBtn');}
+    if(!t||!t.offsetParent){ar.hidden=true;return;}const r=t.getBoundingClientRect();ar.hidden=false;
+    ar.style.left=Math.round(r.left+r.width/2)+'px';ar.style.top=Math.round(r.top-6)+'px';};
+  place();setInterval(place,400);addEventListener('resize',place);})();
 /* ---------- Race Desk emote icon ---------- */
 (()=>{const box=document.querySelector('.d3-emotes'),bt=$('emoteToggle');if(!box||!bt)return;
   const set=o=>{box.classList.toggle('open',o);bt.setAttribute('aria-expanded',o);};
