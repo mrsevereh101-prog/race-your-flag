@@ -116,3 +116,19 @@ Suggested order: free items first, then money, then reach.
 10. [ ] **Battle pass**: not started. Seasons with free and premium reward tracks, filled by racing and challenges.
 11. [ ] **Payment method + purchasing**: real money. Needs a Stripe account (yours), a small server step on Supabase to confirm payments, and a refund/terms page. App stores later take their own cut and use their own billing.
 12. [ ] **Website**: a home page for the game (trailer, screenshots, Play button, privacy, contact). Can live on GitHub Pages for free; a custom domain (about $12/year) is optional.
+
+## Hero 3D models (pinned Oct 12; do these together once every hero file is in)
+Don't change the game until all hero models are made. Then add everything in one update.
+- Kapwa Lamò (Warrior) is live with `models/warrior.glb` and the in-game skeleton.
+- Tripo checklist per hero: A-pose, feet visible, no base, one character facing front, ~20k triangles.
+- Weapons (pinned, undecided): either built into the model (short weapons held away from the body)
+  or no weapons at all, with weapons only flashing in during the special ability.
+  Kapwa Lamò: machete instead of spear, no shield.
+- Flag above each racer's head like a name tag by default; "Show Cape" switch in Settings.
+- Load each hero's model only when it is on screen; keep each file under 1 MB.
+- Ages and names (show as "Name · Type"):
+  - Young (17–18): Kapwa Lamò (Warrior), Ha-Neul (Wind Dancer, war fan), Liora Swiftleaf (Elf),
+    Xiao Long (Shaolin), Kid Echo (Rapper)
+  - Older: Hayato Kurogane (Samurai, 35–40), Malkia Nyota (Queen of Beasts, 30s), Sir Aldric (Knight, 30s),
+    Sigurd Stormbeard (Viking, 40s), Old Thorgar (Dwarf, 60s)
+  - Volt-X (Robot, no age)
