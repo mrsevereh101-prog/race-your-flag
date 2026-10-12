@@ -126,6 +126,8 @@ Don't change the game until all hero models are made. Then add everything in one
   Kapwa Lamò: machete instead of spear, no shield.
 - Flag above each racer's head like a name tag by default; "Show Cape" switch in Settings.
 - Load each hero's model only when it is on screen; keep each file under 1 MB.
+- Skins: only the base model per hero. Color skins (Rookie, Crimson, Frost, Jungle, Shadow, Gold, Neon, Inferno)
+  recolor the 3D model in code. Hero-exclusive premium skins: recolor for now, own Tripo model later (optional).
 - Ages and names (show as "Name · Type"):
   - Young (17–18): Kapwa Lamò (Warrior), Ha-Neul (Wind Dancer, war fan), Liora Swiftleaf (Elf),
     Xiao Long (Shaolin), Kid Echo (Rapper)
