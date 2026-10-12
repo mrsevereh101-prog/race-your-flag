@@ -484,8 +484,31 @@ html.cream .cel-gift{background:rgba(255,255,255,.55)!important;border-color:#d6
 #storeTabs button,#roomTabs button{display:grid;place-items:center;gap:2px;min-width:0;padding:5px 2px}#storeTabs,#roomTabs{min-width:0}#storeTabs{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));width:100%}
 #storeTabs .tab-ico,#roomTabs .tab-ico{width:30px;height:30px;margin:0 auto}
 .info-home{position:absolute;left:10px;top:60px;z-index:3;width:36px;height:36px}
+
+/* ---------- Wall of Fame look for the rest of the game (img/ui) ---------- */
+/* mode pages: marble */
+html.home2-on #menu #d3Sheet.open{background:#efe7d8 url(img/ui/marble-bg.webp) center/cover no-repeat!important}
+/* buttons: gold for main actions, cream for the rest, gold when selected */
+html body :is(button.primary,.d3-gold,button.buy):not(.back-btn):not(.ico3d-btn):not(.h2-hot):not(.zd-w),
+html body #menu #d3Sheet .d3-tabbar button[aria-selected="true"],html body :is(.d3-pill,.seg button,.chip-btn,.set-tog)[aria-pressed="true"]{
+  background:none!important;border:2px solid transparent!important;border-image:url(img/ui/btn_gold.webp) 48 108 fill / 22% 22px / 0 stretch!important;box-shadow:none!important;border-radius:0!important}
+html body :is(button.ghost,.d3-pill,.chip-btn,.set-tog,#menu #d3Sheet .d3-tabbar button):not([aria-pressed="true"]):not([aria-selected="true"]):not(.back-btn):not(.ico3d-btn):not(.h2-hot){
+  background:none!important;border:2px solid transparent!important;border-image:url(img/ui/btn_cream.webp) 48 108 fill / 22% 22px / 0 stretch!important;box-shadow:none!important;border-radius:0!important}
+html body :is(button.primary,button.buy,button.ghost,.d3-pill):disabled{filter:grayscale(.85) brightness(.95);opacity:.7}
+html body :is(button.primary,.d3-gold,button.buy,button.ghost,.d3-pill):active:not(:disabled){transform:scale(.97)}
+/* pop-up cards: the cream-and-gold frame */
+html body :is(.store-card,.pause-card,.hub-card,.set-card,.acct-card,.rp-card,.podium-card){
+  background:none!important;border:2px solid transparent!important;border-image:url(img/ui/card_popup.webp) 100 fill / 40px / 0 stretch!important;box-shadow:0 14px 40px rgba(0,0,0,.35)!important;border-radius:0!important}
+/* loading screen */
+#boot{position:fixed;inset:0;z-index:99999;background:#efe7d8 url(img/ui/loading.webp) center/cover no-repeat;display:grid;align-content:end;justify-items:center;padding-bottom:max(14vh,90px);transition:opacity .5s}
+#boot.out{opacity:0;pointer-events:none}
+#boot .bt-bar{width:min(70vw,320px);height:16px;border-radius:999px;background:rgba(80,60,20,.25);box-shadow:inset 0 1px 3px rgba(0,0,0,.35),0 0 0 3px #d9a227;overflow:hidden}
+#boot .bt-bar i{display:block;height:100%;width:0;background:linear-gradient(180deg,#f8e19a,#c8921c);border-radius:999px;transition:width .3s}
+#boot .bt-tx{margin-top:10px;font:800 14px system-ui,sans-serif;color:#6b4a14;letter-spacing:.08em}
 </style>
 </head><body>
+<div id="boot" aria-label="Loading"><div class="bt-bar"><i id="btFill"></i></div><div class="bt-tx">LOADING…</div></div>
+<script>(function(){var f=document.getElementById('btFill'),p=8,t=setInterval(function(){p=Math.min(92,p+(100-p)*0.08);if(f)f.style.width=p+'%';},120);function done(){clearInterval(t);if(f)f.style.width='100%';setTimeout(function(){var b=document.getElementById('boot');if(b){b.classList.add('out');setTimeout(function(){b.remove();},600);}},450);}if(document.readyState==='complete')setTimeout(done,600);else window.addEventListener('load',function(){setTimeout(done,600);});setTimeout(done,9000);})();</script>
 <div id="gate" role="dialog" aria-label="Race Your Flag is private for now"><div class="gate-card"><img class="gate-ic" src="img/icons/tab_quick.webp" alt=""><h2>Race Your Flag</h2><p id="gateMsg">…</p><button class="primary" id="gateSign" hidden>Sign in</button><button class="ghost" id="gateOut" hidden>Sign out</button></div></div>
 <title>Race Your Flag</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
