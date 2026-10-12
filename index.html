@@ -1607,18 +1607,19 @@ html body .h2-tab{border-radius:24px}
 .f3d img{height:1.15em;width:auto;display:block;filter:drop-shadow(0 .06em .05em rgba(0,0,0,.35));pointer-events:none}
 .f3d .f3d-sp{display:block;width:.35em}.f3d .f3d-tx{align-self:center}
 /* trial: gold surfaces with dark engraved lettering, leaderboard page only */
-html body #hub.lb-gold,html body #hub.lb-gold *:not(svg,svg *,input,textarea,select,option){color:#3a2204!important;-webkit-text-fill-color:#3a2204!important;font-weight:900!important;
+html body :is(#hub,#store).lb-gold,html body :is(#hub,#store).lb-gold *:not(svg,svg *,input,textarea,select,option){color:#3a2204!important;-webkit-text-fill-color:#3a2204!important;font-weight:900!important;
   text-shadow:0 1px 0 rgba(255,244,200,.75),0 -1px 0 rgba(90,55,5,.35)!important}
-html body #hub.lb-gold .hub-card{border-image:none!important;background:linear-gradient(180deg,#f4cf62 0%,#e3ac36 45%,#c98f1e 100%)!important;border:3px solid #9a6a12!important;border-radius:22px!important;box-shadow:inset 0 2px 0 rgba(255,245,200,.7),inset 0 -3px 0 rgba(110,70,8,.4),0 0 0 2px #f6dc8a,0 14px 40px rgba(0,0,0,.45)!important}
-html body #hub.lb-gold :is(.lb-row,.lb-pod,.lb-list,.lb-mebar,.lb-season,.hub-row,.seg){background:linear-gradient(180deg,#f8dc84,#ebbb4c)!important;border-color:#a8781c!important;box-shadow:inset 0 1px 0 rgba(255,250,220,.8),inset 0 -2px 0 rgba(140,90,10,.3)!important}
-html body #hub.lb-gold :is(button.ghost,.seg button,.chip-btn):not([aria-pressed="true"]):not(.back-btn){border-image:url(img/ui/btn_gold.webp) 48 108 fill / 22% 22px / 0 stretch!important}
-html body #hub.lb-gold .seg button[aria-pressed="true"]{border-image:url(img/ui/btn_brown.webp) 48 108 fill / 22% 22px / 0 stretch!important}
-html body #hub.lb-gold .seg button[aria-pressed="true"],html body #hub.lb-gold .seg button[aria-pressed="true"] *{color:#ffd760!important;-webkit-text-fill-color:#ffd760!important;text-shadow:0 1px 0 rgba(0,0,0,.4)!important}
-html body #hub.lb-gold .f3d img{filter:brightness(.34) saturate(1.4) drop-shadow(0 1.5px 0 rgba(255,244,200,.7))!important}
-html body #hub.lb-gold .lb-pod{background:url(img/ui/row_top_gold.webp) center/100% 100% no-repeat!important;border:0!important;border-image:none!important;box-shadow:none!important;border-radius:0!important;padding:14px 22px 16px 10px!important}
-html body #hub.lb-gold .lb-row{background:none!important;border:3px solid transparent!important;border-image:url(img/ui/row_reg_gold.webp) 60 70 fill / 16px 20px / 0 stretch!important;box-shadow:none!important;border-radius:0!important;outline:0!important}
-html body #hub.lb-gold .lb-list{background:none!important;border:0!important;box-shadow:none!important}
-html body #hub.lb-gold .lb-row.me{background:linear-gradient(180deg,#fff0b8,#f6d070)!important;border-color:#7a5208!important}
+html body :is(#hub,#store).lb-gold :is(.hub-card,.store-card){border-image:none!important;background:linear-gradient(180deg,#f4cf62 0%,#e3ac36 45%,#c98f1e 100%)!important;border:3px solid #9a6a12!important;border-radius:22px!important;box-shadow:inset 0 2px 0 rgba(255,245,200,.7),inset 0 -3px 0 rgba(110,70,8,.4),0 0 0 2px #f6dc8a,0 14px 40px rgba(0,0,0,.45)!important}
+html body :is(#hub,#store).lb-gold :is(.lb-row,.lb-pod,.lb-list,.lb-mebar,.lb-season,.hub-row,.seg){background:linear-gradient(180deg,#f8dc84,#ebbb4c)!important;border-color:#a8781c!important;box-shadow:inset 0 1px 0 rgba(255,250,220,.8),inset 0 -2px 0 rgba(140,90,10,.3)!important}
+html body :is(#hub,#store).lb-gold :is(button.ghost,.seg button,.chip-btn):not([aria-pressed="true"]):not(.back-btn){border-image:url(img/ui/btn_gold.webp) 48 108 fill / 22% 22px / 0 stretch!important}
+html body :is(#hub,#store).lb-gold .seg button[aria-pressed="true"]{border-image:url(img/ui/btn_brown.webp) 48 108 fill / 22% 22px / 0 stretch!important}
+html body :is(#hub,#store).lb-gold .seg button[aria-pressed="true"],html body :is(#hub,#store).lb-gold .seg button[aria-pressed="true"] *{color:#ffd760!important;-webkit-text-fill-color:#ffd760!important;text-shadow:0 1px 0 rgba(0,0,0,.4)!important}
+html body :is(#hub,#store).lb-gold .f3d img{filter:brightness(.34) saturate(1.4) drop-shadow(0 1.5px 0 rgba(255,244,200,.7))!important}
+html body :is(#hub,#store).lb-gold .lb-pod{background:url(img/ui/row_top_gold.webp) center/100% 100% no-repeat!important;border:0!important;border-image:none!important;box-shadow:none!important;border-radius:0!important;padding:14px 22px 16px 10px!important}
+html body :is(#hub,#store).lb-gold .lb-row{background:none!important;border:3px solid transparent!important;border-image:url(img/ui/row_reg_gold.webp) 60 70 fill / 16px 20px / 0 stretch!important;box-shadow:none!important;border-radius:0!important;outline:0!important}
+html body :is(#hub,#store).lb-gold .lb-list{background:none!important;border:0!important;box-shadow:none!important}
+html body :is(#hub,#store).lb-gold .war-card{background:linear-gradient(180deg,#f8dc84,#e2a838)!important;border-color:#9a6a12!important}
+html body :is(#hub,#store).lb-gold .lb-row.me{background:linear-gradient(180deg,#fff0b8,#f6d070)!important;border-color:#7a5208!important}
 .f3d-pg{font-size:10.5px;color:var(--gold,#f5c542);min-height:1em;line-height:1}
 </style>
 
@@ -1974,7 +1975,7 @@ html body #hub.lb-gold .lb-row.me{background:linear-gradient(180deg,#fff0b8,#f6d
   <div class="pause-card"><h2>Paused</h2><button class="primary" id="resumeBtn">Resume</button><button class="ghost" id="quitBtn">Quit to menu</button></div>
 </div>
 
-<div id="store" class="overlay" hidden>
+<div id="store" class="overlay lb-gold" hidden>
   <div class="store-card">
     <div class="store-head st-treasure"><h2 class="st-title">Store</h2><div class="st-piles"><span class="st-pile"><svg viewBox="0 0 44 30" aria-hidden="true"><defs><linearGradient id="cgG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1a8"/><stop offset=".5" stop-color="#f2b631"/><stop offset="1" stop-color="#a8740f"/></linearGradient></defs><g fill="url(#cgG)" stroke="#8a5d0c" stroke-width=".8"><ellipse cx="12" cy="25" rx="9" ry="3.5"/><ellipse cx="12" cy="21" rx="9" ry="3.5"/><ellipse cx="30" cy="25" rx="9" ry="3.5"/><ellipse cx="30" cy="21" rx="9" ry="3.5"/><ellipse cx="30" cy="17" rx="9" ry="3.5"/><ellipse cx="21" cy="13" rx="9" ry="3.5"/><ellipse cx="21" cy="9" rx="9" ry="3.5"/></g></svg><b id="stCoins">0</b></span><span class="st-pile"><svg viewBox="0 0 44 30" aria-hidden="true"><defs><linearGradient id="dgG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6fbff"/><stop offset=".5" stop-color="#5fc8ff"/><stop offset="1" stop-color="#1c6fb8"/></linearGradient></defs><g fill="url(#dgG)" stroke="#155a96" stroke-width=".8"><path d="M4 20l5-6h8l5 6-9 9z"/><path d="M22 20l5-6h8l5 6-9 9z"/><path d="M13 12l5-6h8l5 6-9 9z"/></g></svg><b id="stGems">0</b></span></div><button class="ghost" id="storeClose">Close</button></div>
     <div class="seg" id="storeTabs" role="group" aria-label="Store section"><button data-tab="owned" title="Owned" aria-label="Owned"><img class="ico tab-ico" src="img/chest-closed-glow.webp" alt=""><span class="tab-tx">Owned</span></button><button data-tab="items" title="Items" aria-label="Items"><img class="ico tab-ico" src="img/icons/box.webp" alt=""><span class="tab-tx">Items</span></button><button data-tab="skins" title="Skins" aria-label="Skins"><img class="ico tab-ico" src="img/icons/skin_classic.webp" alt=""><span class="tab-tx">Skins</span></button><button data-tab="attire" title="Attire" aria-label="Attire"><img class="ico tab-ico" src="img/icons/att_crown.webp" alt=""><span class="tab-tx">Attire</span></button><button data-tab="buffs" title="Perks" aria-label="Perks"><img class="ico tab-ico" src="img/icons/perk_charge.webp" alt=""><span class="tab-tx">Perks</span></button><button data-tab="gems" title="Diamonds" aria-label="Diamonds"><img class="ico tab-ico" src="img/icons/gem.webp" alt=""><span class="tab-tx">Diamonds</span></button></div>
@@ -6497,7 +6498,7 @@ function openHub(sec,tab){const H=HUB[sec];if(!H)return;
   if((sec==='boards'||sec==='guild')&&!requireAuth(sec==='boards'?'Sign in to see the worldwide leaderboards and win their rewards.':'Sign in to create or join a guild.',()=>openHub(sec,tab)))return;
   hubOpen=sec;hubTab=tab||(H.tabs?H.tabs[H.tabs==HUB.boards.tabs?1:0][0]:null);$('hub').hidden=false;renderHub();setTimeout(()=>$('hubClose').focus(),0);}
 function closeHub(){hubOpen=null;$('hub').hidden=true;if(typeof plaza!=='undefined'&&plaza.active){plaza.rebuildMe();plaza.refreshHud();}}
-async function renderHub(){if(!hubOpen)return;const H=HUB[hubOpen];$('hub').classList.toggle('lb-gold',hubOpen==='boards');$('hubTitle').textContent=H.title;
+async function renderHub(){if(!hubOpen)return;const H=HUB[hubOpen];$('hub').classList.add('lb-gold');$('hubTitle').textContent=H.title;
   const tabs=$('hubTabs');tabs.innerHTML='';tabs.hidden=!H.tabs;(H.tabs||[]).forEach(([id,nm])=>{const b=document.createElement('button');b.textContent=nm;b.setAttribute('aria-pressed',id===hubTab);b.onclick=()=>{hubTab=id;renderHub();};tabs.appendChild(b);});
   const box=$('hubBody');box.innerHTML='';await H.render(box,hubTab);renderWallet();}
 function refreshHubBadges(){const n=dailyReady();const b=$('menuTasksBtn');if(b)b.dataset.badge=n?String(n):'';rollPeriods();const l=$('menuBoardsBtn');if(l)l.dataset.badge=LBHIST.pending.length?'!':'';const d=$('deskBoards');if(d)d.dataset.badge=LBHIST.pending.length?'!':'';}
