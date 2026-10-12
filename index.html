@@ -3196,7 +3196,7 @@ function buildModel(flag,charId,opt){
   if(opt.skin&&opt.skin.tint!=null){const tc=new THREE.Color(opt.skin.tint),ex=new Set([skin,sash,flagMesh.material,capeMat]);body.forEach(mt=>{if(ex.has(mt))return;mt.color.lerp(tc,opt.skin.amt);if(opt.skin.emissive)mt.userData.be=new THREE.Color(opt.skin.emissive);});}
   const out={root,pelvis,torso,headP,eyes,mouth,stars,armL,armR,legL,legR,flagPivot,flagMesh,shadow,shield,ring,tag,body,hipH,look:lk,sc:lk.sc,cape,headFlag,gearHead,gearTorso};
   {root.updateMatrixWorld(true);const v=new THREE.Vector3();headP.getWorldPosition(v);root.worldToLocal(v);out.headY=v.y;}
-  out.skin=opt.skin||null;
+  out.skin=opt.skin||null;out.hid=hid;
   if(headFlag)headFlag.position.y=out.headY+0.95;
   if(HERO3D[hid]){if(HERO3D[hid].geo)attachHero3D(out,hid);else loadHero3D(hid);}
   return out;
@@ -3237,17 +3237,17 @@ function loadHero3D(id){const H=HERO3D[id];if(!H||H.busy||H.geo||H.fail||typeof 
       const t=clamp(((ax-J.sh[0])*dx+(y-J.sh[1])*dy)/dd,0,1),px=J.sh[0]+t*dx,py=J.sh[1]+t*dy,dist=Math.hypot(ax-px,y-py);
       const arm=(1-sm(ri,ri+0.035,dist))*sm(J.tw+0.015,J.tw+0.055,ax)*(y>J.hand[1]-0.1?1:0),low=sm(0.38,0.56,t);
       w[L?3:5]+=arm*(1-low);w[L?4:6]+=arm*low;
-      const rest=1-arm,head=sm(J.head[1]-0.015,J.head[1]+0.025,y),leg=1-sm(J.split+0.01,J.hip[1],y),trunk=Math.max(0,1-head-leg);
+      const rest=1-arm,head=sm(J.head[1]-0.05,J.head[1]-0.01,y),leg=1-sm(J.split+0.01,J.hip[1],y),trunk=Math.max(0,1-head-leg);
       w[2]+=rest*head;const up=sm(J.pelvis[1],J.pelvis[1]+0.1,y);w[1]+=rest*trunk*up;w[0]+=rest*trunk*(1-up);
       const side=sm(-0.035,0.035,x),kn=1-sm(J.knee[1]-0.05,J.knee[1]+0.05,y);
       w[7]+=rest*leg*side*(1-kn);w[8]+=rest*leg*side*kn;w[9]+=rest*leg*(1-side)*(1-kn);w[10]+=rest*leg*(1-side)*kn;
       const tp=[...w.keys()].sort((a,b)=>w[b]-w[a]).slice(0,4),tot=tp.reduce((a,k)=>a+w[k],0)||1;
       tp.forEach((k,j)=>{si[i*4+j]=k;sw[i*4+j]=w[k]/tot;});}
     geo.setAttribute('skinIndex',new THREE.Uint16BufferAttribute(si,4));geo.setAttribute('skinWeight',new THREE.Float32BufferAttribute(sw,4));
-    geo.userData.shared=true;const mat=mesh.material;mat.skinning=true;mat.userData.shared=true;['map','normalMap','metalnessMap','roughnessMap'].forEach(k=>{if(mat[k])mat[k].__shared=true;});
-    if(mat.metalness!=null)mat.metalness=Math.min(mat.metalness,0.15);
-    // the game draws in plain colour, so read the picture as-is instead of darkening it
-    if(mat.map)mat.map.encoding=THREE.LinearEncoding;mat.needsUpdate=true;
+    geo.userData.shared=true;
+    // lit like everything else in the game (the model's shiny-metal material went black under some tracks' lights)
+    const map=mesh.material.map;if(map){map.encoding=THREE.LinearEncoding;map.__shared=true;}
+    const mat=new THREE.MeshLambertMaterial({map,skinning:true});mat.userData.shared=true;mesh.material.dispose();
     H.geo=geo;H.mat=mat;H.top=top;H.back=back;H.busy=false;H.mats={};
     // swap the new model in wherever this hero is already on screen
     try{if(state==='menu'&&selChar===id)rebuildPreview();}catch(e){}
@@ -3284,17 +3284,36 @@ function attachHero3D(m,id){const H=HERO3D[id],J=H.J;if(m.glb||!H.geo)return;
   if(m.gearTorso&&m.gearTorso.length){const w=wrap(tor,new THREE.Group(),[0,0,0]);w.children[0].position.z=-H.back*S-0.2;m.gearTorso.forEach(o=>w.children[0].add(o));}
   if(m.headFlag)m.headFlag.position.y=H.top*S+0.42;
   m.pelvis.visible=false;
-  m.glb={pel,tor,hd,shL,elL,shR,elR,hpL,knL,hpR,knR,S,J,hipH:m.hipH};}
+  m.glb={pel,tor,hd,shL,elL,shR,elR,hpL,knL,hpR,knR,S,J,hipH:m.hipH,rest:Math.atan2(J.hand[0]-J.sh[0],J.sh[1]-J.hand[1])};}
 // copy the simple runner's pose onto the model's bones (mirrored, since the model faces the other way)
+const _hE=new THREE.Euler(),_hq=new THREE.Quaternion(),_hz=new THREE.Quaternion(),_hZ=new THREE.Vector3(0,0,1);
 function syncHero3D(m){const g=m.glb;if(!g)return;const P=m.pelvis.rotation,TR=m.torso.rotation,HD=m.headP.rotation;
   g.pel.position.y=g.J.pelvis[1]+(m.pelvis.position.y-g.hipH)/g.S;g.pel.rotation.set(-P.x,P.y,-P.z);
   g.tor.rotation.set(-TR.x,TR.y,-TR.z);g.hd.rotation.set(-HD.x,HD.y,-HD.z);
-  const A=(sh,el,a,rest)=>{sh.rotation.set(-a.sh.rotation.x,a.sh.rotation.y,-a.sh.rotation.z-rest);el.rotation.set(-a.elb.rotation.x,a.elb.rotation.y,-a.elb.rotation.z);};
-  A(g.shL,g.elL,m.armL,0.5);A(g.shR,g.elR,m.armR,-0.5);
+  // the model's arms rest at an angle, so the elbow bends around axes turned by that same angle
+  const A=(sh,el,a,rest)=>{sh.rotation.set(-a.sh.rotation.x,a.sh.rotation.y,-a.sh.rotation.z-rest);
+    _hE.set(-a.elb.rotation.x,a.elb.rotation.y,-a.elb.rotation.z);_hq.setFromEuler(_hE);_hz.setFromAxisAngle(_hZ,rest);el.quaternion.copy(_hz).multiply(_hq);_hz.setFromAxisAngle(_hZ,-rest);el.quaternion.multiply(_hz);};
+  A(g.shL,g.elL,m.armL,g.rest);A(g.shR,g.elR,m.armR,-g.rest);
   g.hpL.rotation.x=-m.legL.hip.rotation.x;g.knL.rotation.x=-m.legL.knee.rotation.x;g.hpR.rotation.x=-m.legR.hip.rotation.x;g.knR.rotation.x=-m.legR.knee.rotation.x;}
 function disposeModel(m){disposeTree(m.root);}
 
 function J(o,k,t,f){o[k]+=(t-o[k])*f;}
+// every hero runs a little differently: steps, stride, knees, arm swing, elbows, lean, bounce, twist, arms out, waddle
+const RUN_STYLE={
+  samurai:{lean:0.22,arm:0.45,elb:0.8,bob:0.6,knee:1.1},
+  warrior:{stride:1.12,arm:1.15,lean:0.06},
+  archer:{cad:1.08,bob:1.3,knee:1.15,arm:0.8,elb:0.9},
+  elf:{stride:1.2,knee:0.9,bob:1.25,lean:-0.03},
+  dwarf:{cad:1.35,stride:0.7,knee:0.8,arm:1.2,wide:0.35,roll:0.14,bob:0.7},
+  queen:{lean:-0.1,arm:0.6,sway:0.5,bob:0.6,elb:0.8},
+  knight:{cad:0.92,arm:0.7,elb:0.8,bob:0.6,lean:0.05,wide:0.15},
+  shaolin:{lean:0.15,elb:1.15,knee:1.25},
+  viking:{cad:0.9,stride:1.05,wide:0.3,roll:0.1,arm:1.1,bob:1.25},
+  robot:{stiff:1,knee:0.7,bob:0.4,sway:0,elb:1.05},
+  rapper:{lean:-0.08,roll:0.15,sway:1.5,arm:0.7,cad:0.97},
+  kicker:{knee:1.35,bob:1.5,cad:1.1},
+  gas:{bob:0.5,arm:0.75,lean:0.1,sway:0.6,elb:0.7},
+};
 function poseRunner(r,dt,now){
   const m=r.m,T=now/1000,k=Math.min(1,dt*14);
   let py=m.hipH,prx=0,prz=0,tx=-0.06,ty=0,hx=0,hy=0,lsx=0,lsz=-0.12,lex=0.3,lez=0,rsx=0,rsz=0.12,rex=0.3,rez=0,lhx=0,lkx=0,rhx=0,rkx=0;
@@ -3303,12 +3322,13 @@ function poseRunner(r,dt,now){
   if(!mode){if(r.stun>0)mode='stun';else if(r.slide>0)mode='slide';else if(r.y>0.08||r.leaping)mode='air';else if(r.finished&&r.speed<10)mode='celebrate';else if(r.speed>0.6)mode='run';else mode='idle';}
   if(mode!=='air'||!r.leaping)r.flip=0;
   if(mode==='run'){
-    r.anim+=dt*(2.2+r.speed*0.42)*(r.slow>0?0.7:1);
-    const ph=r.anim,st=Math.min(1.1,0.4+s*0.65),sn=Math.sin(ph),cs=Math.cos(ph);
-    lhx=0.95*sn*st;rhx=-lhx;lkx=-(0.2+1.45*Math.max(0,cs))*st;rkx=-(0.2+1.45*Math.max(0,-cs))*st;
-    lsx=-0.9*sn*st;rsx=-lsx;lex=1.45;rex=1.45;lsz=-0.1;rsz=0.1;
-    tx=-0.16-0.14*Math.min(s,1.2);ty=0.2*sn*st;hy=-ty*0.7;hx=0.1;
-    py=m.hipH-0.05+0.08*Math.abs(sn)*st;
+    const Y=Object.assign({cad:1,stride:1,knee:1,arm:1,elb:1,lean:0,bob:1,sway:1,wide:0,roll:0,stiff:0},RUN_STYLE[m.hid]);
+    r.anim+=dt*(2.2+r.speed*0.42)*(r.slow>0?0.7:1)*Y.cad;
+    const ph=r.anim,st=Math.min(1.1,0.4+s*0.65),sn0=Math.sin(ph),cs=Math.cos(ph),sn=Y.stiff?Math.sign(sn0)*Math.min(1,Math.abs(sn0)*1.8):sn0;
+    lhx=0.95*sn*st*Y.stride;rhx=-lhx;lkx=-(0.2+1.45*Math.max(0,cs))*st*Y.knee;rkx=-(0.2+1.45*Math.max(0,-cs))*st*Y.knee;
+    lsx=-0.9*sn*st*Y.arm;rsx=-lsx;lex=1.45*Y.elb;rex=1.45*Y.elb;lsz=-0.1-Y.wide;rsz=0.1+Y.wide;
+    tx=-0.16-0.14*Math.min(s,1.2)-Y.lean;ty=0.2*sn*st*Y.sway;hy=-ty*0.7;hx=0.1+Y.lean*0.5;prz=Y.roll*sn0*st;
+    py=m.hipH-0.05+0.08*Math.abs(sn0)*st*Y.bob;
     if(r.boost>0){tx-=0.12;lsx*=1.2;rsx*=1.2;}
     const step=sn>0?1:-1;if(step!==r.lastStep){r.lastStep=step;if(r.world)footDust(r,step);}
   }else if(mode==='air'){
