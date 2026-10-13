@@ -3188,7 +3188,7 @@ function buildModel(flag,charId,opt){
   });
   const gearHead=headP.children.slice(g0h),gearTorso=torso.children.slice(g0t).filter(o=>o!==cape&&o!==flagPivot);
   // the flag rides above the head like a name tag; the cape is optional (Settings, or the Hero Cape gear)
-  cape.visible=capeGear||capeOn();let headFlag=null;
+  cape.visible=capeOn();let headFlag=null;  // the Hero Cape still gives its bonus when hidden
   if(!cape.visible&&!opt.tag&&!opt.noFlag){
     const u=flag.url&&/^img\//.test(flag.url)?flag.url:null;
     const map=u?(TEXC['hf'+u]||(TEXC['hf'+u]=Object.assign(new THREE.TextureLoader().load(u),{__shared:true}))):flag.tex;
@@ -3319,7 +3319,7 @@ function loadRig(id){const H=HERO3D[id];if(!H||H.busy||H.scene||H.fail||typeof T
     const mat=new THREE.MeshLambertMaterial({map,skinning:true});mat.userData.shared=true;mesh.material.dispose();mesh.material=mat;
     mesh.geometry.userData.shared=true;g.scene.updateMatrixWorld(true);
     const P=new THREE.Vector3(),W=n=>{const b=g.scene.getObjectByName(n);b.getWorldPosition(P);return P.y;};
-    H.hipsY=g.scene.getObjectByName('mixamorigHips').position.y;H.headY=W('mixamorigHead');H.chestY=W('mixamorigSpine2');H.shY=W('mixamorigLeftArm');
+    H.hipsY=g.scene.getObjectByName('mixamorigHips').position.y;H.headY=W('mixamorigHead');H.chestY=W('mixamorigSpine2');H.chestZ=P.z;H.shY=W('mixamorigLeftArm');
     const pos=mesh.geometry.attributes.position;let top=0,back=0;
     for(let i=0;i<pos.count;i++){const y=pos.getY(i);top=Math.max(top,y);if(y>H.chestY-0.08&&y<H.shY&&Math.abs(pos.getX(i))<0.08)back=Math.min(back,pos.getZ(i));}
     H.top=top;H.back=back;H.scene=g.scene;H.mat=mat;H.mats={};H.busy=false;rigReady(id);},undefined,()=>{H.busy=false;H.fail=true;});}
@@ -3339,7 +3339,7 @@ function attachRig(m,id){const H=HERO3D[id];if(m.rig||m.glb||!hero3dReady(H))ret
   const wrap=(b,obj)=>{const w=new THREE.Group();b.getWorldPosition(_rP);_rM.compose(_rP,_rQ,_rS);_rM2.copy(b.matrixWorld).invert().multiply(_rM);_rM2.decompose(w.position,w.quaternion,w.scale);b.add(w);if(obj)w.add(obj);return w;};
   if(!charById(id).as){[...m.armR.hand.children].forEach(o=>wrap(bone('RightHand'),o));
     [...m.armL.elb.children].filter(o=>o.isGroup&&o!==m.armL.hand).forEach(o=>wrap(bone('LeftForeArm'),o));}
-  if(m.cape){wrap(bone('Spine2'),m.cape);m.cape.position.set(0,(H.shY-H.chestY)*S,-H.back*S+0.04);m.cape.scale.setScalar(clamp(H.headY/0.8,0.85,1.4));}
+  if(m.cape){wrap(bone('Spine2'),m.cape);m.cape.position.set(0,(H.shY-H.chestY)*S,(H.chestZ-H.back)*S+0.03);m.cape.scale.setScalar(clamp(H.headY/0.8,0.85,1.4));}
   wrap(bone('Head'),m.stars);m.stars.position.set(0,(H.top-H.headY)*S+0.15,0);
   const hs=clamp((H.top-H.headY)*S/0.62,0.7,1.6);
   if(m.gearHead&&m.gearHead.length){const w=wrap(bone('Head'),new THREE.Group()).children[0];w.scale.setScalar(hs);w.position.y=-0.12;m.gearHead.forEach(o=>w.add(o));}
@@ -3441,7 +3441,7 @@ function poseRunner(r,dt,now){
   m.mouth.scale.set(lerp(m.mouth.scale.x,mx,k),lerp(m.mouth.scale.y,my,k),1);
   m.stars.visible=mode==='stun'&&r.stunKind!=='slip'&&r.stunKind!=='rooted';if(m.stars.visible)m.stars.rotation.y+=dt*6;
   m.flagPivot.rotation.y=Math.sin(T*9+r.anim)*0.35-0.2-(mode==='run'?s*0.3:0);
-  if(m.cape){const lift=mode==='run'?0.15+s*0.75:mode==='air'?0.9:mode==='slide'?1.2:(mode==='stun'&&r.stunKind==='slip')?1.0:0.08;const tgt=-(lift+Math.sin(T*10+r.anim)*0.07*Math.min(1,s+0.2));m.cape.rotation.x+=(tgt-m.cape.rotation.x)*k;}
+  if(m.cape){const lift=mode==='run'?0.15+s*0.75:mode==='air'?0.9:mode==='slide'?1.2:(mode==='stun'&&r.stunKind==='slip')?1.0:0.08;const tgt=-(lift*(m.rig?0.35:1)+Math.sin(T*10+r.anim)*0.07*Math.min(1,s+0.2))+(m.rig&&mode==='run'?0.35:0);m.cape.rotation.x+=(tgt-m.cape.rotation.x)*k;}
 }
 
 /* =========================================================
