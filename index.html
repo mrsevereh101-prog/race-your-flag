@@ -1939,6 +1939,7 @@ html body :is(#hub,#store).lb-gold .lb-row.me{background:linear-gradient(180deg,
       <div class="set-grp" id="setG_look" data-g="look" hidden>
       <div class="set-row"><span>Theme</span><button class="set-tog" id="set_theme"></button><span></span></div>
       <div class="set-row set-row2" title="Wear your flag as a cape instead of above your head"><span>Flag cape</span><button class="set-tog" id="set_cape" aria-label="Flag cape: wear your flag as a cape"></button></div>
+      <div class="set-row set-row2" title="Heroes carry their weapons"><span>Weapons</span><button class="set-tog" id="set_weapons" aria-label="Weapons: heroes carry their weapons"></button></div>
       </div>
       <div class="set-grp" id="setG_sound" data-g="sound" hidden>
       <div class="set-row"><span>Music</span><button class="set-tog" id="set_music"></button><input type="range" min="0" max="100" id="set_musicVol" aria-label="Music volume"></div>
@@ -3012,6 +3013,7 @@ function buildModel(flag,charId,opt){
   const braid=(parent,a,bpt,n,mat,rings,rr)=>{rr=rr||0.045;for(let i=0;i<n;i++){const t=i/(n-1),x=lerp(a[0],bpt[0],t),y=lerp(a[1],bpt[1],t),z=lerp(a[2],bpt[2],t);add(Sph(rr*(1-t*0.35)),mat,x,y,z,parent);if(rings&&(i===2||i===n-2))add(Tor(0.045,0.014),rings,x,y,z,parent,Math.PI/2);}};
   const longHair=(mat,len)=>{add(Sph(0.27,0,TAU,0,Math.PI*0.6),mat,0,0.22,0,headP,0.8,0,0);[-1,1].forEach(s=>add(capG(0.05,0.2),mat,s*0.205,0.12,-0.08,headP,0.12,0,s*0.1));add(new THREE.BoxGeometry(0.38,len,0.08),mat,0,0.27-len/2,0.2,headP);};
   if(id==='archer'||id==='elf'||id==='queen'){const lip=new THREE.MeshBasicMaterial({color:0xb5485a});mouth.material=lip;mouth.scale.x=0.8;[-1,1].forEach(s=>add(sharedGeo('lash',()=>new THREE.BoxGeometry(0.07,0.016,0.02)),dark,s*0.095,0.3,-0.212,headP,0,0,s*-0.3));}
+  const w0r=armR.hand.children.length,w0l=armL.elb.children.length;
   if(id==='samurai'){
     const lam=TX('samLam',{side:DS});
     [-1,1].forEach(sz=>add(new THREE.BoxGeometry(0.28*b,0.36,0.035),lam,0,-0.17,sz*0.2*b,pelvis,sz*0.2,0,0));
@@ -3150,6 +3152,8 @@ function buildModel(flag,charId,opt){
     const ax=new THREE.Group();ax.rotation.set(0.5,0,0);armR.hand.add(ax);
     add(Cyl(0.028,0.028,0.85),wood(),0,0.15,0,ax);add(new THREE.BoxGeometry(0.035,0.36,0.3),TX('rune'),0,0.5,-0.16,ax);add(new THREE.ConeGeometry(0.04,0.14,6),st,0,0.5,0.08,ax,-Math.PI/2,0,0);
   }
+  // weapons stay hidden unless turned on in Settings
+  if(!weaponsOn())[...armR.hand.children.slice(w0r),...armL.elb.children.slice(w0l)].forEach(o=>{o.visible=false;});
   if(!flag.tex){flag.tex=new THREE.CanvasTexture(flag.canvas);flag.tex.__shared=true;}
   // every hero wears their flag as a cape (it replaces the small flag on the shoulder pole)
   const dw=id==='dwarf',capeL=dw?1.05:P.cape?Math.max(0.9,P.cape[1]):1.0,capeW=0.62*b;
@@ -4297,8 +4301,9 @@ const music={vol:0.5,chans:new Map(),cur:null,timers:[],paused:false,unlocked:fa
 const SET=(()=>{let s=null;try{s=JSON.parse(store.get('flagdash-settings')||'null');}catch(e){}s=s&&typeof s==='object'?s:{};
   const num=(v,d)=>typeof v==='number'&&v>=0&&v<=1?v:d;
   return {music:s.music!==undefined?!!s.music:store.get('flagdash-music')!=='0',sfx:s.sfx!==undefined?!!s.sfx:store.get('flagdash-muted')!=='1',voice:s.voice!==false,
-    chat:s.chat!==false,cape:!!s.cape,filter:s.filter!==false,dmFriends:!!s.dmFriends,musicVol:num(s.musicVol,0.5),sfxVol:num(s.sfxVol,0.8),voiceVol:num(s.voiceVol,0.9)};})();
+    chat:s.chat!==false,cape:!!s.cape,weapons:!!s.weapons,filter:s.filter!==false,dmFriends:!!s.dmFriends,musicVol:num(s.musicVol,0.5),sfxVol:num(s.sfxVol,0.8),voiceVol:num(s.voiceVol,0.9)};})();
 function capeOn(){try{return !!SET.cape;}catch(e){return false;}}
+function weaponsOn(){try{return !!SET.weapons;}catch(e){return false;}}
 function saveSettings(){store.set('flagdash-settings',JSON.stringify(SET));}
 let sfxBus=null;
 function sfxOut(){if(!sfxBus){sfxBus=actx.createGain();sfxBus.connect(actx.destination);}sfxBus.gain.value=SET.sfxVol;return sfxBus;}
@@ -4312,7 +4317,7 @@ function applySettings(){
 function renderSettings(){
   const box=$('setBody');if(!box)return;
   [['music','Music'],['sfx','Sound effects'],['voice','Voices']].forEach(([k])=>{const t=$('set_'+k),v=$('set_'+k+'Vol');if(t){t.setAttribute('aria-pressed',SET[k]);t.textContent=SET[k]?'On':'Off';}if(v){v.value=Math.round(SET[k+'Vol']*100);v.disabled=!SET[k];}});
-  ['chat','filter','dmFriends','cape'].forEach(k=>{const t=$('set_'+k);if(t){t.setAttribute('aria-pressed',!!SET[k]);t.textContent=SET[k]?'On':'Off';}});
+  ['chat','filter','dmFriends','cape','weapons'].forEach(k=>{const t=$('set_'+k);if(t){t.setAttribute('aria-pressed',!!SET[k]);t.textContent=SET[k]?'On':'Off';}});
   renderDevBox();
   const vn=$('setVoiceNote');if(vn)vn.textContent=voice.supported()?'Runners speak their taunts with this device’s built-in voice. Recorded voices replace it line by line.':'This browser has no built-in voice. Taunts still show as speech bubbles.';
 }
@@ -7298,7 +7303,7 @@ $('lapSeg').addEventListener('click',e=>{const b=e.target.closest('button');if(!
 $('lobbyLaps').addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!NET.isHost)return;NET.cfg.laps=+b.dataset.laps;syncLobbyPresence();renderLobby();});
 $('setBtn').onclick=openSettings;$('menuSetBtn').onclick=openSettings;$('setClose').onclick=closeSettings;$('setQuit').onclick=()=>{settingsPaused=false;$('settings').hidden=true;if(state==='paused')state=prevState;music.setPaused(false);$('pause').hidden=true;toMenu();};
 ['chat','filter','dmFriends'].forEach(k=>{$('set_'+k).onclick=()=>{SET[k]=!SET[k];applySettings();if(hubChatOpen())renderChat();};});
-$('set_cape').onclick=()=>{SET.cape=!SET.cape;applySettings();try{if(state==='menu')rebuildPreview();}catch(e){}};
+['cape','weapons'].forEach(k=>{$('set_'+k).onclick=()=>{SET[k]=!SET[k];applySettings();try{if(state==='menu')rebuildPreview();}catch(e){}};});
 ['music','sfx','voice'].forEach(k=>{$('set_'+k).onclick=()=>{SET[k]=!SET[k];applySettings();};$('set_'+k+'Vol').oninput=e=>{SET[k+'Vol']=(+e.target.value)/100;applySettings();};});
 $('setTest').onclick=()=>{initAudio();voice.unlock();const r={id:'test',char:charById(selChar)};voice.say(pick(SAY.hit),r,'en',null,3);};
 $('pauseBtn').onclick=()=>openSettings();$('resumeBtn').onclick=()=>togglePause();$('quitBtn').onclick=()=>toMenu();

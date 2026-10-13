@@ -117,6 +117,13 @@ Suggested order: free items first, then money, then reach.
 11. [ ] **Payment method + purchasing**: real money. Needs a Stripe account (yours), a small server step on Supabase to confirm payments, and a refund/terms page. App stores later take their own cut and use their own billing.
 12. [ ] **Website**: a home page for the game (trailer, screenshots, Play button, privacy, contact). Can live on GitHub Pages for free; a custom domain (about $12/year) is optional.
 
+## To do (from Oct 13, user will do these at the desktop)
+2. Weapons as heirloom / mythical store items (USD), shown only when owned (Settings > Weapons switch).
+3. New voices matching each hero's age (young 17-18 vs older).
+4. Slide animations (the old home-made jump and slide looked better than the Tripo ones; leave as is for now).
+5. Image-to-3D skins where a recolour isn't enough.
+Done: 1. Weapons and cape hidden by default; Settings > Theme has "Flag cape" and "Weapons" switches.
+
 ## Rigged heroes (live Oct 13)
 11 heroes are rigged in Tripo (Humanoid + Mixamo skeleton) and share one set of motion-captured moves
 in `models/anims.json` (recorded on Kapwa in Tripo: run, idle, jump, fall, cheer, dance, spin, crouch,
