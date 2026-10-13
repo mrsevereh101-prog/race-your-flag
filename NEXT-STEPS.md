@@ -117,6 +117,15 @@ Suggested order: free items first, then money, then reach.
 11. [ ] **Payment method + purchasing**: real money. Needs a Stripe account (yours), a small server step on Supabase to confirm payments, and a refund/terms page. App stores later take their own cut and use their own billing.
 12. [ ] **Website**: a home page for the game (trailer, screenshots, Play button, privacy, contact). Can live on GitHub Pages for free; a custom domain (about $12/year) is optional.
 
+## Rigged heroes (live Oct 13)
+11 heroes are rigged in Tripo (Humanoid + Mixamo skeleton) and share one set of motion-captured moves
+in `models/anims.json` (recorded on Kapwa in Tripo: run, idle, jump, fall, cheer, dance, spin, crouch,
+wave, flex, dizzy). `driveRig()` picks the move from what the runner is doing.
+- Still on the older home-made skeleton: Wind Dancer (archer) and Elf, until their rigged files arrive.
+- To add a hero: Tripo Rig > Humanoid > Mixamo > Auto Rig > Export GLB; run scratchpad `prep.mjs`
+  (drops baked animations, 1024 webp texture, ~22k triangles), set `{url,rig:true}` in HERO3D.
+- Missing moves: slide (uses a crouch) and point (uses wave).
+
 ## Hero 3D models (live Oct 12)
 All 13 heroes use real 3D models (`models/*.glb`, Tripo, ~22k triangles, 1024 webp textures).
 - The game builds a skeleton for each one from the joint table `HERO3D` in index.html. Joints were measured from
