@@ -117,6 +117,13 @@ Suggested order: free items first, then money, then reach.
 11. [ ] **Payment method + purchasing**: real money. Needs a Stripe account (yours), a small server step on Supabase to confirm payments, and a refund/terms page. App stores later take their own cut and use their own billing.
 12. [ ] **Website**: a home page for the game (trailer, screenshots, Play button, privacy, contact). Can live on GitHub Pages for free; a custom domain (about $12/year) is optional.
 
+## Hero skins as 3D models (ready Oct 13)
+Elf and Dwarf were removed from the game. Each remaining hero will get skins made in Tripo (rigged, Mixamo).
+To add one: run scratchpad `prep.mjs` on the rigged GLB, save to `models/skins/<skinId>.glb`, and give the
+skin in SKINS_SHOP `model:'models/skins/<skinId>.glb'` (new skins: add an entry with hero:'<heroId>').
+The game loads the skin model only when it is equipped (`rigKeyFor`), with the shared moves and no tint.
+The user will also send a picture per skin for its store card.
+
 ## To do (from Oct 13, user will do these at the desktop)
 2. Weapons as heirloom / mythical store items (USD), shown only when owned (Settings > Weapons switch).
 3. New voices matching each hero's age (young 17-18 vs older).
