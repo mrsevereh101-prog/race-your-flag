@@ -6420,7 +6420,11 @@ function renderPortrait(av,cc){
     const rim=new THREE.DirectionalLight(0x9fc4ff,0.6);rim.position.set(2,2,3);AV.scene.add(rim);AV.cam=new THREE.PerspectiveCamera(28,1,0.05,20);}
   const [hero,sk]=(validAv(av)||cpuAvatar(cc)).split('.');const m=buildModel(flagCanvas(COUNTRY_CODES.has(cc)?cc:'USA'),hero,{lane:7,skin:skinById(sk),hq:true});
   if(m.flagPivot)m.flagPivot.visible=false;if(m.shadow)m.shadow.visible=false;if(m.tag)m.tag.visible=false;if(m.headFlag)m.headFlag.visible=false;
-  m.root.rotation.y=0.32;AV.scene.add(m.root);m.root.updateMatrixWorld(true);const hp=new THREE.Vector3();m.headP.getWorldPosition(hp);
+  m.root.rotation.y=0.32;AV.scene.add(m.root);
+  // 3D heroes: stand them in their resting pose (the ready stance puts fists in front of the face) and frame their real head
+  if(m.rig){m.rig.mixer.stopAllAction();m.rig.skel.pose();}
+  m.root.updateMatrixWorld(true);const hp=new THREE.Vector3();
+  const hb=m.rig&&m.rig.holder.getObjectByName('mixamorigHead');if(hb){hb.getWorldPosition(hp);hp.y-=0.12*m.sc;}else m.headP.getWorldPosition(hp);
   const hy=hp.y+0.2*m.sc;AV.cam.position.set(0.12*m.sc,hy+0.05*m.sc,-1.75*m.sc);AV.cam.lookAt(0,hy-0.12*m.sc,0);
   AV.r.render(AV.scene,AV.cam);const url=AV.r.domElement.toDataURL('image/png');AV.scene.remove(m.root);disposeModel(m);return url;}
 /* ---------- uploaded profile pictures (signed-in players; see supabase/avatars.sql) ---------- */
