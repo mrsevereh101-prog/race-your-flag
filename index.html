@@ -1422,7 +1422,11 @@ html.cream.adv .lv-shield{display:grid;place-items:center;flex:none;width:38px;h
 #d3Sheet.open .d3-sheet-body{display:flex!important;flex-direction:column}
 #d3Sheet.open .d3-card{flex:1 0 auto;display:flex;flex-direction:column}
 #d3Sheet.open #playChoices{flex:1 0 auto;display:flex;flex-direction:column}
+#d3Sheet.open #paneQuick:not([hidden]){flex:1 0 auto;display:flex;flex-direction:column}
 #d3Sheet.open #heroCard{flex:1 0 auto}
+/* every page scrolls with a finger when it is taller than the screen (iPhone blocks it if a parent says touch-action:none) */
+html.mode-page #menu.overlay:has(.desk3){touch-action:pan-x pan-y}
+#d3Sheet.open .d3-sheet-body{-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 html.mode-page #menu .left-col>:not(#d3Sheet){visibility:hidden}
 /* the flag button sits under the emote button */
 .home-flag{position:absolute;right:4px;top:84px;z-index:3;width:64px;height:64px;border-radius:50%;padding:0;display:grid;place-items:center;border:2px solid #d9a227;background:var(--cream,#f6ecd2);box-shadow:0 3px 0 rgba(0,0,0,.25),0 6px 14px rgba(0,0,0,.25);cursor:pointer}
@@ -1713,8 +1717,8 @@ html body :is(#hub,#store).lb-gold .lb-row.me{background:linear-gradient(180deg,
         <div id="playChoices">
           <div class="d3-pane quick-pane" id="paneQuick" role="tabpanel" aria-labelledby="tabQuick">
             <div class="cpu-go"><button class="primary d3-gold" id="quickBtn">🏁 Go!</button></div>
+            <div class="hero-card" id="heroCard" aria-live="polite"></div>
           </div>
-          <div class="hero-card" id="heroCard" aria-live="polite"></div>
           <div class="d3-pane online-block" id="paneOnline" role="tabpanel" aria-labelledby="tabOnline" hidden>
             <div id="onlineControls" hidden>
               <button id="createBtn" hidden>Create room</button><div class="d3-pill-row"><div class="d3-join"><input type="text" id="codeInput" placeholder="CODE" maxlength="4" aria-label="Room code" autocomplete="off"><button class="d3-pill d3-pill-dark" id="joinBtn">Join room</button></div></div>
