@@ -421,6 +421,8 @@ html body .hero-card *{color:#4a3412!important;-webkit-text-stroke:0!important;t
 .hero-card .hc-top{display:flex;gap:12px;align-items:center}
 .hero-card .hc-pic{width:110px;height:110px;flex:none;border-radius:16px;background:radial-gradient(circle at 50% 35%,#4a63c9,#26337a);border:2px solid #d9b45a;object-fit:cover}
 .hero-card .hc-id{flex:1;min-width:0}
+.hero-card .hc-art{width:130px;height:160px;flex:none;object-fit:contain;filter:drop-shadow(0 6px 8px rgba(80,55,15,.35))}
+.hero-card .hc-sel{display:block;width:100%;margin:12px 0 0;padding:10px;font-size:17px}.hero-card .hc-sel[disabled]{opacity:.75;cursor:default}
 .hero-card .hc-name{font:700 22px/1.1 "Chakra Petch",sans-serif;margin:0}
 .hero-card .hc-type{font-weight:700;font-size:14px;opacity:.8}
 .hero-card .hc-nat{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:13px}
@@ -7213,21 +7215,29 @@ const HERO_INFO={
   kicker:{cc:'KOR',age:'17',story:'Ha-Neul holds a black belt and a big smile. Hit her once and she kicks back twice; her name means sky, and that is how high she aims.'},
   gas:{cc:'USA',age:'18',story:'Zuri Vapor moves like mist: soft, stylish and gone before you blink. Rivals who chase her end up lost in a purple cloud.'},
 };
-function renderHeroCard(){const box=$('heroCard');if(!box)return;const ch=charById(selChar),info=HERO_INFO[ch.id]||{},n=CHAR_IDS.length,i=CHAR_IDS.indexOf(ch.id);
+// the hero card browses with the arrows; Select makes that hero your runner.
+// Picture: img/heroes/<hero>.webp (a transparent 3D picture); until one exists, the 3D portrait.
+let hcView=null;
+function renderHeroCard(){const box=$('heroCard');if(!box)return;if(!CHAR_IDS.includes(hcView))hcView=selChar;
+  const ch=charById(hcView),info=HERO_INFO[ch.id]||{},n=CHAR_IDS.length,i=CHAR_IDS.indexOf(ch.id),mine=ch.id===selChar;
   const pct=(v,a,b)=>Math.round(clamp((v-a)/(b-a),0.08,1)*100);
   const stats=[['Speed',pct(ch.speed,0.95,1.05)],['Agility',pct(ch.agility,0.85,1.15)],['Power charge',pct(23-ch.charge,0,6)],['Power strength',pct(ch.stun,1.2,1.9)]];
   const f=info.cc?flagCanvas(info.cc):null;
   box.innerHTML=`<div class="hc-nav"><button type="button" class="hc-prev" aria-label="Previous hero"><img src="img/icons/arrow_l.webp" alt=""></button><span class="hc-count">${i+1} / ${n}</span><button type="button" class="hc-next" aria-label="Next hero"><img src="img/icons/arrow_r.webp" alt=""></button></div><div class="hc-top"><span class="hc-picbox"></span><div class="hc-id"><p class="hc-name"></p><div class="hc-type"></div><div class="hc-nat"></div></div></div>
+    <button type="button" class="primary d3-gold hc-sel"${mine?' disabled aria-pressed="true"':''}>${mine?'✓ Selected':'Select'}</button>
     <div class="hc-stats">${stats.map(([k,v])=>`<span>${k}</span><div class="hc-bar"><i style="width:${v}%"></i></div>`).join('')}</div>
     <div class="hc-pw"><b>⚡ ${ch.power}:</b> <span class="hc-pwd"></span></div><div class="hc-pw"><b>⭐ ${ch.perk.name}:</b> <span class="hc-pkd"></span></div>
     <p class="hc-story"></p>
     `;
-  const pic=avatarImg(ch.id+'.'+mySkinId(),selCountry,'hc-pic');box.querySelector('.hc-picbox').replaceWith(pic);
+  const pb=box.querySelector('.hc-picbox'),art=new Image();art.className='hc-art';art.alt='';
+  art.onerror=()=>{if(art.isConnected)art.replaceWith(avatarImg(ch.id+'.'+(mine?mySkinId():'classic'),selCountry,'hc-pic'));};
+  art.src='img/heroes/'+ch.id+'.webp';pb.replaceWith(art);
   box.querySelector('.hc-name').textContent=ch.hn||ch.name;box.querySelector('.hc-type').textContent=ch.name;
   if(f){const im=document.createElement('img');im.src=f.url;im.alt='';box.querySelector('.hc-nat').append(im,`${f.name}${info.age?' · Age '+info.age:''}`);}
   box.querySelector('.hc-pwd').textContent=ch.desc;box.querySelector('.hc-pkd').textContent=ch.perk.desc;box.querySelector('.hc-story').textContent=info.story||'';
-  const go=d=>{selChar=CHAR_IDS[(i+d+n)%n];store.set('flagdash-char',selChar);refreshMenu('flex');try{syncLobbyPresence();}catch(e){}};
-  box.querySelector('.hc-prev').onclick=()=>go(-1);box.querySelector('.hc-next').onclick=()=>go(1);}
+  const go=d=>{hcView=CHAR_IDS[(i+d+n)%n];try{sfx.tap();}catch(e){}renderHeroCard();};
+  box.querySelector('.hc-prev').onclick=()=>go(-1);box.querySelector('.hc-next').onclick=()=>go(1);
+  box.querySelector('.hc-sel').onclick=()=>{selChar=hcView;store.set('flagdash-char',selChar);refreshMenu('flex');try{syncLobbyPresence();}catch(e){}};}
 function refreshMenu(emote){
   try{renderHeroDock();}catch(e){}
   try{renderHeroCard();}catch(e){}
