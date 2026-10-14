@@ -414,6 +414,26 @@ body.layout-desk .lay-piece{outline-offset:1px}
 
 .hero-tag{font-size:11px;font-weight:800;letter-spacing:.04em;color:#f6e3a8;text-transform:uppercase}
 .shop-card.hero-skin .swatch{box-shadow:0 0 18px rgba(242,182,49,.35),inset 0 0 0 2px rgba(255,255,255,.25)}
+
+/* hero card on the race desk */
+.hero-card{margin:12px 0 0;padding:14px;border-radius:18px;background:linear-gradient(180deg,#f7ecd2,#ecdcb6);border:2px solid #d9b45a;box-shadow:0 4px 14px rgba(120,90,30,.25),inset 0 1px 0 #fff8e4;color:#4a3412}
+html body .hero-card *{color:#4a3412!important;-webkit-text-stroke:0!important;text-shadow:none!important}
+.hero-card .hc-top{display:flex;gap:12px;align-items:center}
+.hero-card .hc-pic{width:110px;height:110px;flex:none;border-radius:16px;background:radial-gradient(circle at 50% 35%,#4a63c9,#26337a);border:2px solid #d9b45a;object-fit:cover}
+.hero-card .hc-id{flex:1;min-width:0}
+.hero-card .hc-name{font:700 22px/1.1 "Chakra Petch",sans-serif;margin:0}
+.hero-card .hc-type{font-weight:700;font-size:14px;opacity:.8}
+.hero-card .hc-nat{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:13px}
+.hero-card .hc-nat img{width:28px;height:19px;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.hero-card .hc-stats{display:grid;grid-template-columns:auto 1fr;gap:5px 10px;align-items:center;margin:12px 0 8px;font-size:12px;font-weight:700}
+.hero-card .hc-bar{height:9px;border-radius:6px;background:rgba(120,90,30,.18);overflow:hidden}
+.hero-card .hc-bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#e7b93a,#c98a1c)}
+.hero-card .hc-pw{font-size:13px;margin:4px 0}
+.hero-card .hc-story{font-size:13px;line-height:1.45;margin:8px 0 0;font-style:italic}
+.hero-card .hc-nav{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.hero-card .hc-nav button{width:46px;height:46px;border:0;padding:0;background:none;cursor:pointer}
+.hero-card .hc-nav button img{width:100%;height:100%}
+.hero-card .hc-count{font-size:12px;font-weight:700;opacity:.7}
 </style><style id="icoStyle">
 /* 3D icons */
 .ico{display:block;width:1.3em;height:1.3em;object-fit:contain;pointer-events:none;-webkit-user-drag:none;user-select:none}
@@ -1676,6 +1696,7 @@ html body :is(#hub,#store).lb-gold .lb-row.me{background:linear-gradient(180deg,
             <p class="muted d3-qnote">Jump straight in with your flag, runner and track. Your saved race settings stay the same.</p>
             <div class="cpu-go"><button class="primary d3-gold" id="quickBtn">🏁 Go!</button></div>
           </div>
+          <div class="hero-card" id="heroCard" aria-live="polite"></div>
           <div class="d3-pane online-block" id="paneOnline" role="tabpanel" aria-labelledby="tabOnline" hidden>
             <div id="onlineControls" hidden>
               <button id="createBtn" hidden>Create room</button><div class="d3-pill-row"><div class="d3-join"><input type="text" id="codeInput" placeholder="CODE" maxlength="4" aria-label="Room code" autocomplete="off"><button class="d3-pill d3-pill-dark" id="joinBtn">Join room</button></div></div>
@@ -7166,8 +7187,39 @@ function renderTrackTiles(){trackGrid.innerHTML='';
       pick:()=>{if(selTrack!==th.id){selTrack=th.id;store.set('flagdash-track',th.id);refreshMenu();if(TH!==th){buildWorld(th);genCourse(7);}}},
       info:()=>tileInfo(th.name+(th.region?' · '+th.region:''),[th.blurb,`${th.turns?th.turns.length+' turns':'No turns'} · elevation range ${Math.round(pr.hi-pr.lo)} m${th.slope<0?' · downhill':''}`])};});
   trackGrid.appendChild(tileGrid('track',tiles,renderTrackTiles));}
+
+/* ---------- hero card on the race desk: who your hero is, their stats and story ---------- */
+const HERO_INFO={
+  warrior:{cc:'HTI',age:'17',story:'Named after the hero of Vertières, Kapwa grew up racing barefoot through the hills above Port-au-Prince. He never backs down, and walls are just doors he hasn\'t opened yet.'},
+  archer:{cc:'IRL',age:'18',story:'Aria learned to read the wind on the cliffs of the west coast. She moves like a breeze, light on her feet and impossible to catch.'},
+  samurai:{cc:'JPN',age:'17',story:'Hayato trains in an old dojo by night and races the city streets by day. Calm, sharp and fast, he strikes once and is gone.'},
+  queen:{cc:'KEN',age:'32',story:'Malkia Nyota rules the savanna with a warm heart and a fierce roar. The animals answer when she calls, and they run beside her.'},
+  knight:{cc:'GBR',age:'35',story:'Sir Aldric has guarded the old roads for years. The scar on his cheek is a story he never tells, but his shield has never broken.'},
+  shaolin:{cc:'CHN',age:'18',story:'Xiao Long left the mountain temple to test his training against the world. Patient as stone, quick as fire.'},
+  viking:{cc:'NOR',age:'45',story:'Sigurd Stormbeard sailed the frozen seas before he ever raced. He laughs at the cold and runs like a storm coming ashore.'},
+  robot:{cc:'DEU',age:'v3.0',story:'Volt-X was built to test running shoes and decided it liked winning instead. Always smiling, always charging.'},
+  rapper:{cc:'USA',age:'18',story:'Kid Echo turned his block into a stage. Every step is a beat, and every race is a new track he plans to drop.'},
+  kicker:{cc:'KOR',age:'17',story:'Ha-Neul holds a black belt and a big smile. Hit her once and she kicks back twice; her name means sky, and that is how high she aims.'},
+  gas:{cc:'NGA',age:'18',story:'Zuri Vapor moves like mist: soft, stylish and gone before you blink. Rivals who chase her end up lost in a purple cloud.'},
+};
+function renderHeroCard(){const box=$('heroCard');if(!box)return;const ch=charById(selChar),info=HERO_INFO[ch.id]||{},n=CHAR_IDS.length,i=CHAR_IDS.indexOf(ch.id);
+  const pct=(v,a,b)=>Math.round(clamp((v-a)/(b-a),0.08,1)*100);
+  const stats=[['Speed',pct(ch.speed,0.95,1.05)],['Agility',pct(ch.agility,0.85,1.15)],['Power charge',pct(23-ch.charge,0,6)],['Power strength',pct(ch.stun,1.2,1.9)]];
+  const f=info.cc?flagCanvas(info.cc):null;
+  box.innerHTML=`<div class="hc-top"><span class="hc-picbox"></span><div class="hc-id"><p class="hc-name"></p><div class="hc-type"></div><div class="hc-nat"></div></div></div>
+    <div class="hc-stats">${stats.map(([k,v])=>`<span>${k}</span><div class="hc-bar"><i style="width:${v}%"></i></div>`).join('')}</div>
+    <div class="hc-pw"><b>⚡ ${ch.power}:</b> <span class="hc-pwd"></span></div><div class="hc-pw"><b>⭐ ${ch.perk.name}:</b> <span class="hc-pkd"></span></div>
+    <p class="hc-story"></p>
+    <div class="hc-nav"><button type="button" class="hc-prev" aria-label="Previous hero"><img src="img/icons/arrow_l.webp" alt=""></button><span class="hc-count">${i+1} / ${n}</span><button type="button" class="hc-next" aria-label="Next hero"><img src="img/icons/arrow_r.webp" alt=""></button></div>`;
+  const pic=avatarImg(ch.id+'.'+mySkinId(),selCountry,'hc-pic');box.querySelector('.hc-picbox').replaceWith(pic);
+  box.querySelector('.hc-name').textContent=ch.hn||ch.name;box.querySelector('.hc-type').textContent=ch.name;
+  if(f){const im=document.createElement('img');im.src=f.url;im.alt='';box.querySelector('.hc-nat').append(im,`${f.name}${info.age?' · Age '+info.age:''}`);}
+  box.querySelector('.hc-pwd').textContent=ch.desc;box.querySelector('.hc-pkd').textContent=ch.perk.desc;box.querySelector('.hc-story').textContent=info.story||'';
+  const go=d=>{selChar=CHAR_IDS[(i+d+n)%n];store.set('flagdash-char',selChar);refreshMenu('flex');try{syncLobbyPresence();}catch(e){}};
+  box.querySelector('.hc-prev').onclick=()=>go(-1);box.querySelector('.hc-next').onclick=()=>go(1);}
 function refreshMenu(emote){
   try{renderHeroDock();}catch(e){}
+  try{renderHeroCard();}catch(e){}
   flagGrid.querySelectorAll('.flag-btn').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.code===selCountry);const g=flag3d(b.dataset.code),im=b.querySelector('img'),u=myFlagUrl(b.dataset.code);if(im.getAttribute('src')!==u)im.src=u;const pg=b.querySelector('.f3d-pg');pg.textContent=g.on?'✨ 3D':(g.s||g.v)?`${g.s}/${F3D_SOLO} · ${g.v}/${F3D_VS}`:'';pg.title=g.on?'3D flag unlocked':`3D flag: win ${F3D_SOLO} single races and ${F3D_VS} online races with this flag`;});
   renderCharTiles();renderTrackTiles();
   {const tm=selMode==='teams'||selMode==='trio';$('modeSeg').querySelector('[data-mode="solo"]').setAttribute('aria-pressed',!tm);const tb=$('teamsBtn');tb.setAttribute('aria-pressed',tm);tb.textContent=tm?(selMode==='trio'?'Teams · 2v2v2 ▾':'Teams · 3v3 ▾'):'Teams ▾';
