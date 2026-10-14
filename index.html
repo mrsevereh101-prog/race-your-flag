@@ -3346,7 +3346,7 @@ function attachRig(m,id){const H=HERO3D[id];if(m.rig||m.glb||!hero3dReady(H))ret
   const mixer=new THREE.AnimationMixer(inst),clips=rigClips(H),acts={};
   for(const k in clips){const a=mixer.clipAction(clips[k]);if(RIG_ONCE.has(k)){a.setLoop(THREE.LoopOnce);a.clampWhenFinished=true;}acts[k]=a;}
   m.rig={mixer,acts,cur:null,skel:mesh.skeleton,holder};rigPlay(m,'idle');mixer.update(0.01);}
-const RIG_ONCE=new Set(['jump','fall','crouch']);
+const RIG_ONCE=new Set(['jump','fall','crouch','slide']);
 function rigPlay(m,k,t0){const R=m.rig,a=R.acts[k];if(!a||R.cur===k)return a;const old=R.acts[R.cur];
   a.reset();a.timeScale=1;if(t0)a.time=t0;a.fadeIn(old?0.18:0).play();if(old)old.fadeOut(0.18);R.cur=k;return a;}
 // pick the move from what the runner is doing
@@ -3354,7 +3354,7 @@ function driveRig(m,r,mode,dt){const R=m.rig;let k='idle',a;
   const e=r.emote&&r.emote.t>0?r.emote.id:null;
   if(mode==='run'){k='run';}
   else if(mode==='air')k='jump';
-  else if(mode==='slide')k='crouch';
+  else if(mode==='slide')k=R.acts.slide?'slide':'crouch';
   else if(mode==='stun')k=r.stunKind==='knock'?'fall':r.stunKind==='slip'?'spin':'dizzy';
   else if(mode==='celebrate')k='cheer';
   if(e&&(mode==='idle'||mode==='celebrate'||mode==='set'))k=e==='point'?'wave':e;
@@ -5418,6 +5418,7 @@ const SKINS_SHOP=[
   {id:'dunewalker',lvl:29,hero:'archer',name:'Dune Walker',tier:'free',buff:{agi:0.08,spd:0.02},desc:'Desert gold wraps and a sun-bleached hood. Sand swirls at your heels.',pal:[0x4a2a10,0xe0a24a,0xfff0c8],amt:0.83,emissive:0x3a2000,trail:[1,0.8,0.45],aura:[1,0.85,0.5],sw:'linear-gradient(135deg,#fff0c8,#e0a24a 50%,#4a2a10)'},
   {id:'skyemperor',lvl:31,hero:'samurai',name:'Sky Emperor',tier:'free',buff:{stun:0.14,spd:0.02},desc:'Imperial white and gold armour with a dragon crest. Clouds part as you pass.',pal:[0x3a2a0a,0xf4f0e0,0xffd04a],amt:0.86,emissive:0x3a2a00,trail:[1,0.9,0.5],aura:[1,0.9,0.5],sw:'linear-gradient(135deg,#ffffff,#ffd04a 55%,#3a2a0a)'},
   {id:'continentchamp',lvl:35,hero:'warrior',model:'models/skins/continentchamp.glb',name:'Continental Champion',tier:'free',buff:{spd:0.03,chg:0.1},desc:'Gleaming platinum and royal purple, worn by the best on the continent.',pal:[0x1a0a3a,0xd8dcec,0xffd84a],amt:0.88,emissive:0x2a1a5a,trail:[1,0.9,0.5],aura:[0.85,0.8,1],sw:'linear-gradient(135deg,#ffd84a,#d8dcec 45%,#1a0a3a)'},
+  {id:'stormtiger',lvl:12,hero:'kicker',model:'models/skins/stormtiger.glb',name:'Storm Tiger',tier:'free',buff:{agi:0.06,spd:0.01},desc:'Tiger-stripe orange and black, fierce from head to toe.',pal:[0x1a1410,0xff8a2a,0xffd84a],amt:0.8,trail:[1,0.55,0.15],sw:'linear-gradient(135deg,#ff8a2a,#1a1410)'},
   {id:'celestial',name:'Celestial',tier:'usd',usd:'$4.99',desc:'Night-sky armour that leaves stars behind.',buff:{spd:0.03,stun:0.15},tint:0x3a3aa8,amt:0.6,emissive:0x1a1a5a,trail:[0.8,0.8,1],sw:'linear-gradient(135deg,#1a1a5a,#6a5ae8 55%,#fff3b0)'},
 ];
 // Attire lasts 7 days from purchase. Equipped pieces give their full buff; pieces you own but aren't wearing give 10%.
