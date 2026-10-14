@@ -5,6 +5,11 @@
 > https://mrsevereh101-prog.github.io/race-your-flag/). Read HANDOFF.md and NEXT-STEPS.md first.
 > Workflow: push to main deploys via GitHub Pages. Explain things simply; I'm not a programmer.
 
+## How I like to work
+- Whenever a step involves Supabase, always include the direct link to the SQL Editor:
+  https://supabase.com/dashboard/project/hzzqnwzsasuwjafmsgqh/sql/new
+- Give SQL and messages in copy-paste code boxes.
+
 ## Where things stand (Oct 14)
 - Single-file three.js r128 game: `index.html`. Supabase project hzzqnwzsasuwjafmsgqh (I run SQL myself).
 - **11 heroes**, all real 3D models from Tripo, rigged with the **Mixamo** skeleton (`models/<hero>.glb`):
