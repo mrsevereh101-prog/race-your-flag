@@ -3253,7 +3253,7 @@ function loadHero3D(id){const H=HERO3D[id];if(H&&H.rig)return loadRig(id);if(!H|
     try{(runners||[]).forEach(r=>{if(r.m&&!r.m.glb&&r.char&&r.char.id===id)attachHero3D(r.m,id);});}catch(e){}},undefined,()=>{H.busy=false;H.fail=true;});}
 // a skin recolours the model by tinting its picture (one shared material per hero and skin)
 function hero3dMat(H,sk){if(!sk||(sk.tint==null&&!sk.pal))return H.mat;const k=sk.id||String(sk.tint);if(H.mats[k])return H.mats[k];
-  const m=H.mat.clone();m.userData.shared=true;const tc=new THREE.Color(sk.tint!=null?sk.tint:sk.pal[1]);m.color.setRGB(1,1,1).lerp(tc,Math.min(0.75,(sk.amt||0.6)*0.85));
+  const m=H.mat.clone();m.userData.shared=true;const tc=new THREE.Color(sk.tint!=null?sk.tint:sk.pal[1]);m.color.setRGB(1,1,1).lerp(tc,Math.min(0.3,(sk.amt||0.6)*0.4));  // light, so faces keep their skin tone
   if(sk.emissive){m.emissive=new THREE.Color(sk.emissive);m.emissiveIntensity=0.35;}return H.mats[k]=m;}
 function attachHero3D(m,id){const H=HERO3D[id],J=H.J;if(m.glb||!H.geo)return;
   // size: line the model's neck up with the simple runner's head
