@@ -1410,6 +1410,17 @@ html.cream.adv .lv-shield{display:grid;place-items:center;flex:none;width:38px;h
 #d3Sheet.open .d3-handle-bar{display:none}
 #d3Sheet.open .d3-handle-arrow{transform:none!important;font-size:0;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--cream,#f6ecd2);border:2px solid #d9a227;box-shadow:0 3px 0 rgba(0,0,0,.25)}
 #d3Sheet.open .d3-handle-arrow::before{content:"";width:12px;height:12px;border-left:4px solid #3a2a08;border-bottom:4px solid #3a2a08;transform:translateX(3px) rotate(45deg)}
+/* Race Desk page: 3D back arrow top left, mode tabs at the top of the card, hero card fills the rest */
+.d3-back3d{display:none}
+#d3Sheet.open .d3-handle-arrow:has(.d3-back3d){background:none;border:0;box-shadow:none;width:52px;height:52px}
+#d3Sheet.open .d3-handle-arrow:has(.d3-back3d)::before{display:none}
+#d3Sheet.open .d3-back3d{display:block;width:52px;height:52px;object-fit:contain}
+#d3Sheet.open{grid-template-rows:1fr!important}
+#d3Sheet .d3-card>.d3-tabbar{padding:0 0 10px}
+#d3Sheet.open .d3-sheet-body{display:flex!important;flex-direction:column}
+#d3Sheet.open .d3-card{flex:1 0 auto;display:flex;flex-direction:column}
+#d3Sheet.open #playChoices{flex:1 0 auto;display:flex;flex-direction:column}
+#d3Sheet.open #heroCard{flex:1 0 auto}
 html.mode-page #menu .left-col>:not(#d3Sheet){visibility:hidden}
 /* the flag button sits under the emote button */
 .home-flag{position:absolute;right:4px;top:84px;z-index:3;width:64px;height:64px;border-radius:50%;padding:0;display:grid;place-items:center;border:2px solid #d9a227;background:var(--cream,#f6ecd2);box-shadow:0 3px 0 rgba(0,0,0,.25),0 6px 14px rgba(0,0,0,.25);cursor:pointer}
@@ -1645,6 +1656,8 @@ html body :is(#hub,#store).lb-gold .lb-row.me{background:linear-gradient(180deg,
 #newHint b{order:-1;font-size:14px;padding:3px 10px;border-radius:999px;background:#3a2204;color:#ffd760!important;-webkit-text-fill-color:#ffd760!important;text-shadow:none!important;white-space:nowrap}
 #newHint[hidden]{display:none}
 @keyframes nhBob{to{transform:translate(-50%,calc(-100% - 12px))}}
+#newHint.up{transform:translate(-50%,0);animation-name:nhUp}#newHint.up img{transform:rotate(-90deg)}#newHint.up b{order:1}
+@keyframes nhUp{to{transform:translate(-50%,12px)}}
 @media (prefers-reduced-motion:reduce){#newHint{animation:none}}
 .f3d-pg{font-size:10.5px;color:var(--gold,#f5c542);min-height:1em;line-height:1}
 </style>
@@ -1677,7 +1690,7 @@ html body :is(#hub,#store).lb-gold .lb-row.me{background:linear-gradient(180deg,
       <div class="sum-row" hidden><div id="sumCountry"></div><div id="sumChar"></div></div>
       <div class="d3-sheet" id="d3Sheet">
       <div class="d3-sheet-body" id="d3SheetBody">
-        <button class="d3-handle" id="d3Handle" aria-label="Close panel"><span class="d3-handle-bar"></span><span class="d3-handle-arrow">▼</span></button>
+        <button class="d3-handle" id="d3Handle" aria-label="Close panel"><span class="d3-handle-bar"></span><span class="d3-handle-arrow">▼<img class="d3-back3d" src="img/icons/back.webp" alt=""></span></button>
       <div class="pick-row d3-picks">
         <button class="pick-btn" data-pick="flag" aria-expanded="false"><img id="sumFlag" alt=""><b id="pkFlag"></b><span class="sr-only">Flag</span></button>
         <button class="pick-btn" data-pick="runner" aria-expanded="false"><i aria-hidden="true">🏃</i><b id="pkRunner"></b><span class="sr-only">Runner</span></button>
@@ -1686,14 +1699,17 @@ html body :is(#hub,#store).lb-gold .lb-row.me{background:linear-gradient(180deg,
         <button class="pick-btn" data-pick="perk" aria-expanded="false"><i aria-hidden="true" id="pkPerkIc">⭐</i><b id="pkPerk"></b><span class="sr-only">Perk</span></button>
       </div>
       <section class="d3-card">
+      <nav class="d3-tabbar" role="tablist" aria-label="Race options">
+        <button role="tab" id="tabQuick" data-tab="quick" aria-controls="paneQuick"><i><img class="ico" src="img/icons/tab_quick.webp" alt=""></i><span>Quick Race</span></button>
+        <button role="tab" id="tabOnline" data-tab="online" aria-controls="paneOnline"><i><img class="ico" src="img/icons/tab_online.webp" alt=""></i><span>Online</span></button>
+        <button role="tab" id="tabSolo" data-tab="solo" aria-controls="paneSolo"><i><img class="ico" src="img/icons/tab_challenges.webp" alt=""></i><span>Challenges</span></button>
+      </nav>
         <div id="lobbyReturn" class="play-block d3-pane" hidden>
           <p class="muted">You are in room <b id="returnCode"></b>. Changes to your flag and runner show up in the lobby.</p>
           <button class="primary d3-gold" id="backLobbyBtn">Back to lobby</button>
         </div>
         <div id="playChoices">
           <div class="d3-pane quick-pane" id="paneQuick" role="tabpanel" aria-labelledby="tabQuick">
-            <div class="d3-qinfo"><span class="d3-qic"><img class="ico" src="img/icons/tab_quick.webp" alt=""></span><div><b>Quick Race</b><small>1 lap · solo · 5 CPU rivals · <span id="qTrack"></span></small></div></div>
-            <p class="muted d3-qnote">Jump straight in with your flag, runner and track. Your saved race settings stay the same.</p>
             <div class="cpu-go"><button class="primary d3-gold" id="quickBtn">🏁 Go!</button></div>
           </div>
           <div class="hero-card" id="heroCard" aria-live="polite"></div>
@@ -1724,11 +1740,6 @@ html body :is(#hub,#store).lb-gold .lb-row.me{background:linear-gradient(180deg,
         </div>
       </section>
       </div>
-      <nav class="d3-tabbar" role="tablist" aria-label="Race options">
-        <button role="tab" id="tabQuick" data-tab="quick" aria-controls="paneQuick"><i><img class="ico" src="img/icons/tab_quick.webp" alt=""></i><span>Quick Race</span></button>
-        <button role="tab" id="tabOnline" data-tab="online" aria-controls="paneOnline"><i><img class="ico" src="img/icons/tab_online.webp" alt=""></i><span>Online</span></button>
-        <button role="tab" id="tabSolo" data-tab="solo" aria-controls="paneSolo"><i><img class="ico" src="img/icons/tab_challenges.webp" alt=""></i><span>Challenges</span></button>
-      </nav>
       </div>
       <section class="panel wallet-panel" aria-label="Wallet" hidden>
         <div class="wallet-big"><span class="coin-ic"></span><b id="wCoins">0</b><span class="gem-ic"></span><b id="wGems">0</b></div>
@@ -8333,7 +8344,7 @@ if(isFirstVisit())setTimeout(onboardSetup,700);
   hd.addEventListener('pointermove',e=>{if(y0==null)return;if(e.clientY-y0>24){moved=true;open=false;render();y0=null;}});
   hd.addEventListener('pointerup',()=>{y0=null;});
   hd.addEventListener('click',()=>{if(moved){moved=false;return;}open=false;render();});
-  const qt=()=>{$('qTrack').textContent=$('pkTrack').textContent||'';};new MutationObserver(qt).observe($('pkTrack'),{childList:true,characterData:true,subtree:true});qt();
+  const qt=()=>{const q=$('qTrack');if(q)q.textContent=$('pkTrack').textContent||'';};new MutationObserver(qt).observe($('pkTrack'),{childList:true,characterData:true,subtree:true});qt();
   // in a room, open the panel so the Back to lobby button shows
   new MutationObserver(()=>{if(!$('lobbyReturn').hidden){open=true;render();}}).observe($('lobbyReturn'),{attributes:true,attributeFilter:['hidden']});
   const vis=()=>{sh.style.display=$('menu').hidden?'none':'';};new MutationObserver(vis).observe($('menu'),{attributes:true,attributeFilter:['hidden']});vis();
@@ -8451,7 +8462,7 @@ function font3d(el,col){if(!el||el.children.length)return;const t=el.textContent
     let t=null;if(fresh){const pg=document.documentElement.classList.contains('mode-page');
       if(!pg)t=document.querySelector('.h2-hot[aria-label="Quick Race"]');else if(!$('paneQuick').hidden)t=$('quickBtn');}
     if(!t||!t.offsetParent){ar.hidden=true;return;}const r=t.getBoundingClientRect();ar.hidden=false;
-    ar.style.left=Math.round(r.left+r.width/2)+'px';ar.style.top=Math.round(r.top-6)+'px';};
+    const up=t.id==='quickBtn';ar.classList.toggle('up',up);ar.style.left=Math.round(r.left+r.width/2)+'px';ar.style.top=Math.round(up?r.bottom+6:r.top-6)+'px';};
   place();setInterval(place,400);addEventListener('resize',place);})();
 /* ---------- Race Desk emote icon ---------- */
 (()=>{const box=document.querySelector('.d3-emotes'),bt=$('emoteToggle');if(!box||!bt)return;
