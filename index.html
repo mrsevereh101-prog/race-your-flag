@@ -3383,7 +3383,7 @@ function attachRig(m,id){const H=HERO3D[id];if(m.rig||m.glb||!hero3dReady(H))ret
   m.pelvis.visible=false;
   const mixer=new THREE.AnimationMixer(inst),clips=rigClips(H),acts={};
   for(const k in clips){const a=mixer.clipAction(clips[k]);if(RIG_ONCE.has(k)){a.setLoop(THREE.LoopOnce);a.clampWhenFinished=true;}acts[k]=a;}
-  m.rig={mixer,acts,cur:null,skel:mesh.skeleton,holder};rigPlay(m,'idle');mixer.update(0.01);}
+  const bones={};inst.traverse(o=>{if(o.isBone)bones[o.name.replace('mixamorig','')]=o;});m.rig={mixer,acts,cur:null,skel:mesh.skeleton,holder,key:id,bones};rigPlay(m,'idle');mixer.update(0.01);}
 const RIG_ONCE=new Set(['jump','fall','crouch','slide']);
 function rigPlay(m,k,t0){const R=m.rig,a=R.acts[k];if(!a||R.cur===k)return a;const old=R.acts[R.cur];
   a.reset();a.timeScale=1;if(t0)a.time=t0;a.fadeIn(old?0.18:0).play();if(old)old.fadeOut(0.18);R.cur=k;return a;}
@@ -3391,15 +3391,40 @@ function rigPlay(m,k,t0){const R=m.rig,a=R.acts[k];if(!a||R.cur===k)return a;con
 function driveRig(m,r,mode,dt){const R=m.rig;let k='idle',a;
   const e=r.emote&&r.emote.t>0?r.emote.id:null;
   if(mode==='run'){k='run';}
-  else if(mode==='air')k='jump';
-  else if(mode==='slide')k=R.acts.slide?'slide':'crouch';
+  else if(mode==='air'||mode==='slide')k='run';
   else if(mode==='stun')k=r.stunKind==='knock'?'fall':r.stunKind==='slip'?'spin':'dizzy';
   else if(mode==='celebrate')k='cheer';
   if(e&&(mode==='idle'||mode==='celebrate'||mode==='set'))k=e==='point'?'wave':e;
   a=rigPlay(m,k,k==='jump'?0.55:k==='crouch'?2.3:0);
   if(k==='run'&&a)a.timeScale=clamp((2.2+r.speed*0.42)*1.25/TAU,0.6,1.9)*(r.slow>0?0.7:1);
   if(k==='crouch'&&a&&a.time>2.6)a.timeScale=0;
-  R.mixer.update(Math.min(dt,0.1));}
+  R.mixer.update(Math.min(dt,0.1));
+  // jumps and slides use the hand-made poses of the original runner, laid over the moves
+  R.pw=clamp((R.pw||0)+(mode==='air'||mode==='slide'?1:-1)*dt/0.12,0,1);if(R.pw>0)rigProcPose(m,R.pw);}
+// the simple runner's joint turns, copied onto the Mixamo bones (each bone turns from its rest pose
+// around the body's own axes; arms first drop from the T-pose so the turns match the hanging arms)
+const _pq=new THREE.Quaternion(),_pq2=new THREE.Quaternion(),_pE=new THREE.Euler(),_pV=new THREE.Vector3(),_pV2=new THREE.Vector3(),_pDn=new THREE.Vector3(0,-1,0);
+function rigRest(H){if(H.restW)return H.restW;const sc=H.scene;sc.updateMatrixWorld(true);const W={},P={};
+  ['Hips','Spine','Spine1','Spine2','Neck','Head','LeftArm','LeftForeArm','RightArm','RightForeArm','LeftUpLeg','LeftLeg','RightUpLeg','RightLeg'].forEach(n=>{const b=sc.getObjectByName('mixamorig'+n);if(!b)return;
+    W[n]=b.getWorldQuaternion(new THREE.Quaternion());P[n]=b.parent.getWorldQuaternion(new THREE.Quaternion());});
+  const hang=s=>{const a=sc.getObjectByName('mixamorig'+s+'Arm'),f=sc.getObjectByName('mixamorig'+s+'ForeArm');if(!a||!f)return new THREE.Quaternion();
+    a.getWorldPosition(_pV);f.getWorldPosition(_pV2);return new THREE.Quaternion().setFromUnitVectors(_pV2.sub(_pV).normalize(),_pDn);};
+  return H.restW={W,P,hL:hang('Left'),hR:hang('Right')};}
+function rigProcPose(m,w){const R=m.rig,H=HERO3D[R.key];if(!H||!H.scene)return;const T=rigRest(H),sk=R.bones;
+  const D={},E=(x,y,z)=>new THREE.Quaternion().setFromEuler(_pE.set(-x,y,-z));
+  const set=(n,d,par)=>{const b=sk[n];if(!b||!T.W[n])return;D[n]=d;
+    // local = (parent rest world)^-1 * own turn * (own rest world)
+    _pq.copy(T.P[n]).invert().multiply(d).multiply(T.W[n]);b.quaternion.slerp(_pq,w);};
+  const P=m.pelvis.rotation,TR=m.torso.rotation,HD=m.headP.rotation;
+  set('Hips',E(P.x,P.y,P.z));
+  const sp=E(TR.x/3,TR.y/3,TR.z/3);['Spine','Spine1','Spine2'].forEach(n=>set(n,sp));
+  const hd=E(HD.x/2,HD.y/2,HD.z/2);set('Neck',hd);set('Head',hd);
+  const arm=(side,a,hg)=>{set(side+'Arm',E(a.sh.rotation.x,a.sh.rotation.y,a.sh.rotation.z).multiply(hg));
+    set(side+'ForeArm',hg.clone().invert().multiply(E(a.elb.rotation.x,a.elb.rotation.y,a.elb.rotation.z)).multiply(hg));};
+  arm('Left',m.armL,T.hL);arm('Right',m.armR,T.hR);
+  set('LeftUpLeg',E(m.legL.hip.rotation.x,0,0));set('LeftLeg',E(m.legL.knee.rotation.x,0,0));
+  set('RightUpLeg',E(m.legR.hip.rotation.x,0,0));set('RightLeg',E(m.legR.knee.rotation.x,0,0));
+  const hb=sk.Hips;if(hb)hb.position.y+=(H.hipsY*m.pelvis.position.y/m.hipH-hb.position.y)*w;}
 loadAnims();
 function disposeModel(m){if(m.rig){m.rig.mixer.stopAllAction();m.rig.skel.dispose();}disposeTree(m.root);}
 
