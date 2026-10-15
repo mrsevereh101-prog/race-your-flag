@@ -15,7 +15,9 @@ prompt, and their spot in the lineup prompt at the bottom.
 | Sir Aldric | United Kingdom, 35 | 188 cm (6'2") | Tall, strong, armored |
 | Kid Echo | USA, 18 | 185 cm (6'1") | Tall, lanky |
 | Kapwa Lamò | Haiti, 17 | 183 cm (6'0") | Tall, athletic, muscular |
+| Blaze Carter (new, fire) | USA, 18 | 183 cm (6'0") | Tall, athletic |
 | Malkia Nyota | Kenya, 32 | 180 cm (5'11") | Tall, regal |
+| Anaya Rao (new, earth) | India, 16 | 178 cm (5'10") | Tall, slim, strong |
 | Hayato Kurogane | Japan, 17 | 172 cm (5'8") | Lean, sharp |
 | Xiao Long | China, 18 | 170 cm (5'7") | Compact, strong |
 | Aria Windsong | Ireland, 18 | 168 cm (5'6") | Slim, light |
@@ -45,9 +47,19 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 Single full-body 3D character, A-pose, front view, plain light grey background. Kapwa Lamò, a 17-year-old Black Haitian boy, tall, athletic and muscular, 183 cm (6 feet), about 7.7 heads tall, strong shoulders, long fit runner's legs. Dark brown skin, short curly black hair, confident kind face. Brown leather chest armor with a shoulder strap and one shoulder guard, red and white bead necklace, brown leather belt with a silver buckle, blue kilt over dark brown pants, leather arm guards with teal wraps, leather-wrapped sandals. Empty hands, no weapon. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
+### Blaze Carter (183 cm, 6'0") (new hero, fire power)
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Blaze Carter, an 18-year-old white American boy, tall and athletic, 183 cm (6 feet), about 7.7 heads tall, broad shoulders, long runner's legs. Light skin with a few freckles, messy swept-up blond hair with orange-red tips, blue eyes, cocky confident grin. Black and red racing jacket with orange flame patterns on the sleeves, open over a charcoal t-shirt with a small flame logo, black fingerless gloves, dark red joggers with an orange side stripe, black and orange high-top sneakers. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
 ### Malkia Nyota (180 cm, 5'11")
 ```
 Single full-body 3D character, A-pose, front view, plain light grey background. Malkia Nyota, a 32-year-old Kenyan queen, tall and regal, 180 cm, about 7.6 heads tall, long elegant neck, strong graceful build, proud posture. Dark brown skin, warm wise smile, golden lion-head crown with a carved mane. Golden yellow dress with lion prints, a golden fur stole over the shoulders, amber bead necklace, wide gold arm cuffs, gold strap sandals. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+### Anaya Rao (178 cm, 5'10") (new hero, earth power)
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Anaya Rao, a 16-year-old Indian girl, tall for her age, slim and strong, 178 cm (5 feet 10 inches), about 7.5 heads tall, long legs. Warm brown skin, long thick black hair in a single braid with small gold beads, bright determined eyes, small gold nose stud. Modern sporty Indian style: fitted saffron and teal kurta-style top with gold embroidery on the collar and hem, a teal scarf tied across the body like a sash, slim white trousers, gold bangles on both wrists, teal and white sneakers with gold details. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 ### Hayato Kurogane (172 cm, 5'8")
@@ -85,7 +97,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 Make this once and upload it as a reference with each prompt, so the heights stay consistent.
 
 ```
-Character lineup, 11 stylized 3D cartoon heroes standing side by side in A-pose on a plain light grey background, a height ruler behind them, ordered from tallest to shortest: a giant Viking man (198 cm), a knight in white armor (188 cm), a tall lanky rapper in a white puffer jacket (185 cm), an athletic Haitian boy in leather armor and a blue kilt (183 cm), a regal African queen with a lion crown (180 cm), a lean Japanese boy in a white and gold coat (172 cm), a Shaolin monk in white (170 cm), an Irish girl in a green tunic (168 cm), a girl with a big curly afro and a purple skirt (165 cm), a small Korean girl with a red ponytail (160 cm), a small orange robot (150 cm). Pixar style.
+Character lineup, 13 stylized 3D cartoon heroes standing side by side in A-pose on a plain light grey background, a height ruler behind them, ordered from tallest to shortest: a giant Viking man (198 cm), a knight in white armor (188 cm), a tall lanky rapper in a white puffer jacket (185 cm), an athletic Haitian boy in leather armor and a blue kilt (183 cm), a blond American boy in a black and red flame racing jacket (183 cm), a regal African queen with a lion crown (180 cm), a tall Indian girl with a long braid in a saffron and teal top (178 cm), a lean Japanese boy in a white and gold coat (172 cm), a Shaolin monk in white (170 cm), an Irish girl in a green tunic (168 cm), a girl with a big curly afro and a purple skirt (165 cm), a small Korean girl with a red ponytail (160 cm), a small orange robot (150 cm). Pixar style.
 ```
 
 ## Tripo steps
