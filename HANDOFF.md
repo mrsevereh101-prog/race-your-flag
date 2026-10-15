@@ -23,6 +23,14 @@
 - Weapons and capes hidden by default; Settings > Theme has "Flag cape" and "Weapons" switches.
   Flag floats above the player's head.
 
+## Hero build prompts and heights
+
+`docs/HERO_PROMPTS.md` holds the Tripo prompt and height for every hero (tallest: Sigurd 198 cm, shortest:
+Volt-X 150 cm). **Whenever a hero is added or changed, update that file** (chart, prompt, lineup prompt).
+The user is rebuilding the heroes at these heights. The game currently scales every rig to the same head
+height (`attachRig`: `S=(m.headY||1.75)/H.headY`), so when the new models arrive, change that to keep each
+model's own height.
+
 ## How to add a skin or hero from Tripo
 1. In Tripo: Retopology (Quad, 10,000) > Rig (Humanoid, **Mixamo**, Auto Rig) > Export GLB (finished .glb, not .tmp).
 2. `cd tools/3d && npm install && node prep.mjs <file.glb> ../../models/skins/<id>.glb`
