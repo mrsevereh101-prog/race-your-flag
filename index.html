@@ -347,6 +347,30 @@ body.layout-desk .lay-piece{outline-offset:1px}
 #celebrate.cosmic .cel-step.s1 .cel-nm{font-size:clamp(13px,3.8vw,17px)}
 #celebrate.cosmic .cel-step.s1 .cel-time{color:#fff}
 @media (prefers-reduced-motion:reduce){.cel-sky::before,.cel-sky i,.cel-orbit::before{animation:none}}
+/* winner panel: the gold, silver and bronze podium picture (img/ui/podium.webp). Each top-3 hero stands on
+   their step, their flag on the step's body, name and time underneath. Spots are measured on the picture. */
+.cel-congrats,.cel-podimg{display:none}
+#celebrate.podx .cel-congrats{display:block;margin:-4px auto -6px;width:min(100%,420px);line-height:0;opacity:0;transform:scale(.6);transition:opacity .4s,transform .6s cubic-bezier(.2,1.6,.4,1)}
+#celebrate.podx.won .cel-congrats{opacity:1;transform:none}
+#celebrate.podx .cel-congrats img{width:100%;height:auto;filter:drop-shadow(0 4px 6px rgba(0,0,0,.4))}
+#celebrate.podx .cel-podium{position:relative;display:block;width:100%;max-width:440px;margin:0 auto;aspect-ratio:1/1.05;min-height:0;padding:0;transform:none;margin-bottom:0}
+#celebrate.podx .cel-podimg{display:block;position:absolute;left:0;width:100%;height:auto;top:49.4%}
+#celebrate.podx .cel-step{position:absolute!important;inset:0;display:block;margin:0!important;transform:translateY(24px);pointer-events:none}
+#celebrate.podx .cel-step>img.cel-hero{display:block;box-shadow:none;border-radius:0;aspect-ratio:auto}
+#celebrate.podx .cel-step.show{transform:none}
+#celebrate.podx .cel-step.s1{--x:50%;--fy:61.7%;--by:76.5%;--h:52%;--fw:17%;z-index:2}
+#celebrate.podx .cel-step.s2{--x:17.5%;--fy:65.8%;--by:81.4%;--h:41%;--fw:15%;z-index:1}
+#celebrate.podx .cel-step.s3{--x:83%;--fy:72%;--by:83.5%;--h:41%;--fw:15%;z-index:3}
+#celebrate.podx .cel-hero{position:absolute;left:var(--x);bottom:calc(100% - var(--fy));height:var(--h);width:auto;max-width:34%;object-fit:contain;transform:translateX(-50%);filter:drop-shadow(0 6px 6px rgba(0,0,0,.45))}
+#celebrate.podx .cel-pflag{position:absolute;left:var(--x);top:var(--by);transform:translate(-50%,-50%);width:var(--fw);display:flex;gap:2px;justify-content:center}
+#celebrate.podx .cel-pflag img{width:100%;min-width:0;flex:1 1 0;aspect-ratio:3/2;object-fit:cover;border-radius:4px/9px;box-shadow:0 0 0 1.5px rgba(255,255,255,.55),0 3px 6px rgba(0,0,0,.45)}
+#celebrate.podx .cel-plab{position:absolute;left:var(--x);top:91.5%;transform:translateX(-50%);width:32%;text-align:center;line-height:1.15}
+#celebrate.podx .cel-plab .cel-nm{font-weight:800;font-size:clamp(11px,3.3vw,14px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#celebrate.podx .cel-plab .cel-time{font-size:clamp(10px,3vw,12.5px);opacity:.85}
+#celebrate.podx .cel-step.s1.show{animation:none}
+#celebrate.podx .cel-step.s1.show .cel-hero{animation:celHop 1s ease-in-out .3s 2}
+@keyframes celHop{0%,100%{transform:translateX(-50%)}40%{transform:translate(-50%,-8%)}}
+@media (prefers-reduced-motion:reduce){#celebrate.podx .cel-congrats{transition:none}#celebrate.podx .cel-step.s1.show .cel-hero{animation:none}}
 @media (prefers-reduced-motion:reduce){.cel-step,.cel-gift{transition:none}.cel-title.win,.cel-step.s1.show,.cel-gift.show .gbox{animation:none}}
 
 /* ---------- Race Desk bottom sheet: ▲ pulls up the rest ---------- */
@@ -2047,8 +2071,10 @@ html body :is(#hub,#store).lb-gold .lb-row.me{background:linear-gradient(180deg,
   <div class="cel-confetti" id="celConfetti" aria-hidden="true"></div>
   <div class="cel-card" role="dialog" aria-labelledby="celTitle" aria-live="polite">
     <div class="cel-eyebrow" id="celEyebrow">🏁 Race complete</div>
+    <div class="cel-congrats" aria-hidden="true"><img alt="" src="img/congrats.webp" width="760" height="323"></div>
     <h2 class="cel-title" id="celTitle">And the winner is…</h2>
     <div class="cel-podium">
+      <img class="cel-podimg" alt="" src="img/ui/podium.webp" width="900" height="388">
       <div class="cel-step s2" id="celS2"></div><div class="cel-step s1" id="celS1"></div><div class="cel-step s3" id="celS3"></div>
     </div>
     <div class="cel-gifts" id="celGifts" hidden></div>
@@ -8186,7 +8212,9 @@ function celebrate(rows,place,rw,done){
   if(CEL.open){CEL.done=done;return;}
   CEL.open=true;CEL.done=done;CEL.timers.forEach(clearTimeout);CEL.timers=[];
   const ov=$('celebrate'),teams=RACE&&isTeamMode(RACE.mode);
-  ov.classList.add('cosmic');
+  ov.classList.add('cosmic','podx');ov.classList.remove('won');
+  // a runner's spot on the podium: hero picture on top, flag(s) on the step, name and time below
+  const podSlot=(n,hero,flags,time)=>`<img class="cel-hero" alt="" src="img/heroes/${hero}.webp" onerror="this.remove()"><div class="cel-pflag">${flags.map(u=>`<img alt="" src="${u}">`).join('')}</div><div class="cel-plab"><div class="cel-nm"></div><div class="cel-time">${time}</div></div>`;
   const nm=r=>r.nm||(r.flag&&r.flag.name)||'Runner';
   $('celEyebrow').textContent=`🏁 Race complete · ${TH.name}`+(GP&&RACE&&RACE.gp?` · Grand Prix ${GP.round+1}/${GP.tracks.length}`:'');
   const t=$('celTitle');t.textContent='And the winner is…';t.classList.remove('win');
@@ -8195,11 +8223,11 @@ function celebrate(rows,place,rw,done){
     [1,2,3].forEach(n=>{const el=$('celS'+n),t=order[n-1];el.classList.remove('show','me','team');el.innerHTML='';if(t==null)return;
       const mem=rows.filter(x=>x.r.team===t);if(mem.some(x=>x.r.kind==='local'))el.classList.add('me');el.classList.add('team');
       const fl=mem.map(x=>`<img alt="" src="${x.r.flag?x.r.flag.url:''}">`).join('');
-      el.innerHTML=`<div class="cel-medal">${['🥇','🥈','🥉'][n-1]}</div><div class="cel-pw"><div class="cel-plate"><div class="face"><div class="cel-flags n${mem.length}">${fl}</div><b>${n}</b></div></div>${n<3?'<div class="cel-orbit"></div>':''}</div><div class="cel-nm"></div><div class="cel-time">${tp[t]} pts</div><div class="cel-block">${n}</div>`;
+      const best=mem[0]&&mem[0].r.char?mem[0].r.char.id:'';el.innerHTML=podSlot(n,best,mem.map(x=>x.r.flag?x.r.flag.url:''),tp[t]+' pts');
       el.querySelector('.cel-nm').textContent=teamIc(t)+' '+teamName(t);});}
   else [1,2,3].forEach(n=>{const el=$('celS'+n),x=rows[n-1];el.classList.remove('show','me','team');el.innerHTML='';if(!x)return;
     if(x.r.kind==='local')el.classList.add('me');
-    const fu=x.r.flag?x.r.flag.url:'';el.innerHTML=`<div class="cel-medal">${['🥇','🥈','🥉'][n-1]}</div><img alt="" src="${fu}"><div class="cel-pw"><div class="cel-plate"><div class="face"><img alt="" src="${fu}"><b>${n}</b></div></div>${n<3?'<div class="cel-orbit"></div>':''}</div><div class="cel-nm"></div><div class="cel-time">${x.est?'≈ ':''}${fmt(x.t)}</div><div class="cel-block">${n}</div>`;
+    const fu=x.r.flag?x.r.flag.url:'';el.innerHTML=podSlot(n,x.r.char?x.r.char.id:'',[fu],(x.est?'≈ ':'')+fmt(x.t));
     el.querySelector('.cel-nm').textContent=nm(x.r)+(x.r.kind==='local'?' (you)':'');});
   const gifts=[];
   gifts.push({ic:'🎁',ico:'coin',v:priceHTML(rw.coinsWon,'coin'),l:'Coins earned'});
@@ -8217,7 +8245,7 @@ function celebrate(rows,place,rw,done){
   const winName=teams&&CEL.tTie?`It's a tie! ${teamIc(tWin)} ${teamIc(CEL.t2)}`:teams&&tWin!=null?(player&&player.team===tWin?`YOUR TEAM WINS! ${teamIc(tWin)}`:`${teamIc(tWin)} ${teamName(tWin)} win!`):win?(win.kind==='local'?'YOU WIN!':`${nm(win)} wins!`):'';CEL.winTitle=winName;
   const steps=[[700,()=>{$('celS3').classList.add('show');sfx.beep(false);}],
     [2000,()=>{$('celS2').classList.add('show');sfx.beep(false);}],
-    [3500,()=>{$('celS1').classList.add('show');t.textContent='🏆 '+winName;t.classList.add('win');sfx.fanfare();confetti(win&&win.kind==='local'?160:110);}],
+    [3500,()=>{$('celS1').classList.add('show');ov.classList.add('won');t.textContent='🏆 '+winName;t.classList.add('win');sfx.fanfare();confetti(win&&win.kind==='local'?160:110);}],
     [4100,winLine],
     [5200,()=>{$('celNext').hidden=false;$('celSkip').hidden=true;$('celNext').focus();}]];
   if(reduceMotion)steps.forEach(([,f])=>f());else steps.forEach(([ms,f])=>CEL.timers.push(setTimeout(f,ms)));
@@ -8226,7 +8254,7 @@ function celebrate(rows,place,rw,done){
 function winClip(r){if(!r||!r.char)return null;const ids=[1,2,3,4].map(n=>`${r.char.id}-win-${n}`).filter(id=>VOICE_FILES.has(id));return ids.length?VOICE_DIR+ids[Math.floor(Math.random()*ids.length)]+'.mp3':null;}
 function winLine(){if(CEL.winSaid||!CEL.winUrl||!SET.voice)return;CEL.winSaid=true;voice.stop();voice.curPri=3;clipPlay(CEL.winUrl,Math.min(1.2,SET.voiceVol*1.15),()=>{voice.curPri=0;},true);}
 function celFinish(){CEL.timers.forEach(clearTimeout);CEL.timers=[];winLine();
-  ['celS3','celS2','celS1'].forEach(id=>$(id).classList.add('show'));[...$('celGifts').children].forEach(d=>d.classList.add('show'));
+  ['celS3','celS2','celS1'].forEach(id=>$(id).classList.add('show'));$('celebrate').classList.add('won');[...$('celGifts').children].forEach(d=>d.classList.add('show'));
   const t=$('celTitle');if(!t.classList.contains('win')){t.textContent='🏆 '+(CEL.winTitle||'');t.classList.add('win');}
   $('celNext').hidden=false;$('celSkip').hidden=true;$('celNext').focus();}
 function confetti(n){if(reduceMotion)return;const box=$('celConfetti');const cols=['#f6d77f','#e9c46a','#ffffff','#5fa8ff','#ff6b6b','#5fd08a','#c4b5ff'];
