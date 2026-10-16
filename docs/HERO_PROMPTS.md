@@ -12,6 +12,7 @@ prompt, and their spot in the lineup prompt at the bottom.
 | Hero | Country, age | Height | Build |
 |---|---|---|---|
 | Sigurd Stormbeard | Norway, 45 | 198 cm (6'6") | Giant, broad, heavy |
+| Dmitri Volkov (new, war machines) | Russia, 30 | 191 cm (6'3") | Big, powerful, soldier build |
 | Sir Aldric | United Kingdom, 35 | 188 cm (6'2") | Tall, strong, armored |
 | Kid Echo | USA, 18 | 185 cm (6'1") | Tall, lanky |
 | Kapwa Lamò | Haiti, 17 | 183 cm (6'0") | Tall, athletic, muscular |
@@ -19,8 +20,10 @@ prompt, and their spot in the lineup prompt at the bottom.
 | Malkia Nyota | Kenya, 32 | 180 cm (5'11") | Tall, regal |
 | Layla Al-Rimal (new, sand) | Jordan, 17 | 180 cm (5'11") | Tall, lean, agile |
 | Anaya Rao (new, earth) | India, 16 | 178 cm (5'10") | Tall, slim, strong |
+| Seo Min-jun (new, water) | Korea, 16 | 175 cm (5'9") | Lean, athletic |
 | Hayato Kurogane | Japan, 17 | 172 cm (5'8") | Lean, sharp |
 | Xiao Long | China, 18 | 170 cm (5'7") | Compact, strong |
+| Selam Tesfaye (new, birds) | Ethiopia, 17 | 170 cm (5'7") | Slim, graceful |
 | Aria Windsong | Ireland, 18 | 168 cm (5'6") | Slim, light |
 | Zuri Vapor | USA, 18 | 165 cm (5'5") | Slim, graceful |
 | Luana Ipê (new, tree/thorns) | Brazil, 15 | 165 cm (5'5") | Slim, agile |
@@ -32,6 +35,11 @@ prompt, and their spot in the lineup prompt at the bottom.
 ### Sigurd Stormbeard (198 cm, 6'6")
 ```
 Single full-body 3D character, A-pose, front view, plain light grey background. Sigurd Stormbeard, a 45-year-old Norwegian Viking, very tall giant of a man, 198 cm, about 8 heads tall, huge broad shoulders, barrel chest, thick arms and legs, heavy powerful build. Long red-brown hair, big braided red-brown beard with light blue beads, fierce friendly face. White fur vest over an ice-blue tunic with white snowflake patterns, wide white leather belt with a round blue buckle, light blue arm cuffs, grey trousers wrapped in white straps, white fur-topped boots. Empty hands, no weapon. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+### Dmitri Volkov (191 cm, 6'3") (new hero, weapons of war)
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Dmitri Volkov, a 30-year-old Russian war hero, big and powerful, 191 cm (6 feet 3 inches), about 7.9 heads tall, broad shoulders, thick arms, solid soldier build. Short light brown hair, short stubble beard, ice-blue eyes, tough but kind face, a grey fur ushanka hat with the ear flaps tied up. Heavy dark green armored winter coat with grey fur collar and metal shoulder plates, ammunition belts crossed over the chest, a compact rocket pod backpack with small missile tubes on his back, armored gloves, padded grey combat trousers with knee armor, heavy black combat boots. Empty hands, no rifle. No real flags or military insignia. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 ### Sir Aldric (188 cm, 6'2")
@@ -69,9 +77,19 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 Single full-body 3D character, A-pose, front view, plain light grey background. Anaya Rao, a 16-year-old Indian girl, tall for her age, slim and strong, 178 cm (5 feet 10 inches), about 7.5 heads tall, long legs. Warm brown skin, long thick black hair in a single braid with small gold beads, bright determined eyes, small gold nose stud. Modern sporty Indian style: fitted saffron and teal kurta-style top with gold embroidery on the collar and hem, a teal scarf tied across the body like a sash, slim white trousers, gold bangles on both wrists, teal and white sneakers with gold details. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
+### Seo Min-jun (175 cm, 5'9") (new hero, water power)
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Seo Min-jun, a 16-year-old Korean boy, lean and athletic, 175 cm (5 feet 9 inches), about 7.4 heads tall, long legs, youthful face. Light skin, soft black hair with wavy bangs and blue-dyed tips, calm cool smile. Modern streetwear with a water theme: deep blue and white zip jacket with a wave pattern along the sleeves, white t-shirt, a small silver droplet pendant, navy track pants with a light blue side stripe, white and blue sneakers, a light blue wristband with a glowing water-drop gem. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
 ### Hayato Kurogane (172 cm, 5'8")
 ```
 Single full-body 3D character, A-pose, front view, plain light grey background. Hayato Kurogane, a 17-year-old Japanese boy, lean and sharp, 172 cm, about 7.3 heads tall, slim athletic build. Spiky dark brown hair with shaved sides, calm focused face. Modern samurai style: long white coat with gold trim and gold dragon embroidery, white top with rope cross-lacing on the chest, wide white hakama trousers with gold wave patterns at the hem, fingerless white gloves with gold spikes, white and gold sneakers. Empty hands, no sword. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+### Selam Tesfaye (170 cm, 5'7") (new hero, queen of the birds)
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Selam Tesfaye, a 17-year-old Ethiopian girl, slim and graceful, 170 cm (5 feet 7 inches), about 7.2 heads tall, regal posture. Rich brown skin, large expressive eyes, long dark braids pulled back with a gold headband decorated with small feathers. Outfit inspired by the white Ethiopian habesha dress: flowing white knee-length dress with a bright colorful woven tibeb border in green, gold and red at the hem, cuffs and neckline, a light feathered shawl over the shoulders in white, brown and gold, gold bird-shaped earrings, a feather-patterned leather arm guard on her left forearm for a bird to land on, light brown leggings and sandals. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 ### Xiao Long (170 cm, 5'7")
@@ -109,7 +127,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 Make this once and upload it as a reference with each prompt, so the heights stay consistent.
 
 ```
-Character lineup, 15 stylized 3D cartoon heroes standing side by side in A-pose on a plain light grey background, a height ruler behind them, ordered from tallest to shortest: a giant Viking man (198 cm), a knight in white armor (188 cm), a tall lanky rapper in a white puffer jacket (185 cm), an athletic Haitian boy in leather armor and a blue kilt (183 cm), a blond American inventor in a black tech vest with goggles and a small drone (183 cm), a regal African queen with a lion crown (180 cm), a tall Arab girl in a sand-colored desert scarf and terracotta outfit (180 cm), a tall Indian girl with a long braid in a saffron and teal top (178 cm), a lean Japanese boy in a white and gold coat (172 cm), a Shaolin monk in white (170 cm), an Irish girl in a green tunic (168 cm), a girl with a big curly afro and a purple skirt (165 cm), a Brazilian girl with leaves in her hair and a green leaf outfit (165 cm), a small Korean girl with a red ponytail (160 cm), a small orange robot (150 cm). Pixar style.
+Character lineup, 18 stylized 3D cartoon heroes standing side by side in A-pose on a plain light grey background, a height ruler behind them, ordered from tallest to shortest: a giant Viking man (198 cm), a big Russian soldier in a fur hat and armored green coat with a rocket backpack (191 cm), a knight in white armor (188 cm), a tall lanky rapper in a white puffer jacket (185 cm), an athletic Haitian boy in leather armor and a blue kilt (183 cm), a blond American inventor in a black tech vest with goggles and a small drone (183 cm), a regal African queen with a lion crown (180 cm), a tall Arab girl in a sand-colored desert scarf and terracotta outfit (180 cm), a tall Indian girl with a long braid in a saffron and teal top (178 cm), a young Korean boy in a blue wave-pattern jacket (175 cm), a lean Japanese boy in a white and gold coat (172 cm), a Shaolin monk in white (170 cm), an Ethiopian girl in a white dress with a colorful border and a feathered shawl (170 cm), an Irish girl in a green tunic (168 cm), a girl with a big curly afro and a purple skirt (165 cm), a Brazilian girl with leaves in her hair and a green leaf outfit (165 cm), a small Korean girl with a red ponytail (160 cm), a small orange robot (150 cm). Pixar style.
 ```
 
 ## Tripo steps
