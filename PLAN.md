@@ -79,10 +79,10 @@ Prompts: `docs/HERO_PROMPTS.md`. Steps: image-to-3D, Retopology (Quad 10k), Rig 
 ## 3. Skins (prompts by Code, models by Cowork)
 
 3 skins per hero for launch (1 free, 2 unlock); 2 more per hero later = 5 prompts each.
-Prompts go in `docs/SKIN_PROMPTS.md`.
+Prompts are under each hero in `docs/HERO_PROMPTS.md`.
 
-- [ ] Code: write the skin prompts (start with the 6 launch heroes)
-- [ ] Cowork: make the launch skins in Tripo (6 heroes x 3)
+- [x] Code: 3 skin prompts per hero, under each hero in `docs/HERO_PROMPTS.md` (54 prompts)
+- [ ] Cowork: make the launch skins in Tripo (7 heroes x 3)
 - [ ] Code: put the skins in the game + store card pictures
 - Already in the game: Kapwa's Continental Champion, Ha-Neul's Storm Tiger
 

@@ -16,7 +16,7 @@ shortest). Steps for every hero:
 Rules: one character, A-pose, empty hands, no props floating around them (keep birds, drones and weapons
 out of the model; the game adds them).
 
-**Skins:** 5 per hero, prompts coming in `docs/SKIN_PROMPTS.md`. Same steps, file name `<hero>-<skin>.glb`.
+**Skins:** 3 per hero, prompts listed under each hero in `docs/HERO_PROMPTS.md`. Same steps, file name `<hero>-<skin>.glb`.
 
 ## ElevenLabs (audio)
 
