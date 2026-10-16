@@ -15,7 +15,7 @@ prompt, and their spot in the lineup prompt at the bottom.
 | Sir Aldric | United Kingdom, 35 | 188 cm (6'2") | Tall, strong, armored |
 | Kid Echo | USA, 18 | 185 cm (6'1") | Tall, lanky |
 | Kapwa Lamò | Haiti, 17 | 183 cm (6'0") | Tall, athletic, muscular |
-| Blaze Carter (new, tech + fire) | USA, 18 | 183 cm (6'0") | Tall, athletic |
+| Blaze Carter (new, tech gadgets) | USA, 18 | 183 cm (6'0") | Tall, athletic |
 | Malkia Nyota | Kenya, 32 | 180 cm (5'11") | Tall, regal |
 | Anaya Rao (new, earth) | India, 16 | 178 cm (5'10") | Tall, slim, strong |
 | Hayato Kurogane | Japan, 17 | 172 cm (5'8") | Lean, sharp |
@@ -47,9 +47,9 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 Single full-body 3D character, A-pose, front view, plain light grey background. Kapwa Lamò, a 17-year-old Black Haitian boy, tall, athletic and muscular, 183 cm (6 feet), about 7.7 heads tall, strong shoulders, long fit runner's legs. Dark brown skin, short curly black hair, confident kind face. Brown leather chest armor with a shoulder strap and one shoulder guard, red and white bead necklace, brown leather belt with a silver buckle, blue kilt over dark brown pants, leather arm guards with teal wraps, leather-wrapped sandals. Empty hands, no weapon. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
-### Blaze Carter (183 cm, 6'0") (new hero, tech guy, fire power from his gear)
+### Blaze Carter (183 cm, 6'0") (new hero, tech genius: gadgets he built himself)
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Blaze Carter, an 18-year-old white American tech genius, tall and athletic, 183 cm (6 feet), about 7.7 heads tall, broad shoulders, long runner's legs. Light skin with a few freckles, short messy blond hair with an undercut, blue eyes, clever confident grin, futuristic orange-tinted visor goggles pushed up on his forehead. Sleek black and dark grey tech suit with glowing orange circuit lines, a small glowing orange reactor core in the center of the chest, armored high-tech gauntlets on both forearms with orange vents (his flame launchers), a slim utility belt with small gadgets, black tech joggers with knee guards, chunky black and orange high-tech sneakers with glowing soles. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Blaze Carter, an 18-year-old white American inventor and tech genius, tall and athletic, 183 cm (6 feet), about 7.7 heads tall, broad shoulders, long runner's legs. Light skin with a few freckles, short messy blond hair, blue eyes, clever confident grin, homemade tech goggles with blue lenses pushed up on his forehead. Dark grey hoodie under a black techwear vest with many pockets and small tools, a homemade wrist computer with a glowing blue screen on his left forearm, a small round helper drone with blue lights hovering just above his right shoulder, a compact gadget backpack with antennas and cables, a utility belt with small gadgets, dark cargo pants with knee pads, chunky black sneakers with glowing blue soles. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 ### Malkia Nyota (180 cm, 5'11")
@@ -97,7 +97,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 Make this once and upload it as a reference with each prompt, so the heights stay consistent.
 
 ```
-Character lineup, 13 stylized 3D cartoon heroes standing side by side in A-pose on a plain light grey background, a height ruler behind them, ordered from tallest to shortest: a giant Viking man (198 cm), a knight in white armor (188 cm), a tall lanky rapper in a white puffer jacket (185 cm), an athletic Haitian boy in leather armor and a blue kilt (183 cm), a blond American tech genius in a black tech suit with glowing orange lines and visor goggles (183 cm), a regal African queen with a lion crown (180 cm), a tall Indian girl with a long braid in a saffron and teal top (178 cm), a lean Japanese boy in a white and gold coat (172 cm), a Shaolin monk in white (170 cm), an Irish girl in a green tunic (168 cm), a girl with a big curly afro and a purple skirt (165 cm), a small Korean girl with a red ponytail (160 cm), a small orange robot (150 cm). Pixar style.
+Character lineup, 13 stylized 3D cartoon heroes standing side by side in A-pose on a plain light grey background, a height ruler behind them, ordered from tallest to shortest: a giant Viking man (198 cm), a knight in white armor (188 cm), a tall lanky rapper in a white puffer jacket (185 cm), an athletic Haitian boy in leather armor and a blue kilt (183 cm), a blond American inventor in a black tech vest with goggles and a small drone (183 cm), a regal African queen with a lion crown (180 cm), a tall Indian girl with a long braid in a saffron and teal top (178 cm), a lean Japanese boy in a white and gold coat (172 cm), a Shaolin monk in white (170 cm), an Irish girl in a green tunic (168 cm), a girl with a big curly afro and a purple skirt (165 cm), a small Korean girl with a red ponytail (160 cm), a small orange robot (150 cm). Pixar style.
 ```
 
 ## Tripo steps
