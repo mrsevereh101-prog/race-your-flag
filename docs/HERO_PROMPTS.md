@@ -23,7 +23,7 @@ prompt, and their spot in the lineup prompt at the bottom.
 | Xiao Long | China, 18 | 170 cm (5'7") | Compact, strong |
 | Aria Windsong | Ireland, 18 | 168 cm (5'6") | Slim, light |
 | Zuri Vapor | USA, 18 | 165 cm (5'5") | Slim, graceful |
-| Luana Ipê (new, tree/thorns) | Brazil, 18 | 165 cm (5'5") | Slim, agile |
+| Luana Ipê (new, tree/thorns) | Brazil, 15 | 165 cm (5'5") | Slim, agile |
 | Ha-Neul | Korea, 17 | 160 cm (5'3") | Small, quick |
 | Volt-X | Germany, v3.0 | 150 cm (4'11") | Small robot |
 
@@ -91,7 +91,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 
 ### Luana Ipê (165 cm, 5'5") (new hero, tree power: thorny vines bind rivals)
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Luana Ipê, an 18-year-old Brazilian girl from the Amazon, slim and agile, 165 cm (5 feet 5 inches), about 7 heads tall. Warm golden-brown skin, long wavy dark brown hair with small green leaves and a few tiny yellow ipê flowers woven in, bright green eyes, playful confident smile. Nature-inspired outfit: fitted leaf-green top with a wrap of woven vines across the shoulder, a skirt of layered large green leaves over brown fitted shorts, a belt of braided vines with a small wooden seed charm, wooden bead bracelets, thin vines curling around her forearms and lower legs, light brown wrapped sandals. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Luana Ipê, a 15-year-old Brazilian girl from the Amazon, youthful, slim and agile, 165 cm (5 feet 5 inches), about 7 heads tall. Warm golden-brown skin, long wavy dark brown hair with small green leaves and a few tiny yellow ipê flowers woven in, bright green eyes, playful confident smile. Nature-inspired outfit: fitted leaf-green top with a wrap of woven vines across the shoulder, a skirt of layered large green leaves over brown fitted shorts, a belt of braided vines with a small wooden seed charm, wooden bead bracelets, thin vines curling around her forearms and lower legs, light brown wrapped sandals. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 ### Ha-Neul (160 cm, 5'3")
