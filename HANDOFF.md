@@ -23,6 +23,12 @@
 - Weapons and capes hidden by default; Settings > Theme has "Flag cape" and "Weapons" switches.
   Flag floats above the player's head.
 
+## Plan map
+
+`PLAN.md` is the user's progress tracker (launch rules, seasons, every to-do). Keep it ticked and
+up to date whenever something is done or decided. Launch rules (Oct 16): 6 launch heroes, the rest by
+season, 3 skins per hero (1 free + 2 unlock), dev/tester accounts see everything unlocked.
+
 ## Hero build prompts and heights
 
 `docs/HERO_PROMPTS.md` holds the Tripo prompt and height for every hero (tallest: Sigurd 198 cm, shortest:
