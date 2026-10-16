@@ -30,7 +30,44 @@ prompt, and their spot in the lineup prompt at the bottom.
 | Ha-Neul | Korea, 17 | 160 cm (5'3") | Small, quick |
 | Volt-X | Germany, v3.0 | 150 cm (4'11") | Small robot |
 
-## Prompts
+## Launch heroes (in launch order)
+
+### 1. Kapwa Lamò (183 cm, 6'0")
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Kapwa Lamò, a 17-year-old Black Haitian boy, tall, athletic and muscular, 183 cm (6 feet), about 7.7 heads tall, strong shoulders, long fit runner's legs. Dark brown skin, short curly black hair, confident kind face. Brown leather chest armor with a shoulder strap and one shoulder guard, red and white bead necklace, brown leather belt with a silver buckle, blue kilt over dark brown pants, leather arm guards with teal wraps, leather-wrapped sandals. Empty hands, no weapon. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+### 2. Blake Carter (183 cm, 6'0") (new hero, tech genius: gadgets he built himself)
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Blake Carter, an 18-year-old white American inventor and tech genius, tall and athletic, 183 cm (6 feet), about 7.7 heads tall, broad shoulders, long runner's legs. Light skin with a few freckles, short messy blond hair, blue eyes, clever confident grin, homemade tech goggles with blue lenses pushed up on his forehead. Dark grey hoodie under a black techwear vest with many pockets and small tools, a homemade wrist computer with a glowing blue screen on his left forearm, a small round helper drone with blue lights hovering just above his right shoulder, a compact gadget backpack with antennas and cables, a utility belt with small gadgets, dark cargo pants with knee pads, chunky black sneakers with glowing blue soles. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+### 3. Aria Windsong (168 cm, 5'6")
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Aria Windsong, an 18-year-old Irish girl, slim and light, 168 cm, about 7.2 heads tall, long legs, graceful build. Fair skin with light freckles, long brown hair in a side braid, warm smile. Green tunic with white Celtic swirl patterns, brown leather shoulder guards and arm guards, cream rope sash at the waist, quilted green skirt, brown leggings, brown leather boots, small green pendant necklace. Empty hands, no bow. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+### 4. Hayato Kurogane (172 cm, 5'8")
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Hayato Kurogane, a 17-year-old Japanese boy, lean and sharp, 172 cm, about 7.3 heads tall, slim athletic build. Spiky dark brown hair with shaved sides, calm focused face. Modern samurai style: long white coat with gold trim and gold dragon embroidery, white top with rope cross-lacing on the chest, wide white hakama trousers with gold wave patterns at the hem, fingerless white gloves with gold spikes, white and gold sneakers. Empty hands, no sword. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+### 5. Malkia Nyota (180 cm, 5'11")
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Malkia Nyota, a 32-year-old Kenyan queen, tall and regal, 180 cm, about 7.6 heads tall, long elegant neck, strong graceful build, proud posture. Dark brown skin, warm wise smile, golden lion-head crown with a carved mane. Golden yellow dress with lion prints, a golden fur stole over the shoulders, amber bead necklace, wide gold arm cuffs, gold strap sandals. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+### 6. Kid Echo (185 cm, 6'1")
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Kid Echo, an 18-year-old Black American rapper, tall and lanky, 185 cm (6 feet 1 inch), about 7.8 heads tall, long arms and legs, slim build. Short twisted hair, big friendly smile, small earring. Cropped white puffer jacket, white headphones around his neck, silver chains with a record pendant, oversized grey t-shirt with a vinyl record print, grey cargo joggers, white sneakers. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+### 7. Ha-Neul (160 cm, 5'3")
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Ha-Neul, a 17-year-old Korean Taekwondo girl, small and quick, 160 cm, about 6.8 heads tall, petite athletic build, strong legs. Long red-brown hair in a high ponytail with a white ribbon and colorful hair clips, big bright smile. Cropped pastel lilac and pink jacket with white stars, white crop top, pleated white skirt with a pink belt and a silver chain, pink leggings, pink fingerless gloves, chunky white and pink sneakers. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+## Coming soon heroes (tallest first)
 
 ### Sigurd Stormbeard (198 cm, 6'6")
 ```
@@ -45,26 +82,6 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 ### Sir Aldric (188 cm, 6'2")
 ```
 Single full-body 3D character, A-pose, front view, plain light grey background. Sir Aldric, a 35-year-old English knight, tall and strong, 188 cm, about 7.8 heads tall, broad shoulders, long legs, sturdy build. Short brown hair, short beard, a small scar on his cheek, serious calm face. White plate armor with bronze trim, a golden sun emblem on the chest, chainmail on the arms and hips, a white cloth tabard hanging down the front, white armored boots. Empty hands, no weapon, no shield. Stylized 3D cartoon game character, Pixar style, high detail.
-```
-
-### Kid Echo (185 cm, 6'1")
-```
-Single full-body 3D character, A-pose, front view, plain light grey background. Kid Echo, an 18-year-old Black American rapper, tall and lanky, 185 cm (6 feet 1 inch), about 7.8 heads tall, long arms and legs, slim build. Short twisted hair, big friendly smile, small earring. Cropped white puffer jacket, white headphones around his neck, silver chains with a record pendant, oversized grey t-shirt with a vinyl record print, grey cargo joggers, white sneakers. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
-```
-
-### Kapwa Lamò (183 cm, 6'0")
-```
-Single full-body 3D character, A-pose, front view, plain light grey background. Kapwa Lamò, a 17-year-old Black Haitian boy, tall, athletic and muscular, 183 cm (6 feet), about 7.7 heads tall, strong shoulders, long fit runner's legs. Dark brown skin, short curly black hair, confident kind face. Brown leather chest armor with a shoulder strap and one shoulder guard, red and white bead necklace, brown leather belt with a silver buckle, blue kilt over dark brown pants, leather arm guards with teal wraps, leather-wrapped sandals. Empty hands, no weapon. Stylized 3D cartoon game character, Pixar style, high detail.
-```
-
-### Blake Carter (183 cm, 6'0") (new hero, tech genius: gadgets he built himself)
-```
-Single full-body 3D character, A-pose, front view, plain light grey background. Blake Carter, an 18-year-old white American inventor and tech genius, tall and athletic, 183 cm (6 feet), about 7.7 heads tall, broad shoulders, long runner's legs. Light skin with a few freckles, short messy blond hair, blue eyes, clever confident grin, homemade tech goggles with blue lenses pushed up on his forehead. Dark grey hoodie under a black techwear vest with many pockets and small tools, a homemade wrist computer with a glowing blue screen on his left forearm, a small round helper drone with blue lights hovering just above his right shoulder, a compact gadget backpack with antennas and cables, a utility belt with small gadgets, dark cargo pants with knee pads, chunky black sneakers with glowing blue soles. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
-```
-
-### Malkia Nyota (180 cm, 5'11")
-```
-Single full-body 3D character, A-pose, front view, plain light grey background. Malkia Nyota, a 32-year-old Kenyan queen, tall and regal, 180 cm, about 7.6 heads tall, long elegant neck, strong graceful build, proud posture. Dark brown skin, warm wise smile, golden lion-head crown with a carved mane. Golden yellow dress with lion prints, a golden fur stole over the shoulders, amber bead necklace, wide gold arm cuffs, gold strap sandals. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 ### Layla Al-Rimal (180 cm, 5'11") (new hero, sand power)
@@ -82,11 +99,6 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 Single full-body 3D character, A-pose, front view, plain light grey background. Seo Min-jun, a 16-year-old Korean boy, lean and athletic, 175 cm (5 feet 9 inches), about 7.4 heads tall, long legs, youthful face. Light skin, soft black hair with wavy bangs and blue-dyed tips, calm cool smile. Modern streetwear with a water theme: deep blue and white zip jacket with a wave pattern along the sleeves, white t-shirt, a small silver droplet pendant, navy track pants with a light blue side stripe, white and blue sneakers, a light blue wristband with a glowing water-drop gem. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
-### Hayato Kurogane (172 cm, 5'8")
-```
-Single full-body 3D character, A-pose, front view, plain light grey background. Hayato Kurogane, a 17-year-old Japanese boy, lean and sharp, 172 cm, about 7.3 heads tall, slim athletic build. Spiky dark brown hair with shaved sides, calm focused face. Modern samurai style: long white coat with gold trim and gold dragon embroidery, white top with rope cross-lacing on the chest, wide white hakama trousers with gold wave patterns at the hem, fingerless white gloves with gold spikes, white and gold sneakers. Empty hands, no sword. Stylized 3D cartoon game character, Pixar style, high detail.
-```
-
 ### Selam Tesfaye (170 cm, 5'7") (new hero, queen of the birds)
 ```
 Single full-body 3D character, A-pose, front view, plain light grey background. Selam Tesfaye, a 17-year-old Ethiopian girl, slim and graceful, 170 cm (5 feet 7 inches), about 7.2 heads tall, regal posture. Rich brown skin, large expressive eyes, long dark braids pulled back with a gold headband decorated with small feathers. Outfit inspired by the white Ethiopian habesha dress: flowing white knee-length dress with a bright colorful woven tibeb border in green, gold and red at the hem, cuffs and neckline, a light feathered shawl over the shoulders in white, brown and gold, gold bird-shaped earrings, a feather-patterned leather arm guard on her left forearm for a bird to land on, light brown leggings and sandals. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
@@ -95,11 +107,6 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 ### Xiao Long (170 cm, 5'7")
 ```
 Single full-body 3D character, A-pose, front view, plain light grey background. Xiao Long, an 18-year-old Chinese Shaolin monk, compact and strong, 170 cm, about 7.2 heads tall, solid muscular build, low center of gravity. Shaved head, confident grin. White kung fu robe with black tiger-stripe marks on the shoulders, light blue sash belt, light blue prayer bead necklace, blue wrapped forearms, baggy white trousers, blue wrapped shins, white cloth shoes. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
-```
-
-### Aria Windsong (168 cm, 5'6")
-```
-Single full-body 3D character, A-pose, front view, plain light grey background. Aria Windsong, an 18-year-old Irish girl, slim and light, 168 cm, about 7.2 heads tall, long legs, graceful build. Fair skin with light freckles, long brown hair in a side braid, warm smile. Green tunic with white Celtic swirl patterns, brown leather shoulder guards and arm guards, cream rope sash at the waist, quilted green skirt, brown leggings, brown leather boots, small green pendant necklace. Empty hands, no bow. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 ### Zuri Vapor (165 cm, 5'5")
@@ -112,17 +119,19 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 Single full-body 3D character, A-pose, front view, plain light grey background. Luana Ipê, a 15-year-old Brazilian girl from the Amazon, youthful, slim and agile, 165 cm (5 feet 5 inches), about 7 heads tall. Warm golden-brown skin, long wavy dark brown hair with small green leaves and a few tiny yellow ipê flowers woven in, bright green eyes, playful confident smile. Nature-inspired outfit: fitted leaf-green top with a wrap of woven vines across the shoulder, a skirt of layered large green leaves over brown fitted shorts, a belt of braided vines with a small wooden seed charm, wooden bead bracelets, thin vines curling around her forearms and lower legs, light brown wrapped sandals. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
-### Ha-Neul (160 cm, 5'3")
-```
-Single full-body 3D character, A-pose, front view, plain light grey background. Ha-Neul, a 17-year-old Korean Taekwondo girl, small and quick, 160 cm, about 6.8 heads tall, petite athletic build, strong legs. Long red-brown hair in a high ponytail with a white ribbon and colorful hair clips, big bright smile. Cropped pastel lilac and pink jacket with white stars, white crop top, pleated white skirt with a pink belt and a silver chain, pink leggings, pink fingerless gloves, chunky white and pink sneakers. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
-```
-
 ### Volt-X (150 cm, 4'11")
 ```
 Single full-body 3D character, A-pose, front view, plain light grey background. Volt-X, a small friendly running robot, 150 cm, compact body with a round head about one fifth of its height, short sturdy legs. Orange and teal armor plates with purple joints, small colorful pixel decals, a round helmet head with a teal screen face showing a happy pixel smile, a small antenna, a glowing purple core in the chest, grey robot hands, chunky orange feet. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
-## Height ruler lineup (optional reference picture)
+
+## Launch lineup (optional reference picture for the 7 launch heroes)
+
+```
+Character lineup, 7 stylized 3D cartoon heroes standing side by side in A-pose on a plain light grey background, a height ruler behind them, from left to right: a tall lanky Black rapper in a white puffer jacket (185 cm), an athletic Black Haitian boy in brown leather armor and a blue kilt (183 cm), a blond American inventor in a black tech vest with goggles and a small drone (183 cm), a regal African queen with a golden lion crown (180 cm), a lean Japanese boy in a long white and gold coat (172 cm), an Irish girl with a brown braid in a green tunic (168 cm), a small Korean girl with a red ponytail in a pastel jacket (160 cm). Pixar style.
+```
+
+## Full lineup, all heroes (optional reference picture)
 
 Make this once and upload it as a reference with each prompt, so the heights stay consistent.
 
