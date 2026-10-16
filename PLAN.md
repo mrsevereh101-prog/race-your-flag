@@ -9,26 +9,27 @@ Who does what: **You** = you, **Cowork** = Claude Cowork (Tripo and ElevenLabs),
 
 ## 1. Launch rules (decided Oct 16)
 
-- The game launches with **6 heroes**. The other heroes arrive **by season**.
+- The game launches with **7 heroes**. The other heroes arrive **by season**.
 - Every hero starts with **3 skins: 1 free + 2 to unlock**. More skins can come with seasons.
 - The **developer account** (and testers) keep **every hero and skin unlocked**.
 
-### Launch heroes (6) - proposed, change if you like
+### Launch heroes (7)
 | | Hero | Country | Age | Height | Power |
 |---|---|---|---|---|---|
 | [ ] | Kapwa Lamò | Haiti | 17 | 6'0" | Lightning |
 | [ ] | Blake Carter | USA | 18 | 6'0" | Gadgets (power to pick) |
+| [ ] | Aria Windsong | Ireland | 18 | 5'6" | Wind |
 | [ ] | Hayato Kurogane | Japan | 17 | 5'8" | Slash |
 | [ ] | Malkia Nyota | Kenya | 32 | 5'11" | Stampede |
 | [ ] | Kid Echo | USA | 18 | 6'1" | Bass Drop |
 | [ ] | Ha-Neul | Korea | 17 | 5'3" | Hurricane Kick |
 
-### Seasons - proposed (3 new heroes each)
+### Seasons - proposed (new heroes each season)
 | Season | Heroes |
 |---|---|
 | Season 1 | Sir Aldric (UK, Holy Light), Zuri Vapor (USA, Gas), Xiao Long (China, Fire Fist) |
 | Season 2 | Sigurd Stormbeard (Norway, Blizzard), Volt-X (Germany, Laser Grid), Layla Al-Rimal (Jordan, Sand) |
-| Season 3 | Anaya Rao (India, Earth), Aria Windsong (Ireland, Wind), Luana Ipê (Brazil, Thorns) |
+| Season 3 | Anaya Rao (India, Earth), Luana Ipê (Brazil, Thorns) |
 | Season 4 | Dmitri Volkov (Russia, War machines), Seo Min-jun (Korea, Water), Selam Tesfaye (Ethiopia, Birds) |
 
 ### Game code for the launch rules (Code)
@@ -70,7 +71,7 @@ Prompts: `docs/HERO_PROMPTS.md`. Steps: image-to-3D, Retopology (Quad 10k), Rig 
 
 ### Decisions still open
 - [ ] Blake: power (Drone Swarm, EMP or Grapple Hook)
-- [x] Renamed from Blaze to Blake (Oct 16); Blake replaces Aria at launch, Aria moves to Season 3
+- [x] Renamed from Blaze to Blake (Oct 16); Blake added to launch; launch is now 7 heroes with Aria kept
 - [ ] Anaya: earth power OK?
 - [ ] Powers for Layla (Sandstorm?), Luana (Thorn Bind), Dmitri (Rocket Barrage?), Min-jun (Tidal Wave?), Selam (Sky Swarm?)
 
