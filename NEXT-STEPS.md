@@ -3,6 +3,17 @@
 Game: https://mrsevereh101-prog.github.io/race-your-flag/
 Supabase project: hzzqnwzsasuwjafmsgqh
 
+## To do (Oct 16)
+1. [ ] **Sound effects**: 48 are in `sfx/` (see `SOUND-EFFECTS.md`). Still needed: one sound per hero power,
+   including the new heroes (Blaze, Anaya, Layla, Luana, Dmitri, Min-jun, Selam), made in ElevenLabs Sound Effects.
+2. [ ] **Voices**: done for Kapwa (warrior), Aria (archer), Hayato (samurai) (`voice/`, `VOICE-LINES.md`).
+   Still needed: every other hero, with voices matched to their age (teens vs older heroes).
+   The elf and dwarf voice files are left over from removed heroes.
+3. [ ] **5 skin prompts per hero**: one Tripo prompt per skin, same height and A-pose rules as
+   `docs/HERO_PROMPTS.md` (18 heroes = 90 prompts).
+4. [ ] **Attack effect prompts**: a 3D or 2D art prompt for each hero's power effect (lightning, wind,
+   stampede, sandstorm, thorns, birds...).
+
 ## Done
 - Online play through Supabase Realtime (rooms, lobby, races, Flag Challenge online)
 - Worldwide leaderboards (`supabase/leaderboard.sql`, already run)
