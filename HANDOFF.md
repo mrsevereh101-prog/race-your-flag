@@ -26,8 +26,8 @@
 ## Plan map
 
 `PLAN.md` is the user's progress tracker (launch rules, seasons, every to-do). Keep it ticked and
-up to date whenever something is done or decided. Launch rules (Oct 16): 7 launch heroes (Kapwa, Blake, Aria, Hayato, Malkia, Kid Echo, Ha-Neul), the rest by
-season, 3 skins per hero (1 free + 2 unlock), dev/tester accounts see everything unlocked.
+up to date whenever something is done or decided. Launch rules (Oct 16): 7 launch heroes (Kapwa, Blake, Aria, Hayato, Malkia, Kid Echo, Ha-Neul), the rest show only "Coming soon"
+(no dates or seasons in the game), 3 skins per hero (1 free + 2 unlock), dev/tester accounts see everything unlocked.
 
 ## Hero build prompts and heights
 

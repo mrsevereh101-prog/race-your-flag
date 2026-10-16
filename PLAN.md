@@ -9,7 +9,7 @@ Who does what: **You** = you, **Cowork** = Claude Cowork (Tripo and ElevenLabs),
 
 ## 1. Launch rules (decided Oct 16)
 
-- The game launches with **7 heroes**. The other heroes arrive **by season**.
+- The game launches with **7 heroes**. The others show **"Coming soon"** (no dates or seasons shown).
 - Every hero starts with **3 skins: 1 free + 2 to unlock**. More skins can come with seasons.
 - The **developer account** (and testers) keep **every hero and skin unlocked**.
 
@@ -24,19 +24,18 @@ Who does what: **You** = you, **Cowork** = Claude Cowork (Tripo and ElevenLabs),
 | [ ] | Kid Echo | USA | 18 | 6'1" | Bass Drop |
 | [ ] | Ha-Neul | Korea | 17 | 5'3" | Hurricane Kick |
 
-### Seasons - proposed (new heroes each season)
-| Season | Heroes |
-|---|---|
-| Season 1 | Sir Aldric (UK, Holy Light), Zuri Vapor (USA, Gas), Xiao Long (China, Fire Fist) |
-| Season 2 | Sigurd Stormbeard (Norway, Blizzard), Volt-X (Germany, Laser Grid), Layla Al-Rimal (Jordan, Sand) |
-| Season 3 | Anaya Rao (India, Earth), Luana Ipê (Brazil, Thorns) |
-| Season 4 | Dmitri Volkov (Russia, War machines), Seo Min-jun (Korea, Water), Selam Tesfaye (Ethiopia, Birds) |
+### Coming soon (11)
+The game only says **"Coming soon"** on these heroes, with no dates or season numbers, so the release
+order can change at any time. The order below is just a working idea, not shown in the game.
+
+Sir Aldric, Zuri Vapor, Xiao Long, Sigurd Stormbeard, Volt-X, Layla Al-Rimal, Anaya Rao, Luana Ipê,
+Dmitri Volkov, Seo Min-jun, Selam Tesfaye
 
 ### Game code for the launch rules (Code)
-- [ ] Lock heroes that are not out yet ("Coming in Season X" on their card)
+- [ ] Lock heroes that are not out yet ("Coming soon" on their card, no dates or seasons)
 - [ ] Skins: 1 free + 2 unlockable per hero (by level, coins or diamonds - to decide)
 - [ ] Developer and tester accounts see everything unlocked
-- [ ] Season system: a simple list of which heroes and skins are out
+- [ ] A simple list in the game code of which heroes and skins are out (easy to change any time)
 
 ---
 
