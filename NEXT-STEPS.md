@@ -5,7 +5,7 @@ Supabase project: hzzqnwzsasuwjafmsgqh
 
 ## To do (Oct 16)
 1. [ ] **Sound effects**: 48 are in `sfx/` (see `SOUND-EFFECTS.md`). Still needed: one sound per hero power,
-   including the new heroes (Blaze, Anaya, Layla, Luana, Dmitri, Min-jun, Selam), made in ElevenLabs Sound Effects.
+   including the new heroes (Blake, Anaya, Layla, Luana, Dmitri, Min-jun, Selam), made in ElevenLabs Sound Effects.
 2. [ ] **Voices**: done for Kapwa (warrior), Aria (archer), Hayato (samurai) (`voice/`, `VOICE-LINES.md`).
    Still needed: every other hero, with voices matched to their age (teens vs older heroes).
    The elf and dwarf voice files are left over from removed heroes.

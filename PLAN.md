@@ -17,7 +17,7 @@ Who does what: **You** = you, **Cowork** = Claude Cowork (Tripo and ElevenLabs),
 | | Hero | Country | Age | Height | Power |
 |---|---|---|---|---|---|
 | [ ] | Kapwa Lamò | Haiti | 17 | 6'0" | Lightning |
-| [ ] | Aria Windsong | Ireland | 18 | 5'6" | Wind |
+| [ ] | Blake Carter | USA | 18 | 6'0" | Gadgets (power to pick) |
 | [ ] | Hayato Kurogane | Japan | 17 | 5'8" | Slash |
 | [ ] | Malkia Nyota | Kenya | 32 | 5'11" | Stampede |
 | [ ] | Kid Echo | USA | 18 | 6'1" | Bass Drop |
@@ -28,7 +28,7 @@ Who does what: **You** = you, **Cowork** = Claude Cowork (Tripo and ElevenLabs),
 |---|---|
 | Season 1 | Sir Aldric (UK, Holy Light), Zuri Vapor (USA, Gas), Xiao Long (China, Fire Fist) |
 | Season 2 | Sigurd Stormbeard (Norway, Blizzard), Volt-X (Germany, Laser Grid), Layla Al-Rimal (Jordan, Sand) |
-| Season 3 | Anaya Rao (India, Earth), Blaze Carter (USA, Gadgets), Luana Ipê (Brazil, Thorns) |
+| Season 3 | Anaya Rao (India, Earth), Aria Windsong (Ireland, Wind), Luana Ipê (Brazil, Thorns) |
 | Season 4 | Dmitri Volkov (Russia, War machines), Seo Min-jun (Korea, Water), Selam Tesfaye (Ethiopia, Birds) |
 
 ### Game code for the launch rules (Code)
@@ -50,7 +50,7 @@ Prompts: `docs/HERO_PROMPTS.md`. Steps: image-to-3D, Retopology (Quad 10k), Rig 
 | [ ] | [ ] | Sir Aldric | 6'2" |
 | [ ] | [ ] | Kid Echo | 6'1" |
 | [ ] | [ ] | Kapwa Lamò | 6'0" |
-| [ ] | [ ] | Blaze Carter (new) | 6'0" |
+| [ ] | [ ] | Blake Carter (new) | 6'0" |
 | [ ] | [ ] | Malkia Nyota | 5'11" |
 | [ ] | [ ] | Layla Al-Rimal (new) | 5'11" |
 | [ ] | [ ] | Anaya Rao (new) | 5'10" |
@@ -69,7 +69,8 @@ Prompts: `docs/HERO_PROMPTS.md`. Steps: image-to-3D, Retopology (Quad 10k), Rig 
 - [ ] Hero card pictures for the new heroes (transparent, like the current ones)
 
 ### Decisions still open
-- [ ] Blaze: power (Drone Swarm, EMP or Grapple Hook) and keep the name "Blaze"?
+- [ ] Blake: power (Drone Swarm, EMP or Grapple Hook)
+- [x] Renamed from Blaze to Blake (Oct 16); Blake replaces Aria at launch, Aria moves to Season 3
 - [ ] Anaya: earth power OK?
 - [ ] Powers for Layla (Sandstorm?), Luana (Thorn Bind), Dmitri (Rocket Barrage?), Min-jun (Tidal Wave?), Selam (Sky Swarm?)
 
@@ -98,7 +99,7 @@ Prompts go in `docs/SKIN_PROMPTS.md`.
 
 - [x] Kapwa, Aria, Hayato (in `voice/`, `VOICE-LINES.md`)
 - [ ] Code: write lines and a voice description for the other 15 heroes, matched to their age
-- [ ] Cowork: record them (launch heroes first: Malkia, Kid Echo, Ha-Neul)
+- [ ] Cowork: record them (launch heroes first: Blake, Malkia, Kid Echo, Ha-Neul)
 - [ ] Code: put them in the game
 
 ## 6. Power effects art (prompts by Code)

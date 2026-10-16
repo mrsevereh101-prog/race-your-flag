@@ -16,7 +16,7 @@ prompt, and their spot in the lineup prompt at the bottom.
 | Sir Aldric | United Kingdom, 35 | 188 cm (6'2") | Tall, strong, armored |
 | Kid Echo | USA, 18 | 185 cm (6'1") | Tall, lanky |
 | Kapwa Lamò | Haiti, 17 | 183 cm (6'0") | Tall, athletic, muscular |
-| Blaze Carter (new, tech gadgets) | USA, 18 | 183 cm (6'0") | Tall, athletic |
+| Blake Carter (new, tech gadgets) | USA, 18 | 183 cm (6'0") | Tall, athletic |
 | Malkia Nyota | Kenya, 32 | 180 cm (5'11") | Tall, regal |
 | Layla Al-Rimal (new, sand) | Jordan, 17 | 180 cm (5'11") | Tall, lean, agile |
 | Anaya Rao (new, earth) | India, 16 | 178 cm (5'10") | Tall, slim, strong |
@@ -57,9 +57,9 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 Single full-body 3D character, A-pose, front view, plain light grey background. Kapwa Lamò, a 17-year-old Black Haitian boy, tall, athletic and muscular, 183 cm (6 feet), about 7.7 heads tall, strong shoulders, long fit runner's legs. Dark brown skin, short curly black hair, confident kind face. Brown leather chest armor with a shoulder strap and one shoulder guard, red and white bead necklace, brown leather belt with a silver buckle, blue kilt over dark brown pants, leather arm guards with teal wraps, leather-wrapped sandals. Empty hands, no weapon. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
-### Blaze Carter (183 cm, 6'0") (new hero, tech genius: gadgets he built himself)
+### Blake Carter (183 cm, 6'0") (new hero, tech genius: gadgets he built himself)
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Blaze Carter, an 18-year-old white American inventor and tech genius, tall and athletic, 183 cm (6 feet), about 7.7 heads tall, broad shoulders, long runner's legs. Light skin with a few freckles, short messy blond hair, blue eyes, clever confident grin, homemade tech goggles with blue lenses pushed up on his forehead. Dark grey hoodie under a black techwear vest with many pockets and small tools, a homemade wrist computer with a glowing blue screen on his left forearm, a small round helper drone with blue lights hovering just above his right shoulder, a compact gadget backpack with antennas and cables, a utility belt with small gadgets, dark cargo pants with knee pads, chunky black sneakers with glowing blue soles. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Blake Carter, an 18-year-old white American inventor and tech genius, tall and athletic, 183 cm (6 feet), about 7.7 heads tall, broad shoulders, long runner's legs. Light skin with a few freckles, short messy blond hair, blue eyes, clever confident grin, homemade tech goggles with blue lenses pushed up on his forehead. Dark grey hoodie under a black techwear vest with many pockets and small tools, a homemade wrist computer with a glowing blue screen on his left forearm, a small round helper drone with blue lights hovering just above his right shoulder, a compact gadget backpack with antennas and cables, a utility belt with small gadgets, dark cargo pants with knee pads, chunky black sneakers with glowing blue soles. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 ### Malkia Nyota (180 cm, 5'11")
