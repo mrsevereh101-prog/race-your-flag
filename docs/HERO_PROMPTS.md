@@ -17,6 +17,7 @@ prompt, and their spot in the lineup prompt at the bottom.
 | Kapwa Lamò | Haiti, 17 | 183 cm (6'0") | Tall, athletic, muscular |
 | Blaze Carter (new, tech gadgets) | USA, 18 | 183 cm (6'0") | Tall, athletic |
 | Malkia Nyota | Kenya, 32 | 180 cm (5'11") | Tall, regal |
+| Layla Al-Rimal (new, sand) | Jordan, 17 | 180 cm (5'11") | Tall, lean, agile |
 | Anaya Rao (new, earth) | India, 16 | 178 cm (5'10") | Tall, slim, strong |
 | Hayato Kurogane | Japan, 17 | 172 cm (5'8") | Lean, sharp |
 | Xiao Long | China, 18 | 170 cm (5'7") | Compact, strong |
@@ -55,6 +56,11 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 ### Malkia Nyota (180 cm, 5'11")
 ```
 Single full-body 3D character, A-pose, front view, plain light grey background. Malkia Nyota, a 32-year-old Kenyan queen, tall and regal, 180 cm, about 7.6 heads tall, long elegant neck, strong graceful build, proud posture. Dark brown skin, warm wise smile, golden lion-head crown with a carved mane. Golden yellow dress with lion prints, a golden fur stole over the shoulders, amber bead necklace, wide gold arm cuffs, gold strap sandals. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+### Layla Al-Rimal (180 cm, 5'11") (new hero, sand power)
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Layla Al-Rimal, a 17-year-old Arab girl from Jordan, tall, lean and agile, 180 cm (5 feet 11 inches), about 7.6 heads tall, long legs. Warm olive-tan skin, dark brown eyes with a fierce confident look, long dark wavy hair partly covered by a flowing sand-colored desert scarf wrapped loosely around her head and neck with red and white patterned edges. Sand and terracotta colored athletic desert outfit: fitted long-sleeve top with gold geometric patterns, a short wrapped sash belt in deep red, a light sand-colored half cape over one shoulder, loose tan trousers tucked into wrapped ankle guards, light desert running boots, small gold cuff bracelets. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 ### Anaya Rao (178 cm, 5'10") (new hero, earth power)
@@ -97,7 +103,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 Make this once and upload it as a reference with each prompt, so the heights stay consistent.
 
 ```
-Character lineup, 13 stylized 3D cartoon heroes standing side by side in A-pose on a plain light grey background, a height ruler behind them, ordered from tallest to shortest: a giant Viking man (198 cm), a knight in white armor (188 cm), a tall lanky rapper in a white puffer jacket (185 cm), an athletic Haitian boy in leather armor and a blue kilt (183 cm), a blond American inventor in a black tech vest with goggles and a small drone (183 cm), a regal African queen with a lion crown (180 cm), a tall Indian girl with a long braid in a saffron and teal top (178 cm), a lean Japanese boy in a white and gold coat (172 cm), a Shaolin monk in white (170 cm), an Irish girl in a green tunic (168 cm), a girl with a big curly afro and a purple skirt (165 cm), a small Korean girl with a red ponytail (160 cm), a small orange robot (150 cm). Pixar style.
+Character lineup, 14 stylized 3D cartoon heroes standing side by side in A-pose on a plain light grey background, a height ruler behind them, ordered from tallest to shortest: a giant Viking man (198 cm), a knight in white armor (188 cm), a tall lanky rapper in a white puffer jacket (185 cm), an athletic Haitian boy in leather armor and a blue kilt (183 cm), a blond American inventor in a black tech vest with goggles and a small drone (183 cm), a regal African queen with a lion crown (180 cm), a tall Arab girl in a sand-colored desert scarf and terracotta outfit (180 cm), a tall Indian girl with a long braid in a saffron and teal top (178 cm), a lean Japanese boy in a white and gold coat (172 cm), a Shaolin monk in white (170 cm), an Irish girl in a green tunic (168 cm), a girl with a big curly afro and a purple skirt (165 cm), a small Korean girl with a red ponytail (160 cm), a small orange robot (150 cm). Pixar style.
 ```
 
 ## Tripo steps
