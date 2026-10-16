@@ -397,6 +397,15 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 ```
 
 
+## Store icon prompt (for every skin)
+
+Upload the skin's picture with this prompt. Keep the green background (Claude cuts it out). Name the
+picture after the skin, for example `kapwa-stormking.png`.
+
+```
+Using the uploaded character as reference, show the complete outfit as a single 3D game icon, floating and hollow inside like an invisible mannequin: top, bottoms and shoes in their normal positions, as if worn by an invisible person, plus any headwear (crown, helmet, hat, headband or hair accessory) floating just above the collar in its normal position. Remove the person completely: no head, no face, no hair, no skin, no hands. Keep the exact colors, patterns, materials and details. Front view, centered, filling most of the frame. Stylized 3D cartoon game icon, soft studio lighting, clean edges, plain solid bright green background, no text, square image.
+```
+
 ## Launch lineup (optional reference picture for the 7 launch heroes)
 
 ```
