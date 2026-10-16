@@ -23,6 +23,7 @@ prompt, and their spot in the lineup prompt at the bottom.
 | Xiao Long | China, 18 | 170 cm (5'7") | Compact, strong |
 | Aria Windsong | Ireland, 18 | 168 cm (5'6") | Slim, light |
 | Zuri Vapor | USA, 18 | 165 cm (5'5") | Slim, graceful |
+| Luana Ipê (new, tree/thorns) | Brazil, 18 | 165 cm (5'5") | Slim, agile |
 | Ha-Neul | Korea, 17 | 160 cm (5'3") | Small, quick |
 | Volt-X | Germany, v3.0 | 150 cm (4'11") | Small robot |
 
@@ -88,6 +89,11 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 Single full-body 3D character, A-pose, front view, plain light grey background. Zuri Vapor, an 18-year-old Black American girl, slim and graceful, 165 cm, about 7 heads tall, slender build. Dark brown skin, big natural curly afro hair with a purple headband, small silver hoop earrings, soft confident smile. White wrap top with purple orchid prints on the sleeves, black belt, flared purple skirt, black leggings, black ankle boots. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
+### Luana Ipê (165 cm, 5'5") (new hero, tree power: thorny vines bind rivals)
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Luana Ipê, an 18-year-old Brazilian girl from the Amazon, slim and agile, 165 cm (5 feet 5 inches), about 7 heads tall. Warm golden-brown skin, long wavy dark brown hair with small green leaves and a few tiny yellow ipê flowers woven in, bright green eyes, playful confident smile. Nature-inspired outfit: fitted leaf-green top with a wrap of woven vines across the shoulder, a skirt of layered large green leaves over brown fitted shorts, a belt of braided vines with a small wooden seed charm, wooden bead bracelets, thin vines curling around her forearms and lower legs, light brown wrapped sandals. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
 ### Ha-Neul (160 cm, 5'3")
 ```
 Single full-body 3D character, A-pose, front view, plain light grey background. Ha-Neul, a 17-year-old Korean Taekwondo girl, small and quick, 160 cm, about 6.8 heads tall, petite athletic build, strong legs. Long red-brown hair in a high ponytail with a white ribbon and colorful hair clips, big bright smile. Cropped pastel lilac and pink jacket with white stars, white crop top, pleated white skirt with a pink belt and a silver chain, pink leggings, pink fingerless gloves, chunky white and pink sneakers. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
@@ -103,7 +109,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 Make this once and upload it as a reference with each prompt, so the heights stay consistent.
 
 ```
-Character lineup, 14 stylized 3D cartoon heroes standing side by side in A-pose on a plain light grey background, a height ruler behind them, ordered from tallest to shortest: a giant Viking man (198 cm), a knight in white armor (188 cm), a tall lanky rapper in a white puffer jacket (185 cm), an athletic Haitian boy in leather armor and a blue kilt (183 cm), a blond American inventor in a black tech vest with goggles and a small drone (183 cm), a regal African queen with a lion crown (180 cm), a tall Arab girl in a sand-colored desert scarf and terracotta outfit (180 cm), a tall Indian girl with a long braid in a saffron and teal top (178 cm), a lean Japanese boy in a white and gold coat (172 cm), a Shaolin monk in white (170 cm), an Irish girl in a green tunic (168 cm), a girl with a big curly afro and a purple skirt (165 cm), a small Korean girl with a red ponytail (160 cm), a small orange robot (150 cm). Pixar style.
+Character lineup, 15 stylized 3D cartoon heroes standing side by side in A-pose on a plain light grey background, a height ruler behind them, ordered from tallest to shortest: a giant Viking man (198 cm), a knight in white armor (188 cm), a tall lanky rapper in a white puffer jacket (185 cm), an athletic Haitian boy in leather armor and a blue kilt (183 cm), a blond American inventor in a black tech vest with goggles and a small drone (183 cm), a regal African queen with a lion crown (180 cm), a tall Arab girl in a sand-colored desert scarf and terracotta outfit (180 cm), a tall Indian girl with a long braid in a saffron and teal top (178 cm), a lean Japanese boy in a white and gold coat (172 cm), a Shaolin monk in white (170 cm), an Irish girl in a green tunic (168 cm), a girl with a big curly afro and a purple skirt (165 cm), a Brazilian girl with leaves in her hair and a green leaf outfit (165 cm), a small Korean girl with a red ponytail (160 cm), a small orange robot (150 cm). Pixar style.
 ```
 
 ## Tripo steps
