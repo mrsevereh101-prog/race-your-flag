@@ -29,6 +29,8 @@
 up to date whenever something is done or decided. Launch rules (Oct 16): 7 launch heroes (Kapwa, Blake, Aria, Hayato, Malkia, Kid Echo, Ha-Neul), the rest show only "Coming soon"
 (no dates or seasons in the game), 3 skins per hero (1 free + 2 unlock), dev/tester accounts see everything unlocked.
 **Blake (Oct 17):** in the game as hero `blake` (Drone Swarm power, Overclock perk = 15% faster recharge, both placeholders to confirm). `models/blake.glb`; skins Garage Inventor (free), Neon Hacker (lvl 15), Mech Pilot (1500 coins) in `models/skins/`. Still to do: voice/sound effect, store icons.
+**Audio (Oct 17):** ElevenLabs was blocked in the cloud session (no `api.elevenlabs.io` access, no key), so nothing was recorded yet. Run `ELEVENLABS_API_KEY=... node tools/audio/make-audio.mjs voices` then `... sfx` once the host is allowed (network settings) and the key is a secret. It uses Kapwa's "Hendsome" voice, designs Blake/Malkia/Kid Echo/Ha-Neul voices, makes Kapwa's Creole lines (`Wap kon Joj!` on hit, `Ret nan wol ou!` when hit; already in the game, they play once `warrior-ht-*.mp3` exist), and 4 new power sounds, then lists the files in index.html (`wire`). Aria and Hayato keep their existing recordings.
+**Hero page (Oct 17):** a Skins row (Original + each skin, equip / locked / price) shows on the hero card of the selected hero. Cream pages use black bold text.
 **Done in code (Oct 17):** `HERO_OUT` list in index.html (next to `charById`) = heroes that are out; add an id
 to release a hero. `heroOut(id)` is true for those, or for everyone when Developer mode / dev / tester account.
 

@@ -140,3 +140,9 @@ Prompts are under each hero in `docs/HERO_PROMPTS.md`.
 - [x] Winner podium with heroes standing on gold, silver and bronze
 - [x] Hero build prompts with heights for 18 heroes (`docs/HERO_PROMPTS.md`)
 - [x] Cowork brief (`COWORK.md`)
+
+
+## Oct 17 additions
+- [x] Skins row on the selected hero's page; black bold text on cream pages
+- [x] Kapwa Creole lines added in code (Wap kon Joj! / Ret nan wol ou!); audio not yet made
+- [ ] Run `tools/audio/make-audio.mjs voices` and `sfx` (needs ElevenLabs key + api.elevenlabs.io allowed): voices for Blake, Malkia, Kid Echo, Ha-Neul, Kapwa Creole, and power sounds power_drone / power_stampede / power_bass / power_kick

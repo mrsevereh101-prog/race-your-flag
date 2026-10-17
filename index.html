@@ -441,7 +441,7 @@ body.layout-desk .lay-piece{outline-offset:1px}
 
 /* hero card on the race desk */
 .hero-card{margin:12px 0 0;padding:14px;border-radius:18px;background:linear-gradient(180deg,#f7ecd2,#ecdcb6);border:2px solid #d9b45a;box-shadow:0 4px 14px rgba(120,90,30,.25),inset 0 1px 0 #fff8e4;color:#4a3412}
-html body .hero-card *{color:#4a3412!important;-webkit-text-stroke:0!important;text-shadow:none!important}
+html body .hero-card *{color:#000!important;-webkit-text-fill-color:#000!important;font-weight:700;-webkit-text-stroke:0!important;text-shadow:none!important}
 .hero-card .hc-top{display:flex;gap:12px;align-items:center}
 .hero-card .hc-pic{width:110px;height:110px;flex:none;border-radius:16px;background:radial-gradient(circle at 50% 35%,#4a63c9,#26337a);border:2px solid #d9b45a;object-fit:cover}
 .hero-card .hc-id{flex:1;min-width:0}
@@ -460,6 +460,12 @@ html body .hero-card *{color:#4a3412!important;-webkit-text-stroke:0!important;t
 .hero-card .hc-nav button{width:46px;height:46px;border:0;padding:0;background:none;cursor:pointer}
 .hero-card .hc-nav button img{width:100%;height:100%}
 .hero-card .hc-count{font-size:12px;font-weight:700;opacity:.7}
+.hero-card .hc-skins{margin:12px 0 0}.hero-card .hc-skins h4{margin:0 0 6px;font:700 14px "Chakra Petch",sans-serif}
+.hero-card .hc-sk-row{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:thin}
+.hero-card .hc-sk{flex:none;width:84px;padding:4px;border-radius:12px;border:2px solid #d9b45a;background:rgba(255,255,255,.55);cursor:pointer;display:grid;gap:3px;justify-items:center;font:700 11px/1.15 "Chakra Petch",sans-serif;color:inherit;text-align:center}
+.hero-card .hc-sk img{width:68px;height:68px;border-radius:10px;object-fit:cover;background:radial-gradient(circle at 50% 35%,#fff7e0,#e8cf96)}
+.hero-card .hc-sk.on{border-color:#1f8a3a;box-shadow:0 0 0 2px rgba(31,138,58,.4)}.hero-card .hc-sk.lock{opacity:.7}.hero-card .hc-sk.lock img{filter:grayscale(.8)}
+.hero-card .hc-sk small{font-weight:700;font-size:10px;opacity:.85}
 </style><style id="icoStyle">
 /* 3D icons */
 .ico{display:block;width:1.3em;height:1.3em;object-fit:contain;pointer-events:none;-webkit-user-drag:none;user-select:none}
@@ -1139,6 +1145,9 @@ img.av{border-radius:10px;background:radial-gradient(circle at 50% 35%,#4a6ad8,#
 #fcHud .fc-list span.low{color:#ff8a7a}
 #fcHud .fc-list img{width:18px;height:12px;border-radius:2px}
 @media (max-width:860px){#fcHud{top:calc(env(safe-area-inset-top,0px) + 150px + var(--app-top,0px))}#fcHud .fc-list{display:none}}
+/* Oct 17: black bold text on the light cream pages */
+html.cream.adv body :is(#heroCard,.hd-card,#settings,.set-row,.pause-card,#acct,#social,#hub) :is(p,span,small,label,h1,h2,h3,h4,div,b,i,li,td,th):not(.primary *):not(button.primary):not(.hc-bar *):not(.hd-stat *):not(.d3-gold *){color:#000!important;-webkit-text-fill-color:#000!important;font-weight:800!important;text-shadow:none!important;-webkit-text-stroke:0!important}
+html.cream.adv body #heroCard button.hc-sk,html.cream.adv body #heroCard button.hc-sk *{color:#000!important;-webkit-text-fill-color:#000!important;font-weight:800!important;text-shadow:none!important;-webkit-text-stroke:0!important}
 </style>
 <style id="themeCream">
 /* ===== Cream & gold theme: ivory panels, dark brown text, every box framed in shining gold ===== */
@@ -4285,7 +4294,8 @@ const SFX_DIR='sfx/';
 const SFX_FILES=['coin','jump','hit','slide','item_get','item_use','count_beep','count_go','finish','chest_rumble','chest_burst','reward_pop',
   'gem','boost_pad','jump_pad','power_slash','power_thunder','power_wind','power_trees','power_quake','power_ready','wall_smash','meteor','shield_block',
   'dart','net','shockwave','vortex','ram','bubble','escape','titan','aegis','banana','rocket','freeze','mine','ghost','fire',
-  'tap','purchase','equip','claim','level_up','message','flag_steal','flag_lost','wave'];
+  'tap','purchase','equip','claim','level_up','message','flag_steal','flag_lost','wave',
+  'power_drone','power_stampede','power_bass','power_kick'];
 const sfxBuf={};let sfxLoading=false,sfxStamp=0;
 function loadSfx(){if(!actx||sfxLoading)return;sfxLoading=true;
   SFX_FILES.forEach(n=>fetch(SFX_DIR+n+'.mp3').then(r=>r.ok?r.arrayBuffer():Promise.reject()).then(b=>new Promise((res,rej)=>actx.decodeAudioData(b,res,rej))).then(buf=>{sfxBuf[n]=buf;}).catch(()=>{}));}
@@ -4578,15 +4588,15 @@ function handleAct(src,a){
       else if(p==='warrior'){flashScreen('#cfe8ff');victims.forEach(o=>boltFx({x:o.x+rand(-1.5,1.5),d:o.d,y:24},o));sfx.thunder();}
       else if(p==='archer'){windFx(src);victims.forEach(o=>swirlFx(o));sfx.wind();}
       else if(p==='elf'){victims.forEach(o=>treeFx(o,ch.stun));sfx.trees();}
-      else if(p==='queen'){stampedeFx(src);victims.forEach(o=>emojiFx(o,pick(['🦁','🦏','🐘','🐆','🦬'])));sfx.quake();samp('power_wind',0.6);}
+      else if(p==='queen'){stampedeFx(src);victims.forEach(o=>emojiFx(o,pick(['🦁','🦏','🐘','🐆','🦬'])));sfx.quake();samp('power_stampede',1);samp('power_wind',0.6);}
       else if(p==='knight'){flashScreen('#fff6d0');victims.forEach(o=>lightFx(o));samp('power_ready',1)||sfx.power();samp('power_thunder',0.5);}
       else if(p==='shaolin'){fireWaveFx(src);victims.forEach(o=>{const q=wpos(o,0.8);burst(q.x,q.y,q.z,26,[1,0.5,0.1],{add:true,max:6,up:5,grav:2,size:0.4});});samp('fire',1)||sfx.power();samp('power_slash',0.6);}
       else if(p==='viking'){blizzardFx(src);victims.forEach(o=>iceFx(o,ch.stun));samp('freeze',1)||sfx.power();samp('power_wind',0.7);}
       else if(p==='robot'){victims.forEach(o=>laserFx(src,o));samp('shockwave',1)||sfx.power();}
-      else if(p==='blake'){ringFx(src.x,src.d,0x4fd0ff,26,0.6);victims.forEach(o=>{swirlFx(o);const q=wpos(o,1.2);burst(q.x,q.y,q.z,20,[0.3,0.8,1],{add:true,max:5,up:3,grav:2,size:0.3});});samp('shockwave',1)||sfx.power();}
-      else if(p==='kicker'){ringFx(src.x,src.d,0xff6a8a,28,0.6);windFx(src);victims.forEach(o=>{swirlFx(o);const q=wpos(o,1);burst(q.x,q.y,q.z,18,[1,0.5,0.6],{add:true,max:5,up:4,grav:3});});samp('power_slash',1)||sfx.slash();samp('power_wind',0.6);}
+      else if(p==='blake'){ringFx(src.x,src.d,0x4fd0ff,26,0.6);victims.forEach(o=>{swirlFx(o);const q=wpos(o,1.2);burst(q.x,q.y,q.z,20,[0.3,0.8,1],{add:true,max:5,up:3,grav:2,size:0.3});});samp('power_drone',1)||samp('shockwave',1)||sfx.power();}
+      else if(p==='kicker'){ringFx(src.x,src.d,0xff6a8a,28,0.6);windFx(src);victims.forEach(o=>{swirlFx(o);const q=wpos(o,1);burst(q.x,q.y,q.z,18,[1,0.5,0.6],{add:true,max:5,up:4,grav:3});});samp('power_kick',1);samp('power_slash',1)||sfx.slash();samp('power_wind',0.6);}
       else if(p==='gas'){ringFx(src.x,src.d,0x9a62f0,26,0.9);victims.forEach(o=>gasFx(o));samp('power_wind',1)||sfx.wind();}
-      else if(p==='rapper'){bassFx(src);victims.forEach(o=>swirlFx(o));samp('shockwave',1)||sfx.power();tone(55,0.9,'sine',0.12,-20);tone(42,1.1,'sine',0.1,-12,0.15);}
+      else if(p==='rapper'){bassFx(src);victims.forEach(o=>swirlFx(o));samp('power_bass',1)||samp('shockwave',1)||sfx.power();tone(55,0.9,'sine',0.12,-20);tone(42,1.1,'sine',0.1,-12,0.15);}
       else{if(!reduceMotion)shake=Math.max(shake,0.9);ringFx(src.x,src.d,0xc98a4a,25,0.8);runners.forEach(o=>{const q=wpos(o,0.1);burst(q.x,q.y,q.z,20,TH.dust,{max:5,up:4,grav:9,size:0.4});});sfx.quake();}
       for(const o of victims){if(!o.owned)continue;if(hit(o,ch.stun,src,ch.kind,`${src.nm}'s ${ch.power} stunned you`,true)&&p==='archer')o.d=Math.max(0,o.d-4);}
       break;}
@@ -4743,8 +4753,8 @@ const CHAR_SAY={
 // Haitian Creole lines for runners wearing the Haiti flag. Each has a voice id:
 // drop a recording at voice/<id>.mp3 and add the id to VOICE_FILES to play it with the bubble.
 const SAY_HT={
-  hit:[['Pran sa!','ht-pran-sa'],['Men li!','ht-men-li'],['Ale lakay ou!','ht-ale-lakay-ou']],
-  hurt:[['M ap jwenn ou!','ht-m-ap-jwenn-ou'],['Ou pral peye sa!','ht-ou-pral-peye-sa'],['Tann mwen!','ht-tann-mwen']]
+  hit:[['Pran sa!','ht-pran-sa'],['Men li!','ht-men-li'],['Ale lakay ou!','ht-ale-lakay-ou'],['Wap kon Joj!','ht-wap-kon-joj']],
+  hurt:[['M ap jwenn ou!','ht-m-ap-jwenn-ou'],['Ou pral peye sa!','ht-ou-pral-peye-sa'],['Tann mwen!','ht-tann-mwen'],['Ret nan wol ou!','ht-ret-nan-wol-ou']]
 };
 const VOICE_DIR='voice/';
 // Voice clips play through the game's audio engine (an <audio> started from a timer is blocked on phones).
@@ -4763,7 +4773,8 @@ const bubbles=[];const bubbleTex=new Map();
 // Each line is [text, recording id, language]. Recordings are per hero (voice/<hero>-<kind>-<nn>.mp3, see VOICE-LINES.md).
 function sayPool(r,k){
   const h=r.char.id,ch=CHAR_SAY[h]||{};const out=[];
-  if(k==='power')(ch.power||ch.hit||SAY.hit).forEach((t,i)=>out.push([t,ch.power||ch.hit?`${h}-own-hit-${i+1}`:`${h}-hit-${pad2(i+1)}`,'en']));
+  const sepPower=ch.power&&ch.hit&&ch.power.join()!==ch.hit.join();
+  if(k==='power')(ch.power||ch.hit||SAY.hit).forEach((t,i)=>out.push([t,sepPower?`${h}-own-power-${i+1}`:ch.power||ch.hit?`${h}-own-hit-${i+1}`:`${h}-hit-${pad2(i+1)}`,'en']));
   else (SAY[k]||[]).forEach((t,i)=>out.push([t,`${h}-${k}-${pad2(i+1)}`,'en']));
   if(k!=='power'&&ch[k])ch[k].forEach((t,i)=>{const l=[t,`${h}-own-${k}-${i+1}`,'en'];out.push(l);out.push(l);});
   if(r.flag.code==='HTI'&&SAY_HT[k])SAY_HT[k].forEach(([t,id])=>{const l=[t,VOICE_FILES.has(h+'-'+id)?h+'-'+id:id,'ht'];for(let i=0;i<4;i++)out.push(l);});
@@ -7308,6 +7319,7 @@ function renderHeroCard(){const box=$('heroCard');if(!box)return;if(!CHAR_IDS.in
     <div class="hc-stats">${stats.map(([k,v])=>`<span>${k}</span><div class="hc-bar"><i style="width:${v}%"></i></div>`).join('')}</div>
     <div class="hc-pw"><b>⚡ ${ch.power}:</b> <span class="hc-pwd"></span></div><div class="hc-pw"><b>⭐ ${ch.perk.name}:</b> <span class="hc-pkd"></span></div>
     <p class="hc-story"></p>
+    ${mine&&!soon?'<div class="hc-skins"><h4>Skins</h4><div class="hc-sk-row"></div></div>':''}
     `;
   const pb=box.querySelector('.hc-picbox'),art=new Image();art.className='hc-art';art.alt='';
   art.onerror=()=>{if(art.isConnected)art.replaceWith(avatarImg(ch.id+'.'+(mine?mySkinId():'classic'),selCountry,'hc-pic'));};
@@ -7317,6 +7329,14 @@ function renderHeroCard(){const box=$('heroCard');if(!box)return;if(!CHAR_IDS.in
   box.querySelector('.hc-pwd').textContent=ch.desc;box.querySelector('.hc-pkd').textContent=ch.perk.desc;box.querySelector('.hc-story').textContent=info.story||'';
   const go=d=>{hcView=CHAR_IDS[(i+d+n)%n];try{sfx.tap();}catch(e){}renderHeroCard();};
   box.querySelector('.hc-prev').onclick=()=>go(-1);box.querySelector('.hc-next').onclick=()=>go(1);
+  const skRow=box.querySelector('.hc-sk-row');
+  if(skRow){const cur=mySkinId();[skinById('classic')].concat(SKINS_SHOP.filter(k=>k.hero===ch.id)).forEach(k=>{
+    const locked=lvLocked(k),owned=k.id==='classic'||wallet.skins.includes(k.id)||(k.tier==='free'&&!locked),eq=cur===k.id,b=document.createElement('button');b.type='button';
+    b.className='hc-sk'+(eq?' on':'')+(owned?'':' lock');b.append(avatarImg(ch.id+'.'+k.id,selCountry,''));
+    const nm=document.createElement('span');nm.textContent=k.id==='classic'?'Original':k.name;const st=document.createElement('small');
+    st.textContent=eq?'✓ Equipped':owned?'Equip':locked?'🔒 Level '+k.lvl:k.tier==='coin'?'🪙 '+k.cost:'🔒 Store';b.append(nm,st);
+    b.onclick=()=>{if(eq)return;if(owned){equipSkin(k);saveWallet();refreshMenu('flex');try{rebuildPreview('flex');syncLobbyPresence();}catch(e){}}
+      else if(!locked){storeTab='skins';openStore();}};skRow.appendChild(b);});}
   box.querySelector('.hc-sel').onclick=()=>{if(!heroOut(hcView))return;selChar=hcView;store.set('flagdash-char',selChar);refreshMenu('flex');try{syncLobbyPresence();}catch(e){}};}
 function refreshMenu(emote){
   fixSelChar();
