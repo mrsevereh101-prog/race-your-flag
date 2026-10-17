@@ -10,10 +10,12 @@ const mode=process.argv[2]||'';
 // hero -> voice name in the ElevenLabs library. If it is missing, a new voice is designed from `desc` and saved under that name.
 const HEROES={
   warrior:{voice:'Hendsome',desc:null,win:['Thunder wins again!']},
-  blake:{voice:'RYF Blake',desc:'Young American man, 18, energetic and clever, quick confident delivery, a little cocky tech genius, friendly, heroic video game character.',win:['Called it! Genius wins!']},
-  queen:{voice:'RYF Malkia',desc:'Warm confident Kenyan woman in her thirties, regal and powerful, rich deep voice, calm authority with a fierce roar, heroic video game character.',win:['The savanna crowns its queen!']},
-  rapper:{voice:'RYF Kid Echo',desc:'Young Black American man, 18, smooth and playful, swagger, rhythmic street-smart delivery, hype energy, heroic video game character.',win:['Drop the mic, that is a win!']},
-  kicker:{voice:'RYF Ha-Neul',desc:'Young Korean woman, 17, bright, sporty and fierce, quick energetic delivery, big smile in the voice, heroic video game character.',win:['Black belt, gold medal!']},
+  blake:{voice:'RYF Blake',desc:'Teenage American boy, 18, young-sounding youthful voice, light and energetic, quick confident delivery, a little cocky tech genius, friendly, not deep, heroic video game character.',win:['Called it! Genius wins!']},
+  samurai:{voice:'RYF Hayato',desc:'Teenage Japanese boy, 17, young clear voice, calm and focused but youthful, crisp short phrases, quiet confidence, not deep, heroic video game character.',win:['One strike. One win.']},
+  archer:{voice:'RYF Aria',desc:'Teenage Irish girl, 18, young bright voice with a light Irish lilt, quick, witty and playful, youthful, heroic video game character.',win:['Faster than the wind!']},
+  queen:{voice:'RYF Malkia',desc:'Warm, confident Kenyan woman in her thirties, regal and powerful, rich deep voice, calm authority with a fierce roar, heroic video game character.',win:['The savanna crowns its queen!']},
+  rapper:{voice:'RYF Kid Echo',desc:'Teenage Black American boy, 18, young-sounding voice, smooth and playful, swagger, rhythmic street-smart delivery, hype energy, heroic video game character.',win:['Drop the mic, that is a win!']},
+  kicker:{voice:'RYF Ha-Neul',desc:'Teenage Korean girl, 17, young bright voice, sporty and fierce, quick energetic delivery, big smile in the voice, heroic video game character.',win:['Black belt, gold medal!']},
 };
 // Haitian Creole lines for Kapwa (Haiti flag): file = warrior-<id>.mp3
 const CREOLE=[['ht-wap-kon-joj','Wap kon Joj!'],['ht-ret-nan-wol-ou','Ret nan wol ou!']];
