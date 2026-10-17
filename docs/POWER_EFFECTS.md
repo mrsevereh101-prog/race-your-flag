@@ -12,7 +12,7 @@ Art for what you see when a hero uses their power. One picture sheet per hero, m
 If a glow gets cut off or a fringe of the screen color remains, lower `--hi` (for example 0.12) or ask the image tool to remake that sheet with less glow outside the shapes.
 
 ## Shared rules (paste with every sheet prompt)
-Stylized cartoon mobile-game visual effect art, bright and punchy, bold clean shapes, soft glow, a white-hot core fading to saturated color at the edges, slightly 3D painted look, polished like a premium mobile game. Effects only: NO characters, NO people, NO hands, NO text, NO letters, NO logos, NO borders, NO frames. Each piece is a separate object, centered in its own cell with generous empty space around it, nothing overlapping or touching the cell edges. Flat solid background color only, no floor, no shadow, no gradient. Square cells, same style across all six pieces.
+Stylized cartoon mobile-game visual effect art, bright and punchy, bold clean shapes, soft glow, a white-hot core fading to saturated color at the edges, slightly 3D painted look, polished like a premium mobile game. Effects only: NO characters, NO people, NO faces, NO hands, NO text, NO letters, NO logos, NO borders, NO frames. Each piece is a separate object, centered in its own cell with generous empty space around it, nothing overlapping or touching the cell edges. Flat solid background color only, no floor, no shadow, no gradient. Square cells, same style across all six pieces.
 
 ## 1. Kapwa Lamò: Lightning  (screen: magenta)
 Ids in order: `fx_bolt_a  fx_bolt_b  fx_bolt_c  fx_strike_flash  fx_spark  fx_cloud`
@@ -44,10 +44,12 @@ Ids in order: `fx_sound_ring  fx_speaker  fx_note_a  fx_note_b  fx_eq_bars  fx_b
 
 Sheet prompt: Six music and bass effect pieces in neon purple, magenta-pink and white. (1) a set of concentric sound-wave rings, thick and glowing, viewed from slightly above like a shockwave. (2) a big chunky speaker cabinet with a large woofer cone, glowing purple rim, seen from the front. (3) a glowing eighth music note with a small trail. (4) a glowing pair of beamed music notes. (5) a row of glowing equalizer bars of different heights, neon purple and pink. (6) a radial bass-drop burst: a round starburst with thick wobbling wave lines radiating outward.
 
-## 7. Ha-Neul: Hurricane Kick  (screen: green)
-Ids in order: `fx_kick_trail  fx_kick_swoosh  fx_foot_hit  fx_whirl  fx_star  fx_blossom`
+## 7. Ha-Neul: Hurricane Kick (after-image)  (screen: green)
+Ids in order: `fx_ghost_kick_a  fx_ghost_kick_b  fx_ghost_foot  fx_kick_swoosh  fx_foot_hit  fx_star`
 
-Sheet prompt: Six taekwondo hurricane-kick effect pieces in hot pink, white and coral. (1) a big spiral crescent motion trail, like the path of a spinning kick, thick glowing ribbon ending in a point. (2) a fast curved kick swoosh streak, white core with pink glow. (3) a foot-impact burst: a starburst of white-pink light with a small round shockwave ring and short sharp rays. (4) a spinning whirl of pink wind ribbons, like a small tornado seen from the side. (5) a bright four-point sparkle star in pink and white. (6) a cluster of pink cherry-blossom petals swirling.
+Her kick leaves an after-image: ghostly copies of the kick trailing behind in a fan, like a fast anime kick. The code side also makes real after-image ghosts from her own 3D model during the move; these pictures add the glow around them.
+
+Sheet prompt: Six taekwondo after-image kick effect pieces in hot pink, white and coral. (1) an after-image kick trail: four translucent pink-white ghost copies of a single kicking LEG and FOOT (no body, no person) fanned out along a sweeping arc, each copy fainter than the last, the strongest copy at the front with a bright white edge, speed lines behind. (2) a different after-image: three translucent ghost copies of a high-kicking leg and foot rising in an upward arc, fading to nothing at the back, speed lines. (3) one single glowing foot-and-ankle silhouette in a taekwondo kick pose, solid white-pink light, like a flat glowing stamp (no body, no person). (4) a fast curved kick swoosh streak, white core with pink glow. (5) a foot-impact burst: a starburst of white-pink light with a small round shockwave ring and short sharp rays. (6) a bright four-point sparkle star in pink and white.
 
 ## Notes for the code side (not for the image tool)
 - The game draws each picture as a glowing flat sprite (additive blend) that faces the camera, scaled and faded by code, so each hero's power keeps its own timing and sound.
