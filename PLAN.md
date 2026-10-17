@@ -148,3 +148,4 @@ Prompts are under each hero in `docs/HERO_PROMPTS.md`.
 - [ ] Run `tools/audio/make-audio.mjs voices` and `sfx` (needs ElevenLabs key + api.elevenlabs.io allowed): voices for Blake, Malkia, Kid Echo, Ha-Neul, Kapwa Creole, and power sounds power_drone / power_stampede / power_bass / power_kick
 - [x] Equal starting stats + "owned flags" currency to upgrade speed/agility/recharge per hero; flags won/lost by finishing place (Oct 17). Costs and rewards are first guesses: tune `STAT_BASE`, `upCost`, `PLACE_FLAGS`
 - [x] White-background hero pictures; Skins row in the runner popup
+- [ ] (Pinned Oct 17) Colour-adjust hero/skin 3D models: change brightness, contrast and saturation by editing the texture inside the .glb (tools/3d, gltf-transform + sharp), not in Tripo. Do a before/after picture first, one hero or skin at a time, then maybe all.

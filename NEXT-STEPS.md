@@ -14,6 +14,8 @@ Supabase project: hzzqnwzsasuwjafmsgqh
 4. [ ] **Attack effect prompts** (Oct 17: written for the 7 launch heroes in `docs/POWER_EFFECTS.md`; art made and in the game Oct 17: `img/fx/`, sheets in `art/sheets/fx_*.jpg`, code `artFx` in index.html): a 3D or 2D art prompt for each hero's power effect (lightning, wind,
    stampede, sandstorm, thorns, birds...).
 
+5. [ ] **Model colour tweaks (pinned Oct 17)**: brightness / contrast / saturation of hero and skin models, edited in the .glb texture (before/after picture first).
+
 ## Done
 - Online play through Supabase Realtime (rooms, lobby, races, Flag Challenge online)
 - Worldwide leaderboards (`supabase/leaderboard.sql`, already run)
