@@ -11,7 +11,7 @@ Supabase project: hzzqnwzsasuwjafmsgqh
    The elf and dwarf voice files are left over from removed heroes.
 3. [ ] **5 skin prompts per hero**: one Tripo prompt per skin, same height and A-pose rules as
    `docs/HERO_PROMPTS.md` (18 heroes = 90 prompts).
-4. [ ] **Attack effect prompts** (Oct 17: written for the 7 launch heroes in `docs/POWER_EFFECTS.md`; art not made yet): a 3D or 2D art prompt for each hero's power effect (lightning, wind,
+4. [ ] **Attack effect prompts** (Oct 17: written for the 7 launch heroes in `docs/POWER_EFFECTS.md`; art made and in the game Oct 17: `img/fx/`, sheets in `art/sheets/fx_*.jpg`, code `artFx` in index.html): a 3D or 2D art prompt for each hero's power effect (lightning, wind,
    stampede, sandstorm, thorns, birds...).
 
 ## Done

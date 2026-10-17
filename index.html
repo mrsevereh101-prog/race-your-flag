@@ -4860,7 +4860,7 @@ function artFx(n,o){const a=fxArt(n);if(!a.ok||typeof scene==='undefined')return
     mat.opacity=(o.alpha==null?1:o.alpha)*Math.min(1,q/0.12,(1-q)/(o.fo||0.35));mat.rotation=(o.rot||0)+(o.spin||0)*q;}});return true;}
 // Kapwa: tall bolts fall on every rival, a flash on the ground, sparks, and a storm cloud over him
 function boltArt(src,victims){if(!fxReady('fx_bolt_a'))return false;artFx('fx_cloud',{pos:wpos(src,9),size:11,dur:1.1,s0:0.5,s1:1,alpha:0.9});
-  for(let i=0;i<3;i++){const d=src.d+rand(7,24),B=W(rand(-5,5),d,Hf(d)),c=B.clone();c.y+=9;artFx(pick(['fx_bolt_a','fx_bolt_b','fx_bolt_c']),{pos:c,size:19,asp:0.5,dur:0.55,delay:0.1+i*0.12,s0:1,s1:1.05,fo:0.6});B.y+=0.4;artFx('fx_strike_flash',{pos:B,size:5.5,dur:0.6,delay:0.15+i*0.12,s0:0.4,s1:1.4});}
+  for(let i=0;i<3;i++){const d=src.d+rand(7,24),B=W(rand(-5,5),d,Hf(d)),c=B.clone();c.y+=9;artFx(pick(['fx_bolt_a','fx_bolt_b','fx_bolt_c']),{pos:c,size:19,asp:0.5,dur:0.55,delay:0.1+i*0.12,s0:1,s1:1.05,fo:0.6});B.y+=0.4;artFx('fx_strike_flash',{pos:B,size:4,dur:0.6,delay:0.15+i*0.12,s0:0.4,s1:1.2});}
   victims.forEach((o,i)=>{const B=wpos(o,0),c=B.clone();c.y+=9;artFx(pick(['fx_bolt_a','fx_bolt_b','fx_bolt_c']),{pos:c,size:19,asp:0.5,dur:0.55,delay:i*0.04,add:true,s0:1,s1:1.05,fo:0.6});
     artFx('fx_strike_flash',{pos:wpos(o,0.4),size:5.5,dur:0.6,delay:i*0.04+0.05,add:true,s0:0.4,s1:1.4});artFx('fx_spark',{pos:wpos(o,1.6),size:3,dur:0.5,delay:i*0.04+0.08,add:true,spin:1.2,s0:0.5,s1:1.2});});return true;}
 // Hayato: crossing slash arcs and a hit burst on every rival, petals drift away
