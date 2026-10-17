@@ -32,10 +32,10 @@ Sir Aldric, Zuri Vapor, Xiao Long, Sigurd Stormbeard, Volt-X, Layla Al-Rimal, An
 Dmitri Volkov, Seo Min-jun, Selam Tesfaye
 
 ### Game code for the launch rules (Code)
-- [ ] Lock heroes that are not out yet ("Coming soon" on their card, no dates or seasons)
+- [x] Lock heroes that are not out yet ("Coming soon" on their card and greyed in the hero row, no dates or seasons)
 - [ ] Skins: 1 free + 2 unlockable per hero (by level, coins or diamonds - to decide)
-- [ ] Developer and tester accounts see everything unlocked
-- [ ] A simple list in the game code of which heroes and skins are out (easy to change any time)
+- [ ] Developer and tester accounts see everything unlocked (heroes done; skins still to do)
+- [ ] A simple list in the game code of which heroes and skins are out (heroes done: `RELEASED_HEROES` in index.html; skins still to do)
 
 ---
 

@@ -1541,6 +1541,7 @@ html .desk3 #pvName small{font:700 12px var(--body,system-ui);letter-spacing:0;t
 .hd-title{margin:0;text-align:center;font:900 15px var(--display,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#f6ecd2;text-shadow:0 2px 3px rgba(0,0,0,.5)}
 .hd-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:340px;margin:0 auto;width:100%}
 .hd-hero{aspect-ratio:1;padding:0;border-radius:14px;overflow:hidden;border:2px solid #c8921c;background:radial-gradient(circle at 50% 35%,#fff7e0,#e8cf96);box-shadow:0 3px 0 rgba(0,0,0,.25);cursor:pointer;display:grid;place-items:center}
+.hd-hero.soon{filter:grayscale(1) brightness(.7);opacity:.7;cursor:not-allowed}
 .hd-hero img{width:100%;height:100%;object-fit:cover}
 .hd-hero[aria-pressed="true"]{border:3px solid #ffd447;box-shadow:0 0 0 3px rgba(255,212,71,.55),0 0 16px rgba(255,200,60,.8)}
 .hd-card{background:linear-gradient(180deg,#fffaf0,#f3e6c6);border:2px solid #d9a227;border-radius:16px;padding:8px 12px;display:grid;gap:4px;box-shadow:0 4px 12px rgba(0,0,0,.25);color:#2a1c04}
@@ -2505,7 +2506,11 @@ function sideFn(th){
    MENU STATE
    ========================================================= */
 let selCountry=store.get('flagdash-country')||'USA';if(!COUNTRY_CODES.has(selCountry))selCountry='USA';
-let selChar=store.get('flagdash-char')||'samurai';if(!CHAR_IDS.includes(selChar))selChar='samurai';
+// Heroes that are out. Everyone else shows "Coming soon" (no dates). Edit this list to release a hero.
+// Developer and tester accounts (and Developer mode) can use every hero.
+const RELEASED_HEROES=['warrior','archer','samurai','queen','rapper','kicker'];
+const heroOut=id=>{if(RELEASED_HEROES.includes(id)||store.get('flagdash-devmode')==='1')return true;try{return AUTH.dev===true||AUTH.tester===true;}catch(e){return false;}};
+let selChar=store.get('flagdash-char')||'samurai';if(!CHAR_IDS.includes(selChar)||!heroOut(selChar))selChar='samurai';
 let selTrack=store.get('flagdash-track')||'stadium';if(!THEMES.some(t=>t.id===selTrack))selTrack='stadium';
 let selMode=normMode(store.get('flagdash-mode'));
 let myName=cleanName(store.get('flagdash-name'))||('Runner '+Math.floor(rand(10,99)));
@@ -6153,8 +6158,8 @@ const HD_RANGE={speed:[0.95,1.04],agility:[0.82,1.15],charge:[24,16]};
 const hdBar=(v,[a,b])=>Math.max(1,Math.min(10,Math.round((v-a)/(b-a)*10)));
 function renderHeroDock(){const row=$('hdRow'),card=$('hdCard');if(!row)return;
   if(row.dataset.built!=='1'){row.innerHTML='';CHARS.forEach(ch=>{const b=document.createElement('button');b.type='button';b.className='hd-hero';b.dataset.ch=ch.id;b.title=ch.name;b.setAttribute('aria-label',ch.name);
-      b.onclick=()=>{if(selChar===ch.id)return;selChar=ch.id;store.set('flagdash-char',ch.id);refreshMenu('flex');syncLobbyPresence();};row.appendChild(b);});row.dataset.built='1';}
-  row.querySelectorAll('.hd-hero').forEach(b=>{const id=b.dataset.ch,k=id+'.'+heroSkinFor(id)+'|'+selCountry;b.setAttribute('aria-pressed',String(id===selChar));
+      b.onclick=()=>{if(selChar===ch.id||!heroOut(ch.id))return;selChar=ch.id;store.set('flagdash-char',ch.id);refreshMenu('flex');syncLobbyPresence();};row.appendChild(b);});row.dataset.built='1';}
+  row.querySelectorAll('.hd-hero').forEach(b=>{const id=b.dataset.ch;b.classList.toggle('soon',!heroOut(id));b.title=heroOut(id)?charById(id).name:charById(id).name+' · Coming soon';const k=id+'.'+heroSkinFor(id)+'|'+selCountry;b.setAttribute('aria-pressed',String(id===selChar));
     if(b.dataset.k!==k&&typeof THREE!=='undefined'){b.dataset.k=k;b.innerHTML='';b.appendChild(heroTileImg(id));}});
   const ch=charById(selChar);if(!ch)return;
   const bar=(lab,v,r)=>{const n=hdBar(v,r);return `<div class="hd-stat"><span>${lab}</span><i>${Array.from({length:10},(_,i)=>`<b class="${i<n?'on':''}"></b>`).join('')}</i></div>`;};
@@ -7242,7 +7247,7 @@ function infoTap(b,e){const onI=e&&e.target&&e.target.closest&&e.target.closest(
 const statPct=(v,lo,hi)=>Math.round(clamp((v-lo)/(hi-lo),0.08,1)*100);
 function renderCharTiles(){charGrid.innerHTML='';
   const tiles=CHARS.map(ch=>({key:ch.id,el:mkTile({img:heroTileImg(ch.id),label:ch.hn||ch.name,cls:ch.id===selChar?'on own':'own'}),
-    pick:()=>{if(selChar!==ch.id){selChar=ch.id;store.set('flagdash-char',ch.id);refreshMenu('flex');syncLobbyPresence();}},
+    pick:()=>{if(selChar!==ch.id&&heroOut(ch.id)){selChar=ch.id;store.set('flagdash-char',ch.id);refreshMenu('flex');syncLobbyPresence();}},
     info:()=>{const st=document.createElement('div');st.className='stats';st.innerHTML=`<div class="stat">Speed<i><b style="width:${statPct(ch.speed,0.96,1.04)}%"></b></i></div><div class="stat">Agility<i><b style="width:${statPct(ch.agility,0.8,1.18)}%"></b></i></div><div class="stat">Recharge<i><b style="width:${statPct(26-ch.charge,3,9)}%"></b></i></div>`;
       return tileInfo(`${heroName(ch)} · ${ch.power}`,[ch.desc,`⭐ ${ch.perk.name}: ${ch.perk.desc}`,st]);}}));
   charGrid.appendChild(tileGrid('runner',tiles,renderCharTiles));}
@@ -7279,7 +7284,7 @@ function renderHeroCard(){const box=$('heroCard');if(!box)return;if(!CHAR_IDS.in
   const stats=[['Speed',pct(ch.speed,0.95,1.05)],['Agility',pct(ch.agility,0.85,1.15)],['Power charge',pct(23-ch.charge,0,6)],['Power strength',pct(ch.stun,1.2,1.9)]];
   const f=info.cc?flagCanvas(info.cc):null;
   box.innerHTML=`<div class="hc-nav"><button type="button" class="hc-prev" aria-label="Previous hero"><img src="img/icons/arrow_l.webp" alt=""></button><span class="hc-count">${i+1} / ${n}</span><button type="button" class="hc-next" aria-label="Next hero"><img src="img/icons/arrow_r.webp" alt=""></button></div><div class="hc-top"><span class="hc-picbox"></span><div class="hc-id"><p class="hc-name"></p><div class="hc-type"></div><div class="hc-nat"></div></div></div>
-    <button type="button" class="primary d3-gold hc-sel"${mine?' disabled aria-pressed="true"':''}>${mine?'✓ Selected':'Select'}</button>
+    <button type="button" class="primary d3-gold hc-sel"${mine||!heroOut(ch.id)?' disabled':''}${mine?' aria-pressed="true"':''}>${mine?'✓ Selected':heroOut(ch.id)?'Select':'Coming soon'}</button>
     <div class="hc-stats">${stats.map(([k,v])=>`<span>${k}</span><div class="hc-bar"><i style="width:${v}%"></i></div>`).join('')}</div>
     <div class="hc-pw"><b>⚡ ${ch.power}:</b> <span class="hc-pwd"></span></div><div class="hc-pw"><b>⭐ ${ch.perk.name}:</b> <span class="hc-pkd"></span></div>
     <p class="hc-story"></p>
@@ -7292,7 +7297,7 @@ function renderHeroCard(){const box=$('heroCard');if(!box)return;if(!CHAR_IDS.in
   box.querySelector('.hc-pwd').textContent=ch.desc;box.querySelector('.hc-pkd').textContent=ch.perk.desc;box.querySelector('.hc-story').textContent=info.story||'';
   const go=d=>{hcView=CHAR_IDS[(i+d+n)%n];try{sfx.tap();}catch(e){}renderHeroCard();};
   box.querySelector('.hc-prev').onclick=()=>go(-1);box.querySelector('.hc-next').onclick=()=>go(1);
-  box.querySelector('.hc-sel').onclick=()=>{selChar=hcView;store.set('flagdash-char',selChar);refreshMenu('flex');try{syncLobbyPresence();}catch(e){}};}
+  box.querySelector('.hc-sel').onclick=()=>{if(!heroOut(hcView))return;selChar=hcView;store.set('flagdash-char',selChar);refreshMenu('flex');try{syncLobbyPresence();}catch(e){}};}
 function refreshMenu(emote){
   try{renderHeroDock();}catch(e){}
   try{renderHeroCard();}catch(e){}
@@ -8196,7 +8201,7 @@ const LAYOUT=(()=>{
   $('deskSet').onclick=()=>openSettings();$('chalBtn').onclick=()=>openHub('tasks','challenges');$('deskAcct').onclick=()=>openAcct();$('acctClose').onclick=()=>closeAcct();$('setAcct').onclick=()=>{closeSettings();openAcct();};
   $('acct').addEventListener('click',e=>{if(e.target===$('acct'))closeAcct();});$('deskStore').onclick=()=>openStore();
   $('deskWallet').onclick=e=>{if(e.target.closest&&e.target.closest('.d3-gem'))storeTab='gems';openStore();};$('deskWallet').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openStore();}};$('d3Store').onclick=()=>openStore();$('d3Friends').onclick=()=>openSocial('friends');
-  const cycle=dir=>{const i=CHAR_IDS.indexOf(selChar);selChar=CHAR_IDS[(i+dir+CHAR_IDS.length)%CHAR_IDS.length];store.set('flagdash-char',selChar);refreshMenu('flex');syncLobbyPresence();};
+  const cycle=dir=>{const ok=CHAR_IDS.filter(heroOut),i=ok.indexOf(selChar);selChar=ok[(i+dir+ok.length)%ok.length];store.set('flagdash-char',selChar);refreshMenu('flex');syncLobbyPresence();};
   $('pvLeft').onclick=()=>cycle(-1);$('pvRight').onclick=()=>cycle(1);
   const short=t=>{const n=+String(t).replace(/[^0-9]/g,'');return n>=1e6?(n/1e6).toFixed(n>=1e7?1:2).replace(/\.?0+$/,'')+'M':n>=1e5?Math.round(n/1e3)+'K':t;};
   const wal=()=>{$('d3Coins').textContent=short($('wCoins').textContent);$('d3Gems').textContent=short($('wGems').textContent);};
