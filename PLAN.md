@@ -32,10 +32,15 @@ Sir Aldric, Zuri Vapor, Xiao Long, Sigurd Stormbeard, Volt-X, Layla Al-Rimal, An
 Dmitri Volkov, Seo Min-jun, Selam Tesfaye
 
 ### Game code for the launch rules (Code)
-- [ ] Lock heroes that are not out yet ("Coming soon" on their card, no dates or seasons)
+- [x] Lock heroes that are not out yet ("Coming soon" on their card, no dates or seasons) (Oct 17)
 - [ ] Skins: 1 free + 2 unlockable per hero (by level, coins or diamonds - to decide)
-- [ ] Developer and tester accounts see everything unlocked
-- [ ] A simple list in the game code of which heroes and skins are out (easy to change any time)
+- [x] Developer and tester accounts see everything unlocked (Oct 17; Developer mode too)
+- [x] A simple list in the game code of which heroes are out: `HERO_OUT` in index.html (Oct 17)
+- [ ] Add Blake to that list once he is in the game (he is not built yet)
+
+How it works now: heroes not on the list are grey with "Coming soon" on the home row, the hero card
+and the runner tiles, and can't be picked. The arrows skip them, computer racers only use launch
+heroes, and their skins are hidden in the store. Someone who had picked a locked hero is moved to Kapwa.
 
 ---
 

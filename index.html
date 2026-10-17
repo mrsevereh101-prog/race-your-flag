@@ -1542,6 +1542,8 @@ html .desk3 #pvName small{font:700 12px var(--body,system-ui);letter-spacing:0;t
 .hd-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:340px;margin:0 auto;width:100%}
 .hd-hero{aspect-ratio:1;padding:0;border-radius:14px;overflow:hidden;border:2px solid #c8921c;background:radial-gradient(circle at 50% 35%,#fff7e0,#e8cf96);box-shadow:0 3px 0 rgba(0,0,0,.25);cursor:pointer;display:grid;place-items:center}
 .hd-hero img{width:100%;height:100%;object-fit:cover}
+.hd-hero{position:relative}.hd-hero.soon img{filter:grayscale(1) brightness(.6)}
+.hd-hero.soon::after{content:'Coming soon';position:absolute;left:0;right:0;bottom:0;padding:2px 0;background:rgba(0,0,0,.65);color:#ffe9a8;font:700 9px/1.2 system-ui,sans-serif;text-align:center}
 .hd-hero[aria-pressed="true"]{border:3px solid #ffd447;box-shadow:0 0 0 3px rgba(255,212,71,.55),0 0 16px rgba(255,200,60,.8)}
 .hd-card{background:linear-gradient(180deg,#fffaf0,#f3e6c6);border:2px solid #d9a227;border-radius:16px;padding:8px 12px;display:grid;gap:4px;box-shadow:0 4px 12px rgba(0,0,0,.25);color:#2a1c04}
 .hd-h{display:flex;gap:6px;align-items:baseline;font:900 16px var(--display,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#1f4f86}
@@ -2360,6 +2362,17 @@ const CHARS=[
 ];
 const CHAR_IDS=CHARS.map(c=>c.id);
 const charById=id=>CHARS.find(c=>c.id===id)||CHARS[0];
+// LAUNCH LIST: the heroes that are out. To release a hero, add its id here (ids: samurai warrior archer
+// queen knight shaolin viking robot rapper kicker gas). Every other hero shows "Coming soon".
+// Developer and tester accounts, and Developer mode, see every hero unlocked.
+const HERO_OUT=['warrior','archer','samurai','queen','rapper','kicker'];
+function allOpen(){if(store.get('flagdash-devmode')==='1')return true;try{return !AUTH.on||AUTH.dev===true||AUTH.tester===true;}catch(e){return false;}}
+const heroOut=id=>HERO_OUT.includes(id)||allOpen();
+const outIds=()=>CHAR_IDS.filter(heroOut);
+// still checking who is signed in: don't move anyone off a hero yet
+function authWait(){try{return AUTH.on&&(!AUTH.ready||(AUTH.user&&AUTH.dev===undefined));}catch(e){return true;}}
+// a player on a hero that isn't out yet is moved to the first launch hero (their saved pick is kept)
+function fixSelChar(){if(!authWait()&&!heroOut(selChar)){selChar=HERO_OUT[0];hcView=null;}}
 const heroName=ch=>ch.hn?`${ch.hn} · ${ch.name}`:ch.name;
 const ITEMS={banana:{name:'Banana Peel',icon:'🍌'},rocket:{name:'Rocket',icon:'🚀'},freeze:{name:'Freeze Bomb',icon:'❄️'},turbo:{name:'Turbo Shoes',icon:'💨'},shield:{name:'Shield',icon:'🛡️'},mine:{name:'Land Mine',icon:'💣'},ghost:{name:'Ghost',icon:'👻'},fire:{name:'Fire Trail',icon:'🔥'},swap:{name:'Lead Swap',icon:'🔄'}};
 /* ---------- 3D icons: pictures in img/icons/<name>.webp take the place of the emoji ---------- */
@@ -4100,7 +4113,7 @@ function zdOver(){const z=RACE.zd;if(z.over)return;z.over=true;zdHud();
   feed('The horde broke through on wave '+z.wave,'bad');}
 function startZombieDefense(){
   const used=new Set([selChar]),cpus=[];
-  for(let i=0;i<3;i++){const ch=shuffle(CHAR_IDS.filter(c=>!used.has(c)))[0]||pick(CHAR_IDS);used.add(ch);const cc=pick(COUNTRIES.filter(c=>c[0]!==selCountry))[0];cpus.push({id:'zd'+i,bot:true,nm:flagCanvas(cc).name,cc,ch,tm:0,sk:'classic'});}
+  for(let i=0;i<3;i++){const ch=shuffle(HERO_OUT.filter(c=>!used.has(c)))[0]||pick(HERO_OUT);used.add(ch);const cc=pick(COUNTRIES.filter(c=>c[0]!==selCountry))[0];cpus.push({id:'zd'+i,bot:true,nm:flagCanvas(cc).name,cc,ch,tm:0,sk:'classic'});}
   const roster=[{id:'me',local:true,nm:myName,cc:selCountry,ch:selChar,tm:0,sk:mySkinId()},...cpus];
   GP=null;startRaceFromGo({id:'zd'+Date.now(),seed:Math.floor(Math.random()*1e9),trk:selTrack,mode:'solo',laps:1,lo:false,zd:true,roster},false);
 }
@@ -4151,7 +4164,7 @@ const FC_START=3,FC_ROUND=15,FC_KEEP=2,FC_GRACE=3,FC_PLACE_PTS=[10,8,6,4,2,1],FC
 function startFlagChallenge(){
   const others=shuffle(COUNTRIES.map(c=>c[0]).filter(c=>c!==selCountry)).slice(0,5);
   const roster=[{id:'me',local:true,nm:myName,cc:selCountry,ch:selChar,tm:0,sk:mySkinId()}];
-  others.forEach((cc,i)=>roster.push({id:'b'+i,bot:true,cc,ch:pick(CHAR_IDS),tm:0,sk:pick(BOT_SKINS)}));
+  others.forEach((cc,i)=>roster.push({id:'b'+i,bot:true,cc,ch:pick(HERO_OUT),tm:0,sk:pick(BOT_SKINS)}));
   GP=null;startRaceFromGo({id:'fc'+Date.now(),seed:Math.floor(Math.random()*1e9),trk:selTrack,mode:'solo',laps:1,lo:true,fc:true,roster:shuffle(roster)},false);
   $('trackLabel').textContent='Flag Challenge · '+TH.name;
 }
@@ -5132,7 +5145,7 @@ function hostStart(){
     roster.forEach(e=>{const t=top.indexOf(e.gid);if(t>=0)e.tm=t;else{const c=[0,1,2].slice(0,nT).map(k=>roster.filter(x=>x!==e&&x.tm===k&&top.indexOf(x.gid)===k).length);e.tm=c.indexOf(Math.min(...c));}});
     for(let t=0;t<nT;t++)if(!tn[t])tn[t]=TEAMS[t].name;}
   if(NET.cfg.bots){const used=new Set(roster.map(e=>e.cc));const pool=shuffle(COUNTRIES.map(c=>c[0]).filter(c=>!used.has(c)));let i=0;
-    const nT=teamCount(mode);while(roster.length<6){const cnt=[0,1,2].slice(0,nT).map(t=>roster.filter(e=>e.tm===t).length);const tm=cnt.indexOf(Math.min(...cnt));roster.push({id:'b'+i,bot:true,cc:pool[i],ch:pick(CHAR_IDS),sk:pick(BOT_SKINS),tm,nm:''});i++;}}
+    const nT=teamCount(mode);while(roster.length<6){const cnt=[0,1,2].slice(0,nT).map(t=>roster.filter(e=>e.tm===t).length);const tm=cnt.indexOf(Math.min(...cnt));roster.push({id:'b'+i,bot:true,cc:pool[i],ch:pick(HERO_OUT),sk:pick(BOT_SKINS),tm,nm:''});i++;}}
   const go={tn,gb:!!tn,id:'g'+Date.now().toString(36)+Math.floor(Math.random()*1e4),seed:Math.floor(Math.random()*1e9),trk:NET.cfg.trk,mode,fc,laps:clamp(NET.cfg.laps|0,1,3)||1,lo:NET.cfg.lo!==false,roster:shuffle(roster)};
   NET.goId=go.id;pushPresence({go,rdy:false});NET.me.rdy=false;
   startRaceFromGo(go,true);
@@ -5256,7 +5269,7 @@ async function initAuth(){
 // Developer accounts are listed in Supabase (supabase/devs.sql). Only they see the Developer switch in Settings.
 async function checkDev(){AUTH.dev=undefined;renderGate();let dev=false,tester=false;if(AUTH.user){try{const sb=await getSb();const {data,error}=await sb.rpc('fd_is_dev');dev=!error&&data===true;
     // testers (supabase/testers.sql) get into the private game but not Developer mode
-    if(!dev){const t=await sb.rpc('fd_is_tester');tester=!t.error&&t.data===true;}}catch(e){}}AUTH.tester=tester;AUTH.dev=dev;renderDevBox();renderGate();}
+    if(!dev){const t=await sb.rpc('fd_is_tester');tester=!t.error&&t.data===true;}}catch(e){}}AUTH.tester=tester;AUTH.dev=dev;renderDevBox();renderGate();try{refreshMenu();}catch(e){}}
 // Private for now: only accounts on the developer list (supabase/devs.sql) get past this screen.
 const GATED=!window.claude;
 function renderGate(){const g=$('gate');if(!g)return;if(!GATED||AUTH.dev===true||AUTH.tester===true){g.hidden=true;return;}g.hidden=false;
@@ -5674,7 +5687,7 @@ function renderStore(){
   const grid=$('storeGrid');grid.innerHTML='';
   if(storeTab==='owned'){renderOwned(grid);return;}
   if(storeTab==='gems'){renderGemShop(grid);return;}
-  const list=storeTab==='items'?LOADOUT:storeTab==='skins'?SKINS_SHOP:storeTab==='attire'?ATTIRE:BUFFS.concat([LUCK]);
+  const list=storeTab==='items'?LOADOUT:storeTab==='skins'?SKINS_SHOP.filter(k=>!k.hero||heroOut(k.hero)):storeTab==='attire'?ATTIRE:BUFFS.concat([LUCK]);
   RARITY.forEach(t=>{let its=list.filter(i=>rarityOf(i)===t.id);if(storeTab==='skins')its=its.slice().sort((a,b)=>(b.hero===selChar)-(a.hero===selChar)||(!!b.hero)-(!!a.hero));if(!its.length)return;
     const h=document.createElement('h3');h.className='tier-head rh-'+t.id;h.textContent=t.name;{const ra=icoOf('rar',t.id);if(ra)h.prepend(icoEl(ra,'rar-ico'));}grid.appendChild(h);
     const tiles=its.map(it=>{const card=()=>storeTab==='items'?itemCard(it):storeTab==='skins'?skinCard(it):storeTab==='attire'?attireCard(it):it.id==='luck'?luckCard(it):buffCard(it);
@@ -5690,7 +5703,7 @@ function renderOwned(grid){
     grid.appendChild(tileGrid('store',its.map(it=>{const c=card(it);return {key:'own:'+key+':'+it.id,el:mkTile(Object.assign(tile(it),{cls:(c.classList.contains('on')?'on ':'')+'own r-'+rarityOf(it)})),info:()=>{const k=card(it);k.classList.add('in-pop');
       if(key==='skin'&&k.classList.contains('on')&&it.id!=='classic'){const u=document.createElement('button');u.className='ghost';u.textContent='Unequip';u.onclick=()=>{if(it.hero&&wallet.hs)delete wallet.hs[it.hero];else wallet.skin='classic';saveWallet();renderStore();rebuildPreview();syncLobbyPresence();};k.querySelector('.shop-row').appendChild(u);}
       return k;}};}),renderStore));};
-  sec('Skins',SKINS_SHOP.filter(k=>(wallet.skins.includes(k.id)||k.tier==='free')&&!lvLocked(k)),k=>icoOf('skin',k.id)?{ico:icoOf('skin',k.id),label:k.name}:k.hero?{img:heroTileImg(k.hero,k.id),label:k.name}:{html:skin3D(k),label:k.name},skinCard,'skin');
+  sec('Skins',SKINS_SHOP.filter(k=>(!k.hero||heroOut(k.hero))&&(wallet.skins.includes(k.id)||k.tier==='free')&&!lvLocked(k)),k=>icoOf('skin',k.id)?{ico:icoOf('skin',k.id),label:k.name}:k.hero?{img:heroTileImg(k.hero,k.id),label:k.name}:{html:skin3D(k),label:k.name},skinCard,'skin');
   sec('Items',LOADOUT.filter(l=>wallet.items.includes(l.id)),l=>({ico:icoOf('lo',l.id),icon:l.icon,label:l.name}),itemCard,'item');
   sec('Attire',ATTIRE.filter(a=>attireActive(a.id)),a=>({ico:icoOf('att',a.id),icon:a.icon,label:a.name}),attireCard,'att');
   sec('Buffs',BUFFS.filter(b=>(wallet.buffs[b.id]|0)>0).concat(luckActive()?[LUCK]:[]),b=>b.id==='luck'?{ico:icoOf('perk','luck'),icon:'🍀',label:b.name}:{ico:icoOf('perk',b.id),icon:BUFF_ICON[b.id],label:b.name,badge:'×'+(wallet.buffs[b.id]|0)},b=>b.id==='luck'?luckCard(b):buffCard(b),'buff');
@@ -5811,7 +5824,7 @@ let GP=null;
 function startGP(){
   const others=shuffle(COUNTRIES.map(c=>c[0]).filter(c=>c!==selCountry)).slice(0,5);
   const roster=[{id:'me',local:true,nm:myName,cc:selCountry,ch:selChar,tm:0,sk:mySkinId()}];
-  others.forEach((cc,i)=>roster.push({id:'b'+i,bot:true,cc,ch:pick(CHAR_IDS),tm:botTeam(selMode,i),sk:pick(BOT_SKINS)}));
+  others.forEach((cc,i)=>roster.push({id:'b'+i,bot:true,cc,ch:pick(HERO_OUT),tm:botTeam(selMode,i),sk:pick(BOT_SKINS)}));
   GP={tracks:[null,null,null,null],used:[],round:0,laps:selLaps,mode:selMode,lo:loOn,roster,pts:{},counted:-1};
   roster.forEach(e=>GP.pts[e.id]=0);gpRace();
 }
@@ -6153,8 +6166,8 @@ const HD_RANGE={speed:[0.95,1.04],agility:[0.82,1.15],charge:[24,16]};
 const hdBar=(v,[a,b])=>Math.max(1,Math.min(10,Math.round((v-a)/(b-a)*10)));
 function renderHeroDock(){const row=$('hdRow'),card=$('hdCard');if(!row)return;
   if(row.dataset.built!=='1'){row.innerHTML='';CHARS.forEach(ch=>{const b=document.createElement('button');b.type='button';b.className='hd-hero';b.dataset.ch=ch.id;b.title=ch.name;b.setAttribute('aria-label',ch.name);
-      b.onclick=()=>{if(selChar===ch.id)return;selChar=ch.id;store.set('flagdash-char',ch.id);refreshMenu('flex');syncLobbyPresence();};row.appendChild(b);});row.dataset.built='1';}
-  row.querySelectorAll('.hd-hero').forEach(b=>{const id=b.dataset.ch,k=id+'.'+heroSkinFor(id)+'|'+selCountry;b.setAttribute('aria-pressed',String(id===selChar));
+      b.onclick=()=>{if(!heroOut(ch.id)){try{sfx.tap();}catch(e){}hcView=ch.id;try{renderHeroCard();}catch(e){}return;}if(selChar===ch.id)return;selChar=ch.id;store.set('flagdash-char',ch.id);refreshMenu('flex');syncLobbyPresence();};row.appendChild(b);});row.dataset.built='1';}
+  row.querySelectorAll('.hd-hero').forEach(b=>{const id=b.dataset.ch,k=id+'.'+heroSkinFor(id)+'|'+selCountry;b.setAttribute('aria-pressed',String(id===selChar));{const soon=!heroOut(id);b.classList.toggle('soon',soon);b.setAttribute('aria-label',charById(id).name+(soon?' (coming soon)':''));}
     if(b.dataset.k!==k&&typeof THREE!=='undefined'){b.dataset.k=k;b.innerHTML='';b.appendChild(heroTileImg(id));}});
   const ch=charById(selChar);if(!ch)return;
   const bar=(lab,v,r)=>{const n=hdBar(v,r);return `<div class="hd-stat"><span>${lab}</span><i>${Array.from({length:10},(_,i)=>`<b class="${i<n?'on':''}"></b>`).join('')}</i></div>`;};
@@ -6252,7 +6265,7 @@ function startChallenge(id){
   const ch=chById(id);if(!ch)return;closeHub();
   const others=shuffle(COUNTRIES.map(c=>c[0]).filter(c=>c!==selCountry)).slice(0,5);
   const roster=[{id:'me',local:true,nm:myName,cc:selCountry,ch:selChar,tm:0,sk:mySkinId()}];
-  others.forEach((cc,i)=>roster.push({id:'b'+i,bot:true,cc,ch:pick(CHAR_IDS),tm:botTeam(ch.mode,i),sk:pick(BOT_SKINS)}));
+  others.forEach((cc,i)=>roster.push({id:'b'+i,bot:true,cc,ch:pick(HERO_OUT),tm:botTeam(ch.mode,i),sk:pick(BOT_SKINS)}));
   GP=null;initAudio();
   startRaceFromGo({id:'ch'+Date.now(),seed:Math.floor(Math.random()*1e9),trk:ch.trk,mode:ch.mode,laps:ch.laps,lo:ch.lo,roster:shuffle(roster)},false);
   RACE.challenge=ch.id;RACE.rules=ch.rules||{};
@@ -6491,7 +6504,7 @@ function periodLeft(p){const now=new Date();let end;
 /* ---------- profile pictures: a head-and-shoulders portrait of the player's runner in their skin ---------- */
 const validAv=a=>{if(typeof a!=='string'||!/^[a-z]{2,12}\.[a-z0-9_]{2,24}$/.test(a))return null;const [h,k]=a.split('.');return CHAR_IDS.includes(h)&&SKINS_SHOP.some(x=>x.id===k)?a:null;};
 function myAvatar(){return validAv(store.get('flagdash-avatar'))||`${selChar}.${mySkinId()}`;}
-function cpuAvatar(nm){const h=hashStr('av'+(nm||''));const hero=CHAR_IDS[h%CHAR_IDS.length];const pool=SKINS_SHOP.filter(k=>!k.hero||k.hero===hero);return hero+'.'+(h%3?pool[(h>>>4)%pool.length].id:'classic');}
+function cpuAvatar(nm){const h=hashStr('av'+(nm||''));const hero=HERO_OUT[h%HERO_OUT.length];const pool=SKINS_SHOP.filter(k=>!k.hero||k.hero===hero);return hero+'.'+(h%3?pool[(h>>>4)%pool.length].id:'classic');}
 const AV={cache:new Map(),r:null,q:[],busy:false};
 function avatarImg(av,cc,cls){const im=document.createElement('img');im.className='av '+(cls||'');im.alt='';const key=(av||'')+'|'+cc;
   const c=AV.cache.get(key);if(c)im.src=c;else{im.classList.add('loading');AV.q.push({key,av,cc,im});pumpAvatars();}return im;}
@@ -6668,7 +6681,7 @@ const GH_TAIL=['','','','_GG','99','x','Pro','Dash','_HT','7','Run','Flash','Bol
 // the guild's CPU members: same names every time for the same guild
 function ghCpu(gid){const rng=mulberry32(hashStr('ghm'+gid)),n=gid.startsWith('gstarter')?18+Math.floor(rng()*10):10+Math.floor(rng()*8),out=[];const used=new Set();
   for(let i=0;i<n;i++){let nm;do{nm=GH_FIRST[Math.floor(rng()*GH_FIRST.length)]+GH_TAIL[Math.floor(rng()*GH_TAIL.length)];}while(used.has(nm));used.add(nm);
-    out.push({id:'c'+i,nm,cc:COUNTRIES[Math.floor(rng()*COUNTRIES.length)][0],ch:CHAR_IDS[Math.floor(rng()*CHAR_IDS.length)],base:rng(),role:i===0?'Leader':i<3?'Elder':'Member',cpu:true});}
+    out.push({id:'c'+i,nm,cc:COUNTRIES[Math.floor(rng()*COUNTRIES.length)][0],ch:HERO_OUT[Math.floor(rng()*HERO_OUT.length)],base:rng(),role:i===0?'Leader':i<3?'Elder':'Member',cpu:true});}
   return out;}
 const ghLeaderIsMe=()=>GUILD&&GUILD.owner===PID;
 function ghMembers(){const wk=weekKey(),f=periodFrac('w',wk),cpu=ghCpu(GUILD.id).map(m=>Object.assign(m,{pts:Math.round(m.base*m.base*520*f)}));
@@ -7241,10 +7254,10 @@ function infoTap(b,e){const onI=e&&e.target&&e.target.closest&&e.target.closest(
   if(onI||b.getAttribute('aria-pressed')==='true'){b.classList.toggle('open');return true;}return false;}
 const statPct=(v,lo,hi)=>Math.round(clamp((v-lo)/(hi-lo),0.08,1)*100);
 function renderCharTiles(){charGrid.innerHTML='';
-  const tiles=CHARS.map(ch=>({key:ch.id,el:mkTile({img:heroTileImg(ch.id),label:ch.hn||ch.name,cls:ch.id===selChar?'on own':'own'}),
-    pick:()=>{if(selChar!==ch.id){selChar=ch.id;store.set('flagdash-char',ch.id);refreshMenu('flex');syncLobbyPresence();}},
+  const tiles=CHARS.map(ch=>({key:ch.id,el:mkTile({img:heroTileImg(ch.id),label:ch.hn||ch.name,badge:heroOut(ch.id)?'':'Coming soon',cls:!heroOut(ch.id)?'locked':ch.id===selChar?'on own':'own'}),
+    pick:()=>{if(heroOut(ch.id)&&selChar!==ch.id){selChar=ch.id;store.set('flagdash-char',ch.id);refreshMenu('flex');syncLobbyPresence();}},
     info:()=>{const st=document.createElement('div');st.className='stats';st.innerHTML=`<div class="stat">Speed<i><b style="width:${statPct(ch.speed,0.96,1.04)}%"></b></i></div><div class="stat">Agility<i><b style="width:${statPct(ch.agility,0.8,1.18)}%"></b></i></div><div class="stat">Recharge<i><b style="width:${statPct(26-ch.charge,3,9)}%"></b></i></div>`;
-      return tileInfo(`${heroName(ch)} · ${ch.power}`,[ch.desc,`⭐ ${ch.perk.name}: ${ch.perk.desc}`,st]);}}));
+      return tileInfo(`${heroName(ch)} · ${ch.power}`,[...(heroOut(ch.id)?[]:['🔒 Coming soon']),ch.desc,`⭐ ${ch.perk.name}: ${ch.perk.desc}`,st]);}}));
   charGrid.appendChild(tileGrid('runner',tiles,renderCharTiles));}
 function elevProfile(th){const h=heightFn(th),pts=[];let lo=1e9,hi=-1e9;for(let i=0;i<=60;i++){const v=h(i/60*TRACK);pts.push(v);lo=Math.min(lo,v);hi=Math.max(hi,v);}return {pts,lo,hi};}
 const PROF=THEMES.map(elevProfile);const gLo=Math.min(...PROF.map(p=>p.lo)),gHi=Math.max(...PROF.map(p=>p.hi));
@@ -7274,12 +7287,12 @@ const HERO_INFO={
 // Picture: img/heroes/<hero>.webp (a transparent 3D picture); until one exists, the 3D portrait.
 let hcView=null;
 function renderHeroCard(){const box=$('heroCard');if(!box)return;if(!CHAR_IDS.includes(hcView))hcView=selChar;
-  const ch=charById(hcView),info=HERO_INFO[ch.id]||{},n=CHAR_IDS.length,i=CHAR_IDS.indexOf(ch.id),mine=ch.id===selChar;
+  const ch=charById(hcView),info=HERO_INFO[ch.id]||{},n=CHAR_IDS.length,i=CHAR_IDS.indexOf(ch.id),mine=ch.id===selChar,soon=!heroOut(ch.id);
   const pct=(v,a,b)=>Math.round(clamp((v-a)/(b-a),0.08,1)*100);
   const stats=[['Speed',pct(ch.speed,0.95,1.05)],['Agility',pct(ch.agility,0.85,1.15)],['Power charge',pct(23-ch.charge,0,6)],['Power strength',pct(ch.stun,1.2,1.9)]];
   const f=info.cc?flagCanvas(info.cc):null;
   box.innerHTML=`<div class="hc-nav"><button type="button" class="hc-prev" aria-label="Previous hero"><img src="img/icons/arrow_l.webp" alt=""></button><span class="hc-count">${i+1} / ${n}</span><button type="button" class="hc-next" aria-label="Next hero"><img src="img/icons/arrow_r.webp" alt=""></button></div><div class="hc-top"><span class="hc-picbox"></span><div class="hc-id"><p class="hc-name"></p><div class="hc-type"></div><div class="hc-nat"></div></div></div>
-    <button type="button" class="primary d3-gold hc-sel"${mine?' disabled aria-pressed="true"':''}>${mine?'✓ Selected':'Select'}</button>
+    <button type="button" class="primary d3-gold hc-sel"${mine||soon?' disabled':''}${mine?' aria-pressed="true"':''}>${soon?'🔒 Coming soon':mine?'✓ Selected':'Select'}</button>
     <div class="hc-stats">${stats.map(([k,v])=>`<span>${k}</span><div class="hc-bar"><i style="width:${v}%"></i></div>`).join('')}</div>
     <div class="hc-pw"><b>⚡ ${ch.power}:</b> <span class="hc-pwd"></span></div><div class="hc-pw"><b>⭐ ${ch.perk.name}:</b> <span class="hc-pkd"></span></div>
     <p class="hc-story"></p>
@@ -7292,8 +7305,9 @@ function renderHeroCard(){const box=$('heroCard');if(!box)return;if(!CHAR_IDS.in
   box.querySelector('.hc-pwd').textContent=ch.desc;box.querySelector('.hc-pkd').textContent=ch.perk.desc;box.querySelector('.hc-story').textContent=info.story||'';
   const go=d=>{hcView=CHAR_IDS[(i+d+n)%n];try{sfx.tap();}catch(e){}renderHeroCard();};
   box.querySelector('.hc-prev').onclick=()=>go(-1);box.querySelector('.hc-next').onclick=()=>go(1);
-  box.querySelector('.hc-sel').onclick=()=>{selChar=hcView;store.set('flagdash-char',selChar);refreshMenu('flex');try{syncLobbyPresence();}catch(e){}};}
+  box.querySelector('.hc-sel').onclick=()=>{if(!heroOut(hcView))return;selChar=hcView;store.set('flagdash-char',selChar);refreshMenu('flex');try{syncLobbyPresence();}catch(e){}};}
 function refreshMenu(emote){
+  fixSelChar();
   try{renderHeroDock();}catch(e){}
   try{renderHeroCard();}catch(e){}
   flagGrid.querySelectorAll('.flag-btn').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.code===selCountry);const g=flag3d(b.dataset.code),im=b.querySelector('img'),u=myFlagUrl(b.dataset.code);if(im.getAttribute('src')!==u)im.src=u;const pg=b.querySelector('.f3d-pg');pg.textContent=g.on?'✨ 3D':(g.s||g.v)?`${g.s}/${F3D_SOLO} · ${g.v}/${F3D_VS}`:'';pg.title=g.on?'3D flag unlocked':`3D flag: win ${F3D_SOLO} single races and ${F3D_VS} online races with this flag`;});
@@ -7390,7 +7404,7 @@ $('fcBtn').onclick=()=>{if(plaza.active)leavePlaza();initAudio();if(actx&&actx.s
 function startOffline(quick){
   const others=shuffle(COUNTRIES.map(c=>c[0]).filter(c=>c!==selCountry)).slice(0,5);
   const roster=[{id:'me',local:true,nm:myName,cc:selCountry,ch:selChar,tm:0,sk:mySkinId()}];
-  others.forEach((cc,i)=>roster.push({id:'b'+i,bot:true,cc,ch:pick(CHAR_IDS),tm:botTeam(selMode,i),sk:pick(BOT_SKINS)}));
+  others.forEach((cc,i)=>roster.push({id:'b'+i,bot:true,cc,ch:pick(HERO_OUT),tm:botTeam(selMode,i),sk:pick(BOT_SKINS)}));
   // Quick Race: a random track every match (your chosen track is kept for normal races)
   const trk=quick?pick(THEMES.map(t=>t.id).filter(id=>THEMES.length<2||id!==quickLast)):selTrack;if(quick)quickLast=trk;
   GP=null;startRaceFromGo({id:'off'+Date.now(),seed:Math.floor(Math.random()*1e9),trk,mode:quick?'solo':selMode,laps:quick?1:selLaps,lo:loOn,roster:shuffle(roster)},false);
@@ -8196,7 +8210,7 @@ const LAYOUT=(()=>{
   $('deskSet').onclick=()=>openSettings();$('chalBtn').onclick=()=>openHub('tasks','challenges');$('deskAcct').onclick=()=>openAcct();$('acctClose').onclick=()=>closeAcct();$('setAcct').onclick=()=>{closeSettings();openAcct();};
   $('acct').addEventListener('click',e=>{if(e.target===$('acct'))closeAcct();});$('deskStore').onclick=()=>openStore();
   $('deskWallet').onclick=e=>{if(e.target.closest&&e.target.closest('.d3-gem'))storeTab='gems';openStore();};$('deskWallet').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openStore();}};$('d3Store').onclick=()=>openStore();$('d3Friends').onclick=()=>openSocial('friends');
-  const cycle=dir=>{const i=CHAR_IDS.indexOf(selChar);selChar=CHAR_IDS[(i+dir+CHAR_IDS.length)%CHAR_IDS.length];store.set('flagdash-char',selChar);refreshMenu('flex');syncLobbyPresence();};
+  const cycle=dir=>{const ids=outIds(),i=Math.max(0,ids.indexOf(selChar));selChar=ids[(i+dir+ids.length)%ids.length];store.set('flagdash-char',selChar);refreshMenu('flex');syncLobbyPresence();};
   $('pvLeft').onclick=()=>cycle(-1);$('pvRight').onclick=()=>cycle(1);
   const short=t=>{const n=+String(t).replace(/[^0-9]/g,'');return n>=1e6?(n/1e6).toFixed(n>=1e7?1:2).replace(/\.?0+$/,'')+'M':n>=1e5?Math.round(n/1e3)+'K':t;};
   const wal=()=>{$('d3Coins').textContent=short($('wCoins').textContent);$('d3Gems').textContent=short($('wGems').textContent);};
