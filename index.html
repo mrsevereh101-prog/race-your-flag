@@ -3788,7 +3788,7 @@ const prog=r=>(r.lap-1)*TRACK+r.d;
 const totalLen=()=>TRACK*(RACE?RACE.laps:1);
 
 function makeRunner(e,idx,n,online){
-  const flag=flagCanvas(e.cc),ch=charById(e.ch);
+  const flag=flagCanvas(e.cc),ch=charById(e.ch);fxPreload(ch.id);
   const isLocal=online?(e.peer&&e.peer===NET.myPeer):!!e.local;
   const kind=isLocal?'local':(e.bot?'bot':'remote');
   const owned=isLocal||(!!e.bot&&(!online||NET.isHost));
@@ -4600,19 +4600,19 @@ function handleAct(src,a){
     case 'ult':{
       const ch=src.char,p=ch.id;lastUltT=raceTime;if(src.kind==='local')showUlt(src);if(src.owned)speak(src,'power');
       const victims=runners.filter(o=>o!==src&&!o.finished&&!sameTeam(o,src));
-      if(p==='samurai'){ringFx(src.x,src.d,0xff4a3a,30,0.6);victims.forEach(o=>slashFx(o));sfx.slash();}
-      else if(p==='warrior'){flashScreen('#cfe8ff');victims.forEach(o=>boltFx({x:o.x+rand(-1.5,1.5),d:o.d,y:24},o));sfx.thunder();}
-      else if(p==='archer'){windFx(src);victims.forEach(o=>swirlFx(o));sfx.wind();}
+      if(p==='samurai'){ringFx(src.x,src.d,0xff4a3a,30,0.6);victims.forEach(o=>{if(!slashArt(o))slashFx(o);else{const q=wpos(o,1.2);burst(q.x,q.y,q.z,10,[1,0.3,0.25],{add:true,max:5,grav:3});}});sfx.slash();}
+      else if(p==='warrior'){flashScreen('#cfe8ff');if(!boltArt(src,victims))victims.forEach(o=>boltFx({x:o.x+rand(-1.5,1.5),d:o.d,y:24},o));else victims.forEach(o=>{const B=wpos(o,1.5);burst(B.x,B.y,B.z,10,[0.6,0.9,1],{add:true,max:5,grav:2});});sfx.thunder();}
+      else if(p==='archer'){windFx(src);if(!windArt(src,victims))victims.forEach(o=>swirlFx(o));sfx.wind();}
       else if(p==='elf'){victims.forEach(o=>treeFx(o,ch.stun));sfx.trees();}
-      else if(p==='queen'){stampedeFx(src);victims.forEach(o=>emojiFx(o,pick(['🦁','🦏','🐘','🐆','🦬'])));sfx.quake();samp('power_stampede',1);samp('power_wind',0.6);}
+      else if(p==='queen'){stampedeFx(src);victims.forEach(o=>{if(!stampedeArt(o))emojiFx(o,pick(['🦁','🦏','🐘','🐆','🦬']));});sfx.quake();samp('power_stampede',1);samp('power_wind',0.6);}
       else if(p==='knight'){flashScreen('#fff6d0');victims.forEach(o=>lightFx(o));samp('power_ready',1)||sfx.power();samp('power_thunder',0.5);}
       else if(p==='shaolin'){fireWaveFx(src);victims.forEach(o=>{const q=wpos(o,0.8);burst(q.x,q.y,q.z,26,[1,0.5,0.1],{add:true,max:6,up:5,grav:2,size:0.4});});samp('fire',1)||sfx.power();samp('power_slash',0.6);}
       else if(p==='viking'){blizzardFx(src);victims.forEach(o=>iceFx(o,ch.stun));samp('freeze',1)||sfx.power();samp('power_wind',0.7);}
       else if(p==='robot'){victims.forEach(o=>laserFx(src,o));samp('shockwave',1)||sfx.power();}
-      else if(p==='blake'){ringFx(src.x,src.d,0x4fd0ff,26,0.6);victims.forEach(o=>{swirlFx(o);const q=wpos(o,1.2);burst(q.x,q.y,q.z,20,[0.3,0.8,1],{add:true,max:5,up:3,grav:2,size:0.3});});samp('power_drone',1)||samp('shockwave',1)||sfx.power();}
-      else if(p==='kicker'){ringFx(src.x,src.d,0xff6a8a,28,0.6);windFx(src);victims.forEach(o=>{swirlFx(o);const q=wpos(o,1);burst(q.x,q.y,q.z,18,[1,0.5,0.6],{add:true,max:5,up:4,grav:3});});samp('power_kick',1);samp('power_slash',1)||sfx.slash();samp('power_wind',0.6);}
+      else if(p==='blake'){ringFx(src.x,src.d,0x4fd0ff,26,0.6);const dr=droneArt(src,victims);victims.forEach(o=>{if(!dr)swirlFx(o);const q=wpos(o,1.2);burst(q.x,q.y,q.z,20,[0.3,0.8,1],{add:true,max:5,up:3,grav:2,size:0.3});});samp('power_drone',1)||samp('shockwave',1)||sfx.power();}
+      else if(p==='kicker'){ringFx(src.x,src.d,0xff6a8a,28,0.6);windFx(src);const ka=kickArt(src,victims);victims.forEach(o=>{if(!ka)swirlFx(o);const q=wpos(o,1);burst(q.x,q.y,q.z,18,[1,0.5,0.6],{add:true,max:5,up:4,grav:3});});samp('power_kick',1);samp('power_slash',1)||sfx.slash();samp('power_wind',0.6);}
       else if(p==='gas'){ringFx(src.x,src.d,0x9a62f0,26,0.9);victims.forEach(o=>gasFx(o));samp('power_wind',1)||sfx.wind();}
-      else if(p==='rapper'){bassFx(src);victims.forEach(o=>swirlFx(o));samp('power_bass',1)||samp('shockwave',1)||sfx.power();tone(55,0.9,'sine',0.12,-20);tone(42,1.1,'sine',0.1,-12,0.15);}
+      else if(p==='rapper'){bassFx(src);if(!bassArt(src,victims))victims.forEach(o=>swirlFx(o));samp('power_bass',1)||samp('shockwave',1)||sfx.power();tone(55,0.9,'sine',0.12,-20);tone(42,1.1,'sine',0.1,-12,0.15);}
       else{if(!reduceMotion)shake=Math.max(shake,0.9);ringFx(src.x,src.d,0xc98a4a,25,0.8);runners.forEach(o=>{const q=wpos(o,0.1);burst(q.x,q.y,q.z,20,TH.dust,{max:5,up:4,grav:9,size:0.4});});sfx.quake();}
       for(const o of victims){if(!o.owned)continue;if(hit(o,ch.stun,src,ch.kind,`${src.nm}'s ${ch.power} stunned you`,true)&&p==='archer')o.d=Math.max(0,o.d-4);}
       break;}
@@ -4843,6 +4843,57 @@ function clearBubbles(){while(bubbles.length)killBubble(bubbles.length-1);}
 function sayHit(src,o){if(!src||!o||src===o)return;src.lastFoe=o;o.lastFoe=src;speak(src,'hit');speak(o,'hurt',0.55);}
 
 /* ---------- effects ---------- */
+
+/* ---------- power effect art: img/fx/<name>.webp (square cut-outs). Each piece is optional: the built-in effect plays when its picture isn't loaded. ---------- */
+const FXSET={warrior:['bolt_a','bolt_b','bolt_c','strike_flash','spark','cloud'],blake:['drone_front','drone_side','drone_top','zap_arc','scan_ring','zap_hit'],archer:['gust_a','gust_b','wind_swirl','leaf','feather','wind_ring'],samurai:['slash_a','slash_b','slash_x','slash_line','petal','slash_hit'],queen:['lion','elephant','rhino','buffalo','dust','paw'],rapper:['sound_ring','speaker','note_a','note_b','eq_bars','bass_burst'],kicker:['ghost_kick_a','ghost_kick_b','ghost_foot','kick_swoosh','foot_hit','star']};
+const FXART={};
+function fxArt(n){n=n.replace(/^fx_/,'');let a=FXART[n];if(!a){a=FXART[n]={ok:false};const t=new THREE.TextureLoader().load('img/fx/fx_'+n+'.webp',()=>{a.ok=true;},undefined,()=>{a.bad=true;});t.encoding=THREE.sRGBEncoding;a.t=t;}return a;}
+function fxPreload(h){(FXSET[h]||[]).forEach(fxArt);}
+const fxReady=n=>fxArt(n).ok;
+// one flat picture that always faces the camera. o: pos or from/to (Vector3), size, asp (width/height), s0/s1 (start/end scale), dur, delay, add (glow blend), rot, spin, flip, alpha, fo (fade-out share)
+function artFx(n,o){const a=fxArt(n);if(!a.ok||typeof scene==='undefined')return false;
+  const mat=new THREE.SpriteMaterial({map:a.t,transparent:true,depthWrite:false,depthTest:false,opacity:0,blending:o.add?THREE.AdditiveBlending:THREE.NormalBlending,rotation:o.rot||0});
+  const sp=new THREE.Sprite(mat);sp.renderOrder=18;sp.visible=false;const A=(o.from||o.pos).clone(),B=(o.to||o.from||o.pos).clone(),sz=o.size||2,asp=o.asp||1,s0=o.s0==null?1:o.s0,s1=o.s1==null?1:o.s1,dur=o.dur||0.6,delay=o.delay||0,total=dur+delay,fl=o.flip?-1:1;
+  sp.position.copy(A);sp.scale.set(sz*asp*s0*fl,sz*s0,1);scene.add(sp);
+  fx.push({m:sp,t:0,dur:total,dispose(){mat.dispose();},update(k){const t=k*total-delay;if(t<0){sp.visible=false;return;}sp.visible=true;const q=t/dur,e=q*(2-q);
+    sp.position.lerpVectors(A,B,o.ease===false?q:e);if(o.bob)sp.position.y+=Math.abs(Math.sin(q*o.bob))*0.5;const s=s0+(s1-s0)*e;sp.scale.set(sz*asp*s*fl,sz*s,1);
+    mat.opacity=(o.alpha==null?1:o.alpha)*Math.min(1,q/0.12,(1-q)/(o.fo||0.35));mat.rotation=(o.rot||0)+(o.spin||0)*q;}});return true;}
+// Kapwa: tall bolts fall on every rival, a flash on the ground, sparks, and a storm cloud over him
+function boltArt(src,victims){if(!fxReady('fx_bolt_a'))return false;artFx('fx_cloud',{pos:wpos(src,9),size:11,dur:1.1,s0:0.5,s1:1,alpha:0.9});
+  victims.forEach((o,i)=>{const B=wpos(o,0),c=B.clone();c.y+=9;artFx(pick(['fx_bolt_a','fx_bolt_b','fx_bolt_c']),{pos:c,size:19,asp:0.5,dur:0.55,delay:i*0.04,add:true,s0:1,s1:1.05,fo:0.6});
+    artFx('fx_strike_flash',{pos:wpos(o,0.4),size:5.5,dur:0.6,delay:i*0.04+0.05,add:true,s0:0.4,s1:1.4});artFx('fx_spark',{pos:wpos(o,1.6),size:3,dur:0.5,delay:i*0.04+0.08,add:true,spin:1.2,s0:0.5,s1:1.2});});return true;}
+// Hayato: crossing slash arcs and a hit burst on every rival, petals drift away
+function slashArt(o){if(!fxReady('fx_slash_a'))return false;const P=wpos(o,1.3);
+  artFx('fx_slash_a',{pos:P,size:4.2,dur:0.5,add:true,s0:0.5,s1:1.1,rot:rand(-0.3,0.3)});artFx('fx_slash_b',{pos:P,size:4.2,dur:0.5,delay:0.08,add:true,s0:0.5,s1:1.1,rot:rand(-0.3,0.3)});
+  artFx('fx_slash_x',{pos:P,size:3.6,dur:0.45,delay:0.16,add:true,s0:0.6,s1:1.2});artFx('fx_slash_line',{pos:P,size:6.5,dur:0.4,delay:0.04,add:true,s0:0.7,s1:1.2});artFx('fx_slash_hit',{pos:P,size:3.4,dur:0.45,delay:0.2,add:true,s0:0.3,s1:1.3});
+  for(let i=0;i<2;i++){const T=P.clone();T.x+=rand(-2,2);T.y+=rand(0.5,2.5);T.z+=rand(-2,2);artFx('fx_petal',{from:P,to:T,size:1,dur:0.9,delay:0.2,spin:3,s0:0.6,s1:1});}return true;}
+// Aria: wind gusts rush past down the track, a vortex wraps each rival, leaves and feathers blow away
+function windArt(src,victims){if(!fxReady('fx_gust_a'))return false;const bd=backDir(src.d);
+  for(let i=0;i<9;i++){const d=src.d+rand(4,70),A=W(rand(-6,6),d,Hf(d)+rand(0.6,3.2)),B=A.clone();B.x+=bd.x*34;B.z+=bd.z*34;artFx(i%2?'fx_gust_b':'fx_gust_a',{from:A,to:B,size:rand(5,8),asp:1.2,dur:0.8,delay:i*0.05,s0:0.6,s1:1.5,alpha:0.9,flip:Math.random()<0.5});}
+  artFx('fx_wind_ring',{pos:wpos(src,0.2),size:9,dur:0.8,s0:0.3,s1:1.6,alpha:0.9});
+  victims.forEach((o,i)=>{const P=wpos(o,1.1);artFx('fx_wind_swirl',{pos:P,size:3.6,dur:0.9,delay:0.12+i*0.03,spin:2,s0:0.5,s1:1.1});
+    [['fx_leaf',1.3],['fx_feather',1.3]].forEach(([n,sz])=>{const T=P.clone();T.x+=bd.x*8+rand(-2,2);T.z+=bd.z*8;T.y+=rand(-0.5,2);artFx(n,{from:P,to:T,size:sz,dur:1.1,delay:0.2,spin:rand(-4,4),s0:0.7,s1:1});});});return true;}
+// Blake: a swarm of helper drones flies out to every rival and zaps them
+function droneArt(src,victims){if(!fxReady('fx_drone_front'))return false;const S=wpos(src,2.2);artFx('fx_scan_ring',{pos:wpos(src,0.15),size:8,dur:0.9,add:true,s0:0.4,s1:1.5});
+  victims.forEach((o,i)=>{const E=wpos(o,1.7);['fx_drone_front','fx_drone_side','fx_drone_top'].forEach((n,j)=>{const A=S.clone();A.x+=rand(-1.5,1.5);A.y+=rand(-0.4,1.2);const T=E.clone();T.x+=rand(-0.6,0.6);T.y+=rand(-0.5,0.5);
+      artFx(n,{from:A,to:T,size:1.2,dur:0.55,delay:i*0.04+j*0.07,s0:0.8,s1:1,fo:0.2,bob:6});});
+    artFx('fx_zap_arc',{pos:E,size:3.4,asp:1.3,dur:0.5,delay:0.55+i*0.04,add:true,s0:0.7,s1:1.1});artFx('fx_zap_hit',{pos:E,size:3.2,dur:0.5,delay:0.58+i*0.04,add:true,s0:0.3,s1:1.3,spin:0.8});});return true;}
+// Malkia: golden spirit animals thunder across the track at every rival
+function stampedeArt(o){if(!fxReady('fx_lion'))return false;const n=pick(['fx_lion','fx_elephant','fx_rhino','fx_buffalo']),sz=n==='fx_elephant'?4.6:n==='fx_lion'?3.8:3.4;
+  const rx=W(o.x-11,o.d,Hf(o.d)+sz*0.2),lx=W(o.x+11,o.d,Hf(o.d)+sz*0.2);
+  artFx(n,{from:rx,to:lx,size:sz,dur:0.95,s0:1,s1:1,ease:false,bob:30,fo:0.15});
+  artFx('fx_dust',{from:rx,to:lx,size:2.6,dur:1.0,delay:0.05,ease:false,alpha:0.7,s0:0.8,s1:1.4});artFx('fx_paw',{pos:wpos(o,0.3),size:2.2,dur:0.7,delay:0.45,add:true,s0:0.4,s1:1.2,alpha:0.9});return true;}
+// Kid Echo: the speaker drops the bass: sound rings, a bass burst, notes and equalizer bars
+function bassArt(src,victims){if(!fxReady('fx_sound_ring'))return false;const P=wpos(src,0.3),sp=wpos(src,2.4);sp.x+=2.4;
+  for(let i=0;i<4;i++)artFx('fx_sound_ring',{pos:P,size:7,dur:0.8,delay:i*0.14,add:true,s0:0.3,s1:2.4,alpha:0.9});
+  artFx('fx_speaker',{pos:sp,size:2.6,dur:1.1,s0:0.2,s1:1,fo:0.3});artFx('fx_bass_burst',{pos:wpos(src,1.3),size:6,dur:0.5,add:true,s0:0.3,s1:1.5});
+  for(let i=0;i<6;i++){const T=wpos(src,1.5);T.x+=rand(-3,3);T.y+=rand(2,5);artFx(i%2?'fx_note_a':'fx_note_b',{from:wpos(src,1.5),to:T,size:1.1,dur:1.1,delay:0.1+i*0.08,s0:0.6,s1:1,spin:rand(-0.4,0.4)});}
+  victims.forEach((o,i)=>{artFx('fx_eq_bars',{pos:wpos(o,3),size:2,asp:1.2,dur:0.9,delay:0.2+i*0.04,add:true,s0:0.5,s1:1});});return true;}
+// Ha-Neul: an after-image kick. Her glowing silhouette leaves fading copies behind it, then a swoosh and a hit on every rival
+function kickArt(src,victims){if(!fxReady('fx_ghost_foot'))return false;const bd=backDir(src.d),P=wpos(src,1.2);
+  for(let i=0;i<4;i++){const T=P.clone();T.x+=bd.x*i*1.1;T.z+=bd.z*i*1.1;artFx('fx_ghost_foot',{pos:T,size:3.4-i*0.25,dur:0.6+i*0.08,delay:0.04*i,add:true,alpha:0.85-i*0.17,s0:1.1,s1:0.9,fo:0.5,flip:true});}
+  artFx('fx_ghost_kick_a',{pos:P,size:6,dur:0.7,delay:0.1,add:true,s0:0.7,s1:1.2});artFx('fx_kick_swoosh',{pos:P,size:6.5,dur:0.5,delay:0.05,add:true,s0:0.6,s1:1.2});
+  victims.forEach((o,i)=>{const V=wpos(o,1.2);artFx('fx_ghost_kick_b',{pos:V,size:4.6,dur:0.6,delay:0.35+i*0.04,add:true,s0:0.6,s1:1.15});artFx('fx_foot_hit',{pos:V,size:3.6,dur:0.5,delay:0.45+i*0.04,add:true,s0:0.3,s1:1.3});artFx('fx_star',{pos:wpos(o,2),size:1.8,dur:0.5,delay:0.5+i*0.04,add:true,spin:1.5});});return true;}
 function ringFx(x,d,color,maxR,dur){const m=new THREE.Mesh(ringGeo,new THREE.MeshBasicMaterial({color,transparent:true,opacity:0.85,side:THREE.DoubleSide,depthWrite:false}));m.rotation.x=-Math.PI/2;m.position.copy(W(x,d,Hf(d)+0.12));scene.add(m);fx.push({m,t:0,dur,update(k){m.scale.setScalar(0.5+k*maxR);m.material.opacity=0.85*(1-k);}});}
 function boltFx(a,b){const A=wpos(a,1.8),B=wpos(b,1.5),pts=[];for(let i=0;i<=10;i++){const p=A.clone().lerp(B,i/10);if(i>0&&i<10){p.x+=rand(-0.6,0.6);p.y+=rand(-0.5,0.5);}pts.push(p);}
   const m=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts,false,'catmullrom',0.1),40,0.07,5,false),new THREE.MeshBasicMaterial({color:0xbfefff,transparent:true,opacity:1}));scene.add(m);fx.push({m,t:0,dur:0.4,update(k){m.material.opacity=1-k;}});burst(B.x,B.y,B.z,16,[0.6,0.9,1],{add:true,max:5,grav:2});}
