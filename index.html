@@ -3426,7 +3426,9 @@ function attachRig(m,id){const H=HERO3D[id];if(m.rig||m.glb||!hero3dReady(H))ret
   wrap(bone('Head'),m.stars);m.stars.position.set(0,(H.top-H.headY)*S+0.15,0);
   const hs=clamp((H.top-H.headY)*S/0.62,0.7,1.6);
   if(m.gearHead&&m.gearHead.length){const w=wrap(bone('Head'),new THREE.Group()).children[0];w.scale.setScalar(hs);w.position.y=-0.12;m.gearHead.forEach(o=>w.add(o));}
-  if(m.gearTorso&&m.gearTorso.length){const w=wrap(bone('Spine2'),new THREE.Group()).children[0];w.position.z=-H.back*S-0.2;w.position.y=-0.3;m.gearTorso.forEach(o=>w.add(o));}
+  // back gear (wings) isn't fitted to the 3D heroes yet: it showed as a big white blob, so it stays off them for now
+  if(m.gearTorso&&m.gearTorso.length)m.gearTorso.forEach(o=>{o.visible=false;});
+  if(false&&m.gearTorso&&m.gearTorso.length){const w=wrap(bone('Spine2'),new THREE.Group()).children[0];w.position.z=-H.back*S-0.2;w.position.y=-0.3;m.gearTorso.forEach(o=>w.add(o));}
   if(m.headFlag)m.headFlag.position.y=H.top*S+0.42;
   m.pelvis.visible=false;
   const mixer=new THREE.AnimationMixer(inst),clips=rigClips(H),acts={};
