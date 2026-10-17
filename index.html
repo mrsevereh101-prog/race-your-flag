@@ -469,7 +469,7 @@ html body .hero-card *{color:#000!important;-webkit-text-fill-color:#000!importa
 .hc-up,.hc-skins{margin:12px 0 0;display:grid;gap:6px}.hc-up h4,.hc-skins h4{margin:0;font:700 14px "Chakra Petch",sans-serif;display:flex;justify-content:space-between;align-items:center;gap:8px}
 .hc-uprow{display:grid;grid-template-columns:70px 1fr auto;gap:8px;align-items:center;font:700 12px "Chakra Petch",sans-serif}
 .hc-uprow i{display:grid;grid-template-columns:repeat(10,1fr);gap:2px}.hc-uprow i b{height:10px;border-radius:3px;background:rgba(120,90,30,.22)}.hc-uprow i b.on{background:linear-gradient(180deg,#f2c14a,#c98a1c)}
-.hc-upbtn{min-width:64px;padding:6px 8px;border-radius:9px;border:2px solid #17558f;background:linear-gradient(180deg,#5db3f0,#2a7fd0);font:800 12px "Chakra Petch",sans-serif;cursor:pointer}.hc-upbtn[disabled]{opacity:.45;cursor:default}
+.hc-upbtn{min-width:64px;padding:6px 8px;border-radius:9px;border:2px solid #17558f;background:linear-gradient(180deg,#5db3f0,#2a7fd0);font:800 12px "Chakra Petch",sans-serif;cursor:pointer}.hc-upbtn[disabled]{opacity:.45;cursor:default}.cel-hero.av{background:transparent!important;border:0!important;border-radius:0!important}.hc-pwtag{grid-column:span 1;font-size:10px;white-space:nowrap}.hc-uprow:last-child{grid-template-columns:70px 1fr auto}
 .tile-modal .hc-up,.tile-modal .hc-skins{margin-top:8px}.tile-modal .hc-sk-row{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 6px}
 .tile-modal .hc-sk{flex:none;width:84px;padding:4px;border-radius:12px;border:2px solid #d9b45a;background:rgba(255,255,255,.55);cursor:pointer;display:grid;gap:3px;justify-items:center;font:700 11px/1.15 "Chakra Petch",sans-serif}
 .tile-modal .hc-sk img{width:68px;height:68px;border-radius:10px;object-fit:cover;background:#fff}.tile-modal .hc-sk.on{border-color:#1f8a3a}.tile-modal .hc-sk.lock{opacity:.7}
@@ -1153,8 +1153,11 @@ img.av{border-radius:10px;background:#fff;border:2px solid rgba(255,255,255,.35)
 #fcHud .fc-list img{width:18px;height:12px;border-radius:2px}
 @media (max-width:860px){#fcHud{top:calc(env(safe-area-inset-top,0px) + 150px + var(--app-top,0px))}#fcHud .fc-list{display:none}}
 /* Oct 17: black bold text on the light cream pages */
-html.cream.adv body :is(#heroCard,.hd-card,#settings,.set-row,.pause-card,#acct,#social,#hub,.tile-modal .tm-card,.col-info,.d3-top,.d3-wallet) :is(p,span,small,label,h1,h2,h3,h4,div,b,i,li,td,th):not(.primary *):not(button.primary):not(.hc-bar *):not(.hd-stat *):not(.d3-gold *):not(.hc-upbtn):not(.col-lock):not(.hc-uprow i *){color:#000!important;-webkit-text-fill-color:#000!important;font-weight:800!important;text-shadow:none!important;-webkit-text-stroke:0!important}
-html.cream.adv body :is(#heroCard,.tile-modal) :is(button.hc-sk,button.hc-sk *,button.hc-upbtn){color:#000!important;-webkit-text-fill-color:#000!important;font-weight:800!important;text-shadow:none!important;-webkit-text-stroke:0!important}
+html.cream body :is(#d3Sheet,#heroCard,.tile-modal .tm-card,.picker,#settings,.set-row,.pause-card,#acct,#social,#hub,.hd-card,.d3-top,.d3-wallet,.col-info) *:not(.primary):not(.primary *):not(.d3-gold *):not(.hc-upbtn):not(.info-btn):not(.tp-x):not(.panel-head *):not(.tile-bd):not(.col-lock):not(.col-on):not(img):not(svg):not(svg *):not(.hc-uprow i *):not(.hc-bar *):not(.hd-stat *):not(.lv-shield):not(.lv-shield *){color:#000!important;-webkit-text-fill-color:#000!important;font-weight:800!important;text-shadow:none!important;-webkit-text-stroke:0!important}
+html.cream body :is(.tile-modal,#d3Sheet,.picker) :is(.hc-upbtn,.hc-sk,.hc-sk *){color:#000!important;-webkit-text-fill-color:#000!important}
+html body :is(#heroCard,.hd-card) *:not(.primary):not(.primary *):not(.hc-upbtn):not(img):not(svg *){color:#000!important;-webkit-text-fill-color:#000!important;font-weight:800!important;text-shadow:none!important;-webkit-text-stroke:0!important}
+html body .hc-upbtn{color:#fff!important;-webkit-text-fill-color:#fff!important}
+html.cream body .hc-upbtn{color:#fff!important;-webkit-text-fill-color:#fff!important}
 </style>
 <style id="themeCream">
 /* ===== Cream & gold theme: ivory panels, dark brown text, every box framed in shining gold ===== */
@@ -5728,7 +5731,7 @@ function renderStore(){
     const h=document.createElement('h3');h.className='tier-head rh-'+t.id;h.textContent=t.name;{const ra=icoOf('rar',t.id);if(ra)h.prepend(icoEl(ra,'rar-ico'));}grid.appendChild(h);
     const tiles=its.map(it=>{const card=()=>storeTab==='items'?itemCard(it):storeTab==='skins'?skinCard(it):storeTab==='attire'?attireCard(it):it.id==='luck'?luckCard(it):buffCard(it);
       const c=card();const cls=(c.classList.contains('on')?'on ':'')+(c.classList.contains('locked')?'locked ':'')+(c.querySelector('.owned')||c.classList.contains('on')?'own ':'')+(c.classList.contains('is-new')?'is-new':'');
-      let o;if(storeTab==='skins'){const sa=icoOf('skin',it.id);o=sa?{ico:sa,label:it.name}:it.hero?{img:heroTileImg(it.hero,it.id),label:it.name}:{html:skin3D(it),label:it.name};}
+      let o;if(storeTab==='skins'){const sa=icoOf('skin',it.id);o={img:heroTileImg(it.hero||selChar,it.id),label:it.name};}
       else{o={ico:icoOf(storeTab==='items'?'lo':storeTab==='attire'?'att':'perk',it.id),icon:it.icon||BUFF_ICON[it.id]||'⭐',label:it.name,badge:storeTab==='perks'&&(wallet.buffs[it.id]|0)?'×'+(wallet.buffs[it.id]|0):''};}
       o.cls=cls+' r-'+rarityOf(it);return {key:storeTab+':'+it.id,el:mkTile(o),info:()=>{const k=card();k.classList.add('in-pop');return k;}};});
     const g=tileGrid('store',tiles,renderStore);grid.appendChild(g);});
@@ -5739,7 +5742,7 @@ function renderOwned(grid){
     grid.appendChild(tileGrid('store',its.map(it=>{const c=card(it);return {key:'own:'+key+':'+it.id,el:mkTile(Object.assign(tile(it),{cls:(c.classList.contains('on')?'on ':'')+'own r-'+rarityOf(it)})),info:()=>{const k=card(it);k.classList.add('in-pop');
       if(key==='skin'&&k.classList.contains('on')&&it.id!=='classic'){const u=document.createElement('button');u.className='ghost';u.textContent='Unequip';u.onclick=()=>{if(it.hero&&wallet.hs)delete wallet.hs[it.hero];else wallet.skin='classic';saveWallet();renderStore();rebuildPreview();syncLobbyPresence();};k.querySelector('.shop-row').appendChild(u);}
       return k;}};}),renderStore));};
-  sec('Skins',SKINS_SHOP.filter(k=>(!k.hero||heroOut(k.hero))&&(wallet.skins.includes(k.id)||k.tier==='free')&&!lvLocked(k)),k=>icoOf('skin',k.id)?{ico:icoOf('skin',k.id),label:k.name}:k.hero?{img:heroTileImg(k.hero,k.id),label:k.name}:{html:skin3D(k),label:k.name},skinCard,'skin');
+  sec('Skins',SKINS_SHOP.filter(k=>(!k.hero||heroOut(k.hero))&&(wallet.skins.includes(k.id)||k.tier==='free')&&!lvLocked(k)),k=>({img:heroTileImg(k.hero||selChar,k.id),label:k.name}),skinCard,'skin');
   sec('Items',LOADOUT.filter(l=>wallet.items.includes(l.id)),l=>({ico:icoOf('lo',l.id),icon:l.icon,label:l.name}),itemCard,'item');
   sec('Attire',ATTIRE.filter(a=>attireActive(a.id)),a=>({ico:icoOf('att',a.id),icon:a.icon,label:a.name}),attireCard,'att');
   sec('Buffs',BUFFS.filter(b=>(wallet.buffs[b.id]|0)>0).concat(luckActive()?[LUCK]:[]),b=>b.id==='luck'?{ico:icoOf('perk','luck'),icon:'🍀',label:b.name}:{ico:icoOf('perk',b.id),icon:BUFF_ICON[b.id],label:b.name,badge:'×'+(wallet.buffs[b.id]|0)},b=>b.id==='luck'?luckCard(b):buffCard(b),'buff');
@@ -6543,17 +6546,17 @@ const validAv=a=>{if(typeof a!=='string'||!/^[a-z]{2,12}\.[a-z0-9_]{2,24}$/.test
 function myAvatar(){return validAv(store.get('flagdash-avatar'))||`${selChar}.${mySkinId()}`;}
 function cpuAvatar(nm){const h=hashStr('av'+(nm||''));const hero=HERO_OUT[h%HERO_OUT.length];const pool=SKINS_SHOP.filter(k=>!k.hero||k.hero===hero);return hero+'.'+(h%3?pool[(h>>>4)%pool.length].id:'classic');}
 const AV={cache:new Map(),r:null,q:[],busy:false};
-function avatarImg(av,cc,cls){const im=document.createElement('img');im.className='av '+(cls||'');im.alt='';const key=(av||'')+'|'+cc;
-  const c=AV.cache.get(key);if(c)im.src=c;else{im.classList.add('loading');AV.q.push({key,av,cc,im});pumpAvatars();}return im;}
+function avatarImg(av,cc,cls,full){const im=document.createElement('img');im.className='av '+(cls||'');im.alt='';const key=(av||'')+'|'+cc+(full?'|f':'');
+  const c=AV.cache.get(key);if(c)im.src=c;else{im.classList.add('loading');AV.q.push({key,av,cc,im,full});pumpAvatars();}return im;}
 function pumpAvatars(){if(AV.busy)return;AV.busy=true;requestAnimationFrame(()=>{AV.busy=false;const t0=performance.now();
   const wait=[];
   while(AV.q.length&&performance.now()-t0<40){const j=AV.q.shift();let url=AV.cache.get(j.key);
     // wait for the hero's 3D model so the picture shows the real hero
     if(!url){const [ah,ak]=String(j.av||'').split('.'),key=HERO3D[ah]?rigKeyFor(ah,skinById(ak)):ah,H=HERO3D[key];if(H&&!hero3dReady(H)&&!H.fail){loadHero3D(key);wait.push(j);continue;}}
-    if(!url){try{url=renderPortrait(j.av,j.cc);}catch(e){url='';}AV.cache.set(j.key,url);}
+    if(!url){try{url=renderPortrait(j.av,j.cc,j.full);}catch(e){url='';}AV.cache.set(j.key,url);}
     if(url){j.im.src=url;}j.im.classList.remove('loading');}
   if(wait.length){AV.q.push(...wait);setTimeout(pumpAvatars,300);}else if(AV.q.length)pumpAvatars();});}
-function renderPortrait(av,cc){
+function renderPortrait(av,cc,full){
   if(!AV.r){const cv=document.createElement('canvas');cv.width=cv.height=160;AV.r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true,preserveDrawingBuffer:true});AV.r.setClearColor(0xffffff,1);
     AV.scene=new THREE.Scene();AV.scene.add(new THREE.HemisphereLight(0xffffff,0x40304a,1.05));const l=new THREE.DirectionalLight(0xfff2dc,0.8);l.position.set(-1.5,2.5,-3);AV.scene.add(l);
     const rim=new THREE.DirectionalLight(0x9fc4ff,0.6);rim.position.set(2,2,3);AV.scene.add(rim);AV.cam=new THREE.PerspectiveCamera(28,1,0.05,20);}
@@ -6565,6 +6568,11 @@ function renderPortrait(av,cc){
   m.root.updateMatrixWorld(true);const hp=new THREE.Vector3();
   const hb=m.rig&&m.rig.holder.getObjectByName('mixamorigHead');if(hb){hb.getWorldPosition(hp);hp.y-=0.12*m.sc;}else m.headP.getWorldPosition(hp);
   const hy=hp.y+0.2*m.sc;AV.cam.position.set(0.12*m.sc,hy+0.05*m.sc,-1.75*m.sc);AV.cam.lookAt(0,hy-0.12*m.sc,0);
+  if(full){const sz=new THREE.Vector3(1.0*m.sc,1.85*m.sc,0.5*m.sc),ct=new THREE.Vector3(0,0.96*m.sc,0);
+    AV.r.setSize(260,390);AV.r.setClearColor(0,0);AV.cam.aspect=260/390;AV.cam.fov=24;AV.cam.updateProjectionMatrix();
+    const dist=Math.max(sz.y*0.53/Math.tan(THREE.MathUtils.degToRad(12)),sz.x*0.75/Math.tan(THREE.MathUtils.degToRad(12))/(260/390));
+    AV.cam.position.set(0.1*m.sc,ct.y,-dist);AV.cam.lookAt(0,ct.y,0);AV.r.render(AV.scene,AV.cam);const u2=AV.r.domElement.toDataURL('image/png');
+    AV.r.setSize(160,160);AV.r.setClearColor(0xffffff,1);AV.cam.aspect=1;AV.cam.fov=28;AV.cam.updateProjectionMatrix();AV.scene.remove(m.root);disposeModel(m);return u2;}
   AV.r.render(AV.scene,AV.cam);const url=AV.r.domElement.toDataURL('image/png');AV.scene.remove(m.root);disposeModel(m);return url;}
 /* ---------- uploaded profile pictures (signed-in players; see supabase/avatars.sql) ---------- */
 const validPic=p=>typeof p==='string'&&/^[0-9a-f-]{36}\/[0-9]{10,14}\.jpg$/.test(p)?p:null;
@@ -7332,9 +7340,10 @@ function heroUpgradeBox(ch,redraw){const box=document.createElement('div');box.c
     row.innerHTML=`<span>${lab}</span><i>${Array.from({length:UP_MAX},(_,j)=>`<b class="${j<lv?'on':''}"></b>`).join('')}</i>`;
     const b=document.createElement('button');b.type='button';b.className='hc-upbtn';b.textContent=max?'MAX':`+ ${cost?cost+' 🏁':'Free'}`;b.disabled=max||(wallet.flags|0)<cost;
     b.onclick=e=>{e.stopPropagation();if(max||(wallet.flags|0)<cost)return;wallet.flags-=cost;u[k]=lv+1;saveWallet();try{sfx.equip();}catch(x){}redraw();};row.appendChild(b);box.appendChild(row);});
+  {const pw=Math.round(clamp((ch.stun-1.2)/0.7,0.1,1)*10),row=document.createElement('div');row.className='hc-uprow';row.innerHTML=`<span>Power</span><i>${Array.from({length:UP_MAX},(_,j)=>`<b class="${j<pw?'on':''}"></b>`).join('')}</i><span class="hc-pwtag">${ch.power}</span>`;box.appendChild(row);}
   return box;}
 function heroSkinsRow(ch,redraw){const wrap=document.createElement('div');wrap.className='hc-skins';wrap.innerHTML='<h4>Skins</h4><div class="hc-sk-row"></div>';const skRow=wrap.querySelector('.hc-sk-row');
-  const cur=mySkinId();[skinById('classic')].concat(SKINS_SHOP.filter(k=>k.hero===ch.id)).forEach(k=>{
+  const cur=mySkinId();[skinById('classic')].concat(SKINS_SHOP.filter(k=>k.hero===ch.id),SKINS_SHOP.filter(k=>!k.hero&&k.id!=='classic'&&(wallet.skins.includes(k.id)||(k.tier==='free'&&!lvLocked(k))))).forEach(k=>{
     const locked=lvLocked(k),owned=k.id==='classic'||wallet.skins.includes(k.id)||(k.tier==='free'&&!locked)||allOpen(),eq=cur===k.id,b=document.createElement('button');b.type='button';
     b.className='hc-sk'+(eq?' on':'')+(owned?'':' lock');b.append(avatarImg(ch.id+'.'+k.id,selCountry,''));
     const nm=document.createElement('span');nm.textContent=k.id==='classic'?'Original':k.name;const st=document.createElement('small');
@@ -8285,8 +8294,10 @@ function celebrate(rows,place,rw,done){
   const ov=$('celebrate'),teams=RACE&&isTeamMode(RACE.mode);
   ov.classList.add('cosmic','podx');ov.classList.remove('won');
   // a runner's spot on the podium: hero picture on top, flag(s) on the step, name and time below
-  const podSlot=(n,hero,flags,time)=>`<img class="cel-hero" alt="" src="img/heroes/${hero}.webp" onerror="this.remove()"><div class="cel-pflag">${flags.map(u=>`<img alt="" src="${u}">`).join('')}</div><div class="cel-plab"><div class="cel-nm"></div><div class="cel-time">${time}</div></div>`;
+  const podSlot=(n,hero,flags,time)=>`<img class="cel-hero" alt="" src="img/heroes/${hero}.webp"><div class="cel-pflag">${flags.map(u=>`<img alt="" src="${u}">`).join('')}</div><div class="cel-plab"><div class="cel-nm"></div><div class="cel-time">${time}</div></div>`;
   const nm=r=>r.nm||(r.flag&&r.flag.name)||'Runner';
+  // no picture file for this hero (a new one like Blake): draw the real 3D hero, full body, so nobody is missing from the podium
+  const podFallback=(el,hero,skin,cc)=>{const im=el.querySelector('.cel-hero');if(!im)return;const sw=()=>{if(!im.isConnected)return;im.replaceWith(avatarImg(hero+'.'+(skin||'classic'),cc||'USA','cel-hero',true));};im.onerror=sw;if(im.complete&&!im.naturalWidth)sw();};
   $('celEyebrow').textContent=`🏁 Race complete · ${TH.name}`+(GP&&RACE&&RACE.gp?` · Grand Prix ${GP.round+1}/${GP.tracks.length}`:'');
   const t=$('celTitle');t.textContent='And the winner is…';t.classList.remove('win');
   let tWin=null;CEL.tTie=false;
@@ -8295,11 +8306,11 @@ function celebrate(rows,place,rw,done){
       const mem=rows.filter(x=>x.r.team===t);if(mem.some(x=>x.r.kind==='local'))el.classList.add('me');el.classList.add('team');
       const fl=mem.map(x=>`<img alt="" src="${x.r.flag?x.r.flag.url:''}">`).join('');
       const best=mem[0]&&mem[0].r.char?mem[0].r.char.id:'';el.innerHTML=podSlot(n,best,mem.map(x=>x.r.flag?x.r.flag.url:''),tp[t]+' pts');
-      el.querySelector('.cel-nm').textContent=teamIc(t)+' '+teamName(t);});}
+      el.querySelector('.cel-nm').textContent=teamIc(t)+' '+teamName(t);podFallback(el,best,'classic',mem[0]&&mem[0].r.flag&&mem[0].r.flag.code);});}
   else [1,2,3].forEach(n=>{const el=$('celS'+n),x=rows[n-1];el.classList.remove('show','me','team');el.innerHTML='';if(!x)return;
     if(x.r.kind==='local')el.classList.add('me');
     const fu=x.r.flag?x.r.flag.url:'';el.innerHTML=podSlot(n,x.r.char?x.r.char.id:'',[fu],(x.est?'≈ ':'')+fmt(x.t));
-    el.querySelector('.cel-nm').textContent=nm(x.r)+(x.r.kind==='local'?' (you)':'');});
+    el.querySelector('.cel-nm').textContent=nm(x.r)+(x.r.kind==='local'?' (you)':'');podFallback(el,x.r.char&&x.r.char.id,x.r.skin&&x.r.skin.id,x.r.flag&&x.r.flag.code);});
   const gifts=[];
   gifts.push({ic:'🎁',ico:'coin',v:priceHTML(rw.coinsWon,'coin'),l:'Coins earned'});
   if(rw.gemsWon)gifts.push({ic:'💎',ico:'gem',v:'+'+rw.gemsWon,l:rw.gemsWon>1?'Diamonds':'Diamond'});
