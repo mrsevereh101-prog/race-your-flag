@@ -4600,11 +4600,11 @@ function handleAct(src,a){
     case 'ult':{
       const ch=src.char,p=ch.id;lastUltT=raceTime;if(src.kind==='local')showUlt(src);if(src.owned)speak(src,'power');
       const victims=runners.filter(o=>o!==src&&!o.finished&&!sameTeam(o,src));
-      if(p==='samurai'){ringFx(src.x,src.d,0xff4a3a,30,0.6);victims.forEach(o=>{if(!slashArt(o))slashFx(o);else{const q=wpos(o,1.2);burst(q.x,q.y,q.z,10,[1,0.3,0.25],{add:true,max:5,grav:3});}});sfx.slash();}
+      if(p==='samurai'){ringFx(src.x,src.d,0xff4a3a,30,0.6);slashArt(src,3.2);victims.forEach(o=>{if(!slashArt(o))slashFx(o);else{const q=wpos(o,1.2);burst(q.x,q.y,q.z,10,[1,0.3,0.25],{add:true,max:5,grav:3});}});sfx.slash();}
       else if(p==='warrior'){flashScreen('#cfe8ff');if(!boltArt(src,victims))victims.forEach(o=>boltFx({x:o.x+rand(-1.5,1.5),d:o.d,y:24},o));else victims.forEach(o=>{const B=wpos(o,1.5);burst(B.x,B.y,B.z,10,[0.6,0.9,1],{add:true,max:5,grav:2});});sfx.thunder();}
       else if(p==='archer'){windFx(src);if(!windArt(src,victims))victims.forEach(o=>swirlFx(o));sfx.wind();}
       else if(p==='elf'){victims.forEach(o=>treeFx(o,ch.stun));sfx.trees();}
-      else if(p==='queen'){stampedeFx(src);victims.forEach(o=>{if(!stampedeArt(o))emojiFx(o,pick(['🦁','🦏','🐘','🐆','🦬']));});sfx.quake();samp('power_stampede',1);samp('power_wind',0.6);}
+      else if(p==='queen'){stampedeFx(src);[9,15,21].forEach(a=>stampedeArt(src,a));victims.forEach(o=>{if(!stampedeArt(o))emojiFx(o,pick(['🦁','🦏','🐘','🐆','🦬']));});sfx.quake();samp('power_stampede',1);samp('power_wind',0.6);}
       else if(p==='knight'){flashScreen('#fff6d0');victims.forEach(o=>lightFx(o));samp('power_ready',1)||sfx.power();samp('power_thunder',0.5);}
       else if(p==='shaolin'){fireWaveFx(src);victims.forEach(o=>{const q=wpos(o,0.8);burst(q.x,q.y,q.z,26,[1,0.5,0.1],{add:true,max:6,up:5,grav:2,size:0.4});});samp('fire',1)||sfx.power();samp('power_slash',0.6);}
       else if(p==='viking'){blizzardFx(src);victims.forEach(o=>iceFx(o,ch.stun));samp('freeze',1)||sfx.power();samp('power_wind',0.7);}
@@ -4852,7 +4852,7 @@ function fxPreload(h){(FXSET[h]||[]).forEach(fxArt);}
 const fxReady=n=>fxArt(n).ok;
 // one flat picture that always faces the camera. o: pos or from/to (Vector3), size, asp (width/height), s0/s1 (start/end scale), dur, delay, add (glow blend), rot, spin, flip, alpha, fo (fade-out share)
 function artFx(n,o){const a=fxArt(n);if(!a.ok||typeof scene==='undefined')return false;
-  const mat=new THREE.SpriteMaterial({map:a.t,transparent:true,depthWrite:false,depthTest:false,opacity:0,blending:o.add?THREE.AdditiveBlending:THREE.NormalBlending,rotation:o.rot||0});
+  const mat=new THREE.SpriteMaterial({map:a.t,transparent:true,depthWrite:false,depthTest:false,opacity:0,blending:THREE.NormalBlending,rotation:o.rot||0});
   const sp=new THREE.Sprite(mat);sp.renderOrder=18;sp.visible=false;const A=(o.from||o.pos).clone(),B=(o.to||o.from||o.pos).clone(),near=Math.min(1,Math.max(0.3,Math.min(A.distanceTo(camera.position),B.distanceTo(camera.position))/16)),sz=(o.size||2)*near,asp=o.asp||1,s0=o.s0==null?1:o.s0,s1=o.s1==null?1:o.s1,dur=o.dur||0.6,delay=o.delay||0,total=dur+delay,fl=o.flip?-1:1;
   sp.position.copy(A);sp.scale.set(sz*asp*s0*fl,sz*s0,1);scene.add(sp);
   fx.push({m:sp,t:0,dur:total,dispose(){mat.dispose();},update(k){const t=k*total-delay;if(t<0){sp.visible=false;return;}sp.visible=true;const q=t/dur,e=q*(2-q);
@@ -4860,10 +4860,11 @@ function artFx(n,o){const a=fxArt(n);if(!a.ok||typeof scene==='undefined')return
     mat.opacity=(o.alpha==null?1:o.alpha)*Math.min(1,q/0.12,(1-q)/(o.fo||0.35));mat.rotation=(o.rot||0)+(o.spin||0)*q;}});return true;}
 // Kapwa: tall bolts fall on every rival, a flash on the ground, sparks, and a storm cloud over him
 function boltArt(src,victims){if(!fxReady('fx_bolt_a'))return false;artFx('fx_cloud',{pos:wpos(src,9),size:11,dur:1.1,s0:0.5,s1:1,alpha:0.9});
+  for(let i=0;i<3;i++){const d=src.d+rand(7,24),B=W(rand(-5,5),d,Hf(d)),c=B.clone();c.y+=9;artFx(pick(['fx_bolt_a','fx_bolt_b','fx_bolt_c']),{pos:c,size:19,asp:0.5,dur:0.55,delay:0.1+i*0.12,s0:1,s1:1.05,fo:0.6});B.y+=0.4;artFx('fx_strike_flash',{pos:B,size:5.5,dur:0.6,delay:0.15+i*0.12,s0:0.4,s1:1.4});}
   victims.forEach((o,i)=>{const B=wpos(o,0),c=B.clone();c.y+=9;artFx(pick(['fx_bolt_a','fx_bolt_b','fx_bolt_c']),{pos:c,size:19,asp:0.5,dur:0.55,delay:i*0.04,add:true,s0:1,s1:1.05,fo:0.6});
     artFx('fx_strike_flash',{pos:wpos(o,0.4),size:5.5,dur:0.6,delay:i*0.04+0.05,add:true,s0:0.4,s1:1.4});artFx('fx_spark',{pos:wpos(o,1.6),size:3,dur:0.5,delay:i*0.04+0.08,add:true,spin:1.2,s0:0.5,s1:1.2});});return true;}
 // Hayato: crossing slash arcs and a hit burst on every rival, petals drift away
-function slashArt(o){if(!fxReady('fx_slash_a'))return false;const P=wpos(o,1.3);
+function slashArt(o,fwd){if(!fxReady('fx_slash_a'))return false;const P=wpos(o,1.3);if(fwd){const bd=backDir(o.d);P.x-=bd.x*fwd;P.z-=bd.z*fwd;}
   artFx('fx_slash_a',{pos:P,size:4.2,dur:0.5,add:true,s0:0.5,s1:1.1,rot:rand(-0.3,0.3)});artFx('fx_slash_b',{pos:P,size:4.2,dur:0.5,delay:0.08,add:true,s0:0.5,s1:1.1,rot:rand(-0.3,0.3)});
   artFx('fx_slash_x',{pos:P,size:3.6,dur:0.45,delay:0.16,add:true,s0:0.6,s1:1.2});artFx('fx_slash_line',{pos:P,size:6.5,dur:0.4,delay:0.04,add:true,s0:0.7,s1:1.2});artFx('fx_slash_hit',{pos:P,size:3.4,dur:0.45,delay:0.2,add:true,s0:0.3,s1:1.3});
   for(let i=0;i<2;i++){const T=P.clone();T.x+=rand(-2,2);T.y+=rand(0.5,2.5);T.z+=rand(-2,2);artFx('fx_petal',{from:P,to:T,size:1,dur:0.9,delay:0.2,spin:3,s0:0.6,s1:1});}return true;}
@@ -4874,15 +4875,16 @@ function windArt(src,victims){if(!fxReady('fx_gust_a'))return false;const bd=bac
   victims.forEach((o,i)=>{const P=wpos(o,1.1);artFx('fx_wind_swirl',{pos:P,size:3.6,dur:0.9,delay:0.12+i*0.03,spin:2,s0:0.5,s1:1.1});
     [['fx_leaf',1.3],['fx_feather',1.3]].forEach(([n,sz])=>{const T=P.clone();T.x+=bd.x*8+rand(-2,2);T.z+=bd.z*8;T.y+=rand(-0.5,2);artFx(n,{from:P,to:T,size:sz,dur:1.1,delay:0.2,spin:rand(-4,4),s0:0.7,s1:1});});});return true;}
 // Blake: a swarm of helper drones flies out to every rival and zaps them
-function droneArt(src,victims){if(!fxReady('fx_drone_front'))return false;const S=wpos(src,2.2);artFx('fx_scan_ring',{pos:wpos(src,0.15),size:8,dur:0.9,add:true,s0:0.4,s1:1.5});
+function droneArt(src,victims){if(!fxReady('fx_drone_front'))return false;const S=wpos(src,2.2),fw=backDir(src.d);for(let i=0;i<6;i++){const T=S.clone();T.x-=fw.x*(22+i*4)+rand(-2,2);T.z-=fw.z*(22+i*4);T.y+=rand(-0.6,1.2);const A=S.clone();A.x+=rand(-1,1);artFx(['fx_drone_front','fx_drone_side','fx_drone_top'][i%3],{from:A,to:T,size:0.8,dur:0.9,delay:i*0.06,s0:1,s1:0.5,fo:0.3,bob:8});}
+  artFx('fx_scan_ring',{pos:wpos(src,0.15),size:8,dur:0.9,add:true,s0:0.4,s1:1.5});
   victims.forEach((o,i)=>{const E=wpos(o,1.7);['fx_drone_front','fx_drone_side','fx_drone_top'].forEach((n,j)=>{const A=S.clone();A.x+=rand(-1.5,1.5);A.y+=rand(-0.4,1.2);const T=E.clone();T.x+=rand(-0.6,0.6);T.y+=rand(-0.5,0.5);
       artFx(n,{from:A,to:T,size:1.2,dur:0.55,delay:i*0.04+j*0.07,s0:0.8,s1:1,fo:0.2,bob:6});});
     artFx('fx_zap_arc',{pos:E,size:3.4,asp:1.3,dur:0.5,delay:0.55+i*0.04,add:true,s0:0.7,s1:1.1});artFx('fx_zap_hit',{pos:E,size:3.2,dur:0.5,delay:0.58+i*0.04,add:true,s0:0.3,s1:1.3,spin:0.8});});return true;}
 // Malkia: golden spirit animals thunder across the track at every rival
-function stampedeArt(o){if(!fxReady('fx_lion'))return false;const n=pick(['fx_lion','fx_elephant','fx_rhino','fx_buffalo']),sz=n==='fx_elephant'?4.6:n==='fx_lion'?3.8:3.4;
-  const rx=W(o.x-11,o.d,Hf(o.d)+sz*0.2),lx=W(o.x+11,o.d,Hf(o.d)+sz*0.2);
+function stampedeArt(o,ahead){if(!fxReady('fx_lion'))return false;ahead=ahead||0;const n=pick(['fx_lion','fx_elephant','fx_rhino','fx_buffalo']),sz=n==='fx_elephant'?4.6:n==='fx_lion'?3.8:3.4;
+  const dd=o.d+ahead,rx=W(o.x-11,dd,Hf(dd)+sz*0.2),lx=W(o.x+11,dd,Hf(dd)+sz*0.2);
   artFx(n,{from:rx,to:lx,size:sz,dur:0.95,s0:1,s1:1,ease:false,bob:30,fo:0.15});
-  artFx('fx_dust',{from:rx,to:lx,size:2.6,dur:1.0,delay:0.05,ease:false,alpha:0.7,s0:0.8,s1:1.4});artFx('fx_paw',{pos:wpos(o,0.3),size:2.2,dur:0.7,delay:0.45,add:true,s0:0.4,s1:1.2,alpha:0.9});return true;}
+  artFx('fx_dust',{from:rx,to:lx,size:2.6,dur:1.0,delay:0.05,ease:false,alpha:0.7,s0:0.8,s1:1.4});if(!ahead)artFx('fx_paw',{pos:wpos(o,0.3),size:2.2,dur:0.7,delay:0.45,s0:0.4,s1:1.2,alpha:0.9});return true;}
 // Kid Echo: the speaker drops the bass: sound rings, a bass burst, notes and equalizer bars
 function bassArt(src,victims){if(!fxReady('fx_sound_ring'))return false;const P=wpos(src,0.3),sp=wpos(src,2.4);sp.x+=2.4;
   for(let i=0;i<4;i++)artFx('fx_sound_ring',{pos:P,size:6,dur:0.8,delay:i*0.14,add:true,s0:0.3,s1:2.2,alpha:0.55});
