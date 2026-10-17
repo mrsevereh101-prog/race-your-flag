@@ -1648,10 +1648,10 @@ html #menu .ico3d-btn::before,html #menu .ico3d-btn::after{display:none!importan
 .gh-tab{display:grid;justify-items:center;gap:1px;padding:5px 0;min-width:0;border-radius:12px;border:2px solid rgba(217,162,39,.6);background:linear-gradient(180deg,#3a4aa0,#1c2462)}
 .gh-tab .gh-ic{font-size:20px;line-height:1;width:30px;height:30px;display:block}.gh-tab .gh-ic .ico{width:100%;height:100%}.bdg-ic{display:inline-block!important;width:1.2em;height:1.2em;vertical-align:-0.25em}.gh-iic .ico{width:48px;height:48px;margin:0 auto}.gh-tab small{font-size:8.5px;white-space:nowrap;overflow:hidden;max-width:100%}.gh-tab[aria-pressed="true"]{border-color:#f2c14a;background:linear-gradient(180deg,#f2c14a,#c8921c)}
 .gh-sec{display:grid;gap:10px}
-.gh-chat{display:grid;gap:8px}.gh-msgs{height:min(46vh,420px);overflow-y:auto;display:grid;align-content:start;gap:6px;padding:8px;border-radius:14px;background:rgba(10,16,50,.75);border:2px solid rgba(217,162,39,.5)}
+.gh-chat{display:grid;gap:8px}.gh-msgs{height:min(46vh,420px);overflow-y:auto;display:grid;align-content:start;gap:6px;padding:8px;border-radius:14px;background:#fff;border:2px solid #d9a227}
 .gh-m{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:8px;align-items:start}.gh-m img{width:26px;height:18px;border-radius:3px;margin-top:2px}
-.gh-m b{display:block;font-size:12px;color:#ffd77a!important;-webkit-text-fill-color:#ffd77a!important}.gh-m span{font-size:14px;word-break:break-word}.gh-m small{font-size:10px;opacity:.7}
-.gh-m.mine b{color:#7fd8ff!important;-webkit-text-fill-color:#7fd8ff!important}.gh-m.ann{background:rgba(242,193,74,.18);border-radius:8px;padding:4px}
+.gh-m b{display:block;font-size:12px;color:#7a4a00!important;-webkit-text-fill-color:#7a4a00!important;font-weight:800!important;text-shadow:none!important;-webkit-text-stroke:0!important}.gh-m span{font-size:14px;word-break:break-word;color:#000!important;-webkit-text-fill-color:#000!important;font-weight:700!important;text-shadow:none!important;-webkit-text-stroke:0!important}.gh-m small{font-size:10px;color:#555!important;-webkit-text-fill-color:#555!important;font-weight:700!important;text-shadow:none!important;-webkit-text-stroke:0!important}
+.gh-m.mine b{color:#0a58b5!important;-webkit-text-fill-color:#0a58b5!important}.gh-m.ann{background:rgba(242,193,74,.3);border-radius:8px;padding:4px}
 .gh-send{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}.gh-send input{font-size:16px;padding:10px;border-radius:12px}
 .gh-don{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.gh-line{padding:6px 10px;border-radius:10px;background:rgba(10,16,50,.35);font-size:13px}
 .gh-news{padding:10px 12px;border-radius:14px;background:rgba(10,16,50,.45);border-left:4px solid #f2c14a}.gh-news p{margin:4px 0}.gh-news small{opacity:.75}
@@ -6796,7 +6796,8 @@ function ghChat(box){const wrap=document.createElement('div');wrap.className='gh
   const form=document.createElement('form');form.className='gh-send';form.innerHTML='<input type="text" maxlength="120" placeholder="Message your guild" aria-label="Message your guild" autocomplete="off"><button class="primary" type="submit">Send</button>';wrap.appendChild(form);box.appendChild(wrap);
   const g=ghOf(GUILD.id);let sig='';
   const draw=()=>{const real=(gChan()&&CH.hist[gChan()]||[]).filter(m=>!BLOCKED[m.from]).map(m=>({nm:m.mine?'You':m.nm,cc:m.cc,t:filterText(m.t),ts:m.ts,mine:!!m.mine}));
-    const all=real.concat(ghCpuChat(GUILD.id),g.chat.map(m=>Object.assign({},m,{t:filterText(m.t)}))).sort((a,b)=>a.ts-b.ts).slice(-60);
+    const all=real.concat(ghCpuChat(GUILD.id),g.chat.map(m=>Object.assign({},m,{t:filterText(m.t)})))
+    .sort((a,b)=>a.ts-b.ts).filter((m,i,a)=>{if(m.mine)return true;for(let j=Math.max(0,i-6);j<i;j++)if(a[j].t===m.t&&a[j].nm===m.nm||a[j].t===m.t&&a[j].ts>m.ts-3600000)return false;return true;}).slice(-60);
     const s=all.length+'|'+(all.length?all[all.length-1].ts:0);if(s===sig)return;sig=s;list.innerHTML='';
     all.forEach(m=>{const r=document.createElement('div');r.className='gh-m'+(m.mine?' mine':'')+(m.ann?' ann':'');const im=document.createElement('img');im.alt='';im.src=flagCanvas(COUNTRY_CODES.has(m.cc)?m.cc:'USA').url;
       const b=document.createElement('div');const h=document.createElement('b');h.textContent=(m.ann?'📢 ':'')+m.nm+(m.role&&m.role!=='Member'?` · ${m.role}`:'');const t=document.createElement('span');t.textContent=m.t;const d=new Date(m.ts);const tm=document.createElement('small');tm.textContent=`${d.getHours()}:${pad2(d.getMinutes())}`;
