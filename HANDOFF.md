@@ -28,6 +28,7 @@
 `PLAN.md` is the user's progress tracker (launch rules, seasons, every to-do). Keep it ticked and
 up to date whenever something is done or decided. Launch rules (Oct 16): 7 launch heroes (Kapwa, Blake, Aria, Hayato, Malkia, Kid Echo, Ha-Neul), the rest show only "Coming soon"
 (no dates or seasons in the game), 3 skins per hero (1 free + 2 unlock), dev/tester accounts see everything unlocked.
+**Blake (Oct 17):** in the game as hero `blake` (Drone Swarm power, Overclock perk = 15% faster recharge, both placeholders to confirm). `models/blake.glb`; skins Garage Inventor (free), Neon Hacker (lvl 15), Mech Pilot (1500 coins) in `models/skins/`. Still to do: voice/sound effect, store icons.
 **Done in code (Oct 17):** `HERO_OUT` list in index.html (next to `charById`) = heroes that are out; add an id
 to release a hero. `heroOut(id)` is true for those, or for everyone when Developer mode / dev / tester account.
 

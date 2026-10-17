@@ -2332,6 +2332,9 @@ const CHARS=[
  {id:'warrior',hn:'Kapwa Lamò',perk:{name:'Unstoppable',desc:'Smashes straight through walls instead of crashing into them.'},name:'Warrior',power:'Lightning',desc:'Calls lightning down on every rival on the track. Charges fastest.',speed:1.01,agility:0.93,charge:18,stun:1.6,kind:'knock',rgb:[0.6,0.85,1],
   look:{skin:0x5a3a24,b:1.16,ls:1.04,sc:1.04},
   svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#2c2f6b"/><path d="M19 4L9 19h7l-2 11 11-16h-7z" fill="#ffd24a"/></svg>'},
+ {id:'blake',hn:'Blake Carter',perk:{name:'Overclock',desc:'His power recharges 15% faster: gadgets are built for speed.'},name:'Inventor',power:'Drone Swarm',desc:'A swarm of his homemade drones buzzes down the track and zaps every rival.',speed:1.01,agility:1.05,charge:19,stun:1.4,kind:'knock',rgb:[0.3,0.75,1],
+  look:{skin:0xf2d0b4,b:1.06,ls:1.04,sc:1.03},
+  svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#16344f"/><circle cx="17" cy="17" r="7" fill="#2a2f3a"/><circle cx="17" cy="17" r="3.4" fill="#4fd0ff"/><path d="M5 9l5 4M29 9l-5 4M5 25l5-4M29 25l-5-4" stroke="#9fe6ff" stroke-width="2.2" stroke-linecap="round"/></svg>'},
  {id:'archer',hn:'Aria Windsong',perk:{name:'Full Quiver',desc:'Starts every race already holding an item.'},name:'Wind Dancer',power:'Wind',desc:'A gale blows every rival backwards and spins them around.',speed:1.02,agility:1.1,charge:20,stun:1.3,kind:'slip',rgb:[0.8,1,0.95],
   look:{skin:0xe8b996,b:0.92,ls:1.04,sc:0.97},
   svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#24533f"/><path d="M5 12h16a4 4 0 10-4-4M5 18h22a4 4 0 11-4 4M5 24h11" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>'},
@@ -2365,7 +2368,7 @@ const charById=id=>CHARS.find(c=>c.id===id)||CHARS[0];
 // LAUNCH LIST: the heroes that are out. To release a hero, add its id here (ids: samurai warrior archer
 // queen knight shaolin viking robot rapper kicker gas). Every other hero shows "Coming soon".
 // Developer and tester accounts, and Developer mode, see every hero unlocked.
-const HERO_OUT=['warrior','archer','samurai','queen','rapper','kicker'];
+const HERO_OUT=['warrior','blake','archer','samurai','queen','rapper','kicker'];
 function allOpen(){if(store.get('flagdash-devmode')==='1')return true;try{return !AUTH.on||AUTH.dev===true||AUTH.tester===true;}catch(e){return false;}}
 const heroOut=id=>HERO_OUT.includes(id)||allOpen();
 const outIds=()=>CHAR_IDS.filter(heroOut);
@@ -3289,6 +3292,7 @@ function buildModel(flag,charId,opt){
 const HJ=(pel,head,sh,elb,hand,hip,knee,tw,aw,split)=>({pelvis:[0,pel],torso:[0,pel+0.05],head:[0,head],sh,elb,hand,hip,knee,tw,aw,split});
 const HERO3D={
  warrior:{url:'models/warrior.glb',rig:true},
+ blake:{url:'models/blake.glb',rig:true},
  archer:{url:'models/winddancer.glb',J:HJ(0.48,0.795,[0.118,0.71],[0.201,0.581],[0.263,0.461],[0.072,0.46],[0.077,0.244],0.083,0.06,0.35)},
  gas:{url:'models/gas.glb',rig:true},
  knight:{url:'models/knight.glb',rig:true},
@@ -3482,6 +3486,7 @@ const RUN_STYLE={
   robot:{stiff:1,knee:0.7,bob:0.4,sway:0,elb:1.05},
   rapper:{lean:-0.08,roll:0.15,sway:1.5,arm:0.7,cad:0.97},
   kicker:{knee:1.35,bob:1.5,cad:1.1},
+  blake:{lean:0.05,knee:1.1,bob:0.9,cad:1.04},
   gas:{bob:0.5,arm:0.75,lean:0.1,sway:0.6,elb:0.7},
 };
 function poseRunner(r,dt,now){
@@ -4039,6 +4044,7 @@ function zdUlt(r){const z=RACE.zd;if(!z||z.over||r.down||r.charge<1||state!=='ra
   else if(id==='shaolin'){samp('fire',1);live.forEach(e=>{zdDamage(e,13,r);const q=zdP(e.x,e.d,0.8);burst(q.x,q.y,q.z,16,[1,0.5,0.1],{add:true,max:6,up:4,grav:2,size:0.4});});}
   else if(id==='viking'){samp('freeze',1);flashScreen('rgba(210,240,255,.6)');live.forEach(e=>{e.frz=6;zdDamage(e,5,r);});}
   else if(id==='robot'){samp('shockwave',1);live.sort((a,b)=>b.hp-a.hp).slice(0,12).forEach((e,i)=>setTimeout(()=>{if(!z.en.includes(e))return;laserFx(r,{x:e.x,d:e.d,y:0,m:null});zdDamage(e,14,r);},i*50));}
+  else if(id==='blake'){samp('shockwave',1);ringFx(r.x,r.d,0x4fd0ff,18,0.6);live.sort((a,b)=>b.hp-a.hp).slice(0,10).forEach((e,i)=>setTimeout(()=>{if(!z.en.includes(e))return;const q=zdP(e.x,e.d,1);burst(q.x,q.y,q.z,14,[0.3,0.8,1],{add:true,max:5,up:3,grav:2,size:0.3});zdDamage(e,12,r);},i*60));}
   else if(id==='kicker'){samp('power_slash',1);windFx(r);live.forEach(e=>{e.push=e.type==='boss'?5:12;zdDamage(e,7,r);});}
   else if(id==='gas'){samp('power_wind',1);for(let i=0;i<6;i++)ringFx(rand(-3,3),ZD_LINE+6+i*6,0x9a62f0,6,0.8);live.forEach(e=>{e.frz=Math.max(e.frz,2.5);zdDamage(e,5,r);});}
   else if(id==='rapper'){samp('shockwave',1);bassFx(r);live.forEach(e=>{e.push=e.type==='boss'?4:10;e.frz=Math.max(e.frz,1.5);zdDamage(e,6,r);});}
@@ -4467,7 +4473,7 @@ function openSettings(){const o=$('settings');o.hidden=false;renderSettings();
 function closeSettings(){$('settings').hidden=true;if(settingsPaused){settingsPaused=false;togglePause();}}
 
 /* ---------- spoken taunts: device text-to-speech until recordings exist ---------- */
-const VOICE_STYLE={samurai:{pitch:0.75,rate:1.0},warrior:{pitch:0.6,rate:0.95},archer:{pitch:1.15,rate:1.1},elf:{pitch:1.45,rate:1.05},dwarf:{pitch:0.55,rate:1.15},queen:{pitch:1.1,rate:0.95},knight:{pitch:0.8,rate:0.95},shaolin:{pitch:0.9,rate:1.0},viking:{pitch:0.5,rate:0.95},robot:{pitch:0.3,rate:0.9},rapper:{pitch:0.85,rate:1.2},kicker:{pitch:1.3,rate:1.1},gas:{pitch:1.2,rate:1.05}};
+const VOICE_STYLE={samurai:{pitch:0.75,rate:1.0},warrior:{pitch:0.6,rate:0.95},archer:{pitch:1.15,rate:1.1},elf:{pitch:1.45,rate:1.05},dwarf:{pitch:0.55,rate:1.15},queen:{pitch:1.1,rate:0.95},knight:{pitch:0.8,rate:0.95},shaolin:{pitch:0.9,rate:1.0},viking:{pitch:0.5,rate:0.95},robot:{pitch:0.3,rate:0.9},rapper:{pitch:0.85,rate:1.2},kicker:{pitch:1.3,rate:1.1},blake:{pitch:0.95,rate:1.15},gas:{pitch:1.2,rate:1.05}};
 const voice={list:[],ready:false,cur:null,curPri:0,
   supported(){return typeof window.speechSynthesis!=='undefined'&&typeof window.SpeechSynthesisUtterance!=='undefined';},
   load(){if(!this.supported())return;const upd=()=>{this.list=speechSynthesis.getVoices()||[];this.ready=this.list.length>0;};upd();try{speechSynthesis.addEventListener('voiceschanged',upd);}catch(e){speechSynthesis.onvoiceschanged=upd;}},
@@ -4503,7 +4509,7 @@ const feedSeen=new Map();let feedLast=0;
 // Who hit whom, as icons: attacker's flag, the weapon, the victim's flag (+ any loot)
 const flagURL=r=>{const f=r&&r.flag;if(!f)return '';return f.url||(f.url=f.canvas.toDataURL('image/png'));};
 const HIT_IC=[[/rocket/i,'🚀'],[/banana/i,'🍌'],[/mine/i,'💣'],[/fire/i,'🔥'],[/froze|freeze/i,'❄️'],[/lightning|zapp/i,'⚡'],[/slash|sword/i,'⚔️'],[/quake/i,'🌋'],[/wind|gale/i,'🌪️'],[/tree/i,'🌳'],[/dart/i,'🎯'],[/net\b/i,'🕸️'],[/meteor/i,'☄️'],[/shockwave/i,'💥'],[/vortex/i,'🌀'],[/passed through/i,'👻']];
-function hitIcon(why,src){for(const [re,ic] of HIT_IC)if(re.test(why||''))return ic;const p=src&&src.char&&src.char.id;return {samurai:'⚔️',warrior:'⚡',archer:'🌪️',elf:'🌳',dwarf:'🌋',queen:'🦁',knight:'✨',shaolin:'🔥',viking:'❄️',robot:'🤖',rapper:'🎤',kicker:'🦶',gas:'💨'}[p]||'💥';}
+function hitIcon(why,src){for(const [re,ic] of HIT_IC)if(re.test(why||''))return ic;const p=src&&src.char&&src.char.id;return {samurai:'⚔️',warrior:'⚡',archer:'🌪️',elf:'🌳',dwarf:'🌋',queen:'🦁',knight:'✨',shaolin:'🔥',viking:'❄️',robot:'🤖',rapper:'🎤',kicker:'🦶',gas:'💨',blake:'🛰️'}[p]||'💥';}
 function hitFeed(a,b,ic){
   if(!a||!b||!RACE)return null;const mine=a===player,me=b===player;const f=$('feed');const e=document.createElement('div');e.className='msg hitchip'+(mine?' good':me?' bad':'');
   const im=r=>{const i=document.createElement('img');i.src=flagURL(r);i.alt=r.nm||'';return i;};
@@ -4577,6 +4583,7 @@ function handleAct(src,a){
       else if(p==='shaolin'){fireWaveFx(src);victims.forEach(o=>{const q=wpos(o,0.8);burst(q.x,q.y,q.z,26,[1,0.5,0.1],{add:true,max:6,up:5,grav:2,size:0.4});});samp('fire',1)||sfx.power();samp('power_slash',0.6);}
       else if(p==='viking'){blizzardFx(src);victims.forEach(o=>iceFx(o,ch.stun));samp('freeze',1)||sfx.power();samp('power_wind',0.7);}
       else if(p==='robot'){victims.forEach(o=>laserFx(src,o));samp('shockwave',1)||sfx.power();}
+      else if(p==='blake'){ringFx(src.x,src.d,0x4fd0ff,26,0.6);victims.forEach(o=>{swirlFx(o);const q=wpos(o,1.2);burst(q.x,q.y,q.z,20,[0.3,0.8,1],{add:true,max:5,up:3,grav:2,size:0.3});});samp('shockwave',1)||sfx.power();}
       else if(p==='kicker'){ringFx(src.x,src.d,0xff6a8a,28,0.6);windFx(src);victims.forEach(o=>{swirlFx(o);const q=wpos(o,1);burst(q.x,q.y,q.z,18,[1,0.5,0.6],{add:true,max:5,up:4,grav:3});});samp('power_slash',1)||sfx.slash();samp('power_wind',0.6);}
       else if(p==='gas'){ringFx(src.x,src.d,0x9a62f0,26,0.9);victims.forEach(o=>gasFx(o));samp('power_wind',1)||sfx.wind();}
       else if(p==='rapper'){bassFx(src);victims.forEach(o=>swirlFx(o));samp('shockwave',1)||sfx.power();tone(55,0.9,'sine',0.12,-20);tone(42,1.1,'sine',0.1,-12,0.15);}
@@ -4729,6 +4736,7 @@ const CHAR_SAY={
   viking:{hit:['For Valhalla!','Skål!'],hurt:['Ha! That tickled!','You call that a hit?'],power:['Winter is here!','Freeze, little ones!']},
   robot:{hit:['Target eliminated.','Calculating victory.'],hurt:['Damage detected.','Error. Error. Rebooting.'],power:['Lasers armed.','Initiating laser grid.']},
   rapper:{hit:['Drop the beat!','You just got remixed!'],hurt:['Yo, not cool!','That ain\'t on beat!'],power:['Feel the bass!','Turn it up!']},
+  blake:{hit:['Nice try, slowpoke!','Calculated.'],hurt:['Hey! That was my prototype!','Rerouting power!'],power:['Drones, deploy!','Swarm protocol, go!']},
   kicker:{hit:['Hi-yah!','Too slow!'],hurt:['Hey! Watch it!','You will regret that!'],power:['Hurricane kick!','Feel the storm of my feet!']},
   gas:{hit:['Breathe that in!','Lost in the fog!'],hurt:['Rude!','You can\'t catch vapor!'],power:['Gas cloud, coming through!','Hope you can hold your breath!']},
 };
@@ -4970,7 +4978,7 @@ function stepRunner(r,dt){
     if(hit(r,0.9,f.owner,'trip',`Burned by ${f.owner.nm}'s fire trail`)){const p=wpos(r,0.6);burst(p.x,p.y,p.z,16,[1,0.5,0.1],{add:true,max:5,up:3,grav:-1,size:0.3});}}
   for(let i=rockets.length-1;i>=0;i--){const k=rockets[i];if(k.owner===r||r.finished)continue;if(k.target&&k.target!==r)continue;
     if(Math.abs(r.d-k.d)<1&&Math.abs(r.x-k.x)<0.9){sendAct(r,{t:'rktx',id:k.id});if(!itemProof(r,'the rocket'))hit(r,1.4,k.owner,'knock',`Hit by ${k.owner.nm}'s rocket`);}}
-  if(!r.finished)r.charge=Math.min(1,r.charge+dt/r.char.charge*(1+(r.mods.chg||0))*(r.kind==='bot'?0.75:1));
+  if(!r.finished)r.charge=Math.min(1,r.charge+dt/r.char.charge*(1+(r.mods.chg||0))*(r.char.id==='blake'?1.15:1)*(r.kind==='bot'?0.75:1));
   if(r.y<0.35&&!r.finished){for(const p of pads){if(p===r.lastPad)continue;if(r.d>=p.d&&r.d<=p.d+p.len&&Math.abs(r.x-p.x)<1.3){r.lastPad=p;triggerPad(r,p);break;}}}
   if(r.lastPad&&r.d>r.lastPad.d+r.lastPad.len+1)r.lastPad=null;
   if(r.kind==='local'&&!r.finished)collectPickups(r);
@@ -5521,6 +5529,9 @@ const SKINS_SHOP=[
   {id:'skyemperor',lvl:31,hero:'samurai',name:'Sky Emperor',tier:'free',buff:{stun:0.14,spd:0.02},desc:'Imperial white and gold armour with a dragon crest. Clouds part as you pass.',pal:[0x3a2a0a,0xf4f0e0,0xffd04a],amt:0.86,emissive:0x3a2a00,trail:[1,0.9,0.5],aura:[1,0.9,0.5],sw:'linear-gradient(135deg,#ffffff,#ffd04a 55%,#3a2a0a)'},
   {id:'continentchamp',lvl:35,hero:'warrior',model:'models/skins/continentchamp.glb',name:'Continental Champion',tier:'free',buff:{spd:0.03,chg:0.1},desc:'Gleaming platinum and royal purple, worn by the best on the continent.',pal:[0x1a0a3a,0xd8dcec,0xffd84a],amt:0.88,emissive:0x2a1a5a,trail:[1,0.9,0.5],aura:[0.85,0.8,1],sw:'linear-gradient(135deg,#ffd84a,#d8dcec 45%,#1a0a3a)'},
   {id:'stormtiger',lvl:12,hero:'kicker',model:'models/skins/stormtiger.glb',name:'Storm Tiger',tier:'free',buff:{agi:0.06,spd:0.01},desc:'Tiger-stripe orange and black, fierce from head to toe.',pal:[0x1a1410,0xff8a2a,0xffd84a],amt:0.8,trail:[1,0.55,0.15],sw:'linear-gradient(135deg,#ff8a2a,#1a1410)'},
+  {id:'garage',hero:'blake',model:'models/skins/garage.glb',name:'Garage Inventor',tier:'free',buff:{agi:0.03},desc:'Orange coveralls, a leather tool belt and welding goggles. Straight from the workshop.',pal:[0x6a3a14,0xe8782a,0xf2f0e8],amt:0.8,trail:[1,0.55,0.2],sw:'linear-gradient(135deg,#e8782a,#6a3a14)'},
+  {id:'neonhacker',hero:'blake',lvl:15,model:'models/skins/neonhacker.glb',name:'Neon Hacker',tier:'free',buff:{chg:0.06,spd:0.01},desc:'A black hoodie with glowing cyan circuits and a LED visor.',pal:[0x0a1018,0x20e0f0,0xe8ffff],amt:0.85,emissive:0x04303a,trail:[0.3,0.9,1],sw:'linear-gradient(135deg,#20e0f0,#0a1018)'},
+  {id:'mechpilot',hero:'blake',model:'models/skins/mechpilot.glb',name:'Mech Pilot',tier:'coin',cost:1500,buff:{spd:0.02,chg:0.06},desc:'White and gold armoured pilot suit with boot thrusters.',pal:[0x1a1612,0xf2f0ea,0xd8a83a],amt:0.85,trail:[1,0.85,0.4],sw:'linear-gradient(135deg,#f2f0ea,#d8a83a 55%,#1a1612)'},
   {id:'celestial',name:'Celestial',tier:'usd',usd:'$4.99',desc:'Night-sky armour that leaves stars behind.',buff:{spd:0.03,stun:0.15},tint:0x3a3aa8,amt:0.6,emissive:0x1a1a5a,trail:[0.8,0.8,1],sw:'linear-gradient(135deg,#1a1a5a,#6a5ae8 55%,#fff3b0)'},
 ];
 // Attire lasts 7 days from purchase. Equipped pieces give their full buff; pieces you own but aren't wearing give 10%.
@@ -7280,6 +7291,7 @@ const HERO_INFO={
   viking:{cc:'NOR',age:'45',story:'Sigurd Stormbeard sailed the frozen seas before he ever raced. He laughs at the cold and runs like a storm coming ashore.'},
   robot:{cc:'DEU',age:'v3.0',story:'Volt-X was built to test running shoes and decided it liked winning instead. Always smiling, always charging.'},
   rapper:{cc:'USA',age:'18',story:'Kid Echo turned his block into a stage. Every step is a beat, and every race is a new track he plans to drop.'},
+  blake:{cc:'USA',age:'18',story:'Blake Carter built his first drone in his parents\' garage and never stopped. Every gadget on him is homemade, and the swarm answers when he whistles.'},
   kicker:{cc:'KOR',age:'17',story:'Ha-Neul holds a black belt and a big smile. Hit her once and she kicks back twice; her name means sky, and that is how high she aims.'},
   gas:{cc:'USA',age:'18',story:'Zuri Vapor moves like mist: soft, stylish and gone before you blink. Rivals who chase her end up lost in a purple cloud.'},
 };

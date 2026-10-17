@@ -36,7 +36,7 @@ Dmitri Volkov, Seo Min-jun, Selam Tesfaye
 - [ ] Skins: 1 free + 2 unlockable per hero (by level, coins or diamonds - to decide)
 - [x] Developer and tester accounts see everything unlocked (Oct 17; Developer mode too)
 - [x] A simple list in the game code of which heroes are out: `HERO_OUT` in index.html (Oct 17)
-- [ ] Add Blake to that list once he is in the game (he is not built yet)
+- [x] Add Blake to that list once he is in the game (Oct 17: Blake is in, with his base model and 3 skins)
 
 How it works now: heroes not on the list are grey with "Coming soon" on the home row, the hero card
 and the runner tiles, and can't be picked. The arrows skip them, computer racers only use launch
@@ -55,7 +55,7 @@ Prompts: `docs/HERO_PROMPTS.md`. Steps: image-to-3D, Retopology (Quad 10k), Rig 
 | [ ] | [ ] | Sir Aldric | 6'2" |
 | [ ] | [ ] | Kid Echo | 6'1" |
 | [ ] | [ ] | Kapwa Lamò | 6'0" |
-| [ ] | [ ] | Blake Carter (new) | 6'0" |
+| [x] | [ ] | Blake Carter (new) | 6'0" |
 | [ ] | [ ] | Malkia Nyota | 5'11" |
 | [ ] | [ ] | Layla Al-Rimal (new) | 5'11" |
 | [ ] | [ ] | Anaya Rao (new) | 5'10" |
@@ -74,7 +74,7 @@ Prompts: `docs/HERO_PROMPTS.md`. Steps: image-to-3D, Retopology (Quad 10k), Rig 
 - [ ] Hero card pictures for the new heroes (transparent, like the current ones)
 
 ### Decisions still open
-- [ ] Blake: power (Drone Swarm, EMP or Grapple Hook)
+- [ ] Blake: power (Oct 17: Drone Swarm is in the game for now, tell Claude if you want EMP or Grapple Hook instead)
 - [x] Renamed from Blaze to Blake (Oct 16); Blake added to launch; launch is now 7 heroes with Aria kept
 - [ ] Anaya: earth power OK?
 - [ ] Powers for Layla (Sandstorm?), Luana (Thorn Bind), Dmitri (Rocket Barrage?), Min-jun (Tidal Wave?), Selam (Sky Swarm?)
