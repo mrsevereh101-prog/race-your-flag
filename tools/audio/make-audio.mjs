@@ -46,7 +46,7 @@ async function voiceId(h){const H=HEROES[h];if(H.id)return H.id;
   const v=await (await api('/text-to-voice',{method:'POST',body:JSON.stringify({voice_name:H.voice,voice_description:H.desc,generated_voice_id:pv.previews[0].generated_voice_id})})).json();return H.id=v.voice_id;}
 async function tts(id,text,file){const r=await api(`/text-to-speech/${id}?output_format=mp3_44100_128`,{method:'POST',body:JSON.stringify({text,model_id:process.env.EL_MODEL||'eleven_v3'})});fs.writeFileSync(path.join(ROOT,file),Buffer.from(await r.arrayBuffer()));}
 function wire(){const f=ROOT+'/index.html';let h=fs.readFileSync(f,'utf8');
-  const v=fs.readdirSync(ROOT+'/voice').filter(x=>x.endsWith('.mp3')&&!x.startsWith('tut-')).map(x=>x.slice(0,-4)).sort();
+  const v=fs.readdirSync(ROOT+'/voice').filter(x=>/^[a-z]+-(hit|hurt|block|banana|own|win|ht)-/.test(x)).map(x=>x.slice(0,-4)).sort();
   h=h.replace(/const VOICE_FILES=new Set\(\[.*?\]\);/,`const VOICE_FILES=new Set([${v.map(x=>`'${x}'`).join(',')}]);`);fs.writeFileSync(f,h);console.log('listed',v.length,'voice files in index.html');}
 if(mode==='voices'){if(!KEY)throw new Error('Set ELEVENLABS_API_KEY');
   for(const [h,file,text] of jobs()){if(!FORCE&&fs.existsSync(path.join(ROOT,file)))continue;await tts(await voiceId(h),text,file);console.log('made',file,'-',text);}wire();}
