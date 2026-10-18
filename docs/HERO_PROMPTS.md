@@ -43,7 +43,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 
 Skin 1 (Free): Street Runner
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Kapwa Lamò, a 17-year-old Black Haitian boy, tall and athletic, 183 cm (6 feet), short curly black hair, same face, hair and body as the base character. Skin "Street Runner": modern Haitian-colors running gear: blue and red zip track jacket with a white side stripe, white t-shirt, black joggers with a red stripe, blue and red running sneakers, a red and white bead necklace. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Kapwa Lamò, a 17-year-old Black Haitian boy, tall and athletic, 183 cm (6 feet), short curly black hair, same face, hair and body as the base character. Skin "Street Runner": modern Haitian-colors running gear: blue and red zip track jacket with a white side stripe, white t-shirt, black joggers with a red stripe, blue and red running sneakers (plain, no logos, no brand marks, no swoosh), a red and white bead necklace. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 Skin 2 (Unlock): Continental Champion
 ```
@@ -61,7 +61,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 
 ### 2. Blake Carter (183 cm, 6'0") (new hero, tech genius: gadgets he built himself)
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Blake Carter, an 18-year-old white American inventor and tech genius, tall and athletic, 183 cm (6 feet), 78 kg (172 lb), about 7.7 heads tall, broad shoulders, long runner's legs. Light skin with a few freckles, short messy blond hair, blue eyes, clever confident grin, homemade tech goggles with blue lenses pushed up on his forehead. Dark grey hoodie under a black techwear vest with many pockets and small tools, a homemade wrist computer with a glowing blue screen on his left forearm, a small round helper drone with blue lights hovering just above his right shoulder, a compact gadget backpack with antennas and cables, a utility belt with small gadgets, dark cargo pants with knee pads, chunky black sneakers with glowing blue soles. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Blake Carter, an 18-year-old white American inventor and tech genius, tall and athletic, 183 cm (6 feet), 78 kg (172 lb), about 7.7 heads tall, broad shoulders, long runner's legs. Light skin with a few freckles, short messy blond hair, blue eyes, clever confident grin, homemade tech goggles with blue lenses pushed up on his forehead. Dark grey hoodie under a black techwear vest with many pockets and small tools, a homemade wrist computer with a glowing blue screen on his left forearm, a small round helper drone with blue lights hovering just above his right shoulder, a compact gadget backpack with antennas and cables, a utility belt with small gadgets, dark cargo pants with knee pads, chunky black sneakers (plain, no logos, no brand marks, no swoosh) with glowing blue soles. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 **Skins** (upload this hero's base picture as a reference so the face, height and body stay the same)
@@ -72,7 +72,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 ```
 Skin 2 (Unlock): Neon Hacker
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Blake Carter, an 18-year-old white American inventor, tall and athletic, 183 cm (6 feet), short messy blond hair, blue eyes, same face, hair and body as the base character. Skin "Neon Hacker": black hoodie with glowing cyan circuit lines, a glowing cyan LED visor over his eyes, black cargo pants with cyan stripes, black sneakers with glowing cyan soles, a holographic wrist screen. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Blake Carter, an 18-year-old white American inventor, tall and athletic, 183 cm (6 feet), short messy blond hair, blue eyes, same face, hair and body as the base character. Skin "Neon Hacker": black hoodie with glowing cyan circuit lines, a glowing cyan LED visor over his eyes, black cargo pants with cyan stripes, black sneakers (plain, no logos, no brand marks, no swoosh) with glowing cyan soles, a holographic wrist screen. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 Skin 3 (Unlock): Mech Pilot
 ```
@@ -81,7 +81,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 
 Skin 4 (Unlock, country-flag skin): Stars and Stripes
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Blake Carter, an 18-year-old white American inventor, tall and athletic, 183 cm (6 feet), short messy blond hair, blue eyes, same face, hair and body as the base character. Skin "Stars and Stripes": the American flag colors only, as a clean techwear outfit: a navy blue hooded jacket with white stars on the shoulders, red and white striped panels down the sleeves, white t-shirt, navy cargo pants with a red side stripe, red and white sneakers with glowing blue soles, goggles with blue lenses pushed up on his forehead, a small star-spangled wrist computer on his left forearm. No flag drawn as a cape, no words. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Blake Carter, an 18-year-old white American inventor, tall and athletic, 183 cm (6 feet), short messy blond hair, blue eyes, same face, hair and body as the base character. Skin "Stars and Stripes": the American flag colors only, as a clean techwear outfit: a navy blue hooded jacket with white stars on the shoulders, red and white striped panels down the sleeves, white t-shirt, navy cargo pants with a red side stripe, red and white sneakers (plain, no logos, no brand marks, no swoosh) with glowing blue soles, goggles with blue lenses pushed up on his forehead, a small star-spangled wrist computer on his left forearm. No flag drawn as a cape, no words. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 ### 3. Aria Windsong (168 cm, 5'6")
@@ -111,7 +111,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 
 ### 4. Hayato Kurogane (172 cm, 5'8")
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Hayato Kurogane, a 17-year-old Japanese boy, lean and sharp, 172 cm, 64 kg (141 lb), about 7.3 heads tall, slim athletic build. Spiky dark brown hair with shaved sides, calm focused face. Modern samurai style: long white coat with gold trim and gold dragon embroidery, white top with rope cross-lacing on the chest, wide white hakama trousers with gold wave patterns at the hem, fingerless white gloves with gold spikes, white and gold sneakers. Empty hands, no sword. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Hayato Kurogane, a 17-year-old Japanese boy, lean and sharp, 172 cm, 64 kg (141 lb), about 7.3 heads tall, slim athletic build. Spiky dark brown hair with shaved sides, calm focused face. Modern samurai style: long white coat with gold trim and gold dragon embroidery, white top with rope cross-lacing on the chest, wide white hakama trousers with gold wave patterns at the hem, fingerless white gloves with gold spikes, white and gold sneakers (plain, no logos, no brand marks, no swoosh). Empty hands, no sword. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 **Skins** (upload this hero's base picture as a reference so the face, height and body stay the same)
@@ -126,12 +126,12 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 ```
 Skin 3 (Unlock): Neon Tokyo
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Hayato Kurogane, a 17-year-old Japanese boy, lean and sharp, 172 cm (5 feet 8 inches), spiky dark brown hair, same face, hair and body as the base character. Skin "Neon Tokyo": black techwear jacket with glowing neon pink lines, a high collar, black joggers with straps, pink and black high-top sneakers, a small glowing pink earpiece. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Hayato Kurogane, a 17-year-old Japanese boy, lean and sharp, 172 cm (5 feet 8 inches), spiky dark brown hair, same face, hair and body as the base character. Skin "Neon Tokyo": black techwear jacket with glowing neon pink lines, a high collar, black joggers with straps, pink and black high-top sneakers (plain, no logos, no brand marks, no swoosh), a small glowing pink earpiece. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 Skin 4 (Unlock, country-flag skin): Rising Sun
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Hayato Kurogane, a 17-year-old Japanese boy, lean and sharp, 172 cm, spiky dark brown hair with shaved sides, calm focused face, same face, hair and body as the base character. Skin "Rising Sun": the Japanese flag colors only (white and red): a long white coat with a large red circle (rising sun) on the back and small red sun circles on the shoulders, red rope cross-lacing on a white top, wide white hakama trousers with a red hem, red fingerless gloves, white sneakers with red soles, a red headband. No flag drawn as a cape, no words. Empty hands, no sword. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Hayato Kurogane, a 17-year-old Japanese boy, lean and sharp, 172 cm, spiky dark brown hair with shaved sides, calm focused face, same face, hair and body as the base character. Skin "Rising Sun": the Japanese flag colors only (white and red): a long white coat with a large red circle (rising sun) on the back and small red sun circles on the shoulders, red rope cross-lacing on a white top, wide white hakama trousers with a red hem, red fingerless gloves, white sneakers (plain, no logos, no brand marks, no swoosh) with red soles, a red headband. No flag drawn as a cape, no words. Empty hands, no sword. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 ### 5. Malkia Nyota (180 cm, 5'11")
@@ -161,32 +161,32 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 
 ### 6. Kid Echo (185 cm, 6'1")
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Kid Echo, an 18-year-old Black American rapper, tall and lanky, 185 cm (6 feet 1 inch), 72 kg (159 lb), about 7.8 heads tall, long arms and legs, slim build. Short twisted hair, big friendly smile, small earring. Cropped white puffer jacket, white headphones around his neck, silver chains with a record pendant, oversized grey t-shirt with a vinyl record print, grey cargo joggers, white sneakers. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Kid Echo, an 18-year-old Black American rapper, tall and lanky, 185 cm (6 feet 1 inch), 72 kg (159 lb), about 7.8 heads tall, long arms and legs, slim build. Short twisted hair, big friendly smile, small earring. Cropped white puffer jacket, white headphones around his neck, silver chains with a record pendant, oversized grey t-shirt with a vinyl record print, grey cargo joggers, white sneakers (plain, no logos, no brand marks, no swoosh). Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 **Skins** (upload this hero's base picture as a reference so the face, height and body stay the same)
 
 Skin 1 (Free): Block Party
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Kid Echo, an 18-year-old Black American rapper, tall and lanky, 185 cm (6 feet 1 inch), short twisted hair, same face, hair and body as the base character. Skin "Block Party": oversized red hoodie, a backwards black cap, baggy blue jeans, white and red sneakers, a small silver chain. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Kid Echo, an 18-year-old Black American rapper, tall and lanky, 185 cm (6 feet 1 inch), short twisted hair, same face, hair and body as the base character. Skin "Block Party": oversized red hoodie, a backwards black cap, baggy blue jeans, white and red sneakers (plain, no logos, no brand marks, no swoosh), a small silver chain. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 Skin 2 (Unlock): Platinum Star
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Kid Echo, an 18-year-old Black American rapper, tall and lanky, 185 cm (6 feet 1 inch), short twisted hair, same face, hair and body as the base character. Skin "Platinum Star": shiny silver metallic jacket, gold chains, dark round sunglasses, white t-shirt, white pants, gold and white sneakers. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Kid Echo, an 18-year-old Black American rapper, tall and lanky, 185 cm (6 feet 1 inch), short twisted hair, same face, hair and body as the base character. Skin "Platinum Star": shiny silver metallic jacket, gold chains, dark round sunglasses, white t-shirt, white pants, gold and white sneakers (plain, no logos, no brand marks, no swoosh). Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 Skin 3 (Unlock): Bass Commander
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Kid Echo, an 18-year-old Black American rapper, tall and lanky, 185 cm (6 feet 1 inch), short twisted hair, same face, hair and body as the base character. Skin "Bass Commander": black outfit with a glowing purple speaker-shaped chest piece, a small subwoofer backpack with glowing rings, black gloves, black cargo pants, black and purple glowing sneakers, headphones on his head. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Kid Echo, an 18-year-old Black American rapper, tall and lanky, 185 cm (6 feet 1 inch), short twisted hair, same face, hair and body as the base character. Skin "Bass Commander": black outfit with a glowing purple speaker-shaped chest piece, a small subwoofer backpack with glowing rings, black gloves, black cargo pants, black and purple glowing sneakers (plain, no logos, no brand marks, no swoosh), headphones on his head. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 Skin 4 (Unlock, country-flag skin): Liberty Beat
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Kid Echo, an 18-year-old Black American rapper, tall and lanky, 185 cm, short twisted hair, big friendly smile, small earring, same face, hair and body as the base character. Skin "Liberty Beat": the American flag colors only: a red, white and blue color-block puffer jacket (blue sleeves, white body, red hem) with white stars on the chest, blue headphones around his neck, silver chains with a star pendant, a white t-shirt with a red stripe, navy cargo joggers with white stars, red and white sneakers. No flag drawn as a cape, no words. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Kid Echo, an 18-year-old Black American rapper, tall and lanky, 185 cm, short twisted hair, big friendly smile, small earring, same face, hair and body as the base character. Skin "Liberty Beat": the American flag colors only: a red, white and blue color-block puffer jacket (blue sleeves, white body, red hem) with white stars on the chest, blue headphones around his neck, silver chains with a star pendant, a white t-shirt with a red stripe, navy cargo joggers with white stars, red and white sneakers (plain, no logos, no brand marks, no swoosh). No flag drawn as a cape, no words. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 ### 7. Ha-Neul (160 cm, 5'3")
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Ha-Neul, a 17-year-old Korean Taekwondo girl, small and quick, 160 cm, 50 kg (110 lb), about 6.8 heads tall, petite athletic build, strong legs. Long red-brown hair in a high ponytail with a white ribbon and colorful hair clips, big bright smile. Cropped pastel lilac and pink jacket with white stars, white crop top, pleated white skirt with a pink belt and a silver chain, pink leggings, pink fingerless gloves, chunky white and pink sneakers. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Ha-Neul, a 17-year-old Korean Taekwondo girl, small and quick, 160 cm, 50 kg (110 lb), about 6.8 heads tall, petite athletic build, strong legs. Long red-brown hair in a high ponytail with a white ribbon and colorful hair clips, big bright smile. Cropped pastel lilac and pink jacket with white stars, white crop top, pleated white skirt with a pink belt and a silver chain, pink leggings, pink fingerless gloves, chunky white and pink sneakers (plain, no logos, no brand marks, no swoosh). Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 **Skins** (upload this hero's base picture as a reference so the face, height and body stay the same)
@@ -197,7 +197,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 ```
 Skin 2 (Unlock): Storm Tiger
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Ha-Neul, a 17-year-old Korean Taekwondo girl, small and quick, 160 cm (5 feet 3 inches), long red-brown hair in a high ponytail, same face, hair and body as the base character. Skin "Storm Tiger": white and orange tiger-stripe martial arts outfit with black stripes, an orange belt, tiger-claw shaped wrist guards, orange and white sneakers (already in the game). Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Ha-Neul, a 17-year-old Korean Taekwondo girl, small and quick, 160 cm (5 feet 3 inches), long red-brown hair in a high ponytail, same face, hair and body as the base character. Skin "Storm Tiger": white and orange tiger-stripe martial arts outfit with black stripes, an orange belt, tiger-claw shaped wrist guards, orange and white sneakers (plain, no logos, no brand marks, no swoosh) (already in the game). Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 Skin 3 (Unlock): Stage Star
 ```
@@ -206,7 +206,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 
 Skin 4 (Unlock, country-flag skin): Taegeuk
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Ha-Neul, a 17-year-old Korean Taekwondo girl, small and quick, 160 cm, long red-brown hair in a high ponytail, big bright smile, same face, hair and body as the base character. Skin "Taegeuk": the Korean flag colors only (white, red, blue and black): a white dobok-style taekwondo uniform with a white belt tied with a red and blue taegeuk circle on the chest, black trim and small black trigram bars (three straight lines) on the sleeves, red and blue fingerless gloves, white sneakers with red and blue accents, a white ribbon in her ponytail. No flag drawn as a cape, no words. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Ha-Neul, a 17-year-old Korean Taekwondo girl, small and quick, 160 cm, long red-brown hair in a high ponytail, big bright smile, same face, hair and body as the base character. Skin "Taegeuk": the Korean flag colors only (white, red, blue and black): a white dobok-style taekwondo uniform with a white belt tied with a red and blue taegeuk circle on the chest, black trim and small black trigram bars (three straight lines) on the sleeves, red and blue fingerless gloves, white sneakers (plain, no logos, no brand marks, no swoosh) with red and blue accents, a white ribbon in her ponytail. No flag drawn as a cape, no words. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 ## Coming soon heroes (tallest first)
@@ -280,7 +280,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 
 Skin 1 (Free): Oasis Runner
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Layla Al-Rimal, a 17-year-old Arab girl from Jordan, tall, lean and agile, 180 cm (5 feet 11 inches), long dark wavy hair, same face, hair and body as the base character. Skin "Oasis Runner": light white linen long top with a teal sash, loose sand-colored trousers, a light teal scarf around her neck, tan sneakers. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Layla Al-Rimal, a 17-year-old Arab girl from Jordan, tall, lean and agile, 180 cm (5 feet 11 inches), long dark wavy hair, same face, hair and body as the base character. Skin "Oasis Runner": light white linen long top with a teal sash, loose sand-colored trousers, a light teal scarf around her neck, tan sneakers (plain, no logos, no brand marks, no swoosh). Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 Skin 2 (Unlock): Desert Falcon
 ```
@@ -293,7 +293,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 
 ### Anaya Rao (178 cm, 5'10") (new hero, earth power)
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Anaya Rao, a 16-year-old Indian girl, tall for her age, slim and strong, 178 cm (5 feet 10 inches), 62 kg (137 lb), about 7.5 heads tall, long legs. Warm brown skin, long thick black hair in a single braid with small gold beads, bright determined eyes, small gold nose stud. Modern sporty Indian style: fitted saffron and teal kurta-style top with gold embroidery on the collar and hem, a teal scarf tied across the body like a sash, slim white trousers, gold bangles on both wrists, teal and white sneakers with gold details. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Anaya Rao, a 16-year-old Indian girl, tall for her age, slim and strong, 178 cm (5 feet 10 inches), 62 kg (137 lb), about 7.5 heads tall, long legs. Warm brown skin, long thick black hair in a single braid with small gold beads, bright determined eyes, small gold nose stud. Modern sporty Indian style: fitted saffron and teal kurta-style top with gold embroidery on the collar and hem, a teal scarf tied across the body like a sash, slim white trousers, gold bangles on both wrists, teal and white sneakers (plain, no logos, no brand marks, no swoosh) with gold details. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 **Skins** (upload this hero's base picture as a reference so the face, height and body stay the same)
@@ -308,19 +308,19 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 ```
 Skin 3 (Unlock): Festival Star
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Anaya Rao, a 16-year-old Indian girl, tall for her age, slim and strong, 178 cm (5 feet 10 inches), long black braid, same face, hair and body as the base character. Skin "Festival Star": sparkly magenta and gold festival outfit with mirror-work embroidery, a flowing magenta scarf, gold jewelry, gold sneakers. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Anaya Rao, a 16-year-old Indian girl, tall for her age, slim and strong, 178 cm (5 feet 10 inches), long black braid, same face, hair and body as the base character. Skin "Festival Star": sparkly magenta and gold festival outfit with mirror-work embroidery, a flowing magenta scarf, gold jewelry, gold sneakers (plain, no logos, no brand marks, no swoosh). Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 ### Seo Min-jun (175 cm, 5'9") (new hero, water power)
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Seo Min-jun, a 16-year-old Korean boy, lean and athletic, 175 cm (5 feet 9 inches), 64 kg (141 lb), about 7.4 heads tall, long legs, youthful face. Light skin, soft black hair with wavy bangs and blue-dyed tips, calm cool smile. Modern streetwear with a water theme: deep blue and white zip jacket with a wave pattern along the sleeves, white t-shirt, a small silver droplet pendant, navy track pants with a light blue side stripe, white and blue sneakers, a light blue wristband with a glowing water-drop gem. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Seo Min-jun, a 16-year-old Korean boy, lean and athletic, 175 cm (5 feet 9 inches), 64 kg (141 lb), about 7.4 heads tall, long legs, youthful face. Light skin, soft black hair with wavy bangs and blue-dyed tips, calm cool smile. Modern streetwear with a water theme: deep blue and white zip jacket with a wave pattern along the sleeves, white t-shirt, a small silver droplet pendant, navy track pants with a light blue side stripe, white and blue sneakers (plain, no logos, no brand marks, no swoosh), a light blue wristband with a glowing water-drop gem. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
 **Skins** (upload this hero's base picture as a reference so the face, height and body stay the same)
 
 Skin 1 (Free): School Day
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Seo Min-jun, a 16-year-old Korean boy, lean and athletic, 175 cm (5 feet 9 inches), soft black hair with wavy bangs, same face, hair and body as the base character. Skin "School Day": Korean school uniform: navy blazer, white shirt, loose blue tie, grey trousers, white sneakers, a blue backpack strap on one shoulder. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Seo Min-jun, a 16-year-old Korean boy, lean and athletic, 175 cm (5 feet 9 inches), soft black hair with wavy bangs, same face, hair and body as the base character. Skin "School Day": Korean school uniform: navy blazer, white shirt, loose blue tie, grey trousers, white sneakers (plain, no logos, no brand marks, no swoosh), a blue backpack strap on one shoulder. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 Skin 2 (Unlock): Deep Diver
 ```
@@ -380,7 +380,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 
 Skin 1 (Free): Street Casual
 ```
-Single full-body 3D character, A-pose, front view, plain light grey background. Zuri Vapor, an 18-year-old Black American girl, slim and graceful, 165 cm (5 feet 5 inches), big natural curly afro hair, same face, hair and body as the base character. Skin "Street Casual": cropped lilac hoodie, high-waisted light jeans, white sneakers, small gold hoop earrings, a purple scrunchie. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+Single full-body 3D character, A-pose, front view, plain light grey background. Zuri Vapor, an 18-year-old Black American girl, slim and graceful, 165 cm (5 feet 5 inches), big natural curly afro hair, same face, hair and body as the base character. Skin "Street Casual": cropped lilac hoodie, high-waisted light jeans, white sneakers (plain, no logos, no brand marks, no swoosh), small gold hoop earrings, a purple scrunchie. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 Skin 2 (Unlock): Royal Kaftan
 ```
