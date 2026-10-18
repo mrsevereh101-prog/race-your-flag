@@ -54,6 +54,11 @@ Skin 3 (Unlock): Storm King
 Single full-body 3D character, A-pose, front view, plain light grey background. Kapwa Lamò, a 17-year-old Black Haitian boy, tall and athletic, 183 cm (6 feet), short curly black hair, same face, hair and body as the base character. Skin "Storm King": dark storm-grey armor with glowing electric-blue lightning lines, a short torn dark blue cape, armored shoulders shaped like storm clouds, blue glowing gauntlets, dark grey armored boots. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
+Kapwa Lamò, Skin 4 (Unlock): Red and Black
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Kapwa Lamò, a 17-year-old Black Haitian boy, tall and athletic, 183 cm (6 feet), short curly black hair, same face, hair and body as the base character. Skin "Red and Black": a bold red and black outfit: black armored chest plate with red trim and a red sash across it, a short black kilt with red edging over black pants with a red side stripe, black leather arm guards with red wraps, a red and black bead necklace, black and red sandals with red straps. Empty hands, no weapon. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
 ### 2. Blake Carter (183 cm, 6'0") (new hero, tech genius: gadgets he built himself)
 ```
 Single full-body 3D character, A-pose, front view, plain light grey background. Blake Carter, an 18-year-old white American inventor and tech genius, tall and athletic, 183 cm (6 feet), 78 kg (172 lb), about 7.7 heads tall, broad shoulders, long runner's legs. Light skin with a few freckles, short messy blond hair, blue eyes, clever confident grin, homemade tech goggles with blue lenses pushed up on his forehead. Dark grey hoodie under a black techwear vest with many pockets and small tools, a homemade wrist computer with a glowing blue screen on his left forearm, a small round helper drone with blue lights hovering just above his right shoulder, a compact gadget backpack with antennas and cables, a utility belt with small gadgets, dark cargo pants with knee pads, chunky black sneakers with glowing blue soles. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
@@ -399,7 +404,7 @@ Single full-body 3D character, A-pose, front view, plain light grey background. 
 
 ## Flag skins (one per launch hero, themed on their country's flag)
 
-Every hero gets a **Flag skin** in their country's colors, like Kapwa's "Street Runner" (Haiti). Upload the hero's base picture as a reference so the face, height and body stay the same. Kapwa's is already written above (Skin 1, Street Runner), so he is not repeated here. Each is an extra skin on top of the 3 above (suggested: unlock with level, or earn by racing under that flag).
+Every hero gets a **Flag skin** in their country's colors, like Kapwa's "Street Runner" (Haiti). Upload the hero's base picture as a reference so the face, height and body stay the same. Kapwa's flag skin is already written above (Skin 1, Street Runner), so he is not repeated here. With his new Red and Black skin (Skin 4), every hero now has 4 skins. Each is an extra skin on top of the 3 above (suggested: unlock with level, or earn by racing under that flag).
 
 Blake Carter, Flag skin (USA): "Stars and Stripes"
 ```

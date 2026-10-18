@@ -149,3 +149,4 @@ Prompts are under each hero in `docs/HERO_PROMPTS.md`.
 - [x] Equal starting stats + "owned flags" currency to upgrade speed/agility/recharge per hero; flags won/lost by finishing place (Oct 17). Costs and rewards are first guesses: tune `STAT_BASE`, `upCost`, `PLACE_FLAGS`
 - [x] White-background hero pictures; Skins row in the runner popup
 - [ ] (Pinned Oct 17) Colour-adjust hero/skin 3D models: change brightness, contrast and saturation by editing the texture inside the .glb (tools/3d, gltf-transform + sharp), not in Tripo. Do a before/after picture first, one hero or skin at a time, then maybe all.
+- [x] (Oct 18) 4 skins per hero: 1 free + 3 unlock, one of them a country-flag skin; Kapwa's 4th is Red and Black. Prompts in docs/LAUNCH_HERO_PROMPTS.md
