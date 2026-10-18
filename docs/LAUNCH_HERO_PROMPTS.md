@@ -142,6 +142,42 @@ Skin 3 (Unlock): Stage Star
 Single full-body 3D character, A-pose, front view, plain light grey background. Ha-Neul, a 17-year-old Korean Taekwondo girl, small and quick, 160 cm (5 feet 3 inches), long red-brown hair in a high ponytail, same face, hair and body as the base character. Skin "Stage Star": sparkly pink and silver K-pop stage outfit, a cropped sequin jacket, a pleated silver skirt, white knee-high boots, a small headset microphone. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
 ```
 
+## Flag skins (one per launch hero, themed on their country's flag)
+
+Every hero gets a **Flag skin** in their country's colors, like Kapwa's "Street Runner" (Haiti). Upload the hero's base picture as a reference so the face, height and body stay the same. Kapwa's is already written above (Skin 1, Street Runner), so he is not repeated here. Each is an extra skin on top of the 3 above (suggested: unlock with level, or earn by racing under that flag).
+
+Blake Carter, Flag skin (USA): "Stars and Stripes"
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Blake Carter, an 18-year-old white American inventor, tall and athletic, 183 cm (6 feet), short messy blond hair, blue eyes, same face, hair and body as the base character. Skin "Stars and Stripes": the American flag colors only, as a clean techwear outfit: a navy blue hooded jacket with white stars on the shoulders, red and white striped panels down the sleeves, white t-shirt, navy cargo pants with a red side stripe, red and white sneakers with glowing blue soles, goggles with blue lenses pushed up on his forehead, a small star-spangled wrist computer on his left forearm. No flag drawn as a cape, no words. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+Aria Windsong, Flag skin (Ireland): "Emerald Isle"
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Aria Windsong, an 18-year-old Irish girl, slim and light, 168 cm, long brown hair in a side braid, fair skin with light freckles, same face, hair and body as the base character. Skin "Emerald Isle": the Irish flag colors only (green, white and orange): a deep green tunic with a white Celtic knot trim and orange stitching, a white and orange rope sash, a green quilted skirt with an orange hem, white leggings, green leather boots with orange laces, a small gold shamrock pendant. No flag drawn as a cape, no words. Empty hands, no bow. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+Hayato Kurogane, Flag skin (Japan): "Rising Sun"
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Hayato Kurogane, a 17-year-old Japanese boy, lean and sharp, 172 cm, spiky dark brown hair with shaved sides, calm focused face, same face, hair and body as the base character. Skin "Rising Sun": the Japanese flag colors only (white and red): a long white coat with a large red circle (rising sun) on the back and small red sun circles on the shoulders, red rope cross-lacing on a white top, wide white hakama trousers with a red hem, red fingerless gloves, white sneakers with red soles, a red headband. No flag drawn as a cape, no words. Empty hands, no sword. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+Malkia Nyota, Flag skin (Kenya): "Savanna Colors"
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Malkia Nyota, a 32-year-old Kenyan queen, tall and regal, 180 cm, dark brown skin, warm wise smile, same face and body as the base character. Skin "Savanna Colors": the Kenyan flag colors only (black, red, green and white): a long black and green dress with a red and white beaded sash, a black and white Maasai-style shield pattern on the stole, a golden lion-head crown with red and green beads, red and green bead necklace, wide beaded arm cuffs, green and red strap sandals. No flag drawn as a cape, no words. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+Kid Echo, Flag skin (USA): "Block Party"
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Kid Echo, an 18-year-old Black American rapper, tall and lanky, 185 cm, short twisted hair, big friendly smile, small earring, same face, hair and body as the base character. Skin "Block Party": the American flag colors only: a red, white and blue color-block puffer jacket (blue sleeves, white body, red hem) with white stars on the chest, blue headphones around his neck, silver chains with a star pendant, a white t-shirt with a red stripe, navy cargo joggers with white stars, red and white sneakers. No flag drawn as a cape, no words. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+Ha-Neul, Flag skin (Korea): "Taegeuk"
+```
+Single full-body 3D character, A-pose, front view, plain light grey background. Ha-Neul, a 17-year-old Korean Taekwondo girl, small and quick, 160 cm, long red-brown hair in a high ponytail, big bright smile, same face, hair and body as the base character. Skin "Taegeuk": the Korean flag colors only (white, red, blue and black): a white dobok-style taekwondo uniform with a white belt tied with a red and blue taegeuk circle on the chest, black trim and small black trigram bars (three straight lines) on the sleeves, red and blue fingerless gloves, white sneakers with red and blue accents, a white ribbon in her ponytail. No flag drawn as a cape, no words. Empty hands. Stylized 3D cartoon game character, Pixar style, high detail.
+```
+
+When a flag skin model arrives: put it in `models/skins/<id>.glb` (see HANDOFF.md, "How to add a skin") and add `model:` to its skin entry in `SKINS_SHOP`. Suggested ids: `stars` (Blake), `emerald` (Aria), `risingsun` (Hayato), `savanna` (Malkia), `blockparty` (Kid Echo), `taegeuk` (Ha-Neul).
+
 ## Store icon prompt (for every skin)
 
 Upload the skin's picture with this prompt. Keep the green background (Claude cuts it out). Name the
