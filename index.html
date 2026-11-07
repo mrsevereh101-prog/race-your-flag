@@ -2366,13 +2366,31 @@ const CHARS=[
  {id:'kicker',hn:'Ha-Neul',as:'archer',perk:{name:'Counter Kick',desc:'When a rival hits her, she kicks back: 30% of the time they get stunned too.'},name:'Taekwondo',power:'Hurricane Kick',desc:'She spins into a hurricane kick that sends every rival on the track flying.',speed:1.03,agility:1.1,charge:20,stun:1.4,kind:'knock',rgb:[1,0.45,0.55],
   look:{skin:0xf0cdb0,b:0.92,ls:1.06,sc:0.98},
   svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#a8324a"/><path d="M8 24c3-9 10-14 19-15" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M6 16c5-1 9 1 12 4M10 28c4-2 9-2 13 0" stroke="#ffc2cf" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="25" cy="9" r="3" fill="#fff"/></svg>'},
+ {id:'anaya',hn:'Anaya Rao',perk:{name:'Stone Skin',desc:'Gets back up 20% faster after any hit or fall.'},name:'Earth Guardian',power:'Earthquake',desc:'She stamps the ground and the whole track cracks open, knocking every rival off their feet.',speed:1.01,agility:1.05,charge:20,stun:1.4,kind:'knock',rgb:[0.85,0.6,0.3],
+  look:{skin:0xa86a42,b:0.98,ls:1.05,sc:1.0},
+  svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#6b4a22"/><path d="M5 22l7-3 4 4 5-6 4 3 4-2" stroke="#f2c36b" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 8v9M13 12l4-4 4 4" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>'},
+ {id:'layla',hn:'Layla Al-Rimal',perk:{name:'Dune Runner',desc:'Her power recharges 10% faster: the desert never rests.'},name:'Sand Dancer',power:'Sandstorm',desc:'A wall of whirling sand sweeps the track, blinding every rival and spinning them around.',speed:1.01,agility:1.05,charge:20,stun:1.4,kind:'slip',rgb:[1,0.8,0.45],
+  look:{skin:0xc89a6a,b:0.94,ls:1.08,sc:1.0},
+  svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#8a5a1c"/><path d="M5 12h14a3.5 3.5 0 10-3.5-3.5M5 18h20a3.5 3.5 0 11-3.5 3.5M5 24h9" stroke="#ffe3a0" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>'},
+ {id:'luana',hn:'Luana Ipê',perk:{name:'Deep Roots',desc:'Her thorns bite back: 25% of the time a rival who hits her is stunned too.'},name:'Amazon Spirit',power:'Thorn Bind',desc:'Thorny vines burst out of the ground and tie every rival down.',speed:1.01,agility:1.05,charge:20,stun:1.4,kind:'knock',rgb:[0.4,0.9,0.4],
+  look:{skin:0xb98258,b:0.9,ls:1.05,sc:0.96},
+  svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#1f5a2a"/><path d="M17 28V10M17 20c-5 0-8-3-8-8 5 0 8 3 8 8zM17 16c4 0 7-3 7-7-4 0-7 3-7 7z" stroke="#9cf0a8" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'},
+ {id:'dmitri',hn:'Dmitri Volkov',perk:{name:'Iron Will',desc:'Heavy armor: gets back up 15% faster after any hit or fall.'},name:'War Machine',power:'Rocket Barrage',desc:'A barrage of rockets rains down the whole track and blasts every rival off their feet.',speed:1.01,agility:1.05,charge:20,stun:1.4,kind:'knock',rgb:[1,0.5,0.2],
+  look:{skin:0xe0b494,b:1.2,ls:1.02,sc:1.06},
+  svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#3a4452"/><path d="M11 24L24 11M24 11l-6 0M24 11l0 6" stroke="#ffb067" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="25" r="3" fill="#ff7a1a"/></svg>'},
+ {id:'minjun',hn:'Seo Min-jun',perk:{name:'Go With the Flow',desc:'Water carries him: his power recharges 10% faster.'},name:'Tide Rider',power:'Tidal Wave',desc:'A giant wave crashes down the track and washes every rival away.',speed:1.01,agility:1.05,charge:20,stun:1.4,kind:'slip',rgb:[0.3,0.7,1],
+  look:{skin:0xf0d0b0,b:1.0,ls:1.05,sc:1.0},
+  svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#12456e"/><path d="M5 22c3-6 6-6 9 0s6 6 9 0 4-4 6-3M5 14c3-6 6-6 9 0s6 6 9 0 4-4 6-3" stroke="#a6e0ff" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>'},
+ {id:'selam',hn:'Selam Tesfaye',perk:{name:'Steady Wings',desc:'Calm in the storm: gets back up 10% faster after any hit or fall.'},name:'Queen of Birds',power:'Sky Swarm',desc:'A flock of birds swoops down from the sky and sends every rival spinning.',speed:1.01,agility:1.05,charge:20,stun:1.4,kind:'slip',rgb:[1,0.85,0.4],
+  look:{skin:0x6e4630,b:0.95,ls:1.06,sc:0.98},
+  svg:'<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#7a2a46"/><path d="M4 14c4-5 8-5 13 0 5-5 9-5 13 0M9 22c3-3 5-3 8 0 3-3 5-3 8 0" stroke="#ffd98a" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'},
 ];
 const CHAR_IDS=CHARS.map(c=>c.id);
 const charById=id=>CHARS.find(c=>c.id===id)||CHARS[0];
 // LAUNCH LIST: the heroes that are out. To release a hero, add its id here (ids: samurai warrior archer
 // queen knight shaolin viking robot rapper kicker gas). Every other hero shows "Coming soon".
 // Developer and tester accounts, and Developer mode, see every hero unlocked.
-const HERO_OUT=['warrior','blake','archer','samurai','queen','rapper','kicker'];
+const HERO_OUT=['warrior','blake','archer','samurai','queen','rapper','kicker','anaya','layla','luana','dmitri','minjun','selam'];
 function allOpen(){if(store.get('flagdash-devmode')==='1')return true;try{return !AUTH.on||AUTH.dev===true||AUTH.tester===true;}catch(e){return false;}}
 const heroOut=id=>HERO_OUT.includes(id)||allOpen();
 const outIds=()=>CHAR_IDS.filter(heroOut);
@@ -3308,6 +3326,12 @@ const HERO3D={
  queen:{url:'models/queen.glb',rig:true},
  rapper:{url:'models/rapper.glb',rig:true},
  samurai:{url:'models/samurai.glb',rig:true},
+ anaya:{url:'models/anaya.glb',rig:true},
+ layla:{url:'models/layla.glb',rig:true},
+ luana:{url:'models/luana.glb',rig:true},
+ dmitri:{url:'models/dmitri.glb',rig:true},
+ minjun:{url:'models/minjun.glb',rig:true},
+ selam:{url:'models/selam.glb',rig:true},
 };
 const H3_ON=new Set();
 function loadHero3D(id){const H=HERO3D[id];if(H&&H.rig)return loadRig(id);if(!H||H.busy||H.geo||H.fail||typeof THREE.GLTFLoader!=='function')return;H.busy=true;
@@ -4589,6 +4613,12 @@ function handleAct(src,a){
       else if(p==='blake'){ringFx(src.x,src.d,0x4fd0ff,26,0.6);const dr=droneArt(src,victims);victims.forEach(o=>{if(!dr)swirlFx(o);const q=wpos(o,1.2);burst(q.x,q.y,q.z,20,[0.3,0.8,1],{add:true,max:5,up:3,grav:2,size:0.3});});samp('power_drone',1)||samp('shockwave',1)||sfx.power();}
       else if(p==='kicker'){ringFx(src.x,src.d,0xff6a8a,28,0.6);windFx(src);const ka=kickArt(src,victims);victims.forEach(o=>{if(!ka)swirlFx(o);const q=wpos(o,1);burst(q.x,q.y,q.z,18,[1,0.5,0.6],{add:true,max:5,up:4,grav:3});});samp('power_kick',1);samp('power_slash',1)||sfx.slash();samp('power_wind',0.6);}
       else if(p==='gas'){ringFx(src.x,src.d,0x9a62f0,26,0.9);victims.forEach(o=>gasFx(o));samp('power_wind',1)||sfx.wind();}
+      else if(p==='anaya'){ringFx(src.x,src.d,0xc98a4a,28,0.8);if(!reduceMotion)shake=Math.max(shake,0.9);victims.forEach(o=>{const q=wpos(o,0.1);burst(q.x,q.y,q.z,26,TH.dust,{max:6,up:5,grav:9,size:0.45});});sfx.quake();}
+      else if(p==='layla'){ringFx(src.x,src.d,0xe6b45a,28,0.7);windFx(src);victims.forEach(o=>{swirlFx(o);const q=wpos(o,1);burst(q.x,q.y,q.z,20,[0.95,0.75,0.4],{max:5,up:3,grav:2,size:0.4});});sfx.wind();}
+      else if(p==='luana'){ringFx(src.x,src.d,0x4ac860,26,0.7);victims.forEach(o=>treeFx(o,ch.stun));sfx.trees();}
+      else if(p==='dmitri'){ringFx(src.x,src.d,0xff7a1a,28,0.6);fireWaveFx(src);victims.forEach(o=>{const q=wpos(o,0.8);burst(q.x,q.y,q.z,28,[1,0.55,0.15],{add:true,max:7,up:5,grav:3,size:0.45});});sfx.quake();samp('fire',1)||sfx.power();}
+      else if(p==='minjun'){ringFx(src.x,src.d,0x4ab0ff,30,0.8);windFx(src);victims.forEach(o=>{swirlFx(o);const q=wpos(o,1);burst(q.x,q.y,q.z,24,[0.35,0.7,1],{add:true,max:6,up:4,grav:4,size:0.35});});samp('power_wind',1)||sfx.wind();}
+      else if(p==='selam'){ringFx(src.x,src.d,0xffd24a,26,0.6);victims.forEach(o=>{emojiFx(o,pick(['🦅','🕊️','🐦']));swirlFx(o);});samp('power_wind',1)||sfx.wind();}
       else if(p==='rapper'){bassFx(src);if(!bassArt(src,victims))victims.forEach(o=>swirlFx(o));samp('power_bass',1)||samp('shockwave',1)||sfx.power();tone(55,0.9,'sine',0.12,-20);tone(42,1.1,'sine',0.1,-12,0.15);}
       else{if(!reduceMotion)shake=Math.max(shake,0.9);ringFx(src.x,src.d,0xc98a4a,25,0.8);runners.forEach(o=>{const q=wpos(o,0.1);burst(q.x,q.y,q.z,20,TH.dust,{max:5,up:4,grav:9,size:0.4});});sfx.quake();}
       for(const o of victims){if(!o.owned)continue;if(hit(o,ch.stun,src,ch.kind,`${src.nm}'s ${ch.power} stunned you`,true)&&p==='archer')o.d=Math.max(0,o.d-4);}
@@ -4623,12 +4653,17 @@ function hit(o,dur,src,kind,why,quiet){
   if(o.shield>0){o.shield=0;ringFx(o.x,o.d,0x8fd8ff,2.5,0.4);if(o.kind==='local'||(src&&src.kind==='local'))sfx.shieldBlock();if(src&&src!==o)hitFeed(src,o,'🛡️');else if(o.kind==='local')feed('Your shield blocked it','good');if(src&&src!==o)speak(o,'block');notifyAttacker(src,o,'blk');return false;}
   dur*=1-((o.mods&&o.mods.stun)||0);
   if(o.char&&o.char.id==='samurai')dur*=0.7;  // perk: Bushido
+  if(o.char&&o.char.id==='anaya')dur*=0.8;  // perk: Stone Skin
+  if(o.char&&o.char.id==='dmitri')dur*=0.85;  // perk: Iron Will
+  if(o.char&&o.char.id==='selam')dur*=0.9;  // perk: Eagle Eye
   if(o.char&&o.char.id==='shaolin'&&!src)dur*=0.5;  // perk: Iron Body (obstacles)
   if(o.char&&o.char.id==='gas'&&src&&src!==o)dur*=0.6;  // perk: Vapor Form
   if(src&&src!==o&&src.char&&src.char.id==='rapper'&&src.owned){src.boost=Math.max(src.boost,1.5);src.boostMul=Math.max(src.boostMul||1,1.35);if(src.kind==='local')feed('🎤 Hype! Speed burst','good');}  // perk: Hype
   o.stun=Math.max(o.stun,dur);o.grace=dur+1.2;o.stunKind=kind||'trip';o.speed*=0.35;o.slide=0;if(kind==='knock')o.vy=Math.max(o.vy,5.5);
   // perk: Counter Kick. She kicks back at whoever hit her
   if(o.char&&o.char.id==='kicker'&&src&&src!==o&&src.owned&&!src.finished&&!(src.stun>0)&&Math.random()<0.3){ringFx(src.x,src.d,0xff6a8a,2.5,0.4);hit(src,0.9,o,'knock',`${o.nm}'s Counter Kick got you`,true);if(o.kind==='local')feed('🦶 Counter Kick!','good');}
+  // perk: Deep Roots. Thorns bite whoever hit her
+  if(o.char&&o.char.id==='luana'&&src&&src!==o&&src.owned&&!src.finished&&!(src.stun>0)&&Math.random()<0.25){ringFx(src.x,src.d,0x4ac860,2.5,0.4);hit(src,0.9,o,'knock',`${o.nm}'s thorns got you`,true);if(o.kind==='local')feed('🌿 Deep Roots: thorns!','good');}
   const p=wpos(o,2.1);burst(p.x,p.y,p.z,10,[1,0.9,0.3],{add:true,max:3,up:3,grav:4,size:0.22});
   if(o.kind==='local'){raceStat('hurt');if(!reduceMotion)shake=0.45;sfx.hit();if(!src||src===o)feed(why||'You got hit','bad');}
   if(src&&src!==o)hitFeed(src,o,hitIcon(why,src));
@@ -4737,6 +4772,12 @@ const CHAR_SAY={
   rapper:{hit:['Drop the beat!','You just got remixed!'],hurt:['Yo, not cool!','That ain\'t on beat!'],power:['Feel the bass!','Turn it up!']},
   blake:{hit:['Nice try, slowpoke!','Calculated.'],hurt:['Hey! That was my prototype!','Rerouting power!'],power:['Drones, deploy!','Swarm protocol, go!']},
   kicker:{hit:['Hi-yah!','Too slow!'],hurt:['Hey! Watch it!','You will regret that!'],power:['Hurricane kick!','Feel the storm of my feet!']},
+  anaya:{hit:['Rock solid!', 'Feel that?'],hurt:['Hey! The ground saw that!', 'Big mistake!'],power:['The earth will shake!', 'Hold on to something!']},
+  layla:{hit:['Eat my dust!', "Can't catch the desert!"],hurt:['Sand in my eyes? Bad idea!', "I'll bury you!"],power:['Sandstorm!', 'The desert is awake!']},
+  luana:{hit:['Nature says no!', 'Watch the thorns!'],hurt:['The forest saw that!', 'Ouch! Not nice!'],power:['Vines, grab them!', 'The jungle is mine!']},
+  dmitri:{hit:['Target down.', 'Too slow, soldier.'],hurt:['That was a mistake.', 'Now I am angry.'],power:['Rockets away!', 'Incoming!']},
+  minjun:{hit:['Riding the wave!', 'Go with the flow!'],hurt:['Hey, I was surfing!', "You'll get soaked!"],power:['Tidal wave!', 'Wash them away!']},
+  selam:{hit:['Fly away!', 'The sky is mine!'],hurt:['My birds saw that!', 'How rude!'],power:['Birds, swoop!', 'Take flight!']},
 };
 // Haitian Creole lines for runners wearing the Haiti flag. Each has a voice id:
 // drop a recording at voice/<id>.mp3 and add the id to VOICE_FILES to play it with the bubble.
@@ -5030,7 +5071,7 @@ function stepRunner(r,dt){
     if(hit(r,0.9,f.owner,'trip',`Burned by ${f.owner.nm}'s fire trail`)){const p=wpos(r,0.6);burst(p.x,p.y,p.z,16,[1,0.5,0.1],{add:true,max:5,up:3,grav:-1,size:0.3});}}
   for(let i=rockets.length-1;i>=0;i--){const k=rockets[i];if(k.owner===r||r.finished)continue;if(k.target&&k.target!==r)continue;
     if(Math.abs(r.d-k.d)<1&&Math.abs(r.x-k.x)<0.9){sendAct(r,{t:'rktx',id:k.id});if(!itemProof(r,'the rocket'))hit(r,1.4,k.owner,'knock',`Hit by ${k.owner.nm}'s rocket`);}}
-  if(!r.finished)r.charge=Math.min(1,r.charge+dt/(r.st||STAT_BASE).charge*(1+(r.mods.chg||0))*(r.char.id==='blake'?1.15:1)*(r.kind==='bot'?0.75:1));
+  if(!r.finished)r.charge=Math.min(1,r.charge+dt/(r.st||STAT_BASE).charge*(1+(r.mods.chg||0))*(r.char.id==='blake'?1.15:r.char.id==='layla'||r.char.id==='minjun'?1.1:1)*(r.kind==='bot'?0.75:1));
   if(r.y<0.35&&!r.finished){for(const p of pads){if(p===r.lastPad)continue;if(r.d>=p.d&&r.d<=p.d+p.len&&Math.abs(r.x-p.x)<1.3){r.lastPad=p;triggerPad(r,p);break;}}}
   if(r.lastPad&&r.d>r.lastPad.d+r.lastPad.len+1)r.lastPad=null;
   if(r.kind==='local'&&!r.finished)collectPickups(r);
@@ -7355,6 +7396,12 @@ const HERO_INFO={
   rapper:{cc:'USA',age:'18',story:'Kid Echo turned his block into a stage. Every step is a beat, and every race is a new track he plans to drop.'},
   blake:{cc:'USA',age:'18',story:'Blake Carter built his first drone in his parents\' garage and never stopped. Every gadget on him is homemade, and the swarm answers when he whistles.'},
   kicker:{cc:'KOR',age:'17',story:'Ha-Neul holds a black belt and a big smile. Hit her once and she kicks back twice; her name means sky, and that is how high she aims.'},
+  anaya:{cc:'IND',age:'16',story:'Anaya Rao grew up where the monsoon meets the mountains. She listens to the ground before she runs, and when she stamps her foot, the earth answers.'},
+  layla:{cc:'JOR',age:'17',story:'Layla Al-Rimal was born in the desert of Wadi Rum, where the dunes move like waves. She runs on sand as if it were a road, and the wind follows her lead.'},
+  luana:{cc:'BRA',age:'15',story:'Luana Ipê comes from a village deep in the Amazon, where the trees talk if you listen. She is the youngest hero, and the forest guards her every step.'},
+  dmitri:{cc:'RUS',age:'30',story:'Dmitri Volkov is the oldest and biggest hero, a veteran who has seen every kind of battle. He doesn\'t talk much, but when his rockets fly, everybody listens.'},
+  minjun:{cc:'KOR',age:'16',story:'Seo Min-jun learned to swim before he could walk, on the coast of Busan. He moves like a wave: calm on the surface, and impossible to stop underneath.'},
+  selam:{cc:'ETH',age:'17',story:'Selam Tesfaye is called the queen of the birds in the Ethiopian highlands. Eagles circle above her as she runs, and when she raises her hand, the sky comes down.'},
 };
 // the hero card browses with the arrows; Select makes that hero your runner.
 // Picture: img/heroes/<hero>.webp (a transparent 3D picture); until one exists, the 3D portrait.
