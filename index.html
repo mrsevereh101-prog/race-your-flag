@@ -3283,7 +3283,7 @@ function buildModel(flag,charId,opt){
     if(gid==='band')add(Tor(0.255,0.04),L(0xe0322a),0,0.3,0,headP,Math.PI/2);
     else if(gid==='shades'){const k=L(0x111118,{emissive:0x0a0a14});[-0.08,0.08].forEach(x=>add(new THREE.BoxGeometry(0.12,0.07,0.03),k,x,0.27,-0.225,headP));add(new THREE.BoxGeometry(0.06,0.02,0.02),k,0,0.28,-0.23,headP);}
     else if(gid==='crown'){const g=L(0xf2c14a,{emissive:0x3a2a00});add(Cyl(0.15,0.15,0.1,true),new THREE.MeshLambertMaterial({color:0xf2c14a,emissive:0x3a2a00,side:DS}),0,0.52,0,headP);for(let i=0;i<5;i++){const a=i*TAU/5;add(new THREE.ConeGeometry(0.03,0.09,5),g,Math.cos(a)*0.15,0.6,Math.sin(a)*0.15,headP);}}
-    else if(gid==='halo')add(Tor(0.2,0.025),new THREE.MeshBasicMaterial({color:0xfff2a0}),0,0.66,0,headP,Math.PI/2);
+    else if(gid==='halo')add(Tor(0.2,0.025),new THREE.MeshBasicMaterial({color:0xfff2a0}),0,0.66,0,headP,Math.PI/2).userData.halo=true;
     else if(gid==='cape'){capeGear=true;const g=L(0xf2c14a,{emissive:0x3a2a00});[-1,1].forEach(sd=>add(new THREE.BoxGeometry(0.035,capeL,0.03),g,sd*capeW/2,-capeL/2,0,cape));add(new THREE.BoxGeometry(capeW+0.035,0.035,0.03),g,0,-capeL,0,cape);}
     else if(gid==='wings'){const w=L(0xf4f4fa);[-1,1].forEach(s=>{const m=add(Sph(0.3),w,s*0.26,0.5,tr+0.12,torso,0,0,s*-0.6);m.scale.set(1.5,0.5,0.12);});}
     else if(gid==='jetpack'){const gr=L(0x8a90a0),rd=L(0xd8342a);[-0.09,0.09].forEach(x=>{add(Cyl(0.075,0.075,0.42),gr,x,0.36,tr+0.14,torso);add(new THREE.ConeGeometry(0.075,0.12,10),rd,x,0.1,tr+0.14,torso,Math.PI);});}
@@ -3426,9 +3426,11 @@ function loadRig(id){const H=HERO3D[id];if(!H||H.busy||H.scene||H.fail||typeof T
     const mat=new THREE.MeshLambertMaterial({map,skinning:true});mat.userData.shared=true;mesh.material.dispose();mesh.material=mat;
     mesh.geometry.userData.shared=true;g.scene.updateMatrixWorld(true);
     const P=new THREE.Vector3(),W=n=>{const b=g.scene.getObjectByName(n);b.getWorldPosition(P);return P.y;};
-    H.hipsY=g.scene.getObjectByName('mixamorigHips').position.y;H.headY=W('mixamorigHead');H.chestY=W('mixamorigSpine2');H.chestZ=P.z;H.shY=W('mixamorigLeftArm');
+    H.hipsY=g.scene.getObjectByName('mixamorigHips').position.y;H.headY=W('mixamorigHead');H.headX=P.x;H.headZ=P.z;H.chestY=W('mixamorigSpine2');H.chestZ=P.z;H.shY=W('mixamorigLeftArm');
     const pos=mesh.geometry.attributes.position;let top=0,back=0;
-    for(let i=0;i<pos.count;i++){const y=pos.getY(i);top=Math.max(top,y);if(y>H.chestY-0.08&&y<H.shY&&Math.abs(pos.getX(i))<0.08)back=Math.min(back,pos.getZ(i));}
+    let hcx=0,hcz=0,hn=0;
+    for(let i=0;i<pos.count;i++){const y=pos.getY(i);top=Math.max(top,y);if(y>H.chestY-0.08&&y<H.shY&&Math.abs(pos.getX(i))<0.08)back=Math.min(back,pos.getZ(i));if(y>H.headY+0.02){hcx+=pos.getX(i);hcz+=pos.getZ(i);hn++;}}
+    H.skullX=hn?hcx/hn:H.headX;H.skullZ=hn?hcz/hn:H.headZ;  // middle of the skull, so a halo can sit over it
     H.top=top;H.back=back;H.scene=g.scene;H.mat=mat;H.mats={};H.busy=false;rigReady(id);},undefined,()=>{H.busy=false;H.fail=true;});}
 function rigReady(id){if(!hero3dReady(HERO3D[id]))return;
   try{if(state==='menu'&&(selChar===id||id.startsWith(selChar+'@')))rebuildPreview();}catch(e){}
@@ -3449,7 +3451,11 @@ function attachRig(m,id){const H=HERO3D[id];if(m.rig||m.glb||!hero3dReady(H))ret
   if(m.cape){wrap(bone('Spine2'),m.cape);m.cape.position.set(0,(H.shY-H.chestY)*S,(H.chestZ-H.back)*S+0.03);m.cape.scale.setScalar(clamp(H.headY/0.8,0.85,1.4));}
   wrap(bone('Head'),m.stars);m.stars.position.set(0,(H.top-H.headY)*S+0.15,0);
   const hs=clamp((H.top-H.headY)*S/0.62,0.7,1.6);
-  if(m.gearHead&&m.gearHead.length){const w=wrap(bone('Head'),new THREE.Group()).children[0];w.scale.setScalar(hs);w.position.y=-0.12;m.gearHead.forEach(o=>w.add(o));}
+  const halos=(m.gearHead||[]).filter(o=>o.userData.halo),hats=(m.gearHead||[]).filter(o=>!o.userData.halo);
+  if(hats.length){const w=wrap(bone('Head'),new THREE.Group()).children[0];w.scale.setScalar(hs);w.position.y=-0.12;hats.forEach(o=>w.add(o));}
+  // the halo rides the head bone and floats over the middle of the skull (the model faces the other way, so x and z flip)
+  if(halos.length){const w=wrap(bone('Head'),new THREE.Group()).children[0];w.scale.setScalar(hs);
+    w.position.set(-(H.skullX-H.headX)*S,(H.top-H.headY)*S+0.05*hs,-(H.skullZ-H.headZ)*S);halos.forEach(o=>{o.position.set(0,0,0);w.add(o);});}
   // back gear (wings) isn't fitted to the 3D heroes yet: it showed as a big white blob, so it stays off them for now
   if(m.gearTorso&&m.gearTorso.length)m.gearTorso.forEach(o=>{o.visible=false;});
   if(false&&m.gearTorso&&m.gearTorso.length){const w=wrap(bone('Spine2'),new THREE.Group()).children[0];w.position.z=-H.back*S-0.2;w.position.y=-0.3;m.gearTorso.forEach(o=>w.add(o));}
