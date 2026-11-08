@@ -3326,12 +3326,12 @@ const HERO3D={
  queen:{url:'models/queen.glb',rig:true},
  rapper:{url:'models/rapper.glb',rig:true},
  samurai:{url:'models/samurai.glb',rig:true},
- anaya:{url:'models/anaya.glb',rig:true},
- layla:{url:'models/layla.glb',rig:true},
- luana:{url:'models/luana.glb',rig:true},
- dmitri:{url:'models/dmitri.glb',rig:true},
- minjun:{url:'models/minjun.glb',rig:true},
- selam:{url:'models/selam.glb',rig:true},
+ anaya:{url:'models/anaya.glb',rig:true,yaw:-Math.PI/2,calm:true},
+ layla:{url:'models/layla.glb',rig:true,yaw:-Math.PI/2,calm:true},
+ luana:{url:'models/luana.glb',rig:true,yaw:-Math.PI/2,calm:true},
+ dmitri:{url:'models/dmitri.glb',rig:true,yaw:-Math.PI/2,calm:true},
+ minjun:{url:'models/minjun.glb',rig:true,yaw:-Math.PI/2,calm:true},
+ selam:{url:'models/selam.glb',rig:true,yaw:-Math.PI/2,calm:true},
 };
 const H3_ON=new Set();
 function loadHero3D(id){const H=HERO3D[id];if(H&&H.rig)return loadRig(id);if(!H||H.busy||H.geo||H.fail||typeof THREE.GLTFLoader!=='function')return;H.busy=true;
@@ -3424,11 +3424,12 @@ function loadRig(id){const H=HERO3D[id];if(!H||H.busy||H.scene||H.fail||typeof T
   new THREE.GLTFLoader().load(H.url,g=>{let mesh=null;g.scene.traverse(o=>{if(o.isSkinnedMesh&&!mesh)mesh=o;});if(!mesh){H.busy=false;H.fail=true;return;}
     const map=mesh.material.map;if(map){map.encoding=THREE.LinearEncoding;map.__shared=true;}
     const mat=new THREE.MeshLambertMaterial({map,skinning:true});mat.userData.shared=true;mesh.material.dispose();mesh.material=mat;
-    mesh.geometry.userData.shared=true;g.scene.updateMatrixWorld(true);
+    mesh.geometry.userData.shared=true;if(H.yaw)g.scene.rotation.y=H.yaw;g.scene.updateMatrixWorld(true);
     const P=new THREE.Vector3(),W=n=>{const b=g.scene.getObjectByName(n);b.getWorldPosition(P);return P.y;};
     H.hipsY=g.scene.getObjectByName('mixamorigHips').position.y;H.headY=W('mixamorigHead');H.chestY=W('mixamorigSpine2');H.chestZ=P.z;H.shY=W('mixamorigLeftArm');
     const pos=mesh.geometry.attributes.position;let top=0,back=0;
-    for(let i=0;i<pos.count;i++){const y=pos.getY(i);top=Math.max(top,y);if(y>H.chestY-0.08&&y<H.shY&&Math.abs(pos.getX(i))<0.08)back=Math.min(back,pos.getZ(i));}
+    const yc=Math.cos(H.yaw||0),ys=Math.sin(H.yaw||0);
+    for(let i=0;i<pos.count;i++){const y=pos.getY(i),px=pos.getX(i),pz=pos.getZ(i),xw=px*yc+pz*ys,zw=-px*ys+pz*yc;top=Math.max(top,y);if(y>H.chestY-0.08&&y<H.shY&&Math.abs(xw)<0.08)back=Math.min(back,zw);}
     H.top=top;H.back=back;H.scene=g.scene;H.mat=mat;H.mats={};H.busy=false;rigReady(id);},undefined,()=>{H.busy=false;H.fail=true;});}
 function rigReady(id){if(!hero3dReady(HERO3D[id]))return;
   try{if(state==='menu'&&(selChar===id||id.startsWith(selChar+'@')))rebuildPreview();}catch(e){}
@@ -3462,7 +3463,11 @@ const RIG_ONCE=new Set(['jump','fall','crouch','slide']);
 function rigPlay(m,k,t0){const R=m.rig,a=R.acts[k];if(!a||R.cur===k)return a;const old=R.acts[R.cur];
   a.reset();a.timeScale=1;if(t0)a.time=t0;a.fadeIn(old?0.18:0).play();if(old)old.fadeOut(0.18);R.cur=k;return a;}
 // pick the move from what the runner is doing
+// heroes with `calm` (the six newest) stand relaxed on the home screen, the hall and in profile pictures: no ready stance, no dance clip
+const rigCalmHero=R=>{const H=HERO3D[R.key];return !!(H&&(H.calm||(H.hero&&HERO3D[H.hero]&&HERO3D[H.hero].calm)));};
 function driveRig(m,r,mode,dt){const R=m.rig;let k='idle',a;
+  if(r.pose==='idle'&&rigCalmHero(R)){if(!R.calm){R.mixer.stopAllAction();R.skel.pose();R.cur=null;R.calm=1;}R.pw=1;rigProcPose(m,1);return;}
+  if(R.calm){R.calm=0;R.pw=0;}
   const e=r.emote&&r.emote.t>0?r.emote.id:null;
   if(mode==='run'){k='run';}
   else if(mode==='air'||mode==='slide')k='run';
@@ -6636,7 +6641,7 @@ function renderPortrait(av,cc,full){
   if(m.flagPivot)m.flagPivot.visible=false;if(m.shadow)m.shadow.visible=false;if(m.tag)m.tag.visible=false;if(m.headFlag)m.headFlag.visible=false;
   m.root.rotation.y=0.32;AV.scene.add(m.root);
   // 3D heroes: stand them in their resting pose (the ready stance puts fists in front of the face) and frame their real head
-  if(m.rig){m.rig.mixer.stopAllAction();m.rig.skel.pose();}
+  if(m.rig){m.rig.mixer.stopAllAction();m.rig.skel.pose();if(rigCalmHero(m.rig))rigProcPose(m,1);}
   m.root.updateMatrixWorld(true);const hp=new THREE.Vector3();
   const hb=m.rig&&m.rig.holder.getObjectByName('mixamorigHead');if(hb){hb.getWorldPosition(hp);hp.y-=0.12*m.sc;}else m.headP.getWorldPosition(hp);
   const hy=hp.y+0.2*m.sc;AV.cam.position.set(0.12*m.sc,hy+0.05*m.sc,-1.75*m.sc);AV.cam.lookAt(0,hy-0.12*m.sc,0);
